@@ -50,4 +50,9 @@ public static class GeometryExtensions
         float w = Mathf.SmoothDamp(current.w, target.w, ref velocity.w, smoothTime);
         return new Quaternion(x, y, z, w);
     }
+
+    public static Vector3 DivideBy(this Vector3 v1, Vector3 v2)
+    {
+        return new Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
+    }
 }
