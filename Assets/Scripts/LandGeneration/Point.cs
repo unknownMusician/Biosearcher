@@ -14,4 +14,16 @@ namespace Biosearcher.LandGeneration
             Value = value;
         }
     }
+
+    public class PointsChunk
+    {
+        public int Size1D { get; }
+        public Point[,,] Points { get; }
+
+        public PointsChunk(Point[,,] points, int size1D)
+        {
+            Points = points;
+            Size1D = size1D;
+        }
+    }
 }

@@ -334,6 +334,19 @@ namespace Biosearcher.LandGeneration
 
         #endregion
 
+        public static Mesh GenerateMesh(Cube[] cubes, float surfaceValue)
+        {
+            MeshData meshData = March(cubes, surfaceValue);
+
+            var mesh = new Mesh();
+            mesh.Clear();
+            mesh.vertices = meshData.Vertices;
+            mesh.triangles = meshData.Triangles;
+            mesh.RecalculateNormals();
+
+            return mesh;
+        }
+
         public static MeshData March(Cube[] cubes, float surfaceValue)
         {
             var meshData = new MeshData();
@@ -379,16 +392,22 @@ namespace Biosearcher.LandGeneration
                     Point edgePoint1 = cube.Points[edgePoint1Index];
                     Point edgePoint2 = cube.Points[edgePoint2Index];
 
-                    triangle[j] = Interpolate(edgePoint1, edgePoint2);
+                    triangle[j] = Interpolate(edgePoint1, edgePoint2, surfaceValue);
                 }
 
                 meshData.AddFace(triangle);
             }
         }
 
-        public static Vector3 Interpolate(Point point1, Point point2)
+        public static Vector3 Interpolate(Point point1, Point point2, float surfaceValue)
         {
-            return (point1.Position + point2.Position) / 2;
+            float lerp = (surfaceValue - point1.Value) / (point2.Value - point1.Value);
+            return Vector3.Lerp(point1.Position, point2.Position, lerp);
+
+            // Vector3 deltaPosition = point2.Position - point1.Position;
+            // return point1.Position + deltaPosition * lerp;
+
+            // return (point1.Position + point2.Position) / 2;
         }
 
         public static int GetPointsHash(Cube cube, float surfaceValue)
