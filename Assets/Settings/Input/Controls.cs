@@ -245,6 +245,134 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Terraformer"",
+            ""id"": ""3d98999e-086f-41a5-96a5-3492344efe9a"",
+            ""actions"": [
+                {
+                    ""name"": ""AddStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""d80edf32-8e44-4d94-a989-d0572fd49380"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""AddStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""6d65461e-4164-40d2-8e5d-88ea4f233011"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RemoveStart"",
+                    ""type"": ""Button"",
+                    ""id"": ""899306e4-0214-41b2-ae2b-ac1b52646622"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""RemoveStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""3dcba410-13b2-4276-9bca-944d606b34e2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""70798630-7616-42fb-90df-4dee8c3407c9"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""AddStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45dc5adc-2bb6-4b2a-9636-4e21593ada10"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AddStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""324c4b31-7550-4745-b74a-65f0a33a336b"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""AddStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4e6668df-c7a4-449b-9f6c-a3f943a4064f"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""AddStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""155a6940-d7f5-48a1-961b-0e0f23f5ca85"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RemoveStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""951743ef-c553-4c49-978f-5d4bc5a95c3c"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RemoveStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1196c8ba-75f0-4939-87c5-383049439ac9"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""RemoveStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""750326f6-103a-4481-88ed-c76b548566d3"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""RemoveStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -286,6 +414,12 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
         m_Camera_MoveStart = m_Camera.FindAction("MoveStart", throwIfNotFound: true);
         m_Camera_MoveStop = m_Camera.FindAction("MoveStop", throwIfNotFound: true);
+        // Terraformer
+        m_Terraformer = asset.FindActionMap("Terraformer", throwIfNotFound: true);
+        m_Terraformer_AddStart = m_Terraformer.FindAction("AddStart", throwIfNotFound: true);
+        m_Terraformer_AddStop = m_Terraformer.FindAction("AddStop", throwIfNotFound: true);
+        m_Terraformer_RemoveStart = m_Terraformer.FindAction("RemoveStart", throwIfNotFound: true);
+        m_Terraformer_RemoveStop = m_Terraformer.FindAction("RemoveStop", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -421,6 +555,63 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public CameraActions @Camera => new CameraActions(this);
+
+    // Terraformer
+    private readonly InputActionMap m_Terraformer;
+    private ITerraformerActions m_TerraformerActionsCallbackInterface;
+    private readonly InputAction m_Terraformer_AddStart;
+    private readonly InputAction m_Terraformer_AddStop;
+    private readonly InputAction m_Terraformer_RemoveStart;
+    private readonly InputAction m_Terraformer_RemoveStop;
+    public struct TerraformerActions
+    {
+        private @Controls m_Wrapper;
+        public TerraformerActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @AddStart => m_Wrapper.m_Terraformer_AddStart;
+        public InputAction @AddStop => m_Wrapper.m_Terraformer_AddStop;
+        public InputAction @RemoveStart => m_Wrapper.m_Terraformer_RemoveStart;
+        public InputAction @RemoveStop => m_Wrapper.m_Terraformer_RemoveStop;
+        public InputActionMap Get() { return m_Wrapper.m_Terraformer; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TerraformerActions set) { return set.Get(); }
+        public void SetCallbacks(ITerraformerActions instance)
+        {
+            if (m_Wrapper.m_TerraformerActionsCallbackInterface != null)
+            {
+                @AddStart.started -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStart;
+                @AddStart.performed -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStart;
+                @AddStart.canceled -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStart;
+                @AddStop.started -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStop;
+                @AddStop.performed -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStop;
+                @AddStop.canceled -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnAddStop;
+                @RemoveStart.started -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStart;
+                @RemoveStart.performed -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStart;
+                @RemoveStart.canceled -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStart;
+                @RemoveStop.started -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStop;
+                @RemoveStop.performed -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStop;
+                @RemoveStop.canceled -= m_Wrapper.m_TerraformerActionsCallbackInterface.OnRemoveStop;
+            }
+            m_Wrapper.m_TerraformerActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @AddStart.started += instance.OnAddStart;
+                @AddStart.performed += instance.OnAddStart;
+                @AddStart.canceled += instance.OnAddStart;
+                @AddStop.started += instance.OnAddStop;
+                @AddStop.performed += instance.OnAddStop;
+                @AddStop.canceled += instance.OnAddStop;
+                @RemoveStart.started += instance.OnRemoveStart;
+                @RemoveStart.performed += instance.OnRemoveStart;
+                @RemoveStart.canceled += instance.OnRemoveStart;
+                @RemoveStop.started += instance.OnRemoveStop;
+                @RemoveStop.performed += instance.OnRemoveStop;
+                @RemoveStop.canceled += instance.OnRemoveStop;
+            }
+        }
+    }
+    public TerraformerActions @Terraformer => new TerraformerActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -449,5 +640,12 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnMoveStart(InputAction.CallbackContext context);
         void OnMoveStop(InputAction.CallbackContext context);
+    }
+    public interface ITerraformerActions
+    {
+        void OnAddStart(InputAction.CallbackContext context);
+        void OnAddStop(InputAction.CallbackContext context);
+        void OnRemoveStart(InputAction.CallbackContext context);
+        void OnRemoveStop(InputAction.CallbackContext context);
     }
 }

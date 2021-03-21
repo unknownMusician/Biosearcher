@@ -44,6 +44,7 @@ RWStructuredBuffer<float3> meshVertices;
 RWStructuredBuffer<int> meshTriangles;
 float3 chunkPosition;
 float surfaceValue;
+int cubeSize;
 
 int pointsSize1D;
 int cubesSize1D;
@@ -199,7 +200,7 @@ void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
     
     int pointIndex = MatrixId2ArrayId(threadId, pointsSize1D);
     
-    float3 position = float3(threadId) - uint(pointsSize1D - 1) / uint(2);
+    int3 position = (threadId - uint(pointsSize1D - 1) / uint(2)) * cubeSize;
     
     marchPoint.position = position;
     marchPoint.value = GenerateValue(position + chunkPosition);

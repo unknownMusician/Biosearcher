@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Biosearcher.LandGeneration
+namespace Biosearcher.Land.Generation
 {
     public class CubeMarcherGPU : MonoBehaviour
     {
@@ -55,7 +55,7 @@ namespace Biosearcher.LandGeneration
             return mesh;
         }
 
-        public MarchPoint[] GeneratePoints(Vector3Int chunkPosition)
+        public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
         {
             MarchPoint[] points = new MarchPoint[7 * 7 * 7];
 
@@ -67,6 +67,7 @@ namespace Biosearcher.LandGeneration
 
             shader.SetBuffer(generatePointsKernel, "points", pointsBuffer);
             shader.SetVector("chunkPosition", (Vector3)chunkPosition);
+            shader.SetInt("cubeSize", cubeSize);
             shader.SetInt("pointsSize1D", 7);
 
             shader.Dispatch(generatePointsKernel, 1, 1, 1);

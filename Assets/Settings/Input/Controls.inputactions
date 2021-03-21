@@ -232,6 +232,134 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Terraformer",
+            "id": "3d98999e-086f-41a5-96a5-3492344efe9a",
+            "actions": [
+                {
+                    "name": "AddStart",
+                    "type": "Button",
+                    "id": "d80edf32-8e44-4d94-a989-d0572fd49380",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "AddStop",
+                    "type": "Button",
+                    "id": "6d65461e-4164-40d2-8e5d-88ea4f233011",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RemoveStart",
+                    "type": "Button",
+                    "id": "899306e4-0214-41b2-ae2b-ac1b52646622",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "RemoveStop",
+                    "type": "Button",
+                    "id": "3dcba410-13b2-4276-9bca-944d606b34e2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "70798630-7616-42fb-90df-4dee8c3407c9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "AddStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45dc5adc-2bb6-4b2a-9636-4e21593ada10",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AddStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "324c4b31-7550-4745-b74a-65f0a33a336b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "AddStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e6668df-c7a4-449b-9f6c-a3f943a4064f",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "AddStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "155a6940-d7f5-48a1-961b-0e0f23f5ca85",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "RemoveStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "951743ef-c553-4c49-978f-5d4bc5a95c3c",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RemoveStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1196c8ba-75f0-4939-87c5-383049439ac9",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "RemoveStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "750326f6-103a-4481-88ed-c76b548566d3",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "RemoveStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

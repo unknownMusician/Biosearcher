@@ -2,25 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Biosearcher.LandGeneration
+namespace Biosearcher.Land.Generation
 {
     public static class GridGenerator
     {
-        public static PointsChunk GeneratePointsChunk(Vector3Int chunkPosition, int size)
+        public static PointsChunk GeneratePointsChunk(Vector3Int chunkPosition, int chunkSize, int cubeSize)
         {
-            int cubeSize = 1;
-            int halfSize = size / 2;
+            int halfChunkSize = chunkSize / 2;
 
-            int pointsArray1DSize = halfSize * 2 + 1;
+            int pointsArray1DSize = halfChunkSize * 2 + 1;
             var points = new Point[pointsArray1DSize, pointsArray1DSize, pointsArray1DSize];
 
-            for (int z = -halfSize, zIndex = 0; z <= halfSize; z += cubeSize, zIndex++)
+            for (int z = -halfChunkSize, zIndex = 0; z <= halfChunkSize; z++, zIndex++)
             {
-                for (int y = -halfSize, yIndex = 0; y <= halfSize; y += cubeSize, yIndex++)
+                for (int y = -halfChunkSize, yIndex = 0; y <= halfChunkSize; y++, yIndex++)
                 {
-                    for (int x = -halfSize, xIndex = 0; x <= halfSize; x += cubeSize, xIndex++)
+                    for (int x = -halfChunkSize, xIndex = 0; x <= halfChunkSize; x++, xIndex++)
                     {
-                        Vector3Int position = new Vector3Int(x, y, z);
+                        Vector3Int position = new Vector3Int(x, y, z) * cubeSize;
                         points[xIndex, yIndex, zIndex] = new Point(position, GenerateValue(position + chunkPosition));
                     }
                 }

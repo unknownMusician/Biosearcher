@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Biosearcher.LandGeneration
+namespace Biosearcher.Land.Generation
 {
     public struct Cube
     {

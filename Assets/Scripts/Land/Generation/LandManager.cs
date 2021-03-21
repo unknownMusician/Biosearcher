@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Biosearcher.LandGeneration
+namespace Biosearcher.Land.Generation
 {
     [RequireComponent(typeof(CubeMarcherGPU))]
     public class LandManager : MonoBehaviour
     {
         [SerializeField] protected Vector3Int size = Vector3Int.one * 3;
         [SerializeField] protected float surfaceValue = 0.2f;
-        [SerializeField] protected bool gizmos = true;
-        [SerializeField] protected bool gizmosOnlyGround = true;
         [SerializeField] protected GameObject chunkPrefab;
 
         protected CubeMarcherGPU cubeMarcher;
 
         protected const int chunkSize = 6;
-        protected const float cubeSize = 1; // todo: unused
+        protected const int cubeSize = 1;
 
         protected List<Cube> cubes = new List<Cube>();
 
@@ -31,16 +29,17 @@ namespace Biosearcher.LandGeneration
                 {
                     for (int x = 0, deltaX = 0; deltaX < size.x; deltaX++, x += deltaX * (int)Mathf.Pow(-1, deltaX + 1))
                     {
-                        GenerateChunkGPU(new Vector3Int(x, y, z) * chunkSize);
-                        //GenerateChunk(new Vector3Int(x, y, z) * chunkSize);
+                        //GenerateChunkGPU(new Vector3Int(x, y, z) * chunkSize);
+                        GenerateChunk(new Vector3Int(x, y, z) * chunkSize);
                     }
                 }
             }
         }
 
+        // todo: put all generating info in one and only one place
         protected void GenerateChunkGPU(Vector3Int chunkPosition)
         {
-            CubeMarcherGPU.MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition);
+            CubeMarcherGPU.MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
             Mesh mesh = cubeMarcher.GenerateMesh(points, surfaceValue);
 
             CreateChunk(mesh, chunkPosition);
@@ -48,7 +47,7 @@ namespace Biosearcher.LandGeneration
 
         protected void GenerateChunk(Vector3Int chunkPosition)
         {
-            PointsChunk points = GridGenerator.GeneratePointsChunk(chunkPosition, 6);
+            PointsChunk points = GridGenerator.GeneratePointsChunk(chunkPosition, chunkSize, cubeSize);
             Cube[] cubes = GridGenerator.ToCubes(points);
             Mesh mesh = CubeMarcher.GenerateMesh(cubes, surfaceValue);
 
@@ -59,28 +58,12 @@ namespace Biosearcher.LandGeneration
         {
             GameObject chunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
             chunkObject.GetComponent<MeshFilter>().mesh = mesh; // todo: expensive
+            chunkObject.AddComponent<MeshCollider>().sharedMesh = mesh;
         }
 
-        //protected void OnDrawGizmos()
-        //{
-        //    //Gizmos.color = Color.black;
-        //    //Gizmos.DrawWireCube(transform.position, size * 2); // todo
-
-        //    if (!gizmos)
-        //    {
-        //        return;
-        //    }
-
-        //    foreach (Cube cube in cubes)
-        //    {
-        //        Point point = cube.Points[0];
-        //        if (point.Value < surfaceValue && gizmosOnlyGround)
-        //        {
-        //            continue;
-        //        }
-        //        Gizmos.color = new Color(point.Value, point.Value, point.Value);
-        //        Gizmos.DrawSphere(point.Position, 0.1f);
-        //    }
-        //}
+        public void TerraformAdd(Vector3 position, float radius)
+        {
+            // todo
+        }
     }
 }
