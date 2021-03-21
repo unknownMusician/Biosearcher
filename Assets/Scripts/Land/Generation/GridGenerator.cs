@@ -31,21 +31,49 @@ namespace Biosearcher.Land.Generation
         {
             float result = 1;
 
-            // result *= ScaledNoise(position, 2);
-            // result *= ScaledNoise(position, 4);
-            // result *= ScaledNoise(position, 8);
-            // result *= ScaledNoise(position, 16);
-            // result *= ScaledNoise(position, 32);
-            // result *= Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(ScaledNoise(position, 64)))));
-            // result *= ScaledNoise(position, 128);
+            // todo
+            result *= 1 - GradientNoise(position / 12f) / 8;
+            result *= 1 - GradientNoise(position / 24f) / 4;
+            result *= 1 - GradientNoise(position / 48f) / 2;
 
-            result *= 1 - Mathf.Clamp01(position.magnitude / 32);
-
-            // result *= 1 - Mathf.Clamp(position.y / 2, 0, 1);
+            // 100 - planet size (todo)
+            result *= 1 - Mathf.Clamp01(position.magnitude / 100);
 
             return result;
         }
 
+        private static float Noise(Vector3 position)
+        {
+            float noise = (Mathf.Sin(Vector3.Dot(position, new Vector3(12.9898f, 78.233f, 128.544f) * 2.0f) * position.magnitude) * 43758.5453f) % 1;
+            return Mathf.Abs(noise);
+        }
+
+        private static float GradientNoise(Vector3 position)
+        {
+            Vector3Int wholePart = new Vector3Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), Mathf.FloorToInt(position.z));
+            // todo
+            Vector3 fractPart = new Vector3(position.x % 1, position.y % 1, position.z % 1);
+            // todo
+            fractPart += new Vector3(position.x < 0 && fractPart.x != 0 ? 1 : 0, position.y < 0 && fractPart.y != 0 ? 1 : 0, position.z < 0 && fractPart.z != 0 ? 1 : 0);
+            float[] noisesZ = new float[2];
+            for (int z = 0; z < 2; z++)
+            {
+                float[] noisesY = new float[2];
+                for (int y = 0; y < 2; y++)
+                {
+                    float[] noisesX = new float[2];
+                    for (int x = 0; x < 2; x++)
+                    {
+                        noisesX[x] = Noise(wholePart + new Vector3(x, y, z));
+                    }
+                    noisesY[y] = Mathf.Lerp(noisesX[0], noisesX[1], fractPart.x);
+                }
+                noisesZ[z] = Mathf.Lerp(noisesY[0], noisesY[1], fractPart.y);
+            }
+            return Mathf.Lerp(noisesZ[0], noisesZ[1], fractPart.z);
+        }
+
+        // todo: remove
         private static float ScaledNoise(Vector3 vector, float scale)
         {
             Vector3 value = (vector / scale);

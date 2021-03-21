@@ -49,6 +49,7 @@ int cubeSize;
 int pointsSize1D;
 int cubesSize1D;
 
+// todo: not in sync with CPU
 float GenerateValue(float3 position)
 {
     float result = 1;

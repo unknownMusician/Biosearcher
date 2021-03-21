@@ -169,7 +169,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &79430799
 MonoBehaviour:
@@ -335,7 +335,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   maxTerraformDistance: 15
-  landManager: {fileID: 1327693539}
+  landManager: {fileID: 0}
   terraformSpherePrefab: {fileID: 3858854534956274053, guid: 6707f303be0e47944a57644979452edc, type: 3}
 --- !u!1 &671082484
 GameObject:
@@ -432,69 +432,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671082484}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1327693538
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1327693540}
-  - component: {fileID: 1327693539}
-  - component: {fileID: 1327693541}
-  m_Layer: 0
-  m_Name: Land Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1327693539
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327693538}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bc4ca8bcdd96494d8e808ae863070c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  size: {x: 17, y: 17, z: 17}
-  surfaceValue: 0.2
-  chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}
---- !u!4 &1327693540
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327693538}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1327693541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327693538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 571e6e43c25eec149818005383a423d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shader: {fileID: 7200000, guid: 8a2e99cf7721a2d4ea70ed3a06f236ef, type: 3}
-  edgeIndex2PointIndexesTexture: {fileID: 0}
-  pointsHash2EdgesHashTexture: {fileID: 0}
-  pointsHash2EdgesIndexesTexture: {fileID: 0}
 --- !u!1 &1673929995
 GameObject:
   m_ObjectHideFlags: 0

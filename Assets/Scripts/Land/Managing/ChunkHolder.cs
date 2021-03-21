@@ -25,7 +25,7 @@ namespace Biosearcher.Land.Managing
         {
             Chunk = chunk;
 
-            StartUpdatePeriod(Chunk.size2UpdatePeriod[chunk.Size]);
+            StartUpdatePeriod(Chunk.Size2UpdatePeriod(chunk.Size));
         }
         protected internal void Initialize(ChunkWithChunks chunk)
         {
@@ -61,7 +61,7 @@ namespace Biosearcher.Land.Managing
         {
             while (isAlive && Chunk is ChunkWithGeometry chunkWithGeometry)
             {
-                if (DistanceToTrigger < Chunk.size2DistanceRange[Chunk.Size, 0] && Chunk.Size > 0)
+                if (DistanceToTrigger < Chunk.Size2DistanceRange(Chunk.Size).min && Chunk.Size > 0)
                 {
                     chunkWithGeometry.Clear();
                     Chunk = new ChunkWithChunks(Chunk.Position, Chunk.Size, this);
@@ -72,7 +72,7 @@ namespace Biosearcher.Land.Managing
                     yield return new WaitForSeconds(period);
                     continue;
                 }
-                if (DistanceToTrigger > Chunk.size2DistanceRange[Chunk.Size, 1])
+                if (DistanceToTrigger > Chunk.Size2DistanceRange(Chunk.Size).max)
                 {
                     Parent.TryCollapse(this);
                 }

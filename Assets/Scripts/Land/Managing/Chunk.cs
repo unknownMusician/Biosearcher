@@ -6,27 +6,37 @@ namespace Biosearcher.Land.Managing
     public abstract class Chunk
     {
         #region Static fields
-        // todo: make formula
-        protected internal static readonly float[,] size2DistanceRange =
-        {
-            {  0,  12}, // 0 → 1
-            { 12,  24}, // 1 → 2
-            { 24,  48}, // 2 → 4
-            { 48,  96}, // 3 → 8
-            { 96, 192}, // 4 → 16
-        };
 
-        protected internal static readonly float[] size2UpdatePeriod =
+        //protected internal static readonly float[,] size2DistanceRange =
+        //{
+        //    {  0,  12}, // 0 → 1
+        //    { 12,  24}, // 1 → 2
+        //    { 24,  48}, // 2 → 4
+        //    { 48,  96}, // 3 → 8
+        //    { 96, 192}, // 4 → 16
+        //};
+        protected internal static (float min, float max) Size2DistanceRange(int size)
         {
-            0.5f, // 0 → 1
-               1, // 1 → 2
-               2, // 2 → 4
-               4, // 3 → 8
-               8, // 4 → 16
-        };
+            if (size == 0)
+            {
+                return (0, 12);
+            }
+            return (Size2ActualSize(size), Size2ActualSize(size + 1));
+        }
 
-        protected internal static int Size2ActualSize(int size) => 6 * (1 << size);
-        // todo: 6 → chunkSize
+        //protected internal static readonly float[] size2UpdatePeriod =
+        //{
+        //    0.5f, // 0 → 1
+        //       1, // 1 → 2
+        //       2, // 2 → 4
+        //       4, // 3 → 8
+        //       8, // 4 → 16
+        //};
+        protected internal static float Size2UpdatePeriod(int size) => (1 << size) / 2f;
+
+        protected internal static int Size2ActualSize(int size) => chunkSize * (1 << size);
+
+        protected internal static readonly int chunkSize = 6;
 
         #endregion
 
@@ -53,7 +63,7 @@ namespace Biosearcher.Land.Managing
                 Debug.LogError("Size should not go below zero.");
             }
 
-            if (distanceToTrigger < size2DistanceRange[size, 0] && size > 0)
+            if (distanceToTrigger < Size2DistanceRange(size).min && size > 0)
             {
                 return new ChunkWithChunks(chunkPosition, size, holder);
             }
