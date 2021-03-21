@@ -7,7 +7,7 @@ namespace Biosearcher.Land.Managing
     {
         #region Static fields
         // todo: make formula
-        public static readonly float[,] size2DistanceRange =
+        protected internal static readonly float[,] size2DistanceRange =
         {
             {  0,  12}, // 0 → 1
             { 12,  24}, // 1 → 2
@@ -16,7 +16,7 @@ namespace Biosearcher.Land.Managing
             { 96, 192}, // 4 → 16
         };
 
-        public static readonly float[] size2UpdatePeriod =
+        protected internal static readonly float[] size2UpdatePeriod =
         {
             0.5f, // 0 → 1
                1, // 1 → 2
@@ -25,25 +25,26 @@ namespace Biosearcher.Land.Managing
                8, // 4 → 16
         };
 
-        // todo: size2ActualSize
+        protected internal static int Size2ActualSize(int size) => 6 * (1 << size);
+        // todo: 6 → chunkSize
 
         #endregion
 
         protected ChunkHolder holder;
 
-        public Vector3Int Position { get; protected set; }
-        public int Size { get; protected set; }
+        protected internal Vector3Int Position { get; protected set; }
+        protected internal int Size { get; protected set; }
 
-        public Chunk(Vector3Int position, int size, ChunkHolder holder)
+        protected internal Chunk(Vector3Int position, int size, ChunkHolder holder)
         {
             this.holder = holder;
             Position = position;
             Size = size;
         }
 
-        public abstract void DrawGizmos();
+        protected internal abstract void DrawGizmos();
 
-        public static Chunk Create(Vector3Int chunkPosition, int size, ChunkHolder holder, Vector3 triggerPosition)
+        protected internal static Chunk Create(Vector3Int chunkPosition, int size, ChunkHolder holder, Vector3 triggerPosition)
         {
             float distanceToTrigger = (triggerPosition - chunkPosition).magnitude;
 

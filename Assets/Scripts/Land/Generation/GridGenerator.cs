@@ -75,7 +75,7 @@ namespace Biosearcher.Land.Generation
         {
             var pointsList = new List<Point>();
 
-            for (int y = 0; y < 2; y++) // todo
+            for (int y = 0; y < 2; y++)
             {
                 for (int z = 0; z < 2; z++)
                 {

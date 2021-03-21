@@ -34,27 +34,27 @@ namespace Biosearcher.Land.Managing
             mainChunk?.Chunk.DrawGizmos();
         }
 
-        protected internal void GenerateChunkGPU(Vector3Int chunkPosition, int cubeSize, out Mesh generatedMesh, out GameObject generatedChunkObject)
+        protected internal void GenerateChunkGPU(Vector3Int chunkPosition, int cubeSize, ChunkHolder parent, out Mesh generatedMesh, out GameObject generatedChunkObject)
         {
             CubeMarcherGPU.MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
             generatedMesh = cubeMarcher.GenerateMesh(points, surfaceValue);
 
-            CreateChunk(generatedMesh, chunkPosition, out generatedChunkObject);
+            CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);
         }
 
-        protected internal void GenerateChunk(Vector3Int chunkPosition, int cubeSize, out Mesh generatedMesh, out GameObject generatedChunkObject)
+        protected internal void GenerateChunk(Vector3Int chunkPosition, int cubeSize, ChunkHolder parent, out Mesh generatedMesh, out GameObject generatedChunkObject)
         {
             PointsChunk points = GridGenerator.GeneratePointsChunk(chunkPosition, chunkSize, cubeSize);
             Cube[] cubes = GridGenerator.ToCubes(points);
             generatedMesh = CubeMarcher.GenerateMesh(cubes, surfaceValue);
 
-            CreateChunk(generatedMesh, chunkPosition, out generatedChunkObject);
+            CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);
         }
 
-        protected void CreateChunk(Mesh mesh, Vector3Int chunkPosition, out GameObject generatedChunkObject)
+        protected void CreateChunk(Mesh mesh, Vector3Int chunkPosition, ChunkHolder parent, out GameObject generatedChunkObject)
         {
             generatedChunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
-            generatedChunkObject.GetComponent<MeshFilter>().mesh = mesh; // todo: expensive
+            generatedChunkObject.GetComponent<MeshFilter>().mesh = mesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = mesh;
         }
 

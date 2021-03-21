@@ -57,7 +57,7 @@ namespace Biosearcher.Land.Generation
         protected void CreateChunk(Mesh mesh, Vector3Int chunkPosition)
         {
             GameObject chunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
-            chunkObject.GetComponent<MeshFilter>().mesh = mesh; // todo: expensive
+            chunkObject.GetComponent<MeshFilter>().mesh = mesh;
             chunkObject.AddComponent<MeshCollider>().sharedMesh = mesh;
         }
 

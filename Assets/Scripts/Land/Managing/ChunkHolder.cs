@@ -6,34 +6,32 @@ namespace Biosearcher.Land.Managing
     public class ChunkHolder
     {
         protected internal Chunk Chunk { get; protected set; }
-        protected internal ChunkWithChunks Parent { get; }
-        protected internal ChunkManager ChunkManager { get; }
-        protected internal Transform Trigger { get; }
+        protected internal ChunkWithChunks Parent { get; protected set; }
+        protected internal ChunkManager ChunkManager { get; protected set; }
+        protected internal Transform Trigger { get; protected set; }
 
         protected bool isAlive = true;
 
         protected float DistanceToTrigger => (Trigger.position - Chunk.Position).magnitude;
 
-        public ChunkHolder(ChunkWithChunks parent, ChunkManager chunkManager)
+        protected internal ChunkHolder(ChunkWithChunks parent, ChunkManager chunkManager)
         {
             Parent = parent;
             ChunkManager = chunkManager;
             Trigger = ChunkManager.Trigger;
         }
 
-        public void Initialize(ChunkWithGeometry chunk)
+        protected internal void Initialize(ChunkWithGeometry chunk)
         {
             Chunk = chunk;
 
             StartUpdatePeriod(Chunk.size2UpdatePeriod[chunk.Size]);
         }
-        public void Initialize(ChunkWithChunks chunk)
+        protected internal void Initialize(ChunkWithChunks chunk)
         {
             Chunk = chunk;
-
-            // todo
         }
-        public void Initialize(Chunk chunk)
+        protected internal void Initialize(Chunk chunk)
         {
             if (chunk is ChunkWithChunks chunkWithChunks)
             {
@@ -45,22 +43,21 @@ namespace Biosearcher.Land.Managing
             }
         }
 
-        public void Clear()
+        protected internal void Clear()
         {
             isAlive = false;
 
             (Chunk as ChunkWithGeometry).Clear();
-            // todo
         }
-        // todo: change all public to internal protected
-        public void Collapse() => Initialize(new ChunkWithGeometry(Chunk.Position, Chunk.Size, this));
+        // todo: change all public to protected internal
+        protected internal void Collapse() => Initialize(new ChunkWithGeometry(Chunk.Position, Chunk.Size, this));
 
         protected void StartUpdatePeriod(float period)
         {
-            ChunkManager.StartCoroutine(Update(period));
+            ChunkManager.StartCoroutine(UpdateChunk(period));
         }
 
-        protected IEnumerator Update(float period)
+        protected IEnumerator UpdateChunk(float period)
         {
             while (isAlive && Chunk is ChunkWithGeometry chunkWithGeometry)
             {
