@@ -1,19 +1,31 @@
 using Biosearcher.InputHandling;
+using Biosearcher.Planet.Orientation;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Biosearcher.PlayerBehaviour
 {
+    [RequireComponent(typeof(PlanetTransform))]
     public class PlayerCamera : MonoBehaviour
     {
         [SerializeField] protected Vector3 relativePosition;
         [SerializeField] protected Transform player;
 
         protected PlayerCameraInput input;
+        protected PlanetTransform planetTransform;
+
+        protected Vector3 _planetEulerAngles;
+        public Vector3 PlanetEulerAngles
+        {
+            get => _planetEulerAngles;
+            protected set => _planetEulerAngles = new Vector3(value.x % 380, value.y % 380, value.z % 380);
+        }
 
         protected void Awake()
         {
+            planetTransform = GetComponent<PlanetTransform>();
+
             input = new PlayerCameraInput(new Presenter(this));
         }
         protected void OnDestroy() => input.OnDestroy();
@@ -30,7 +42,7 @@ namespace Biosearcher.PlayerBehaviour
 
         protected void Rotate(Vector2 direction)
         {
-            float currentRotationX = transform.rotation.eulerAngles.x;
+            float currentRotationX = PlanetEulerAngles.x;
             if (currentRotationX > 60 && currentRotationX < 180 && direction.y < 0)
             {
                 direction.y = 0;
@@ -40,7 +52,8 @@ namespace Biosearcher.PlayerBehaviour
                 direction.y = 0;
             }
 
-            transform.eulerAngles = transform.eulerAngles + new Vector3(-direction.y, direction.x, 0);
+            PlanetEulerAngles += new Vector3(-direction.y, direction.x, 0);
+            planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
             Move();
         }
 

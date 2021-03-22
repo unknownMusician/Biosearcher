@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Biosearcher.Land.Generation
+namespace Biosearcher.Planet.Generation
 {
     public class CubeMarcherGPU : MonoBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Biosearcher.Land.Generation
+namespace Biosearcher.Planet.Generation
 {
     public struct Point
     {

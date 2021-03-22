@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Biosearcher.Land.Generation
+namespace Biosearcher.Planet.Generation
 {
     public static class CubeMarcher
     {

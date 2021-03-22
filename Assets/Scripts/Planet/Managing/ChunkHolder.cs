@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Biosearcher.Land.Managing
+namespace Biosearcher.Planet.Managing
 {
     public class ChunkHolder
     {

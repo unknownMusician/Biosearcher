@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Biosearcher.Land.Managing
+namespace Biosearcher.Planet.Managing
 {
     public class ChunkWithChunks : Chunk
     {

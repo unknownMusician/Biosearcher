@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Biosearcher.Land.Generation
+namespace Biosearcher.Planet.Generation
 {
     public static class GridGenerator
     {
@@ -71,14 +71,6 @@ namespace Biosearcher.Land.Generation
                 noisesZ[z] = Mathf.Lerp(noisesY[0], noisesY[1], fractPart.y);
             }
             return Mathf.Lerp(noisesZ[0], noisesZ[1], fractPart.z);
-        }
-
-        // todo: remove
-        private static float ScaledNoise(Vector3 vector, float scale)
-        {
-            Vector3 value = (vector / scale);
-            value = new Vector3(value.x % 1, value.y % 1, value.z % 1);
-            return Mathf.Clamp01(Perlin.Noise(value));
         }
 
         public static Cube[] ToCubes(PointsChunk pointsChunk)

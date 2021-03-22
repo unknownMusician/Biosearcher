@@ -1,8 +1,8 @@
-﻿using Biosearcher.Land.Generation;
+﻿using Biosearcher.Planet.Generation;
 using System.Collections;
 using UnityEngine;
 
-namespace Biosearcher.Land.Managing
+namespace Biosearcher.Planet.Managing
 {
     [RequireComponent(typeof(CubeMarcherGPU))]
     public class ChunkManager : MonoBehaviour
@@ -11,6 +11,9 @@ namespace Biosearcher.Land.Managing
         [SerializeField] protected int size;
         [SerializeField] protected float surfaceValue = 0.2f;
         [SerializeField] protected GameObject chunkPrefab;
+        [SerializeField] protected Vector3Int planetPosition;
+        [SerializeField] protected Vector3 rotationAxis;
+        [SerializeField] protected float gravityScale = 9.8f; // todo: move
 
         protected CubeMarcherGPU cubeMarcher;
         protected ChunkHolder mainChunk;
@@ -20,13 +23,16 @@ namespace Biosearcher.Land.Managing
         protected internal Transform Trigger => trigger;
         protected internal float SurfaceValue => surfaceValue;
         protected internal GameObject ChunkPrefab => chunkPrefab;
+        public Vector3 RotationAxis => rotationAxis;
+        public Vector3Int PlanetPosition => planetPosition;
+        public float GravityScale => gravityScale;
 
         protected void Awake() => cubeMarcher = GetComponent<CubeMarcherGPU>();
 
         protected void Start()
         {
             mainChunk = new ChunkHolder(null, this);
-            mainChunk.Initialize(Chunk.Create(Vector3Int.zero, size, mainChunk, trigger.position));
+            mainChunk.Initialize(Chunk.Create(planetPosition, size, mainChunk, trigger.position));
         }
 
         protected void OnDrawGizmos()

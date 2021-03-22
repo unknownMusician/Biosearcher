@@ -1,7 +1,5 @@
 using Biosearcher.InputHandling;
-using Biosearcher.Land.Generation;
-using System.Collections;
-using System.Collections.Generic;
+using Biosearcher.Planet.Managing;
 using UnityEngine;
 
 namespace Biosearcher.Tools
@@ -12,7 +10,7 @@ namespace Biosearcher.Tools
         [SerializeField] protected new Transform camera;
         [SerializeField] protected LayerMask terraformable;
         [SerializeField] protected float maxTerraformDistance;
-        [SerializeField] protected LandManager landManager;
+        [SerializeField] protected ChunkManager landManager;
         [SerializeField] protected GameObject terraformSpherePrefab;
 
         protected TerraformerInput input;
