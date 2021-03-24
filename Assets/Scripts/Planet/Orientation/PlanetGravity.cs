@@ -21,7 +21,8 @@ namespace Biosearcher.Planet.Orientation
             ChunkManager chunkManager = planetTransform.ChunkManager;
             if (chunkManager != null)
             {
-                rigidbody.AddForce((chunkManager.PlanetPosition - transform.position).normalized * planetTransform.ChunkManager.GravityScale);
+                Vector3 gravityDirection = (chunkManager.PlanetPosition - transform.position).normalized;
+                rigidbody.AddForce(gravityDirection * planetTransform.ChunkManager.GravityScale);
             }
         }
     }

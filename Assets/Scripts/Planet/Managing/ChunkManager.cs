@@ -14,8 +14,9 @@ namespace Biosearcher.Planet.Managing
         [SerializeField] protected Vector3Int planetPosition;
         [SerializeField] protected Vector3 rotationAxis;
         [SerializeField] protected float gravityScale = 9.8f; // todo: move
+        [SerializeField] protected CubeMarchType marchType;
 
-        protected CubeMarcherGPU cubeMarcher;
+        protected ICubeMarcher cubeMarcher;
         protected ChunkHolder mainChunk;
 
         protected const int chunkSize = 6;
@@ -27,7 +28,17 @@ namespace Biosearcher.Planet.Managing
         public Vector3Int PlanetPosition => planetPosition;
         public float GravityScale => gravityScale;
 
-        protected void Awake() => cubeMarcher = GetComponent<CubeMarcherGPU>();
+        protected void Awake()
+        {
+            if (marchType == CubeMarchType.GPU)
+            {
+                cubeMarcher = GetComponent<CubeMarcherGPU>();
+            }
+            else if (marchType == CubeMarchType.CPU)
+            {
+                cubeMarcher = new CubeMarcherCPU();
+            }
+        }
 
         protected void Start()
         {
@@ -40,33 +51,36 @@ namespace Biosearcher.Planet.Managing
             mainChunk?.Chunk.DrawGizmos();
         }
 
-        protected internal void GenerateChunkGPU(Vector3Int chunkPosition, int cubeSize, ChunkHolder parent, out Mesh generatedMesh, out GameObject generatedChunkObject)
-        {
-            CubeMarcherGPU.MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
-            generatedMesh = cubeMarcher.GenerateMesh(points, surfaceValue);
-
-            CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);
-        }
-
         protected internal void GenerateChunk(Vector3Int chunkPosition, int cubeSize, ChunkHolder parent, out Mesh generatedMesh, out GameObject generatedChunkObject)
         {
-            PointsChunk points = GridGenerator.GeneratePointsChunk(chunkPosition, chunkSize, cubeSize);
-            Cube[] cubes = GridGenerator.ToCubes(points);
-            generatedMesh = CubeMarcher.GenerateMesh(cubes, surfaceValue);
+            float todoTimeStart = Time.realtimeSinceStartup;
+            MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
+            Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            todoTimeStart = Time.realtimeSinceStartup;
+            generatedMesh = cubeMarcher.GenerateMesh(points, surfaceValue);
+            Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
 
             CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);
         }
 
         protected void CreateChunk(Mesh mesh, Vector3Int chunkPosition, ChunkHolder parent, out GameObject generatedChunkObject)
         {
+            float todoTimeStart = Time.realtimeSinceStartup;
             generatedChunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = mesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = mesh;
+            Debug.Log($"Instantiating Chunks: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
         }
 
         public void TerraformAdd(Vector3 position, float radius)
         {
             // todo
+        }
+
+        public enum CubeMarchType
+        {
+            CPU,
+            GPU
         }
     }
 }

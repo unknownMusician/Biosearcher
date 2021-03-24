@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Biosearcher.Planet.Generation
 {
-    public static class GridGenerator
+    public class GridGenerator
     {
-        public static PointsChunk GeneratePointsChunk(Vector3Int chunkPosition, int chunkSize, int cubeSize)
+        public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
         {
-            int halfChunkSize = chunkSize / 2;
+            int halfChunkSize = CubeMarcherConfig.cubesChunkSize / 2;
 
             int pointsArray1DSize = halfChunkSize * 2 + 1;
-            var points = new Point[pointsArray1DSize, pointsArray1DSize, pointsArray1DSize];
+            var points = new MarchPoint[pointsArray1DSize * pointsArray1DSize * pointsArray1DSize];
 
             for (int z = -halfChunkSize, zIndex = 0; z <= halfChunkSize; z++, zIndex++)
             {
@@ -20,35 +20,42 @@ namespace Biosearcher.Planet.Generation
                     for (int x = -halfChunkSize, xIndex = 0; x <= halfChunkSize; x++, xIndex++)
                     {
                         Vector3Int position = new Vector3Int(x, y, z) * cubeSize;
-                        points[xIndex, yIndex, zIndex] = new Point(position, GenerateValue(position + chunkPosition));
+                        int pointIndex = MatrixId2ArrayId(xIndex, yIndex, zIndex, CubeMarcherConfig.pointsChunkSize);
+                        points[pointIndex] = new MarchPoint()
+                        {
+                            position = position,
+                            value = GenerateValue(position + chunkPosition)
+                        };
                     }
                 }
             }
-            return new PointsChunk(points, pointsArray1DSize);
+            return points;
         }
 
-        private static float GenerateValue(Vector3 position)
+        protected float GenerateValue(Vector3 position)
         {
             float result = 1;
 
             // todo
-            result *= 1 - GradientNoise(position / 12f) / 8;
-            result *= 1 - GradientNoise(position / 24f) / 4;
-            result *= 1 - GradientNoise(position / 48f) / 2;
+            result *= 1 - GradientNoise(position / (6 * (1 << 1))) / 16;
+            result *= 1 - GradientNoise(position / (6 * (1 << 2))) / 8;
+            result *= 1 - GradientNoise(position / (6 * (1 << 3))) / 4;
+            result *= 1 - GradientNoise(position / (6 * (1 << 4))) / 2;
+            result *= 1 - GradientNoise(position / (6 * (1 << 5))) / 1.5f;
 
             // 100 - planet size (todo)
-            result *= 1 - Mathf.Clamp01(position.magnitude / 100);
+            result *= 1 - Mathf.Clamp01(position.magnitude / 400);
 
             return result;
         }
 
-        private static float Noise(Vector3 position)
+        protected float Noise(Vector3 position)
         {
             float noise = (Mathf.Sin(Vector3.Dot(position, new Vector3(12.9898f, 78.233f, 128.544f) * 2.0f) * position.magnitude) * 43758.5453f) % 1;
             return Mathf.Abs(noise);
         }
 
-        private static float GradientNoise(Vector3 position)
+        protected float GradientNoise(Vector3 position)
         {
             Vector3Int wholePart = new Vector3Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), Mathf.FloorToInt(position.z));
             // todo
@@ -73,10 +80,10 @@ namespace Biosearcher.Planet.Generation
             return Mathf.Lerp(noisesZ[0], noisesZ[1], fractPart.z);
         }
 
-        public static Cube[] ToCubes(PointsChunk pointsChunk)
+        public MarchCube[] ToCubes(MarchPoint[] points)
         {
-            var cubes = new List<Cube>();
-            int cubesChunkSize = pointsChunk.Size1D - 1;
+            var cubes = new List<MarchCube>();
+            int cubesChunkSize = CubeMarcherConfig.cubesChunkSize;
 
             for (int zIndex = 0; zIndex < cubesChunkSize; zIndex++)
             {
@@ -84,16 +91,16 @@ namespace Biosearcher.Planet.Generation
                 {
                     for (int xIndex = 0; xIndex < cubesChunkSize; xIndex++)
                     {
-                        cubes.Add(GenerateCube(pointsChunk.Points, xIndex, yIndex, zIndex));
+                        cubes.Add(GenerateCube(points, xIndex, yIndex, zIndex));
                     }
                 }
             }
             return cubes.ToArray();
         }
 
-        public static Cube GenerateCube(Point[,,] points, int xIndex, int yIndex, int zIndex)
+        public MarchCube GenerateCube(MarchPoint[] points, int xIndex, int yIndex, int zIndex)
         {
-            var pointsList = new List<Point>();
+            var pointsList = new List<MarchPoint>();
 
             for (int y = 0; y < 2; y++)
             {
@@ -104,11 +111,17 @@ namespace Biosearcher.Planet.Generation
                         int localXIndex = z == 0 ? x : 1 - x;
                         int localYIndex = y;
                         int localZIndex = 1 - z;
-                        pointsList.Add(points[xIndex + localXIndex, yIndex + localYIndex, zIndex + localZIndex]);
+                        int pointIndex = MatrixId2ArrayId(xIndex + localXIndex, yIndex + localYIndex, zIndex + localZIndex, CubeMarcherConfig.pointsChunkSize);
+                        pointsList.Add(points[pointIndex]);
                     }
                 }
             }
-            return new Cube(pointsList.ToArray());
+            return new MarchCube(pointsList.ToArray());
+        }
+
+        public int MatrixId2ArrayId(int x, int y, int z, int chunkSize)
+        {
+            return x + y * chunkSize + z * chunkSize * chunkSize;
         }
     }
 }
