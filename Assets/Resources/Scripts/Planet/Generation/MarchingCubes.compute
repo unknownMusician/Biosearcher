@@ -113,6 +113,16 @@ uint MatrixId2ArrayId(uint3 id, int base)
     return MatrixId2ArrayId(id.x, id.y, id.z, base);
 }
 
+uint2 MatrixId2TextureId(uint x, uint y, uint z, int base)
+{
+    return uint2(x + y * base, z);
+}
+
+uint2 MatrixId2TextureId(uint3 id, int base)
+{
+    return MatrixId2ArrayId(id.x, id.y, id.z, base);
+}
+
 MarchCube GenerateCube(RWStructuredBuffer<MarchPoint> points, uint3 id)
 {
     MarchPoint cubePoints[8];
@@ -232,11 +242,11 @@ void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
     marchPoint.position = position;
     marchPoint.value = GenerateValue(position + chunkPosition);
     
-    
-    if (threadId.x < 9 && threadId.y < 9 && threadId.z < 9)
-    {
+    // todo
+    //if (threadId.x < 9 && threadId.y < 9 && threadId.z < 9)
+    //{
         points[pointIndex] = marchPoint;
-    }
+    //}
 }
 
 [numthreads(8, 8, 8)]

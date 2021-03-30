@@ -26,7 +26,11 @@ namespace Biosearcher.HDRP
         [SerializeField] protected CustomSkySettings settings;
 
         protected void Awake() => instance = this;
-        protected void OnDestroy() => instance = null;
+        protected void OnDestroy()
+        {
+            instance = null;
+            mainStarMaterial.SetFloat("_EmissionStrenght", 0);
+        }
 
         protected void Update()
         {
