@@ -15,6 +15,8 @@ namespace Biosearcher.PlayerBehaviour
         protected PlayerInput input;
         protected PlanetTransform planetTransform;
 
+        protected Vector2 MoveDirection { get; set; }
+
         protected void Awake()
         {
             rigidbody = GetComponent<Rigidbody>();
@@ -27,16 +29,31 @@ namespace Biosearcher.PlayerBehaviour
         protected void OnEnable() => input.OnEnable();
         protected void OnDisable() => input.OnDisable();
 
+        protected void FixedUpdate() => Move(MoveDirection);
+
         protected void Move(Vector2 direction)
         {
-            Quaternion targetRotation = planetTransform.ToUniverse(Quaternion.Euler(0, camera.PlanetEulerAngles.y, 0));
+            if (direction.magnitude == 0)
+            {
+                return;
+            }
+            // Quaternion targetRotation = planetTransform.ToUniverse(Quaternion.Euler(0, camera.PlanetEulerAngles.y, 0));
             float planetYVelocity = planetTransform.ToPlanet(rigidbody.velocity).y;
-            rigidbody.velocity = targetRotation * (direction * speed).ReProjectedXZ(planetYVelocity);
+            //Vector3 universeVerticalVelocity = planetTransform.ToUniverse(new Vector3(0, planetYVelocity, 0));
+            transform.rotation = camera.RotationWithoutX;
+            Vector3 universeVerticalVelocity = transform.up * planetYVelocity;
+            Vector3 moveUniverseDirection = transform.right * direction.x + transform.forward * direction.y;
+            ////moveUniverseDirection *= speed;
+            //Debug.Log(planetYVelocity);
+            //Debug.DrawLine(transform.position, transform.position + universeVerticalVelocity, Color.yellow, 20);
+            rigidbody.velocity = moveUniverseDirection * speed + universeVerticalVelocity;
+            ////rigidbody.AddForce(moveUniverseDirection);
         }
 
         protected void Update()
         {
-            planetTransform.planetRotation = Quaternion.identity;
+            transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - planetTransform.ChunkManager.PlanetPosition) * transform.rotation;
+            //planetTransform.planetRotation = Quaternion.identity;
         }
 
         public class Presenter
@@ -44,7 +61,7 @@ namespace Biosearcher.PlayerBehaviour
             public Player Player { get; }
 
             public Presenter(Player player) => Player = player;
-            public void Move(Vector2 direction) => Player.Move(direction);
+            public void Move(Vector2 direction) => Player.MoveDirection = direction;
         }
     }
 }

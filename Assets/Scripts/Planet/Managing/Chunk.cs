@@ -19,7 +19,7 @@ namespace Biosearcher.Planet.Managing
         {
             if (size == 0)
             {
-                return (0, 12);
+                return (0, 12 * 2);
             }
             return (Size2ActualSize(size), Size2ActualSize(size + 1));
         }

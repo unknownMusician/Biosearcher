@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Biosearcher.Planet.Generation
 {
-    public static class CubeMarcher
+    public class CubeMarcherCPU : ICubeMarcher
     {
         #region Cached Data
 
@@ -334,8 +334,21 @@ namespace Biosearcher.Planet.Generation
 
         #endregion
 
-        public static Mesh GenerateMesh(Cube[] cubes, float surfaceValue)
+        protected GridGenerator gridGenerator;
+
+        public CubeMarcherCPU()
         {
+            gridGenerator = new GridGenerator();
+        }
+
+        public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
+        {
+            return gridGenerator.GeneratePoints(chunkPosition, cubeSize);
+        }
+
+        public Mesh GenerateMesh(MarchPoint[] points, float surfaceValue)
+        {
+            MarchCube[] cubes = gridGenerator.ToCubes(points);
             MeshData meshData = March(cubes, surfaceValue);
 
             var mesh = new Mesh();
@@ -347,11 +360,11 @@ namespace Biosearcher.Planet.Generation
             return mesh;
         }
 
-        public static MeshData March(Cube[] cubes, float surfaceValue)
+        protected MeshData March(MarchCube[] cubes, float surfaceValue)
         {
             var meshData = new MeshData();
 
-            foreach(Cube cube in cubes)
+            foreach (MarchCube cube in cubes)
             {
                 March(cube, surfaceValue, meshData);
             }
@@ -359,7 +372,7 @@ namespace Biosearcher.Planet.Generation
             return meshData;
         }
 
-        public static void March(Cube cube, float surfaceValue, MeshData meshData)
+        protected void March(MarchCube cube, float surfaceValue, MeshData meshData)
         {
             int pointsHash = GetPointsHash(cube, surfaceValue);
 
@@ -389,8 +402,8 @@ namespace Biosearcher.Planet.Generation
                     int edgePoint1Index = EdgeIndex2PointIndexes[edgeIndex, 0];
                     int edgePoint2Index = EdgeIndex2PointIndexes[edgeIndex, 1];
 
-                    Point edgePoint1 = cube.Points[edgePoint1Index];
-                    Point edgePoint2 = cube.Points[edgePoint2Index];
+                    MarchPoint edgePoint1 = cube.Points[edgePoint1Index];
+                    MarchPoint edgePoint2 = cube.Points[edgePoint2Index];
 
                     triangle[j] = Interpolate(edgePoint1, edgePoint2, surfaceValue);
                 }
@@ -399,10 +412,10 @@ namespace Biosearcher.Planet.Generation
             }
         }
 
-        public static Vector3 Interpolate(Point point1, Point point2, float surfaceValue)
+        protected Vector3 Interpolate(MarchPoint point1, MarchPoint point2, float surfaceValue)
         {
-            float lerp = (surfaceValue - point1.Value) / (point2.Value - point1.Value);
-            return Vector3.Lerp(point1.Position, point2.Position, lerp);
+            float lerp = (surfaceValue - point1.value) / (point2.value - point1.value);
+            return Vector3.Lerp(point1.position, point2.position, lerp);
 
             // Vector3 deltaPosition = point2.Position - point1.Position;
             // return point1.Position + deltaPosition * lerp;
@@ -410,46 +423,46 @@ namespace Biosearcher.Planet.Generation
             // return (point1.Position + point2.Position) / 2;
         }
 
-        public static int GetPointsHash(Cube cube, float surfaceValue)
+        protected int GetPointsHash(MarchCube cube, float surfaceValue)
         {
             int cubeIndex = 0;
             // Find which vertices are inside of the surface and which are outside
             for (int i = 0; i < 8; i++)
             {
-                if (cube.Points[i].Value <= surfaceValue)
+                if (cube.Points[i].value <= surfaceValue)
                 {
                     cubeIndex |= 1 << i;
                 }
             }
             return cubeIndex;
         }
-    }
 
-    public class MeshData
-    {
-        protected List<Vector3> meshPoints = new List<Vector3>();
-        protected List<int> meshTriangles = new List<int>();
-
-        public Vector3[] Vertices => meshPoints.ToArray();
-        public int[] Triangles => meshTriangles.ToArray();
-
-        public void AddFace(Vector3[] vertices)
+        public class MeshData
         {
-            int[] triangle = new int[3];
-            for (int i = 0; i < 3; i++)
+            protected List<Vector3> meshPoints = new List<Vector3>();
+            protected List<int> meshTriangles = new List<int>();
+
+            public Vector3[] Vertices => meshPoints.ToArray();
+            public int[] Triangles => meshTriangles.ToArray();
+
+            public void AddFace(Vector3[] vertices)
             {
-                Vector3 vertex = vertices[i];
-                if (meshPoints.Contains(vertex)) // todo: too expensive (use dictionary instead)
+                int[] triangle = new int[3];
+                for (int i = 0; i < 3; i++)
                 {
-                    triangle[i] = meshPoints.IndexOf(vertex);
+                    Vector3 vertex = vertices[i];
+                    if (meshPoints.Contains(vertex)) // todo: too expensive (use dictionary instead)
+                    {
+                        triangle[i] = meshPoints.IndexOf(vertex);
+                    }
+                    else
+                    {
+                        triangle[i] = meshPoints.Count;
+                        meshPoints.Add(vertex);
+                    }
                 }
-                else
-                {
-                    triangle[i] = meshPoints.Count;
-                    meshPoints.Add(vertex);
-                }
+                meshTriangles.AddRange(triangle);
             }
-            meshTriangles.AddRange(triangle);
         }
     }
 }

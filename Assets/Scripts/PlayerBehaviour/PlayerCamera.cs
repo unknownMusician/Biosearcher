@@ -15,12 +15,9 @@ namespace Biosearcher.PlayerBehaviour
         protected PlayerCameraInput input;
         protected PlanetTransform planetTransform;
 
-        protected Vector3 _planetEulerAngles;
-        public Vector3 PlanetEulerAngles
-        {
-            get => _planetEulerAngles;
-            protected set => _planetEulerAngles = new Vector3(value.x % 380, value.y % 380, value.z % 380);
-        }
+        protected float rotationX;
+
+        public Quaternion RotationWithoutX { get; protected set; }
 
         protected void Awake()
         {
@@ -33,7 +30,14 @@ namespace Biosearcher.PlayerBehaviour
         protected void OnEnable() => input.OnEnable();
         protected void OnDisable() => input.OnDisable();
 
-        protected void FixedUpdate() => Move();
+        protected void Update()
+        {
+            RotationWithoutX = Quaternion.FromToRotation(transform.up, transform.position - planetTransform.ChunkManager.PlanetPosition) * transform.rotation;
+            transform.rotation = RotationWithoutX;
+            //planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
+            transform.rotation = Quaternion.AngleAxis(-rotationX, transform.right) * RotationWithoutX;
+            Move();
+        }
 
         protected void Move()
         {
@@ -42,18 +46,15 @@ namespace Biosearcher.PlayerBehaviour
 
         protected void Rotate(Vector2 direction)
         {
-            float currentRotationX = PlanetEulerAngles.x;
-            if (currentRotationX > 60 && currentRotationX < 180 && direction.y < 0)
+            if (Mathf.Abs(rotationX + direction.y) <= 60)
             {
-                direction.y = 0;
+                rotationX += direction.y;
             }
-            if (currentRotationX > 180 && currentRotationX < 300 && direction.y > 0)
-            {
-                direction.y = 0;
-            }
+            Quaternion rotateY = Quaternion.AngleAxis(direction.x, transform.position - planetTransform.ChunkManager.PlanetPosition);
+            transform.rotation = rotateY * transform.rotation;
 
-            PlanetEulerAngles += new Vector3(-direction.y, direction.x, 0);
-            planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
+            //PlanetEulerAngles += new Vector3(-direction.y, direction.x, 0);
+            //planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
             Move();
         }
 

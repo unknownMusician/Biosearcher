@@ -49,22 +49,51 @@ int cubeSize;
 int pointsSize1D;
 int cubesSize1D;
 
-// todo: not in sync with CPU
+float Noise(float3 position)
+{
+    float noise = (sin(dot(position, float3(12.9898f, 78.233f, 128.544f) * 2.0f) * length(position)) * 43758.5453f) % 1;
+    return abs(noise);
+}
+
+float GradientNoise(float3 position)
+{
+    int3 wholePart = floor(position);
+    // todo
+    float3 fractPart = position % 1;
+    // todo
+    fractPart += float3(position.x < 0 && fractPart.x != 0 ? 1 : 0, position.y < 0 && fractPart.y != 0 ? 1 : 0, position.z < 0 && fractPart.z != 0 ? 1 : 0);
+    float noisesZ[2];
+    for (int z = 0; z < 2; z++)
+    {
+        float noisesY[2];
+        for (int y = 0; y < 2; y++)
+        {
+            float noisesX[2];
+            for (int x = 0; x < 2; x++)
+            {
+                noisesX[x] = Noise(wholePart + int3(x, y, z));
+            }
+            noisesY[y] = lerp(noisesX[0], noisesX[1], fractPart.x);
+        }
+        noisesZ[z] = lerp(noisesY[0], noisesY[1], fractPart.y);
+    }
+    return lerp(noisesZ[0], noisesZ[1], fractPart.z);
+}
+
+// todo: not in sync with CPU (+~)
 float GenerateValue(float3 position)
 {
     float result = 1;
 
-    // result *= ScaledNoise(position, 2);
-    // result *= ScaledNoise(position, 4);
-    // result *= ScaledNoise(position, 8);
-    // result *= ScaledNoise(position, 16);
-    // result *= ScaledNoise(position, 32);
-    // result *= Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(Mathf.Sqrt(ScaledNoise(position, 64)))));
-    // result *= ScaledNoise(position, 128);
+    // todo
+    result *= 1 - GradientNoise(position / (6 * (1 << 1))) / 16;
+    result *= 1 - GradientNoise(position / (6 * (1 << 2))) / 8;
+    result *= 1 - GradientNoise(position / (6 * (1 << 3))) / 4;
+    result *= 1 - GradientNoise(position / (6 * (1 << 4))) / 2;
+    result *= 1 - GradientNoise(position / (6 * (1 << 5))) / 1.5f;
 
-    result *= 1 - clamp(length(position / 32), 0, 1);
-
-    // result *= 1 - Mathf.Clamp(position.y / 2, 0, 1);
+    // 100 - planet size (todo)
+    result *= 1 - clamp(length(position) / 400, 0, 1);
 
     return result;
 }
@@ -192,7 +221,14 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
     }
 }
 
-
+void SetBuffer(int cubeIndex)
+{
+    for (int i = 0; i < 15; i++)
+    {
+        meshTriangles[cubeIndex * 15 + i] = -1;
+        meshVertices[cubeIndex * 15 + i] = 0;
+    }
+}
 
 [numthreads(7, 7, 7)]
 void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
@@ -212,7 +248,9 @@ void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
 [numthreads(6, 6, 6)]
 void GenerateMesh(uint3 threadId : SV_DispatchThreadID)
 {
-    int cubeIndex = MatrixId2ArrayId(threadId, cubesSize1D);
+    uint cubeArrayId = MatrixId2ArrayId(threadId, cubesSize1D);
+    
+    SetBuffer(cubeArrayId);
     
     MarchCube marchCube = GenerateCube(points, threadId);
     
@@ -221,8 +259,6 @@ void GenerateMesh(uint3 threadId : SV_DispatchThreadID)
     //meshVertices[cubeIndex] = marchCube.points[0].position;
     //return;
     //meshVertices[1] = (8).xxx;
-    
-    uint cubeArrayId = MatrixId2ArrayId(threadId, cubesSize1D);
     
     March(marchCube, surfaceValue, cubeArrayId);
 
