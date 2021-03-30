@@ -38,8 +38,6 @@ namespace Biosearcher.Planet.Generation
             using ComputeBuffer meshTrianglesBuffer = new ComputeBuffer(meshTriangles.Length, sizeof(int));
 
             pointsBuffer.SetData(points);
-            // meshVerticesBuffer.SetData(meshVertices);
-            // meshTrianglesBuffer.SetData(meshTriangles);
 
             shader.SetBuffer(generateMeshKernel, "points", pointsBuffer);
             shader.SetBuffer(generateMeshKernel, "meshVertices", meshVerticesBuffer);
@@ -54,17 +52,9 @@ namespace Biosearcher.Planet.Generation
 
             shader.Dispatch(generateMeshKernel, 1, 1, 1);
 
-            // pointsBuffer.GetData(points);
             meshVerticesBuffer.GetData(meshVertices);
             meshTrianglesBuffer.GetData(meshTriangles);
 
-            // todo: optimize shader. A lot of unused vertices and points
-            //var mesh = new Mesh();
-            //mesh.Clear();
-            //mesh.vertices = meshVertices;
-            //mesh.triangles = meshTriangles;
-            //mesh.RecalculateNormals();
-            //return mesh;
             return ToMesh(meshVertices, meshTriangles);
         }
 
