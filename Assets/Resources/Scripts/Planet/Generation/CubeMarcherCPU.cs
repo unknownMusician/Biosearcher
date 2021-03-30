@@ -335,10 +335,12 @@ namespace Biosearcher.Planet.Generation
         #endregion
 
         protected GridGenerator gridGenerator;
+        protected float surfaceValue;
 
-        public CubeMarcherCPU()
+        public CubeMarcherCPU(MarchingCubesSettings settings)
         {
-            gridGenerator = new GridGenerator();
+            surfaceValue = settings.SurfaceValue;
+            gridGenerator = new GridGenerator(settings);
         }
 
         public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
@@ -346,7 +348,7 @@ namespace Biosearcher.Planet.Generation
             return gridGenerator.GeneratePoints(chunkPosition, cubeSize);
         }
 
-        public Mesh GenerateMesh(MarchPoint[] points, float surfaceValue)
+        public Mesh GenerateMesh(MarchPoint[] points)
         {
             MarchCube[] cubes = gridGenerator.ToCubes(points);
             MeshData meshData = March(cubes, surfaceValue);

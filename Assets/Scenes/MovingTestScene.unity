@@ -371,12 +371,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trigger: {fileID: 573441555}
   size: 7
-  surfaceValue: 0.2
   chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}
   planetPosition: {x: 0, y: 0, z: 0}
   rotationAxis: {x: 0, y: 1, z: 0}
   gravityScale: 9.8
   marchType: 1
+  settings: {fileID: 11400000, guid: fa25946fbe40daf44a70ecc16e43aed2, type: 2}
 --- !u!4 &79430798
 Transform:
   m_ObjectHideFlags: 0
@@ -404,9 +404,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 7200000, guid: 8a2e99cf7721a2d4ea70ed3a06f236ef, type: 3}
+  settings: {fileID: 11400000, guid: fa25946fbe40daf44a70ecc16e43aed2, type: 2}
   edgeIndex2PointIndexesTexture: {fileID: 0}
   pointsHash2EdgesHashTexture: {fileID: 0}
   pointsHash2EdgesIndexesTexture: {fileID: 0}
+  meshV3T1RenderTexture: {fileID: 0}
 --- !u!108 &101740946 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 4905139321639701586, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}

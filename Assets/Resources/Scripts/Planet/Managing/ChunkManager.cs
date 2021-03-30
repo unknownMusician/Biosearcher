@@ -10,20 +10,17 @@ namespace Biosearcher.Planet.Managing
     {
         [SerializeField] protected Transform trigger;
         [SerializeField] protected int size;
-        [SerializeField] protected float surfaceValue = 0.2f;
         [SerializeField] protected GameObject chunkPrefab;
         [SerializeField] protected Vector3Int planetPosition;
         [SerializeField] protected Vector3 rotationAxis;
         [SerializeField] protected float gravityScale = 9.8f; // todo: move
         [SerializeField] protected CubeMarchType marchType;
+        [SerializeField] protected MarchingCubesSettings settings;
 
         protected ICubeMarcher cubeMarcher;
         protected ChunkHolder mainChunk;
 
-        protected const int chunkSize = 6;
-
         protected internal Transform Trigger => trigger;
-        protected internal float SurfaceValue => surfaceValue;
         protected internal GameObject ChunkPrefab => chunkPrefab;
         public Vector3 RotationAxis => rotationAxis;
         public Vector3Int PlanetPosition => planetPosition;
@@ -37,7 +34,7 @@ namespace Biosearcher.Planet.Managing
             }
             else if (marchType == CubeMarchType.CPU)
             {
-                cubeMarcher = new CubeMarcherCPU();
+                cubeMarcher = new CubeMarcherCPU(settings);
             }
             SkyGameManager.planetPosition = planetPosition;
         }
@@ -59,7 +56,7 @@ namespace Biosearcher.Planet.Managing
             MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
             Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
             todoTimeStart = Time.realtimeSinceStartup;
-            generatedMesh = cubeMarcher.GenerateMesh(points, surfaceValue);
+            generatedMesh = cubeMarcher.GenerateMesh(points);
             Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
 
             CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);

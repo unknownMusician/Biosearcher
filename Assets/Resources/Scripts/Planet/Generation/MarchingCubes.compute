@@ -40,8 +40,6 @@ struct MarchCube
 };
 
 RWStructuredBuffer<MarchPoint> points;
-// RWStructuredBuffer<float3> meshVertices;
-// RWStructuredBuffer<int> meshTriangles;
 RWTexture2D<float4> meshV3T1;
 float3 chunkPosition;
 float surfaceValue;
@@ -93,11 +91,11 @@ float GenerateValue(float3 position)
     float result = 1;
 
     // todo
-    result *= 1 - GradientNoise(position / (6 * (1 << 1))) / 16;
-    result *= 1 - GradientNoise(position / (6 * (1 << 2))) / 8;
-    result *= 1 - GradientNoise(position / (6 * (1 << 3))) / 4;
-    result *= 1 - GradientNoise(position / (6 * (1 << 4))) / 2;
-    result *= 1 - GradientNoise(position / (6 * (1 << 5))) / 1.5f;
+    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 1))) / 16;
+    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 2))) / 8;
+    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 3))) / 4;
+    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 4))) / 2;
+    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 5))) / 1.5f;
 
     // 100 - planet size (todo)
     result *= 1 - clamp(length(position) / 400, 0, 1);
@@ -169,22 +167,17 @@ void AddFace(float3 face[3], uint faceId, uint cubeArrayId)
     
     for (int i = 0; i < 3; i++)
     {
-        
         int vertexGlobalId = faceGlobalId * 3 + i;
         meshV3T1[uint2(vertexGlobalId, 0)] = float4(face[i], vertexGlobalId); // todo: warning (if dimensions == 8)
-
     }
 }
 
 void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
 {
-    
     int pointsHash = GetPointsHash(cube, surfaceValue);
     
     // Find which edges are intersected by the surface
-    //int edgesHash = PointsHash2EdgesHashT.Load(uint3(pointsHash, 0, 0));
     int edgesHash = PointsHash2EdgesHashT[uint2(pointsHash, 0)];
-    // PointsHash2EdgesHashT[pointsHash];
     
     // If the cube is entirely inside or outside of the surface, then there will be no intersections
     if (edgesHash == 0)
@@ -195,8 +188,6 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
     // Save the triangles that were found. There can be up to five per cube
     for (int i = 0; i < 5; i++)
     {
-        
-        //if (PointsHash2EdgesIndexesT.Load(uint3(3 * i, pointsHash, 0)) < 0) // PointsHash2EdgesIndexes[pointsHash][3 * i]
         if (PointsHash2EdgesIndexesT[uint2(3 * i, pointsHash)] == 20.0)
         {
             break;
@@ -206,11 +197,8 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
         
         for (int j = 0; j < 3; j++)
         {
-            //int edgeIndex = PointsHash2EdgesIndexesT.Load(uint3(3 * i + j, pointsHash, 0)); // PointsHash2EdgesIndexes[pointsHash][3 * i + j]
             int edgeIndex = PointsHash2EdgesIndexesT[uint2(3 * i + j, pointsHash)];
             
-            //int edgePoint1Index = EdgeIndex2PointIndexesT.Load(uint3(0, edgeIndex, 0)); // EdgeIndex2PointIndexes[edgeIndex][0];
-            //int edgePoint2Index = EdgeIndex2PointIndexesT.Load(uint3(1, edgeIndex, 0)); // EdgeIndex2PointIndexes[edgeIndex][1];
             int edgePoint1Index = EdgeIndex2PointIndexesT[uint2(0, edgeIndex)];
             int edgePoint2Index = EdgeIndex2PointIndexesT[uint2(1, edgeIndex)];
             
@@ -232,7 +220,7 @@ void PrepareBuffer(int cubeIndex)
     }
 }
 
-[numthreads(7, 7, 7)]
+[numthreads(9, 9, 9)]
 void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
 {
     MarchPoint marchPoint;
@@ -247,7 +235,7 @@ void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
     points[pointIndex] = marchPoint;
 }
 
-[numthreads(6, 6, 6)]
+[numthreads(8, 8, 8)]
 void GenerateMesh(uint3 threadId : SV_DispatchThreadID)
 {
     uint cubeArrayId = MatrixId2ArrayId(threadId, cubesSize1D);

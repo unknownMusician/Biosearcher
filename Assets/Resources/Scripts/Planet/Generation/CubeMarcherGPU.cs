@@ -7,43 +7,45 @@ namespace Biosearcher.Planet.Generation
     public class CubeMarcherGPU : MonoBehaviour, ICubeMarcher
     {
         [SerializeField] protected ComputeShader shader;
-        [Header("Textures")]
-        // todo
-        [SerializeField] protected Texture2D edgeIndex2PointIndexesTexture;
-        // todo
-        [SerializeField] protected Texture2D pointsHash2EdgesHashTexture;
-        // todo
-        [SerializeField] protected Texture2D pointsHash2EdgesIndexesTexture;
-        // todo
-        [SerializeField] protected RenderTexture meshV3T1RenderTexture;
+        [SerializeField] protected MarchingCubesSettings settings;
 
-        protected const int CubesSize1D = 6;
-        protected const int VerticesCount = CubesSize1D * CubesSize1D * CubesSize1D * 15;
+        protected Texture2D edgeIndex2PointIndexesTexture;
+        protected Texture2D pointsHash2EdgesHashTexture;
+        protected Texture2D pointsHash2EdgesIndexesTexture;
+        protected RenderTexture meshV3T1RenderTexture;
+
+        protected int cubesChunkSize;
+        protected int pointsChunkSize;
+        protected float surfaceValue;
+        protected int verticesCount;
         protected int generateMeshKernel;
         protected int generatePointsKernel;
 
         protected void Awake()
         {
+            InitializeMarcher();
             InitializeTextures();
             InitializeShader();
         }
 
         protected void OnDestroy() => ReleaseTextures();
 
-        public Mesh GenerateMesh(MarchPoint[] points, float surfaceValue)
+        public Mesh GenerateMesh(MarchPoint[] points)
         {
             using ComputeBuffer pointsBuffer = new ComputeBuffer(points.Length, sizeof(float) * 4);
 
-            var meshVerticesTexture = new Texture2D(VerticesCount, 1, TextureFormat.RGBAFloat, false);
+            var meshVerticesTexture = new Texture2D(verticesCount, 1, TextureFormat.RGBAFloat, false);
 
             pointsBuffer.SetData(points);
             shader.SetBuffer(generateMeshKernel, "points", pointsBuffer);
+
+            // todo: move
             shader.SetFloat("surfaceValue", surfaceValue);
 
-            shader.Dispatch(generateMeshKernel, 1, 1, 1);
+            shader.Dispatch(generateMeshKernel, 2, 2, 2);
 
             RenderTexture.active = meshV3T1RenderTexture;
-            meshVerticesTexture.ReadPixels(new Rect(0, 0, VerticesCount, 1), 0, 0);
+            meshVerticesTexture.ReadPixels(new Rect(0, 0, verticesCount, 1), 0, 0);
             meshVerticesTexture.Apply();
             NativeArray<Vector4> nativeMeshV3T1 = meshVerticesTexture.GetPixelData<Vector4>(0);
             RenderTexture.active = null;
@@ -91,7 +93,7 @@ namespace Biosearcher.Planet.Generation
 
         public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
         {
-            MarchPoint[] points = new MarchPoint[(CubesSize1D + 1) * (CubesSize1D + 1) * (CubesSize1D + 1)];
+            MarchPoint[] points = new MarchPoint[(cubesChunkSize + 1) * (cubesChunkSize + 1) * (cubesChunkSize + 1)];
 
             using ComputeBuffer pointsBuffer = new ComputeBuffer(points.Length, sizeof(float) * 4);
 
@@ -100,9 +102,9 @@ namespace Biosearcher.Planet.Generation
             shader.SetBuffer(generatePointsKernel, "points", pointsBuffer);
             shader.SetVector("chunkPosition", (Vector3)chunkPosition);
             shader.SetInt("cubeSize", cubeSize);
-            shader.SetInt("pointsSize1D", CubesSize1D + 1);
+            shader.SetInt("pointsSize1D", cubesChunkSize + 1);
 
-            shader.Dispatch(generatePointsKernel, 1, 1, 1);
+            shader.Dispatch(generatePointsKernel, 2, 2, 2);
 
             pointsBuffer.GetData(points);
 
@@ -416,23 +418,32 @@ namespace Biosearcher.Planet.Generation
             pointsHash2EdgesIndexesTexture.SetPixelData(pointsHash2EdgesIndexes, 0);
             pointsHash2EdgesIndexesTexture.Apply();
 
-            meshV3T1RenderTexture = new RenderTexture(VerticesCount, 1, 1, RenderTextureFormat.ARGBFloat);
+            meshV3T1RenderTexture = new RenderTexture(verticesCount, 1, 1, RenderTextureFormat.ARGBFloat);
             meshV3T1RenderTexture.enableRandomWrite = true;
         }
 
         protected void InitializeShader()
         {
-            generateMeshKernel = shader.FindKernel("GenerateMesh");
-            generatePointsKernel = shader.FindKernel("GeneratePoints");
-
-            shader.SetInt("pointsSize1D", CubesSize1D + 1);
-            shader.SetInt("cubesSize1D", CubesSize1D);
+            shader.SetInt("pointsSize1D", pointsChunkSize);
+            shader.SetInt("cubesSize1D", cubesChunkSize);
 
             shader.SetTexture(generateMeshKernel, "EdgeIndex2PointIndexesT", edgeIndex2PointIndexesTexture);
             shader.SetTexture(generateMeshKernel, "PointsHash2EdgesHashT", pointsHash2EdgesHashTexture);
             shader.SetTexture(generateMeshKernel, "PointsHash2EdgesIndexesT", pointsHash2EdgesIndexesTexture);
 
             shader.SetTexture(generateMeshKernel, "meshV3T1", meshV3T1RenderTexture);
+        }
+
+        protected void InitializeMarcher()
+        {
+            cubesChunkSize = settings.CubesChunkSize;
+            pointsChunkSize = settings.PointsChunkSize;
+            surfaceValue = settings.SurfaceValue;
+            verticesCount = cubesChunkSize * cubesChunkSize * cubesChunkSize * 15;
+
+            generateMeshKernel = shader.FindKernel("GenerateMesh");
+            generatePointsKernel = shader.FindKernel("GeneratePoints");
+
         }
 
         protected void ReleaseTextures()

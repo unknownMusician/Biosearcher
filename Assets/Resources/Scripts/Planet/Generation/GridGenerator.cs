@@ -6,9 +6,18 @@ namespace Biosearcher.Planet.Generation
 {
     public class GridGenerator
     {
+        protected int cubesChunkSize;
+        protected int pointsChunkSize;
+
+        public GridGenerator(MarchingCubesSettings settings)
+        {
+            cubesChunkSize = settings.CubesChunkSize;
+            pointsChunkSize = settings.PointsChunkSize;
+        }
+
         public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
         {
-            int halfChunkSize = CubeMarcherConfig.cubesChunkSize / 2;
+            int halfChunkSize = cubesChunkSize / 2;
 
             int pointsArray1DSize = halfChunkSize * 2 + 1;
             var points = new MarchPoint[pointsArray1DSize * pointsArray1DSize * pointsArray1DSize];
@@ -20,7 +29,7 @@ namespace Biosearcher.Planet.Generation
                     for (int x = -halfChunkSize, xIndex = 0; x <= halfChunkSize; x++, xIndex++)
                     {
                         Vector3Int position = new Vector3Int(x, y, z) * cubeSize;
-                        int pointIndex = MatrixId2ArrayId(xIndex, yIndex, zIndex, CubeMarcherConfig.pointsChunkSize);
+                        int pointIndex = MatrixId2ArrayId(xIndex, yIndex, zIndex, pointsChunkSize);
                         points[pointIndex] = new MarchPoint()
                         {
                             position = position,
@@ -94,7 +103,6 @@ namespace Biosearcher.Planet.Generation
         public MarchCube[] ToCubes(MarchPoint[] points)
         {
             var cubes = new List<MarchCube>();
-            int cubesChunkSize = CubeMarcherConfig.cubesChunkSize;
 
             for (int zIndex = 0; zIndex < cubesChunkSize; zIndex++)
             {
@@ -111,7 +119,8 @@ namespace Biosearcher.Planet.Generation
 
         public MarchCube GenerateCube(MarchPoint[] points, int xIndex, int yIndex, int zIndex)
         {
-            var pointsList = new List<MarchPoint>();
+            MarchPoint[] cubePoints = new MarchPoint[8];
+            int counter = 0;
 
             for (int y = 0; y < 2; y++)
             {
@@ -122,12 +131,12 @@ namespace Biosearcher.Planet.Generation
                         int localXIndex = z == 0 ? x : 1 - x;
                         int localYIndex = y;
                         int localZIndex = 1 - z;
-                        int pointIndex = MatrixId2ArrayId(xIndex + localXIndex, yIndex + localYIndex, zIndex + localZIndex, CubeMarcherConfig.pointsChunkSize);
-                        pointsList.Add(points[pointIndex]);
+                        int pointIndex = MatrixId2ArrayId(xIndex + localXIndex, yIndex + localYIndex, zIndex + localZIndex, pointsChunkSize);
+                        cubePoints[counter] = points[pointIndex];
                     }
                 }
             }
-            return new MarchCube(pointsList.ToArray());
+            return new MarchCube(cubePoints);
         }
 
         public int MatrixId2ArrayId(int x, int y, int z, int chunkSize)
