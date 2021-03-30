@@ -40,8 +40,9 @@ struct MarchCube
 };
 
 RWStructuredBuffer<MarchPoint> points;
-RWStructuredBuffer<float3> meshVertices;
-RWStructuredBuffer<int> meshTriangles;
+// RWStructuredBuffer<float3> meshVertices;
+// RWStructuredBuffer<int> meshTriangles;
+RWTexture2D<float4> meshV3T1;
 float3 chunkPosition;
 float surfaceValue;
 int cubeSize;
@@ -170,8 +171,8 @@ void AddFace(float3 face[3], uint faceId, uint cubeArrayId)
     {
         
         int vertexGlobalId = faceGlobalId * 3 + i;
-        meshVertices[vertexGlobalId] = face[i]; // todo: warning (if dimensions == 8)
-        meshTriangles[vertexGlobalId] = vertexGlobalId; // todo: warning (if dimensions == 8)
+        meshV3T1[uint2(vertexGlobalId, 0)] = float4(face[i], vertexGlobalId); // todo: warning (if dimensions == 8)
+
     }
 }
 
@@ -190,11 +191,7 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
     {
         return;
     }
-    
-    
-    // meshVertices[cubeArrayId] = (PointsHash2EdgesHashT[uint2(cubeArrayId, 0)]).xxx;
-    
-    
+        
     // Save the triangles that were found. There can be up to five per cube
     for (int i = 0; i < 5; i++)
     {
@@ -227,12 +224,11 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
     }
 }
 
-void SetBuffer(int cubeIndex)
+void PrepareBuffer(int cubeIndex)
 {
     for (int i = 0; i < 15; i++)
     {
-        meshTriangles[cubeIndex * 15 + i] = -1;
-        meshVertices[cubeIndex * 15 + i] = 0;
+        meshV3T1[uint2(cubeIndex * 15 + i, 0)] = float4(0, 0, 0, -1);
     }
 }
 
@@ -256,15 +252,16 @@ void GenerateMesh(uint3 threadId : SV_DispatchThreadID)
 {
     uint cubeArrayId = MatrixId2ArrayId(threadId, cubesSize1D);
     
-    SetBuffer(cubeArrayId);
-    
-    MarchCube marchCube = GenerateCube(points, threadId);
-    
     //float testValue = float(PointsHash2EdgesHashT[uint2(threadId.x + threadId.y * 6 + threadId.z * 6 * 6, 0)]);
     //float testValue = 56;
-    //meshVertices[cubeIndex] = marchCube.points[0].position;
+    //meshV3T1[cubeIndex] = float4(marchCube.points[0].position, 0);
+    //meshTriangles[uint2(1, 0)] = 8.0;
+    
     //return;
-    //meshVertices[1] = (8).xxx;
+    
+    PrepareBuffer(cubeArrayId);
+    
+    MarchCube marchCube = GenerateCube(points, threadId);
     
     March(marchCube, surfaceValue, cubeArrayId);
 

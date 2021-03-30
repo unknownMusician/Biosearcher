@@ -57,10 +57,10 @@ namespace Biosearcher.Planet.Managing
         {
             float todoTimeStart = Time.realtimeSinceStartup;
             MarchPoint[] points = cubeMarcher.GeneratePoints(chunkPosition, cubeSize);
-            //Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
             todoTimeStart = Time.realtimeSinceStartup;
             generatedMesh = cubeMarcher.GenerateMesh(points, surfaceValue);
-            //Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
 
             CreateChunk(generatedMesh, chunkPosition, parent, out generatedChunkObject);
         }
@@ -71,7 +71,7 @@ namespace Biosearcher.Planet.Managing
             generatedChunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = mesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-            //Debug.Log($"Instantiating Chunks: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            Debug.Log($"Instantiating Chunks: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
         }
 
         public void TerraformAdd(Vector3 position, float radius)
