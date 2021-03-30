@@ -232,7 +232,11 @@ void GeneratePoints(uint3 threadId : SV_DispatchThreadID)
     marchPoint.position = position;
     marchPoint.value = GenerateValue(position + chunkPosition);
     
-    points[pointIndex] = marchPoint;
+    
+    if (threadId.x < 9 && threadId.y < 9 && threadId.z < 9)
+    {
+        points[pointIndex] = marchPoint;
+    }
 }
 
 [numthreads(8, 8, 8)]

@@ -17,9 +17,10 @@ namespace Biosearcher.Planet.Generation
         protected int cubesChunkSize;
         protected int pointsChunkSize;
         protected float surfaceValue;
-        protected int verticesCount;
+        protected Vector2Int textureSize;
         protected int generateMeshKernel;
         protected int generatePointsKernel;
+        protected const int threadGroups = 1;
 
         protected void Awake()
         {
@@ -34,7 +35,7 @@ namespace Biosearcher.Planet.Generation
         {
             using ComputeBuffer pointsBuffer = new ComputeBuffer(points.Length, sizeof(float) * 4);
 
-            var meshVerticesTexture = new Texture2D(verticesCount, 1, TextureFormat.RGBAFloat, false);
+            var meshV3T1Texture = new Texture2D(textureSize.x, textureSize.y, TextureFormat.RGBAFloat, false);
 
             pointsBuffer.SetData(points);
             shader.SetBuffer(generateMeshKernel, "points", pointsBuffer);
@@ -42,16 +43,16 @@ namespace Biosearcher.Planet.Generation
             // todo: move
             shader.SetFloat("surfaceValue", surfaceValue);
 
-            shader.Dispatch(generateMeshKernel, 2, 2, 2);
+            shader.Dispatch(generateMeshKernel, threadGroups, threadGroups, threadGroups);
 
             RenderTexture.active = meshV3T1RenderTexture;
-            meshVerticesTexture.ReadPixels(new Rect(0, 0, verticesCount, 1), 0, 0);
-            meshVerticesTexture.Apply();
-            NativeArray<Vector4> nativeMeshV3T1 = meshVerticesTexture.GetPixelData<Vector4>(0);
+            meshV3T1Texture.ReadPixels(new Rect(0, 0, textureSize.x, textureSize.y), 0, 0);
+            meshV3T1Texture.Apply();
+            NativeArray<Vector4> nativeMeshV3T1 = meshV3T1Texture.GetPixelData<Vector4>(0);
             RenderTexture.active = null;
 
             Mesh mesh = ToMesh(nativeMeshV3T1);
-            Destroy(meshVerticesTexture);
+            Destroy(meshV3T1Texture);
             return mesh;
         }
 
@@ -104,7 +105,7 @@ namespace Biosearcher.Planet.Generation
             shader.SetInt("cubeSize", cubeSize);
             shader.SetInt("pointsSize1D", cubesChunkSize + 1);
 
-            shader.Dispatch(generatePointsKernel, 2, 2, 2);
+            shader.Dispatch(generatePointsKernel, threadGroups, threadGroups, threadGroups);
 
             pointsBuffer.GetData(points);
 
@@ -418,7 +419,7 @@ namespace Biosearcher.Planet.Generation
             pointsHash2EdgesIndexesTexture.SetPixelData(pointsHash2EdgesIndexes, 0);
             pointsHash2EdgesIndexesTexture.Apply();
 
-            meshV3T1RenderTexture = new RenderTexture(verticesCount, 1, 1, RenderTextureFormat.ARGBFloat);
+            meshV3T1RenderTexture = new RenderTexture(textureSize.x, textureSize.y, 1, RenderTextureFormat.ARGBFloat);
             meshV3T1RenderTexture.enableRandomWrite = true;
         }
 
@@ -439,7 +440,8 @@ namespace Biosearcher.Planet.Generation
             cubesChunkSize = settings.CubesChunkSize;
             pointsChunkSize = settings.PointsChunkSize;
             surfaceValue = settings.SurfaceValue;
-            verticesCount = cubesChunkSize * cubesChunkSize * cubesChunkSize * 15;
+            // textureSize = new Vector2Int(15 * cubesChunkSize, cubesChunkSize * cubesChunkSize);
+            textureSize = new Vector2Int(cubesChunkSize * cubesChunkSize * cubesChunkSize * 15, 1);
 
             generateMeshKernel = shader.FindKernel("GenerateMesh");
             generatePointsKernel = shader.FindKernel("GeneratePoints");
