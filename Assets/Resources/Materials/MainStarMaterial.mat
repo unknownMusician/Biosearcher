@@ -27,11 +27,13 @@ Material:
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 2000
-  stringTagMap: {}
+  stringTagMap:
+    MotionVector: User
   disabledShaderPasses:
   - TransparentDepthPrepass
   - TransparentDepthPostpass
   - TransparentBackface
+  - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -49,7 +51,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_3e97835eb88d4fcb9d9acfb6948287ea: 1
+    - Vector1_3e97835eb88d4fcb9d9acfb6948287ea: 1000000
     - _AddPrecomputedVelocity: 0
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -61,8 +63,10 @@ Material:
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 0
+    - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
+    - _EmissionStrenght: 916935.25
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
     - _OpaqueCullMode: 2
@@ -93,7 +97,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_2654dfee48634f86a49a532f7d4a7d67: {r: 1, g: 1, b: 1, a: 1}
-    - Color_63dce4e9c2774e51810aaf0d2c079308: {r: 1, g: 0.43389028, b: 0, a: 1}
+    - Color_63dce4e9c2774e51810aaf0d2c079308: {r: 1, g: 0.90164953, b: 0.5226415, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

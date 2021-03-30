@@ -55,6 +55,16 @@ namespace Biosearcher.Planet.Generation
             return Mathf.Abs(noise);
         }
 
+        protected float SmoothNoise(float x)
+        {
+            return x * x * x * (x * (x * 6 - 15) + 10);
+        }
+
+        protected Vector3 SmoothNoise(Vector3 x)
+        {
+            return new Vector3(SmoothNoise(x.x), SmoothNoise(x.y), SmoothNoise(x.z));
+        }
+
         protected float GradientNoise(Vector3 position)
         {
             Vector3Int wholePart = new Vector3Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y), Mathf.FloorToInt(position.z));
@@ -62,6 +72,7 @@ namespace Biosearcher.Planet.Generation
             Vector3 fractPart = new Vector3(position.x % 1, position.y % 1, position.z % 1);
             // todo
             fractPart += new Vector3(position.x < 0 && fractPart.x != 0 ? 1 : 0, position.y < 0 && fractPart.y != 0 ? 1 : 0, position.z < 0 && fractPart.z != 0 ? 1 : 0);
+            fractPart = SmoothNoise(fractPart);
             float[] noisesZ = new float[2];
             for (int z = 0; z < 2; z++)
             {

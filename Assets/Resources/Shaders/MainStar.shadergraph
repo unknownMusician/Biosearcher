@@ -441,7 +441,7 @@
     "m_DefaultRefNameVersion": 0,
     "m_RefNameGeneratedByDisplayName": "",
     "m_DefaultReferenceName": "Vector1_3e97835eb88d4fcb9d9acfb6948287ea",
-    "m_OverrideReferenceName": "",
+    "m_OverrideReferenceName": "_EmissionStrenght",
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,

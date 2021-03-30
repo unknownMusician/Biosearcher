@@ -15,11 +15,11 @@ D:/Projects/Unity projects/Biosearcher
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-52605
+54979
 Successfully changed project path to: D:/Projects/Unity projects/Biosearcher
 D:/Projects/Unity projects/Biosearcher
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 136.37 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 127.99 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.2.0a10 (b8c2bb7e8b36)
 [Subsystems] Discovering subsystems at path D:/Program Files/Unity Versions/2021.2.0a10/Editor/Data/Resources/UnitySubsystems
@@ -35,37 +35,37 @@ Initialize mono
 Mono path[0] = 'D:/Program Files/Unity Versions/2021.2.0a10/Editor/Data/Managed'
 Mono path[1] = 'D:/Program Files/Unity Versions/2021.2.0a10/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'D:/Program Files/Unity Versions/2021.2.0a10/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56264
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56268
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: D:/Program Files/Unity Versions/2021.2.0a10/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001586 seconds.
+Registered in 0.001013 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 120.80 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 139.84 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.870 seconds
+- Completed reload, in  2.125 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.001981 seconds.
+Registered in 0.001870 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 130.46 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 152.44 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.521 seconds
+- Completed reload, in  4.830 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 0.87 ms, found 0 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.17 seconds
+Refreshing native plugins compatible for Editor in 1.35 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3900 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 196.8 MB.
-System memory in use after: 193.6 MB.
+Unloading 3910 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 201.0 MB.
+System memory in use after: 197.8 MB.
 
-Unloading 49 unused Assets to reduce memory usage. Loaded Objects now: 4343.
-Total: 6.478400 ms (FindLiveObjects: 1.035100 ms CreateObjectMapping: 0.496200 ms MarkObjects: 4.075200 ms  DeleteObjects: 0.870000 ms)
+Unloading 47 unused Assets to reduce memory usage. Loaded Objects now: 4358.
+Total: 9.361000 ms (FindLiveObjects: 0.598000 ms CreateObjectMapping: 0.398800 ms MarkObjects: 6.947400 ms  DeleteObjects: 1.414500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -79,503 +79,76 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Settings/Volumes/VolumeGlobal.asset
-  artifactKey: Guid(7f342610b85f4164f808a1f380dcc668) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Settings/Volumes/VolumeGlobal.asset using Guid(7f342610b85f4164f808a1f380dcc668) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a81e1c47f7d9ef8803ee07a3cf618e50') in 0.175827 seconds 
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd1b1cffc2cdb96b5bae1d729113e2085') in 0.137129 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 1274.845653 seconds.
-  path: Assets/Scripts/HDRP
-  artifactKey: Guid(1691b48b17e011c48adb881cd8513ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP using Guid(1691b48b17e011c48adb881cd8513ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '82fea32438809f1b2ef1eb3a573e3c62') in 0.023576 seconds 
+  Time since last request: 196.606911 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4a586d7e0d63894c7f922be93e08b77f') in 0.009693 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 24.971723 seconds.
-  path: Assets/Scripts/CustomSkySettings
-  artifactKey: Guid(1691b48b17e011c48adb881cd8513ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/CustomSkySettings using Guid(1691b48b17e011c48adb881cd8513ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cf5c71afd8c86cfacd9bb10fba9e6f9d') in 0.043182 seconds 
+  Time since last request: 73.025460 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c23474c3d69fc3ab8cc8456c8f300886') in 0.013195 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 4.086958 seconds.
-  path: Assets/Scripts/InputHandling
-  artifactKey: Guid(0e2f61e6da3bb2a48999d9768bff305a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/InputHandling using Guid(0e2f61e6da3bb2a48999d9768bff305a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57880f68a9a6b1c0bae965cf2b396848') in 0.040923 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 20.047353 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'effd6cbca8a4e9279f9fb1a72628324b') in 0.017657 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 54.306527 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e4624d7d7e87e42e00253dc2c539be9e') in 0.010854 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 12.710545 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ee8515cfdcefbea7d2e54ce399e3c20d') in 0.003094 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 41.492113 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7dc58bd67257b528b1fa61fe1d2a34a') in 0.003689 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 20.183342 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cd24bf5c02ec1fd46cd4d2c4b8eddd2a') in 2.139748 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 70.306440 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5e967176e35d7f18e883a0d872b9ff47') in 0.003137 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003656 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 8.06 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 19.331 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 4.31 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3630 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 183.5 MB.
-System memory in use after: 180.3 MB.
-
-Unloading 42 unused Assets to reduce memory usage. Loaded Objects now: 4347.
-Total: 42.160000 ms (FindLiveObjects: 3.307000 ms CreateObjectMapping: 2.367600 ms MarkObjects: 28.391900 ms  DeleteObjects: 8.089300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.021181 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 8.34 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 19.613 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 6.13 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3630 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 183.5 MB.
-System memory in use after: 180.3 MB.
-
-Unloading 42 unused Assets to reduce memory usage. Loaded Objects now: 4350.
-Total: 40.102800 ms (FindLiveObjects: 2.935200 ms CreateObjectMapping: 2.284000 ms MarkObjects: 30.386400 ms  DeleteObjects: 4.493800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 161.892694 seconds.
-  path: Assets/Scripts/HDRP/CustomSkySettings.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkySettings.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'baa5ff9a26ee91a90acdce3199f21319') in 0.089169 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 87.286146 seconds.
-  path: Assets/Scripts/HDRP/CustomSkyRenderer.cs
-  artifactKey: Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkyRenderer.cs using Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f04485940e8897d1ef798c5f1ce98d1') in 0.012834 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.004330 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 20.35 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 10.902 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 7.12 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3631 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 183.6 MB.
-System memory in use after: 180.4 MB.
-
-Unloading 42 unused Assets to reduce memory usage. Loaded Objects now: 4354.
-Total: 62.321800 ms (FindLiveObjects: 1.297400 ms CreateObjectMapping: 4.806300 ms MarkObjects: 46.845500 ms  DeleteObjects: 9.369400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.006894 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 5.35 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in 63.690 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 6.16 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3631 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 183.6 MB.
-System memory in use after: 180.4 MB.
-
-Unloading 42 unused Assets to reduce memory usage. Loaded Objects now: 4357.
-Total: 38.911500 ms (FindLiveObjects: 3.782600 ms CreateObjectMapping: 2.605500 ms MarkObjects: 27.881300 ms  DeleteObjects: 4.637600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 156.480046 seconds.
-  path: Assets/Scripts/HDRP/CustomSkyRenderer.cs
-  artifactKey: Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkyRenderer.cs using Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.014824 seconds  code(4) message(Build asset version error: assets/scripts/hdrp/customskyrenderer.cs in SourceAssetDB has modification time of '2021-03-26T13:18:11.586088Z' while content on disk has modification time of '2021-03-26T13:18:50.2136607Z')
-  ERROR: Build asset version error: assets/scripts/hdrp/customskyrenderer.cs in SourceAssetDB has modification time of '2021-03-26T13:18:11.586088Z' while content on disk has modification time of '2021-03-26T13:18:50.2136607Z'
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.027148 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.66 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  3.764 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 1.49 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3631 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 183.7 MB.
-System memory in use after: 180.4 MB.
-
-Unloading 42 unused Assets to reduce memory usage. Loaded Objects now: 4360.
-Total: 8.508200 ms (FindLiveObjects: 0.732900 ms CreateObjectMapping: 0.470200 ms MarkObjects: 5.992600 ms  DeleteObjects: 1.309500 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 503.410391 seconds.
-  path: Assets/Scripts/HDRP/CustomSkyRenderer.cs
-  artifactKey: Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSkyRenderer.cs using Guid(db68f1398cfbd544b90d9e9dc94373f9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '16f49156c2693f9da8a5ecc9c3898bd5') in 0.029349 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 10.470643 seconds.
-  path: Assets/Scripts/HDRP/CustomSky.shader
-  artifactKey: Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSky.shader using Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e7e284fae0e7d06e62a8255ab2fd7488') in 1.277274 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 75.039671 seconds.
-  path: Assets/Scripts/HDRP/CustomSky.shader
-  artifactKey: Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSky.shader using Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3e3d99debb3d082a8414133ff384be19') in 0.019894 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.003200 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 1.50 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  8.368 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.81 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 184.0 MB.
-System memory in use after: 180.8 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4363.
-Total: 5.003700 ms (FindLiveObjects: 0.428100 ms CreateObjectMapping: 0.331800 ms MarkObjects: 3.312000 ms  DeleteObjects: 0.929800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 64.918423 seconds.
+  Time since last request: 7004.772133 seconds.
   path: Assets/HDRPDefaultResources/HDRPDefaultSettings.asset
   artifactKey: Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7bec4426df301afad476e713f4f36a22') in 0.083471 seconds 
+Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6874cd256a05773b9712bc31411bd37a') in 0.055126 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 24.032601 seconds.
-  path: Assets/HDRPDefaultResources/DefaultHDRISky.exr
-  artifactKey: Guid(54a3a0570aebe8949bec4966f1376581) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources/DefaultHDRISky.exr using Guid(54a3a0570aebe8949bec4966f1376581) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b63628228015c86b502c21f98622a4f9') in 2.814248 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 666.270058 seconds.
-  path: Assets/Resources/Shaders/CustomSkybox.shadergraph
-  artifactKey: Guid(3c3e5e91bea0016499534b00c6965f31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Resources/Shaders/CustomSkybox.shadergraph using Guid(3c3e5e91bea0016499534b00c6965f31) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '085b7f92f160c415b16754fba910f0c1') in 0.041058 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 23940.474600 seconds.
-  path: Assets/Scripts/HDRP/CustomSky.shader
-  artifactKey: Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSky.shader using Guid(a2e778f1a5bfa5a4bb1f278cf96ee3d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b89943954b347761931304e824587fd5') in 0.094256 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 107.081802 seconds.
-  path: Assets/Scripts/HDRP/CustomSky.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSky.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dabac0b67d35dc3905f609beae9d03ac') in 0.009214 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.026748 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.81 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  3.978 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.82 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.8 MB.
-System memory in use after: 185.5 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4411.
-Total: 5.636200 ms (FindLiveObjects: 0.414200 ms CreateObjectMapping: 0.283500 ms MarkObjects: 4.052400 ms  DeleteObjects: 0.884100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 148.330527 seconds.
-  path: Assets/Scripts/HDRP/CustomSky.cs
-  artifactKey: Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/HDRP/CustomSky.cs using Guid(c5b8bb7b9c69d2c459d088e0a31990ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1f7e4875d64b01a42f6d86cffe331daa') in 0.015296 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.001163 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.69 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.647 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.72 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.8 MB.
-System memory in use after: 185.5 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4414.
-Total: 4.145000 ms (FindLiveObjects: 0.415500 ms CreateObjectMapping: 0.259700 ms MarkObjects: 2.770600 ms  DeleteObjects: 0.697700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 935.871627 seconds.
+  Time since last request: 6.552724 seconds.
   path: Assets/HDRPDefaultResources/HDRPDefaultSettings.asset
   artifactKey: Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d595e977c1aa900982042f69e4190a2') in 0.084752 seconds 
+Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b51ab24edfe6519be8749cfd9bb8a63') in 0.029796 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 22.129172 seconds.
-  path: Assets/HDRPDefaultResources/HDRPDefaultSettings.asset
-  artifactKey: Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9f72ca4b8d10d0b0fcba52ec677f6203') in 0.008127 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.002889 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.99 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.265 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.95 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.8 MB.
-System memory in use after: 185.6 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4417.
-Total: 8.318000 ms (FindLiveObjects: 0.838300 ms CreateObjectMapping: 2.079200 ms MarkObjects: 4.488200 ms  DeleteObjects: 0.910400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.001144 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 2.19 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.782 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.68 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.8 MB.
-System memory in use after: 185.6 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4420.
-Total: 3.950800 ms (FindLiveObjects: 0.318500 ms CreateObjectMapping: 0.161900 ms MarkObjects: 2.772800 ms  DeleteObjects: 0.696000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.001765 seconds.
-Begin MonoManager ReloadAssembly
-Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.63 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.525 seconds
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.65 ms, found 0 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.8 MB.
-System memory in use after: 185.6 MB.
-
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4423.
-Total: 3.847800 ms (FindLiveObjects: 0.325500 ms CreateObjectMapping: 0.234700 ms MarkObjects: 2.504400 ms  DeleteObjects: 0.781600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  Time since last request: 36.521679 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '7ae67d88776ad9cd4f4302131f77297b') in 0.009426 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 679.736348 seconds.
-  path: Assets/HDRPDefaultResources/HDRPDefaultSettings.asset
-  artifactKey: Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/HDRPDefaultResources/HDRPDefaultSettings.asset using Guid(582adbd84082fdb4faf7cd4beb1ccd14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c2fa6351473c6dcfda3b508df68e9577') in 0.061834 seconds 
+  Time since last request: 20.752873 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3cdc8226c53f9c37397dab4e03b9b975') in 0.029166 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 10.637055 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1f233cda0d0721c63b87de983e8de9a') in 0.004865 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 15.095197 seconds.
+  path: Assets/Resources/Scripts/HDRP/GrayScale.shader
+  artifactKey: Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Resources/Scripts/HDRP/GrayScale.shader using Guid(d0289baea7f1f8d469dbd8be37ab339b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be348a73157369eea4e8c3b8f99d1e3e') in 0.010733 seconds 
 ========================================================================
 Received Prepare
 Registering precompiled user dll's ...
-Registered in 0.004517 seconds.
+Registered in 0.002253 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.73 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.89 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  2.242 seconds
+- Completed reload, in  3.279 seconds
 Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 0.70 ms, found 0 plugins.
+Refreshing native plugins compatible for Editor in 0.88 ms, found 0 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 3632 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 188.9 MB.
-System memory in use after: 185.6 MB.
+System memory in use before: 186.9 MB.
+System memory in use after: 183.7 MB.
 
-Unloading 43 unused Assets to reduce memory usage. Loaded Objects now: 4426.
-Total: 5.228200 ms (FindLiveObjects: 0.479900 ms CreateObjectMapping: 0.257700 ms MarkObjects: 3.655300 ms  DeleteObjects: 0.833500 ms)
+Unloading 40 unused Assets to reduce memory usage. Loaded Objects now: 4361.
+Total: 5.542900 ms (FindLiveObjects: 0.445300 ms CreateObjectMapping: 0.355100 ms MarkObjects: 3.920600 ms  DeleteObjects: 0.820500 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -587,4 +160,3 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-AssetImportWorkerClient::OnTransportError - code=2 error=End of file

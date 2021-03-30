@@ -1,3 +1,4 @@
+using Biosearcher.HDRP;
 using Biosearcher.InputHandling;
 using Biosearcher.Planet.Orientation;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace Biosearcher.PlayerBehaviour
         {
             transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - planetTransform.ChunkManager.PlanetPosition) * transform.rotation;
             //planetTransform.planetRotation = Quaternion.identity;
+            SkyGameManager.playerPosition = transform.position;
         }
 
         public class Presenter

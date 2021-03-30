@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 112000000, guid: e88c5b93607f3aa41afa3b8bd08e0a9e, type: 2}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 6c174b8ea78fe2a48bb81fa2d5f82591, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 8cd8ec78ff86b87409b48f49a6bda96b, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -507,7 +507,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 573441551}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -460, y: 0, z: -0.000040214476}
+  m_LocalPosition: {x: -463.9999, y: 0, z: -58.999992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 671082485}
@@ -570,9 +570,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinates:
-    height: 460
+    height: 467.73596
     latitude: 0
-    longitude: -180
+    longitude: -172.75343
   chunkManager: {fileID: 79430797}
 --- !u!1 &671082484
 GameObject:
@@ -670,6 +670,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 671082484}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &932052291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 932052293}
+  - component: {fileID: 932052292}
+  m_Layer: 0
+  m_Name: Sky
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &932052292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932052291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ced00fc61253d6346ae32298f863a7fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainStarLight: {fileID: 101740946}
+  mainStarLightData: {fileID: 1732086772}
+  mainStarMaterial: {fileID: 2100000, guid: 3859d6ed05e7dc645a66c1b441588561, type: 2}
+  settings: {fileID: 11400000, guid: bb7f1b7c8e27d364e91c616b1a23ee52, type: 2}
+--- !u!4 &932052293
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 932052291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1197840194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -677,6 +724,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 404751720, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+      propertyPath: starLight
+      value: 
+      objectReference: {fileID: 101740946}
     - target: {fileID: 404751720, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: chunkManager
       value: 
@@ -687,7 +738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -500
+      value: -9345
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalPosition.y
@@ -699,15 +750,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7066196
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.005807448
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.70756984
       objectReference: {fileID: 0}
     - target: {fileID: 4905139320818531267, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LocalRotation.z
@@ -729,9 +780,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainStar
       objectReference: {fileID: 0}
+    - target: {fileID: 4905139320895301936, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905139320895301936, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4905139320895301936, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 4905139321639701586, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_Intensity
-      value: 16496.342
+      value: 1378.1772
       objectReference: {fileID: 0}
     - target: {fileID: 4905139321639701586, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_AreaSize.x
@@ -748,6 +811,10 @@ PrefabInstance:
     - target: {fileID: 4905139321639701586, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
       propertyPath: m_LightShadowCasterMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8437317130164429899, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+      propertyPath: m_Intensity
+      value: 1378.1772
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6168673746471419069, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
@@ -781,7 +848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441482e8936e35048a1dffac814e3ef8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Profile: {fileID: 0}
+  m_Profile: {fileID: 11400000, guid: 582adbd84082fdb4faf7cd4beb1ccd14, type: 2}
   m_StaticLightingSkyUniqueID: 0
   m_StaticLightingCloudsUniqueID: 0
 --- !u!4 &1447761024
@@ -865,7 +932,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 10000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1029,6 +1096,17 @@ MonoBehaviour:
     latitude: 0
     longitude: 0
   chunkManager: {fileID: 79430797}
+--- !u!114 &1732086772 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8437317130164429899, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
+  m_PrefabInstance: {fileID: 1197840194}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a68c43fe1f2a47cfa234b5eeaa98012, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1765708443
 GameObject:
   m_ObjectHideFlags: 0
