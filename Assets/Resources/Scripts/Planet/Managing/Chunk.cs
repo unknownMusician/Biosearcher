@@ -17,9 +17,10 @@ namespace Biosearcher.Planet.Managing
         //};
         protected internal static (float min, float max) Size2DistanceRange(int size)
         {
-            if (size == 0)
+            if (size <= 2)
             {
-                return (0, 12 * 2);
+                //return (0, 12 * 2);
+                return (0, Size2ActualSize(3));
             }
             return (Size2ActualSize(size), Size2ActualSize(size + 1));
         }

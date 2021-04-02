@@ -405,10 +405,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shader: {fileID: 7200000, guid: 8a2e99cf7721a2d4ea70ed3a06f236ef, type: 3}
   settings: {fileID: 11400000, guid: fa25946fbe40daf44a70ecc16e43aed2, type: 2}
-  edgeIndex2PointIndexesTexture: {fileID: 0}
-  pointsHash2EdgesHashTexture: {fileID: 0}
-  pointsHash2EdgesIndexesTexture: {fileID: 0}
-  meshV3T1RenderTexture: {fileID: 0}
 --- !u!108 &101740946 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 4905139321639701586, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}

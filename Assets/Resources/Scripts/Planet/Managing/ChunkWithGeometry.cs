@@ -5,18 +5,16 @@ namespace Biosearcher.Planet.Managing
 {
     public class ChunkWithGeometry : Chunk
     {
-        protected Mesh mesh;
-        protected GameObject chunkObject;
+        GeometryHolder geometryHolder;
 
         protected internal ChunkWithGeometry(Vector3Int position, int size, ChunkHolder holder) : base(position, size, holder)
         {
-            holder.ChunkManager.GenerateChunk(position, 1 << size, holder, out mesh, out chunkObject);
+            geometryHolder = holder.ChunkManager.GenerateChunk(position, 1 << size, holder);
         }
 
         protected internal void Clear()
         {
-            Object.Destroy(mesh);
-            Object.Destroy(chunkObject);
+            geometryHolder.Geometry.Clear();
         }
 
         protected internal override void DrawGizmos()
@@ -25,6 +23,38 @@ namespace Biosearcher.Planet.Managing
             Gizmos.color = new Color(colorValue, colorValue, colorValue);
             int fullSize = Size2ActualSize(Size);
             Gizmos.DrawWireCube(Position, new Vector3(fullSize, fullSize, fullSize));
+        }
+    }
+
+    public class GeometryHolder
+    {
+        public IGeometry Geometry { get; set; }
+    }
+
+    public interface IGeometry
+    {
+        void Clear();
+    }
+
+    public struct Geometry : IGeometry
+    {
+        public Mesh mesh;
+        public GameObject chunkObject;
+
+        public void Clear()
+        {
+            Object.Destroy(mesh);
+            Object.Destroy(chunkObject);
+        }
+    }
+
+    public struct GeometryCredit : IGeometry
+    {
+        public System.Action onCancel;
+
+        public void Clear()
+        {
+            onCancel?.Invoke();
         }
     }
 }
