@@ -377,6 +377,7 @@ MonoBehaviour:
   gravityScale: 9.8
   marchType: 1
   settings: {fileID: 11400000, guid: fa25946fbe40daf44a70ecc16e43aed2, type: 2}
+  generatingFrequency: 10
 --- !u!4 &79430798
 Transform:
   m_ObjectHideFlags: 0

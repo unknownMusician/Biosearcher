@@ -64,9 +64,9 @@ namespace Biosearcher.Planet.Managing
         protected internal GeometryHolder GenerateChunk(Vector3Int chunkPosition, int cubeSize, ChunkHolder parent)
         {
             var input = (chunkPosition, cubeSize, parent);
-            var geometry = new GeometryCredit() { onCancel = () => generateWorker.TryDequeue(input) };
+            var geometry = new GeometryCredit() { onCancel = () => generateWorker.TryRemoveRequest(input) };
             var geometryHolder = new GeometryHolder() { Geometry = geometry };
-            generateWorker.Enqueue(input, output => OnWorkerJobDone(output, geometryHolder));
+            generateWorker.MakeRequest(input, output => OnWorkerJobDone(output, geometryHolder));
             return geometryHolder;
         }
 
@@ -77,12 +77,12 @@ namespace Biosearcher.Planet.Managing
 
         protected (Mesh, GameObject) GenerateChunkJob((Vector3Int chunkPosition, int cubeSize, ChunkHolder parent) input)
         {
-            float todoTimeStart = Time.realtimeSinceStartup;
+            //float todoTimeStart = Time.realtimeSinceStartup;
             MarchPoint[] points = cubeMarcher.GeneratePoints(input.chunkPosition, input.cubeSize);
-            Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
-            todoTimeStart = Time.realtimeSinceStartup;
+            //Debug.Log($"Generating points: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            //todoTimeStart = Time.realtimeSinceStartup;
             Mesh generatedMesh = cubeMarcher.GenerateMesh(points);
-            Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            //Debug.Log($"Generating Mesh: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
 
             GameObject generatedChunkObject = CreateChunk(generatedMesh, input.chunkPosition, input.parent);
             return (generatedMesh, generatedChunkObject);
@@ -90,11 +90,11 @@ namespace Biosearcher.Planet.Managing
 
         protected GameObject CreateChunk(Mesh mesh, Vector3Int chunkPosition, ChunkHolder parent)
         {
-            float todoTimeStart = Time.realtimeSinceStartup;
+            //float todoTimeStart = Time.realtimeSinceStartup;
             GameObject generatedChunkObject = Instantiate(chunkPrefab, chunkPosition, Quaternion.identity, transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = mesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = mesh;
-            Debug.Log($"Instantiating Chunks: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
+            //Debug.Log($"Instantiating Chunks: {(Time.realtimeSinceStartup - todoTimeStart) * 1000} ms");
             return generatedChunkObject;
         }
 

@@ -37,7 +37,8 @@ namespace Biosearcher.Planet.Managing
 
         protected internal static int Size2ActualSize(int size) => chunkSize * (1 << size);
 
-        protected internal static readonly int chunkSize = 6;
+        // todo: SETTINGS!!!
+        protected internal static readonly int chunkSize = 8;
 
         #endregion
 

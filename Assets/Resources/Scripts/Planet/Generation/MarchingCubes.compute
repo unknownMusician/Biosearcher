@@ -85,20 +85,41 @@ float GradientNoise(float3 position)
     return lerp(noisesZ[0], noisesZ[1], fractPart.z);
 }
 
+float Noise2Mountain(float gradientNoise)
+{
+    float x = gradientNoise;
+    return x * x * x * x;
+}
+
 // todo: not in sync with CPU (+~)
 float GenerateValue(float3 position)
 {
     float result = 1;
+    float3 normalizedPosition = normalize(position);
 
+    // 400 - planet size (todo)
+    float planetRadius = length(position) / 400;
+    //float planetRadius = length(position*2) - 400;
+
+    //planetRadius += GradientNoise(normalizedPosition / (cubesSize1D * (1 << 5))) / 1.5f;
+    
+    // Mountains
+    float preMountainNoise = 1;
+    preMountainNoise *= GradientNoise(normalizedPosition * (cubesSize1D * (1 << 2)));
+    preMountainNoise *= GradientNoise(normalizedPosition * (cubesSize1D * (1 << 3)));
+    float mountainMask = smoothstep(0.3, 0.1, GradientNoise(normalizedPosition * (cubesSize1D / uint(1 << 1))));
+    planetRadius -= (Noise2Mountain(preMountainNoise) + 0.5) * mountainMask * 0.15;
+    
+    // Hills
+    planetRadius -= GradientNoise(normalizedPosition * (cubesSize1D * (1 << 0))) * (1 - mountainMask) * 0.02;
     // todo
-    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 1))) / 16;
-    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 2))) / 8;
-    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 3))) / 4;
-    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 4))) / 2;
-    result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 5))) / 1.5f;
-
-    // 100 - planet size (todo)
-    result *= 1 - clamp(length(position) / 400, 0, 1);
+    //result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 1))) / 16;
+    //result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 2))) / 8;
+    //result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 3))) / 4;
+    //result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 4))) / 2;
+    //result *= 1 - GradientNoise(position / (cubesSize1D * (1 << 5))) / 1.5f;
+    
+    result *= 1 - clamp(planetRadius, 0, 1);
 
     return result;
 }
