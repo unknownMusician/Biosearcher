@@ -33,6 +33,22 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""TorqueStart"",
+                    ""type"": ""Value"",
+                    ""id"": ""2ab5dc8e-ac50-4432-a79c-c3e3b50f3601"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""TorqueStop"",
+                    ""type"": ""Value"",
+                    ""id"": ""e3b27190-3601-480a-b75e-f67149f77731"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -167,6 +183,138 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""MoveStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WS"",
+                    ""id"": ""3c52061b-c176-4e71-8bb5-515e46d2d710"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""05ee9040-9657-4fa0-b86d-8711641be370"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""3dbe0b39-f63d-4a73-b497-28e48c84a96e"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""eaacb994-220d-4bd5-a3ab-bdd1ffc3b59a"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""cae67df3-ef39-433f-8b6f-ba7d1a7d4017"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""591e727e-f16d-4590-ab6b-17a3100f1af7"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TorqueStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""WS"",
+                    ""id"": ""c074c63f-bad5-49e4-a4e3-2c3939d29fbf"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""5165c1e0-fd12-448e-a7ba-74c64bb88531"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""8b5d453b-c18d-44b5-a8be-555d689f1a6f"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""id"": ""bc5e9827-faf6-4a16-985d-d455e1450d2f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""14c4a7b0-4121-4b3d-9411-f72b5663f9a8"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""584839ba-d45e-4eba-bbc0-a9b926fe95da"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""TorqueStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -409,6 +557,8 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_MoveStart = m_Player.FindAction("MoveStart", throwIfNotFound: true);
         m_Player_MoveStop = m_Player.FindAction("MoveStop", throwIfNotFound: true);
+        m_Player_TorqueStart = m_Player.FindAction("TorqueStart", throwIfNotFound: true);
+        m_Player_TorqueStop = m_Player.FindAction("TorqueStop", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -471,12 +621,16 @@ public class @Controls : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_MoveStart;
     private readonly InputAction m_Player_MoveStop;
+    private readonly InputAction m_Player_TorqueStart;
+    private readonly InputAction m_Player_TorqueStop;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @MoveStart => m_Wrapper.m_Player_MoveStart;
         public InputAction @MoveStop => m_Wrapper.m_Player_MoveStop;
+        public InputAction @TorqueStart => m_Wrapper.m_Player_TorqueStart;
+        public InputAction @TorqueStop => m_Wrapper.m_Player_TorqueStop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -492,6 +646,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
                 @MoveStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
                 @MoveStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
+                @TorqueStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
+                @TorqueStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
+                @TorqueStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
+                @TorqueStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
+                @TorqueStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
+                @TorqueStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -502,6 +662,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveStop.started += instance.OnMoveStop;
                 @MoveStop.performed += instance.OnMoveStop;
                 @MoveStop.canceled += instance.OnMoveStop;
+                @TorqueStart.started += instance.OnTorqueStart;
+                @TorqueStart.performed += instance.OnTorqueStart;
+                @TorqueStart.canceled += instance.OnTorqueStart;
+                @TorqueStop.started += instance.OnTorqueStop;
+                @TorqueStop.performed += instance.OnTorqueStop;
+                @TorqueStop.canceled += instance.OnTorqueStop;
             }
         }
     }
@@ -634,6 +800,8 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnMoveStart(InputAction.CallbackContext context);
         void OnMoveStop(InputAction.CallbackContext context);
+        void OnTorqueStart(InputAction.CallbackContext context);
+        void OnTorqueStop(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

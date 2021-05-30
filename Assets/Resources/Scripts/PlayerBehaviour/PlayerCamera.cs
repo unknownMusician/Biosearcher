@@ -25,14 +25,16 @@ namespace Biosearcher.PlayerBehaviour
 
             input = new PlayerCameraInput(new Presenter(this));
         }
-        protected void OnDestroy() => input.OnDestroy();
+        protected void OnDestroy() => input.Dispose();
 
         protected void OnEnable() => input.OnEnable();
         protected void OnDisable() => input.OnDisable();
 
         protected void Update()
         {
-            RotationWithoutX = Quaternion.FromToRotation(transform.up, transform.position - planetTransform.ChunkManager.PlanetPosition) * transform.rotation;
+            Vector3 planetPosition = Vector3.zero;
+
+            RotationWithoutX = Quaternion.FromToRotation(transform.up, transform.position - planetPosition) * transform.rotation;
             transform.rotation = RotationWithoutX;
             //planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
             transform.rotation = Quaternion.AngleAxis(-rotationX, transform.right) * RotationWithoutX;
@@ -50,7 +52,9 @@ namespace Biosearcher.PlayerBehaviour
             {
                 rotationX += direction.y;
             }
-            Quaternion rotateY = Quaternion.AngleAxis(direction.x, transform.position - planetTransform.ChunkManager.PlanetPosition);
+            Vector3 planetPosition = Vector3.zero;
+
+            Quaternion rotateY = Quaternion.AngleAxis(direction.x, transform.position - planetPosition);
             transform.rotation = rotateY * transform.rotation;
 
             //PlanetEulerAngles += new Vector3(-direction.y, direction.x, 0);

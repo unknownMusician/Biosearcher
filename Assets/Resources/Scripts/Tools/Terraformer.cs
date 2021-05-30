@@ -1,5 +1,4 @@
 using Biosearcher.InputHandling;
-using Biosearcher.Planet.Managing;
 using UnityEngine;
 
 namespace Biosearcher.Tools
@@ -10,7 +9,6 @@ namespace Biosearcher.Tools
         [SerializeField] protected new Transform camera;
         [SerializeField] protected LayerMask terraformable;
         [SerializeField] protected float maxTerraformDistance;
-        [SerializeField] protected ChunkManager landManager;
         [SerializeField] protected GameObject terraformSpherePrefab;
 
         protected TerraformerInput input;
@@ -38,7 +36,7 @@ namespace Biosearcher.Tools
             terraformSphere = Instantiate(terraformSpherePrefab);
             terraformSphere.transform.localScale = Vector3.one * radius * 2;
         }
-        protected void OnDestroy() => input.OnDestroy();
+        protected void OnDestroy() => input.Dispose();
 
         protected void OnEnable() => input.OnEnable();
         protected void OnDisable() => input.OnDisable();
@@ -63,7 +61,8 @@ namespace Biosearcher.Tools
             {
                 return;
             }
-            landManager.TerraformAdd((Vector3)TerraformPoint, radius);
+            // todo
+            //landManager.TerraformAdd((Vector3)TerraformPoint, radius);
         }
 
         public class Presenter

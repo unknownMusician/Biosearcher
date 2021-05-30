@@ -1,5 +1,4 @@
-﻿using Biosearcher.Planet.Managing;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Biosearcher.Planet.Orientation
 {
@@ -7,18 +6,16 @@ namespace Biosearcher.Planet.Orientation
     public class PlanetTransform : MonoBehaviour
     {
         [SerializeField] protected Coordinates coordinates;
-        // todo: there should be a planet
-        [SerializeField] protected ChunkManager chunkManager;
-
-        public ChunkManager ChunkManager => chunkManager;
-        protected Vector3 PositionRelativeToPlanet => transform.position - chunkManager.PlanetPosition;
-        public Quaternion UniverseToPlanetRotation => Quaternion.FromToRotation(PositionRelativeToPlanet, chunkManager.RotationAxis);
-        public Quaternion PlanetToUniverseRotation => Quaternion.FromToRotation(chunkManager.RotationAxis, PositionRelativeToPlanet);
+        protected readonly Vector3 planetPosition = Vector3.zero;
+        protected readonly Vector3 planetRotationAxis = Vector3.up;
+        protected Vector3 PositionRelativeToPlanet => transform.position - planetPosition;
+        public Quaternion UniverseToPlanetRotation => Quaternion.FromToRotation(PositionRelativeToPlanet, planetRotationAxis);
+        public Quaternion PlanetToUniverseRotation => Quaternion.FromToRotation(planetRotationAxis, PositionRelativeToPlanet);
 
         public Coordinates Coordinates
         {
             get => new Coordinates(Height, Latitude, Longitude);
-            set => transform.position = ToPositionRelativeToPlanet(value) + chunkManager.PlanetPosition;
+            set => transform.position = ToPositionRelativeToPlanet(value) + planetPosition;
         }
 
         public float Height => ToHeight(PositionRelativeToPlanet);

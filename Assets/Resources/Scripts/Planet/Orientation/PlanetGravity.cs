@@ -1,5 +1,4 @@
-﻿using Biosearcher.Planet.Managing;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Biosearcher.Planet.Orientation
 {
@@ -18,12 +17,10 @@ namespace Biosearcher.Planet.Orientation
 
         protected void FixedUpdate()
         {
-            ChunkManager chunkManager = planetTransform.ChunkManager;
-            if (chunkManager != null)
-            {
-                Vector3 gravityDirection = (chunkManager.PlanetPosition - transform.position).normalized;
-                rigidbody.AddForce(gravityDirection * planetTransform.ChunkManager.GravityScale);
-            }
+            Vector3 planetPosition = Vector3.zero;
+            float planetGravityScale = 9.8f;
+            Vector3 gravityDirection = (planetPosition - transform.position).normalized;
+            rigidbody.AddForce(gravityDirection * planetGravityScale * rigidbody.mass);
         }
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5da823633a7fd408de1d1eacc7c2ca, type: 3}
+  m_Name: Land Settings
+  m_EditorClassIdentifier: 
+  minHierarchySize: 1
+  maxHierarchySize: 4
+  generatingFrequency: 8
+  cubesPerChunk: 64
+  surfaceValue: 0.76
+  geometryType: 1
+  planetShader: {fileID: 7200000, guid: 9f16f4b261d62fe4aa3998145e237e0b, type: 3}
+  flatShader: {fileID: 7200000, guid: 2e24629c70a4b91409db5c26699be3e0, type: 3}
+  preGenerationDuration: 20
+  seed: 6
+  worldType: 0
+  chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}

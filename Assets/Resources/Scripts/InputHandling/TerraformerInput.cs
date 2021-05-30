@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Biosearcher.InputHandling
 {
-    public class TerraformerInput
+    public class TerraformerInput : System.IDisposable
     {
         protected Terraformer.Presenter terraformerPresenter;
         protected UnityEngine.InputSystem.InputAction.CallbackContext callbackContext;
@@ -32,7 +32,7 @@ namespace Biosearcher.InputHandling
             this.terraformerPresenter = playerPresenter;
             SetInput(CustomInput.controls);
         }
-        public void OnDestroy() => UnsetInput(CustomInput.controls);
+        public void Dispose() => UnsetInput(CustomInput.controls);
 
         public void OnEnable() => CustomInput.controls.Terraformer.Enable();
         public void OnDisable() => CustomInput.controls.Terraformer.Disable();

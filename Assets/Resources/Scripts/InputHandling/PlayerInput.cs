@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Biosearcher.InputHandling
 {
-    public class PlayerInput
+    public class PlayerInput : System.IDisposable
     {
         protected Player.Presenter playerPresenter;
         protected UnityEngine.InputSystem.InputAction.CallbackContext callbackContext;
@@ -32,7 +32,7 @@ namespace Biosearcher.InputHandling
             this.playerPresenter = playerPresenter;
             SetInput(CustomInput.controls);
         }
-        public void OnDestroy() => UnsetInput(CustomInput.controls);
+        public void Dispose() => UnsetInput(CustomInput.controls);
 
         public void OnEnable() => CustomInput.controls.Player.Enable();
         public void OnDisable() => CustomInput.controls.Player.Disable();

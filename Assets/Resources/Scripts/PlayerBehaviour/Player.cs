@@ -25,7 +25,7 @@ namespace Biosearcher.PlayerBehaviour
 
             input = new PlayerInput(new Presenter(this));
         }
-        protected void OnDestroy() => input.OnDestroy();
+        protected void OnDestroy() => input.Dispose();
 
         protected void OnEnable() => input.OnEnable();
         protected void OnDisable() => input.OnDisable();
@@ -53,7 +53,9 @@ namespace Biosearcher.PlayerBehaviour
 
         protected void Update()
         {
-            transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - planetTransform.ChunkManager.PlanetPosition) * transform.rotation;
+            Vector3 planetPosition = Vector3.zero;
+
+            transform.rotation = Quaternion.FromToRotation(transform.up, transform.position - planetPosition) * transform.rotation;
             //planetTransform.planetRotation = Quaternion.identity;
             SkyGameManager.playerPosition = transform.position;
         }

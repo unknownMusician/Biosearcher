@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Biosearcher.InputHandling
 {
-    public class PlayerCameraInput
+    public class PlayerCameraInput : System.IDisposable
     {
         protected PlayerCamera.Presenter cameraPresenter;
         protected bool isMoving;
@@ -17,7 +17,7 @@ namespace Biosearcher.InputHandling
             this.cameraPresenter = cameraPresenter;
             SetInput(CustomInput.controls);
         }
-        public void OnDestroy() => UnsetInput(CustomInput.controls);
+        public void Dispose() => UnsetInput(CustomInput.controls);
 
         public void OnEnable() => CustomInput.controls.Camera.Enable();
         public void OnDisable() => CustomInput.controls.Camera.Disable();
