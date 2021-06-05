@@ -1,1 +1,11 @@
 *.log
+/AssetImportWorker0-prev.log
+/AssetImportWorker0.log
+/shadercompiler-AssetImportWorker0.log
+/shadercompiler-AssetImportWorker1.log
+/shadercompiler-AssetImportWorker2.log
+/shadercompiler-AssetImportWorker3.log
+/shadercompiler-UnityShaderCompiler.exe0.log
+/shadercompiler-UnityShaderCompiler.exe1.log
+/shadercompiler-UnityShaderCompiler.exe2.log
+/shadercompiler-UnityShaderCompiler.exe3.log
