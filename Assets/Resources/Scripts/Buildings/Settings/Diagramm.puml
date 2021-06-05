@@ -1,0 +1,13 @@
+﻿@startuml
+
+'---Settings---'
+class UnityEngine.ScriptableObject
+class Settings.Structs.CoalGeneratorSettings
+class Settings.Structs.GreenHouseSettings
+class Settings.BuildingsSettings
+
+'---Connections---'
+UnityEngine.ScriptableObject <|-- Settings.Structs.CoalGeneratorSettings
+UnityEngine.ScriptableObject <|-- Settings.Structs.GreenHouseSettings
+
+@enduml

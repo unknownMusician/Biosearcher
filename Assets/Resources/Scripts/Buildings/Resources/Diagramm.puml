@@ -1,0 +1,25 @@
+﻿@startuml
+
+'---Structs---'
+class Resources.Structs.Water
+class Resources.Structs.Electricity
+
+'---Interfaces---'
+interface Resources.Interfaces.IAddable<TR>
+interface Resources.Interfaces.ISubtractable<TR>
+interface Resources.Interfaces.IMultipliable<TR>
+interface Resources.Interfaces.IDividable<TR>
+interface Resources.Interfaces.IResource<TR>
+interface System.IComparable<TR>
+
+'---Connections---'
+Resources.Interfaces.IAddable <|- Resources.Interfaces.IResource
+Resources.Interfaces.ISubtractable <|-- Resources.Interfaces.IResource
+Resources.Interfaces.IMultipliable <|-- Resources.Interfaces.IResource
+Resources.Interfaces.IDividable <|-- Resources.Interfaces.IResource
+System.IComparable <|-- Resources.Interfaces.IResource
+
+Resources.Interfaces.IResource <|-- Resources.Structs.Electricity
+Resources.Interfaces.IResource <|-- Resources.Structs.Water
+
+@enduml
