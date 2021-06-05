@@ -1,0 +1,11 @@
+﻿@startuml
+
+class Network.Network<TR>
+
+class Network.ElectricityNetwork
+class Network.WaterNetwork
+
+Network.Network <|-- Network.ElectricityNetwork
+Network.Network <|-- Network.WaterNetwork
+
+@enduml
