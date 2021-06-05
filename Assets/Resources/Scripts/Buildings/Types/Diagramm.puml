@@ -1,0 +1,17 @@
+﻿@startuml
+
+'---Interfaces---'
+interface Types.Interfaces.IResourceProducer<TR>
+interface Types.Interfaces.IResourceReceiver<TR>
+
+'---Generators---'
+class Generators.CoalGenerator
+class GreenHouse
+
+'---Connections---'
+
+Types.Interfaces.IResourceProducer <|-- CoalGenerator
+Types.Interfaces.IResourceReceiver <|-- GreenHouse
+Types.Interfaces.IResourceReceiver <|-- GreenHouse
+
+@enduml
