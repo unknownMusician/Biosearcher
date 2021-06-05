@@ -1,0 +1,30 @@
+﻿@startuml
+
+class PlantSettings
+{
+    int id
+    string name
+    float timeToGrow
+    Range temperatureRange
+    Range humidityRange
+    Range illuminationRange
+    //модельки, эффекты, звуки
+}
+class Seed
+{
+    PlantSettings plantSettings
+    void Plant()
+}
+class Plant
+{
+    PlantSettings plantSettings
+    float growthProgress
+    float corruption
+    WeatherController weatherController
+    
+    void Start()
+    void GrowTick()
+    IEnumerator GrowCycle()
+}
+
+@enduml
