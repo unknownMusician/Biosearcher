@@ -39,13 +39,13 @@ namespace Biosearcher.InputHandling
 
         protected void SetInput(Controls controls)
         {
-            controls.Player.MoveStart.performed += HandlePlayerMoveStart;
-            controls.Player.MoveStop.performed += HandlePlayerMoveStop;
+            //controls.Player.MoveStart.performed += HandlePlayerMoveStart;
+            //controls.Player.MoveStop.performed += HandlePlayerMoveStop;
         }
         protected void UnsetInput(Controls controls)
         {
-            controls.Player.MoveStart.performed -= HandlePlayerMoveStart;
-            controls.Player.MoveStop.performed -= HandlePlayerMoveStop;
+            //controls.Player.MoveStart.performed -= HandlePlayerMoveStart;
+            //controls.Player.MoveStop.performed -= HandlePlayerMoveStop;
         }
 
         protected void HandlePlayerMoveStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)

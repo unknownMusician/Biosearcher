@@ -19,23 +19,7 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""f43be611-ce0e-4bf0-aaa9-12c5f792d077"",
             ""actions"": [
                 {
-                    ""name"": ""MoveStart"",
-                    ""type"": ""Value"",
-                    ""id"": ""c8e01934-65fe-44bd-817b-59dd821cdca0"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""MoveStop"",
-                    ""type"": ""Value"",
-                    ""id"": ""7bd750dd-245c-428e-ba1b-1e4c7b907d50"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""TorqueStart"",
+                    ""name"": ""TangentAccelerationStart"",
                     ""type"": ""Value"",
                     ""id"": ""2ab5dc8e-ac50-4432-a79c-c3e3b50f3601"",
                     ""expectedControlType"": ""Axis"",
@@ -43,147 +27,31 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""TorqueStop"",
+                    ""name"": ""TangentAccelerationStop"",
                     ""type"": ""Value"",
                     ""id"": ""e3b27190-3601-480a-b75e-f67149f77731"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""NormalAccelerationStart"",
+                    ""type"": ""Value"",
+                    ""id"": ""6d8caad1-d4a9-40b5-9ffd-c10f5b768c75"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""NormalAccelerationStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d85ce9f-b046-40a2-8b0e-3b394c54f90f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""75a7f1ce-7bb6-40bb-81d2-eb3edcd4b07f"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""13db1af3-0f91-41b7-a664-a8cdb36955ee"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""1d05b87b-ebd1-42ac-a103-c855d0cffef9"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""8a1caabd-35fa-484c-abbe-57845477dac1"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""86457c03-1267-4ebf-8403-6491e264905d"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""941abf96-e81b-49d4-9c31-e4cbaf97eb6a"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""MoveStart"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""WASD"",
-                    ""id"": ""a9a9b03f-2c92-423a-ab94-767ffb23a104"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""d24ca70f-5113-4317-906c-e67f7dd6ba43"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""a296cf9c-21d7-4cb1-a978-92a640160a2e"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""130476b0-0cad-4908-a228-ad5a0137df49"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""9d0e4f0b-0b17-4602-b8dc-d4cb4650ffc2"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ae7193aa-d99d-4fc4-ac0c-9a18acf4ba0f"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": ""Press(behavior=1)"",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""MoveStop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""WS"",
                     ""id"": ""3c52061b-c176-4e71-8bb5-515e46d2d710"",
@@ -191,7 +59,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -202,7 +70,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -213,7 +81,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -224,7 +92,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -235,7 +103,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -246,7 +114,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TorqueStart"",
+                    ""action"": ""TangentAccelerationStart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -257,7 +125,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -268,7 +136,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -279,7 +147,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -290,7 +158,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -301,7 +169,7 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -312,7 +180,139 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""TorqueStop"",
+                    ""action"": ""TangentAccelerationStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""DA"",
+                    ""id"": ""71a528ca-8e41-4ea7-8610-fcde2ff850a2"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""17dfac79-f738-4c9a-9fc0-c0d9fe85511f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""03da9f3c-da0c-49ec-9c1a-2fa4ef4a2ee7"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Left Stick"",
+                    ""id"": ""1a64829e-7c15-490d-9fc0-25714f826aa6"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""40a7d6ae-5656-4aeb-8403-d1b4445ffa83"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""635d554c-3956-4339-a5c2-bfb9742549ff"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NormalAccelerationStart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""DA"",
+                    ""id"": ""d3ced78b-d26e-4407-9e50-3afdbe5e8b1f"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NormalAccelerationStop"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""8c733539-b4dc-44f1-80e5-f564098d1534"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""NormalAccelerationStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""7eca10ad-3b3d-48b1-b354-8ebc57ec2758"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""NormalAccelerationStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Left Stick"",
+                    ""id"": ""34987a4a-83fc-4b04-b023-1968e173eea4"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""NormalAccelerationStop"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""ddbdc311-d383-4448-9004-2d0ca3dba1c0"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NormalAccelerationStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""1cd7784c-2f7d-4b2a-86d7-ca345655a5f4"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""NormalAccelerationStop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 }
@@ -555,10 +555,10 @@ public class @Controls : IInputActionCollection, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_MoveStart = m_Player.FindAction("MoveStart", throwIfNotFound: true);
-        m_Player_MoveStop = m_Player.FindAction("MoveStop", throwIfNotFound: true);
-        m_Player_TorqueStart = m_Player.FindAction("TorqueStart", throwIfNotFound: true);
-        m_Player_TorqueStop = m_Player.FindAction("TorqueStop", throwIfNotFound: true);
+        m_Player_TangentAccelerationStart = m_Player.FindAction("TangentAccelerationStart", throwIfNotFound: true);
+        m_Player_TangentAccelerationStop = m_Player.FindAction("TangentAccelerationStop", throwIfNotFound: true);
+        m_Player_NormalAccelerationStart = m_Player.FindAction("NormalAccelerationStart", throwIfNotFound: true);
+        m_Player_NormalAccelerationStop = m_Player.FindAction("NormalAccelerationStop", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
@@ -619,18 +619,18 @@ public class @Controls : IInputActionCollection, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private IPlayerActions m_PlayerActionsCallbackInterface;
-    private readonly InputAction m_Player_MoveStart;
-    private readonly InputAction m_Player_MoveStop;
-    private readonly InputAction m_Player_TorqueStart;
-    private readonly InputAction m_Player_TorqueStop;
+    private readonly InputAction m_Player_TangentAccelerationStart;
+    private readonly InputAction m_Player_TangentAccelerationStop;
+    private readonly InputAction m_Player_NormalAccelerationStart;
+    private readonly InputAction m_Player_NormalAccelerationStop;
     public struct PlayerActions
     {
         private @Controls m_Wrapper;
         public PlayerActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @MoveStart => m_Wrapper.m_Player_MoveStart;
-        public InputAction @MoveStop => m_Wrapper.m_Player_MoveStop;
-        public InputAction @TorqueStart => m_Wrapper.m_Player_TorqueStart;
-        public InputAction @TorqueStop => m_Wrapper.m_Player_TorqueStop;
+        public InputAction @TangentAccelerationStart => m_Wrapper.m_Player_TangentAccelerationStart;
+        public InputAction @TangentAccelerationStop => m_Wrapper.m_Player_TangentAccelerationStop;
+        public InputAction @NormalAccelerationStart => m_Wrapper.m_Player_NormalAccelerationStart;
+        public InputAction @NormalAccelerationStop => m_Wrapper.m_Player_NormalAccelerationStop;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -640,34 +640,34 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_PlayerActionsCallbackInterface != null)
             {
-                @MoveStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStart;
-                @MoveStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStart;
-                @MoveStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStart;
-                @MoveStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
-                @MoveStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
-                @MoveStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMoveStop;
-                @TorqueStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
-                @TorqueStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
-                @TorqueStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStart;
-                @TorqueStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
-                @TorqueStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
-                @TorqueStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTorqueStop;
+                @TangentAccelerationStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStart;
+                @TangentAccelerationStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStart;
+                @TangentAccelerationStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStart;
+                @TangentAccelerationStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStop;
+                @TangentAccelerationStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStop;
+                @TangentAccelerationStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnTangentAccelerationStop;
+                @NormalAccelerationStart.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStart;
+                @NormalAccelerationStart.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStart;
+                @NormalAccelerationStart.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStart;
+                @NormalAccelerationStop.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStop;
+                @NormalAccelerationStop.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStop;
+                @NormalAccelerationStop.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNormalAccelerationStop;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @MoveStart.started += instance.OnMoveStart;
-                @MoveStart.performed += instance.OnMoveStart;
-                @MoveStart.canceled += instance.OnMoveStart;
-                @MoveStop.started += instance.OnMoveStop;
-                @MoveStop.performed += instance.OnMoveStop;
-                @MoveStop.canceled += instance.OnMoveStop;
-                @TorqueStart.started += instance.OnTorqueStart;
-                @TorqueStart.performed += instance.OnTorqueStart;
-                @TorqueStart.canceled += instance.OnTorqueStart;
-                @TorqueStop.started += instance.OnTorqueStop;
-                @TorqueStop.performed += instance.OnTorqueStop;
-                @TorqueStop.canceled += instance.OnTorqueStop;
+                @TangentAccelerationStart.started += instance.OnTangentAccelerationStart;
+                @TangentAccelerationStart.performed += instance.OnTangentAccelerationStart;
+                @TangentAccelerationStart.canceled += instance.OnTangentAccelerationStart;
+                @TangentAccelerationStop.started += instance.OnTangentAccelerationStop;
+                @TangentAccelerationStop.performed += instance.OnTangentAccelerationStop;
+                @TangentAccelerationStop.canceled += instance.OnTangentAccelerationStop;
+                @NormalAccelerationStart.started += instance.OnNormalAccelerationStart;
+                @NormalAccelerationStart.performed += instance.OnNormalAccelerationStart;
+                @NormalAccelerationStart.canceled += instance.OnNormalAccelerationStart;
+                @NormalAccelerationStop.started += instance.OnNormalAccelerationStop;
+                @NormalAccelerationStop.performed += instance.OnNormalAccelerationStop;
+                @NormalAccelerationStop.canceled += instance.OnNormalAccelerationStop;
             }
         }
     }
@@ -798,10 +798,10 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnMoveStart(InputAction.CallbackContext context);
-        void OnMoveStop(InputAction.CallbackContext context);
-        void OnTorqueStart(InputAction.CallbackContext context);
-        void OnTorqueStop(InputAction.CallbackContext context);
+        void OnTangentAccelerationStart(InputAction.CallbackContext context);
+        void OnTangentAccelerationStop(InputAction.CallbackContext context);
+        void OnNormalAccelerationStart(InputAction.CallbackContext context);
+        void OnNormalAccelerationStop(InputAction.CallbackContext context);
     }
     public interface ICameraActions
     {

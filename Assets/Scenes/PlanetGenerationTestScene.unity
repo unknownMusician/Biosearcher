@@ -383,7 +383,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 334928269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -112.90995, y: 73.15335, z: 172.56343}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1219,8 +1219,8 @@ GameObject:
   - component: {fileID: 2114856211}
   - component: {fileID: 2114856210}
   - component: {fileID: 2114856209}
-  - component: {fileID: 2114856208}
   - component: {fileID: 2114856213}
+  - component: {fileID: 2114856208}
   m_Layer: 0
   m_Name: PlayerRobot
   m_TagString: Untagged
@@ -1240,7 +1240,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c181e2e7abded43baf238161f209be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  tangentAcceleration: 100
+  maxSpeed: 20
+  tangentDamp: 10
+  normalAcceleration: 20
+  maxRotationSpeed: 10
+  normalDamp: 10
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckHeight: 1.5
+  groundDesiredHeight: 1.5
+  springAcceleration: 100
+  springDamp: 10
+  camera: {fileID: 1687258583}
 --- !u!54 &2114856209
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1282,9 +1295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coordinates:
-    height: 332.3885
-    latitude: 21.9266
-    longitude: -174.62758
+    height: 120.89624
+    latitude: -5.648857
+    longitude: -171.53989
 --- !u!4 &2114856212
 Transform:
   m_ObjectHideFlags: 0
@@ -1293,7 +1306,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114856207}
   m_LocalRotation: {x: 0, y: 0, z: 0.7355061, w: 0.6775182}
-  m_LocalPosition: {x: -306.99, y: 124.12, z: -28.869993}
+  m_LocalPosition: {x: -119.00001, y: -11.9, z: -17.699986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347979130}

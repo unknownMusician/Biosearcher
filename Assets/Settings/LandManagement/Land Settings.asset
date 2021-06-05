@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Land Settings
   m_EditorClassIdentifier: 
   minHierarchySize: 1
-  maxHierarchySize: 4
+  maxHierarchySize: 6
   generatingFrequency: 8
-  cubesPerChunk: 64
+  cubesPerChunk: 8
   surfaceValue: 0.76
   geometryType: 1
   planetShader: {fileID: 7200000, guid: 9f16f4b261d62fe4aa3998145e237e0b, type: 3}

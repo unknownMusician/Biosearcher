@@ -21,23 +21,39 @@ namespace Biosearcher.InputHandling
 
         protected void SetInput(Controls controls)
         {
-            controls.Player.TorqueStart.performed += HandlePlayerTorqueStart;
-            controls.Player.TorqueStop.performed += HandlePlayerTorqueStop;
+            controls.Player.TangentAccelerationStart.performed += HandleTangentAccelerationStart;
+            controls.Player.TangentAccelerationStop.performed += HandleTangentAccelerationStop;
+
+            controls.Player.NormalAccelerationStart.performed += HandleNormalAccelerationStart;
+            controls.Player.NormalAccelerationStop.performed += HandleNormalAccelerationStop;
         }
         protected void UnsetInput(Controls controls)
         {
-            controls.Player.TorqueStart.performed -= HandlePlayerTorqueStart;
-            controls.Player.TorqueStop.performed -= HandlePlayerTorqueStop;
+            controls.Player.TangentAccelerationStart.performed -= HandleTangentAccelerationStart;
+            controls.Player.TangentAccelerationStop.performed -= HandleTangentAccelerationStop;
+
+            controls.Player.NormalAccelerationStart.performed -= HandleNormalAccelerationStart;
+            controls.Player.NormalAccelerationStop.performed -= HandleNormalAccelerationStop;
         }
 
-        protected void HandlePlayerTorqueStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
-            playerPresenter.WheelVelocity = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+            playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
         }
 
-        protected void HandlePlayerTorqueStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
-            playerPresenter.WheelVelocity = 0;
+            playerPresenter.TangentAcceleration = 0;
+        }
+
+        protected void HandleNormalAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        {
+            playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+        }
+
+        protected void HandleNormalAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        {
+            playerPresenter.NormalAcceleration = 0;
         }
     }
 }
