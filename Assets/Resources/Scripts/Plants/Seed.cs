@@ -6,14 +6,14 @@ namespace Biosearcher.Plants
     {
         [SerializeField] private PlantSettings plantSettings;
 
-        public void Plant()
+        public Plant Plant(Vector3 position, Quaternion rotation, Transform parent) 
         {
             var prefab = (GameObject) Resources.Load("Prefabs/Plants/Plant");
-            var position = Vector3.zero;
-            var rotation = Quaternion.identity;
-            var plant = Instantiate(prefab, position, rotation);
-            plant.GetComponent<Plant>().Initialize(plantSettings);
-            Destroy(gameObject);
+            var plantObject = Instantiate(prefab, position, rotation, parent);
+            var plant = plantObject.GetComponent<Plant>();
+            plant.Initialize(plantSettings);
+            
+            return plant; 
         }
     }
 }

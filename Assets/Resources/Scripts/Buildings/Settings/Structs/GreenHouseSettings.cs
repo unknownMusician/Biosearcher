@@ -8,8 +8,10 @@ namespace Biosearcher.Buildings.Settings.Structs
     {
         [SerializeField] private Electricity maxPossibleReceivedElectricity;
         [SerializeField] private Water maxPossibleReceivedWater;
+        [SerializeField] private int amountOfSlots;
 
         public Electricity MaxPossibleReceivedElectricity => maxPossibleReceivedElectricity;
         public Water MaxPossibleReceivedWater => maxPossibleReceivedWater;
+        public int AmountOfSlots => amountOfSlots;
     }
 }

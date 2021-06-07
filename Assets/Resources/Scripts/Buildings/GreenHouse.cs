@@ -1,6 +1,9 @@
+using System.Collections.Generic;
 using Biosearcher.Buildings.Resources.Structs;
 using Biosearcher.Buildings.Settings;
+using Biosearcher.Buildings.Settings.Structs;
 using Biosearcher.Buildings.Types.Interfaces;
+using Biosearcher.Plants;
 using UnityEngine;
 
 namespace Biosearcher.Buildings
@@ -10,6 +13,10 @@ namespace Biosearcher.Buildings
         #region Properties
 
         [SerializeField] private BuildingsSettings buildingsSettings;
+        [SerializeField] private Transform[] slotsObjects;
+
+        private GreenHouseSettings settings;
+        private Plant[] slots;
 
         private Electricity maxPossibleReceivedElectricity;
         private Electricity currentPossibleReceivedElectricity;
@@ -27,9 +34,13 @@ namespace Biosearcher.Buildings
         
         private void Awake()
         {
-            LoadProperties();
+            LoadSettings();
             
             //TODO: logic
+            slots = new Plant[settings.AmountOfSlots];
+
+            maxPossibleReceivedElectricity = settings.MaxPossibleReceivedElectricity;
+            maxPossibleReceivedWater = settings.MaxPossibleReceivedWater;
             currentPossibleReceivedElectricity = maxPossibleReceivedElectricity;
             currentPossibleReceivedWater = maxPossibleReceivedWater;
         }
@@ -38,12 +49,18 @@ namespace Biosearcher.Buildings
 
         #region Methods
 
-        private void LoadProperties()
+        private void LoadSettings()
         {
-            var greenHouseSettings = buildingsSettings.GreenHouseSettings;
+            settings = buildingsSettings.GreenHouseSettings;
+        }
 
-            maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
-            maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
+        public void Plant(Seed seed, int slotNumber)
+        {
+            var position = Vector3.zero;
+            var rotation = Quaternion.identity;
+            var parent = slotsObjects[slotNumber];
+            slots[slotNumber] = seed.Plant(position, rotation, parent);
+            Destroy(seed.gameObject);
         }
 
         public void Receive(Electricity resource)
@@ -52,7 +69,6 @@ namespace Biosearcher.Buildings
             //TODO: logic
             return;
         }
-
         public void Receive(Water resource)
         {
             //TODO: logic

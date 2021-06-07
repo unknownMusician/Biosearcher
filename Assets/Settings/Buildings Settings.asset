@@ -21,3 +21,4 @@ MonoBehaviour:
       energy: 5
     maxPossibleReceivedWater:
       volume: 0
+    amountOfSlots: 3
