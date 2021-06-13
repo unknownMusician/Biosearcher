@@ -7,25 +7,17 @@ namespace Biosearcher.Plants
     {
         #region Properties
 
+        private const float GrowthTicksPerSecond = 1;
+        
         private PlantSettings plantSettings;
+        private Slot slot;
+
+        public PlantSettings PlantSettings => plantSettings;
 
         private float growthProgress;
-        private float corruption;
+        private float corruptionProgress;
 
         private bool isGrowing;
-
-        private float ticksPerSecond;
-
-        #endregion
-
-        #region Behaviour methods
-
-        private void Awake()
-        {
-            growthProgress = 0;
-            corruption = 0;
-            ticksPerSecond = 1;
-        }
 
         #endregion
 
@@ -34,6 +26,12 @@ namespace Biosearcher.Plants
         public void Initialize(PlantSettings plantSettings)
         {
             this.plantSettings = plantSettings;
+        }
+
+        public void ChangeSlot(Slot slot)
+        {
+            EndGrowth();
+            this.slot = slot;
             StartGrowth();
         }
 
@@ -48,7 +46,15 @@ namespace Biosearcher.Plants
             Debug.Log("Growth ended!");
             isGrowing = false;
         }
-        
+
+        private bool CheckGrowthConditions(float humidity, float illumination, float temperature)
+        {
+            var humidityCondition = plantSettings.humidityRange.Contains(humidity);
+            var illuminationCondition = plantSettings.illuminationRange.Contains(illumination);
+            var temperatureCondition = plantSettings.temperatureRange.Contains(temperature);
+            
+            return humidityCondition && illuminationCondition && temperatureCondition;
+        }
         private void GrowthTick()
         {
             if (growthProgress.Equals(1))
@@ -56,8 +62,15 @@ namespace Biosearcher.Plants
                 EndGrowth();
                 return;
             }
-            // if temperature, humidity and illumination is ok
-            growthProgress += ticksPerSecond / plantSettings.timeToGrow;
+            
+            if (!CheckGrowthConditions(slot.CurrentHumidity, slot.CurrentIllumination, slot.CurrentTemperature))
+            {
+                corruptionProgress += GrowthTicksPerSecond / plantSettings.timeToCorrupt;
+                Debug.Log($"Corruption: {corruptionProgress}");
+                return;
+            }
+            
+            growthProgress += GrowthTicksPerSecond / plantSettings.timeToGrow;
             Debug.Log($"Progress: {growthProgress}");
         }
         private IEnumerator GrowthCycle()
@@ -65,7 +78,7 @@ namespace Biosearcher.Plants
             while (isGrowing)
             {
                 GrowthTick();
-                yield return new WaitForSeconds(1 / ticksPerSecond);
+                yield return new WaitForSeconds(1 / GrowthTicksPerSecond);
             }
         }
 

@@ -4,27 +4,68 @@ class PlantSettings
 {
     int id
     string name
+    
     float timeToGrow
-    Range temperatureRange
+    float timeToCorrupt
+    
     Range humidityRange
     Range illuminationRange
-    //модельки, эффекты, звуки
+    Range temperatureRange
 }
 class Seed
 {
     PlantSettings plantSettings
-    void Plant()
+    
+    Plant Plant()
 }
 class Plant
 {
     PlantSettings plantSettings
-    float growthProgress
-    float corruption
-    WeatherController weatherController
+    Slot slot
     
-    void Start()
+    float growthProgress
+    float corruptionProgress
+    
+    bool isGrowing
+    
+    void ChangeSlot()
+    bool CheckGrowthConditions()
     void GrowTick()
     IEnumerator GrowCycle()
 }
+class Range
+{
+    float leftBorder
+    float rightBorder
+    
+    bool Contains()
+}
+class Slot
+{
+    bool controlHumidity
+    bool controlIllumination
+    bool controlTemperature
+
+    WeatherController weatherController
+    Plant plant
+
+    float currentHumidity
+    float currentIllumination
+    float currentTemperature
+    
+    void ChangePlant()
+    void CheckSensors()
+    void CalculateNeededEnergy()
+}
+class GreenHouse
+{
+    Slot[] slots
+}
+
+Seed o-- PlantSettings
+Plant o-- PlantSettings
+PlantSettings o-- Range
+Slot o-o Plant
+GreenHouse o-- Slot
 
 @enduml

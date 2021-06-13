@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: test
-  timeToGrow: 5
-  temperatureRange:
-    leftBorder: 0
-    rightBorder: 0
-  illuminationRange:
-    leftBorder: 0
-    rightBorder: 0
+  timeToGrow: 30
+  timeToCorrupt: 30
   humidityRange:
-    leftBorder: 0
-    rightBorder: 0
+    leftBorder: 20
+    rightBorder: 30
+  illuminationRange:
+    leftBorder: 20
+    rightBorder: 30
+  temperatureRange:
+    leftBorder: 20
+    rightBorder: 30

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:Biosearcher.Buildings.Settings:BuildingsSettings
   coalGeneratorSettings:
     maxPossibleEnergyProduced:
-      energy: 5
-    neededCoal: 0.1
+      energy: 3
+    neededCoal: 1
   greenHouseSettings:
     maxPossibleReceivedElectricity:
       energy: 5

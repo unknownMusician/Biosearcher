@@ -7,10 +7,13 @@ namespace Biosearcher.Plants
     public class PlantSettings : ScriptableObject
     {
         [SerializeField] public int id;
-        [SerializeField] public string name;
+        [SerializeField] public string plantName;
+        
         [SerializeField] public float timeToGrow;
-        [SerializeField] public Range temperatureRange;
-        [SerializeField] public Range illuminationRange;
+        [SerializeField] public float timeToCorrupt;
+        
         [SerializeField] public Range humidityRange;
+        [SerializeField] public Range illuminationRange;
+        [SerializeField] public Range temperatureRange;
     }
 }
