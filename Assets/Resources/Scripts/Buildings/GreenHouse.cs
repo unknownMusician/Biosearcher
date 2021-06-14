@@ -5,8 +5,6 @@ using Biosearcher.Buildings.Types.Interfaces;
 using Biosearcher.Plants;
 using UnityEngine;
 
-//TODO: убрать паблики!!!
-
 namespace Biosearcher.Buildings
 {
     public class GreenHouse : MonoBehaviour, IResourceReceiver<Electricity>, IResourceReceiver<Water>
@@ -14,42 +12,39 @@ namespace Biosearcher.Buildings
         [SerializeField] private Seed testSeed1;
         [SerializeField] private Seed testSeed2;
         [SerializeField] private Seed testSeed3;
-        
+
         #region Properties
 
         [SerializeField] private BuildingsSettings buildingsSettings;
         [SerializeField] private Slot[] slots;
 
-        private GreenHouseSettings settings;
+        private GreenHouseSettings _settings;
 
-        private Electricity maxPossibleReceivedElectricity;
-        private Electricity currentPossibleReceivedElectricity;
-        private Water maxPossibleReceivedWater;
-        private Water currentPossibleReceivedWater;
+        private Electricity _maxPossibleReceivedElectricity;
+        private Electricity _currentPossibleReceivedElectricity;
+        private Water _maxPossibleReceivedWater;
+        private Water _currentPossibleReceivedWater;
 
-        Electricity IResourceReceiver<Electricity>.MaxPossibleReceived => maxPossibleReceivedElectricity;
-        Electricity IResourceReceiver<Electricity>.CurrentPossibleReceived => currentPossibleReceivedElectricity;
-        Water IResourceReceiver<Water>.MaxPossibleReceived => maxPossibleReceivedWater;
-        Water IResourceReceiver<Water>.CurrentPossibleReceived => currentPossibleReceivedWater;
+        Electricity IResourceReceiver<Electricity>.MaxPossibleReceived => _maxPossibleReceivedElectricity;
+        Electricity IResourceReceiver<Electricity>.CurrentPossibleReceived => _currentPossibleReceivedElectricity;
+        Water IResourceReceiver<Water>.MaxPossibleReceived => _maxPossibleReceivedWater;
+        Water IResourceReceiver<Water>.CurrentPossibleReceived => _currentPossibleReceivedWater;
 
         #endregion
 
-        #region Behaviour methods
-        
+        #region MonoBehaviour methods
+
         private void Awake()
         {
             LoadSettings();
-            
-            //TODO: logic
 
-            maxPossibleReceivedElectricity = settings.MaxPossibleReceivedElectricity;
-            maxPossibleReceivedWater = settings.MaxPossibleReceivedWater;
-            currentPossibleReceivedElectricity = default;
-            currentPossibleReceivedWater = default;
+            _maxPossibleReceivedElectricity = _settings.MaxPossibleReceivedElectricity;
+            _maxPossibleReceivedWater = _settings.MaxPossibleReceivedWater;
         }
         private void Start()
         {
             RecalculateNeededElectricity();
+            RecalculateNeededWater();
         }
 
         #endregion
@@ -58,19 +53,27 @@ namespace Biosearcher.Buildings
 
         private void LoadSettings()
         {
-            settings = buildingsSettings.GreenHouseSettings;
+            _settings = buildingsSettings.GreenHouseSettings;
         }
 
         private void RecalculateNeededElectricity()
         {
-            currentPossibleReceivedElectricity = default;
+            _currentPossibleReceivedElectricity = default;
             foreach (var slot in slots)
             {
-                if (slot == null)
-                {
-                    continue;
-                }
-                currentPossibleReceivedElectricity += slot.NeededElectricity;
+                if (slot == null) continue;
+
+                _currentPossibleReceivedElectricity += slot.NeededElectricity;
+            }
+        }
+        private void RecalculateNeededWater()
+        {
+            _currentPossibleReceivedWater = default;
+            foreach (var slot in slots)
+            {
+                if (slot == null) continue;
+
+                _currentPossibleReceivedWater += slot.NeededWater;
             }
         }
 
@@ -93,33 +96,38 @@ namespace Biosearcher.Buildings
             var rotation = Quaternion.identity;
             var parent = slots[slotNumber].transform;
             var plant = seed.Plant(position, rotation, parent);
-            slots[slotNumber].ChangePlant(plant);
+            slots[slotNumber].Plant = plant;
             RecalculateNeededElectricity();
+            RecalculateNeededWater();
             Destroy(seed.gameObject);
         }
         public void ChangeSlot(Slot slot, int slotNumber)
         {
             slots[slotNumber] = slot;
             RecalculateNeededElectricity();
+            RecalculateNeededWater();
         }
 
         public void Receive(Electricity resource)
         {
-            var percentage = (resource / currentPossibleReceivedElectricity).Value;
+            var efficiency = (resource / _currentPossibleReceivedElectricity).Value;
             foreach (var slot in slots)
             {
-                if (slot == null)
-                {
-                    continue;
-                }
+                if (slot == null) continue;
                 
-                slot.DecideWhatToDo(percentage);
+                slot.RegulateIllumination(efficiency);
+                slot.RegulateTemperature(efficiency);
             }
         }
         public void Receive(Water resource)
         {
-            //TODO: logic
-            return;
+            var efficiency = (resource / _currentPossibleReceivedWater).Value;
+            foreach (var slot in slots)
+            {
+                if (slot == null) continue;
+                
+                slot.RegulateHumidity(efficiency);
+            }
         }
 
         #endregion

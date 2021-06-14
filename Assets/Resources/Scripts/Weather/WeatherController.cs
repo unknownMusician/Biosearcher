@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-namespace Biosearcher.Resources.Scripts
+namespace Biosearcher.Weather
 {
     public class WeatherController : MonoBehaviour
     {
-        public static WeatherController Instance;
+        public static WeatherController Instance { get; private set; }
 
         private void Awake()
         {

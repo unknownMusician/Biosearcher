@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Biosearcher.Plants
+namespace Biosearcher.Weather
 {
     public class WeatherRegulator<TParameter>
     {

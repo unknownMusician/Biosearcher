@@ -38,6 +38,8 @@ namespace Biosearcher.Buildings.Network
 
         private IEnumerator NetworkCycle()
         {
+            yield return new WaitForSeconds(1f);
+            
             while (isCycleActive)
             {
                 Tick();

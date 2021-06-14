@@ -197,6 +197,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &175359245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 175359246}
+  - component: {fileID: 175359247}
+  m_Layer: 0
+  m_Name: WaterGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &175359246
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175359245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1723226649}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &175359247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 175359245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44a83b585c4e4ac282d423ddc6b76463, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &331954965
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +285,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coalGenerator: {fileID: 823840478}
   greenHouse: {fileID: 345871317}
+  testEternalWaterGenerator: {fileID: 175359247}
   electricityNetwork: {fileID: 1723226648}
+  waterNetwork: {fileID: 1723226650}
 --- !u!1 &345871316
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,6 +1333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1723226649}
   - component: {fileID: 1723226648}
+  - component: {fileID: 1723226650}
   m_Layer: 0
   m_Name: Network
   m_TagString: Untagged
@@ -1322,9 +1368,23 @@ Transform:
   - {fileID: 331954966}
   - {fileID: 823840481}
   - {fileID: 345871320}
+  - {fileID: 175359246}
   m_Father: {fileID: 1176726003}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1723226650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723226647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3d9608d432c0141b10177eb41f086b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cyclesPerSecond: 1
 --- !u!1 &1807923922
 GameObject:
   m_ObjectHideFlags: 0

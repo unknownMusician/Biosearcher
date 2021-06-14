@@ -1,4 +1,4 @@
-﻿namespace Biosearcher.Plants.WeatherParametersStructs
+﻿namespace Biosearcher.Weather.Parameters
 {
     public struct Illumination
     {

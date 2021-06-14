@@ -25,7 +25,7 @@ namespace Biosearcher.Buildings.Generators
         {
             LoadProperties();
 
-            CurrentCoal = 30f;
+            CurrentCoal = 15f;
         }
 
         private void Start()
