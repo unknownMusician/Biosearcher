@@ -1,0 +1,116 @@
+﻿@startuml
+
+class PlantSettings
+{
+    int id
+    string plantName
+    
+    float timeToGrow
+    float timeToCorrupt
+    
+    Range humidityRange
+    Range illuminationRange
+    Range temperatureRange
+}
+class Seed
+{
+    PlantSettings plantSettings
+    
+    Plant Plant()
+}
+class Plant
+{
+    PlantSettings plantSettings
+    Slot slot
+    
+    float growthProgress
+    float corruptionProgress
+    
+    bool isGrowing
+    
+    void Initialize()
+    
+    void StartGrowth()
+    void EndGrowth()
+    
+    bool CheckGrowthConditions()
+    void GrowTick()
+    IEnumerator GrowCycle()
+}
+class Range
+{
+    float LeftBorder
+    float RightBorder
+    float Average
+    
+    bool Contains()
+}
+class Slot
+{   
+    Electricity ElectricityToControlIllumination
+    Electricity ElectricityToControlTemperature
+    Water WaterToControlHumidity
+    
+    float HumidityPercentagePerSecond
+    float IlluminationPercentagePerSecond
+    float TemperaturePercentagePerSecond
+    
+    bool controlHumidity
+    bool controlIllumination
+    bool controlTemperature
+
+    WeatherController weatherController
+    Plant plant
+    
+    WeatherRegulator<Humidity> humidityRegulator
+    WeatherRegulator<Illumination> illuminationRegulator
+    WeatherRegulator<Temperature> temperatureRegulator
+    
+    Electricity NeededElectricity
+    Water NeededWater
+    
+    float CurrentHumidity
+    float CurrentIllumination
+    float CurrentTemperature
+    
+    void ResetWeatherParameters()
+    
+    void RegulateParameter()
+    void RegulateHumidity()
+    void RegulateIllumination()
+    void RegulateTemperature()
+}
+class GreenHouse
+{
+    Slot[] slots
+    
+    void RecalculateNeededElectricity()
+    void RecalculateNeededWater()
+    
+    void Plant()
+    void ChangeSlot()
+    
+    void Receive(Electricity resource)
+    void Receive(Water resource)
+}
+class WeatherRegulator<TParameter>
+{
+    float preparedness
+    float percentagePerSecond
+    bool control
+    float currentValue
+    
+    WeatherRegulator()
+    
+    Reset()
+    Regulate()
+}
+
+Seed o-- PlantSettings
+Plant o-- PlantSettings
+PlantSettings o-- Range
+Slot o-o Plant
+GreenHouse o-- Slot
+Slot o-- WeatherRegulator
+
+@enduml

@@ -2,18 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="834304b2-68b3-4141-962c-e760f8d46c9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Diagramm.puml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/WaterNetwork.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/WaterNetwork.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/TestEternalWaterGenerator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/TestEternalWaterGenerator.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Humidity.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Humidity.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Illumination.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Illumination.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Temperature.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Temperature.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe4.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe5.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe6.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe7.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Generators/CoalGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Generators/CoalGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/GreenHouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/GreenHouse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Network.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Network.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Diagramm.puml" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Diagramm.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Plant.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Plant.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/PlantSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/PlantSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Slot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Slot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/TestGreenHouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/TestGreenHouse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/WeatherController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/WeatherController.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherController.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlantsSystemTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlantsSystemTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,28 +58,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Interfaces/IResourceInteractor.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Interfaces/IResourceReceiver.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/BuildingsParamsSO.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/BuildingsSo.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Structs/Electricity.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Structs/Water.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Structs/Interfaces/IAddable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/IAddable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/ISubstractable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/Structs/CoalGeneratorSettings.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Buildings.puml" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Interfaces/Diagramm.puml" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/ISubtractable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/IMultipliable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/IDividable.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Diagramm.puml" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/BuildingsNetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/ElectricityNetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Interfaces/IResourceProducer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Interfaces/IResourceMover.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/IResourceProducer.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/IResourceMover.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/IResourceReceiver.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/AbstractClasses/ResourceMover.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/AbstractClasses/ResourceReceiver.cs" />
@@ -86,16 +77,38 @@
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/Interfaces/IResourceProducer.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/Diagramm.puml" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Types/Interfaces/IResourceReceiver.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/Structs/GreenHouseSettings.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/Diagramm.puml" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/BuildingsSettings.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Generators/CoalGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/ElectricityNetwork.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Network.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/NetworkContentTest.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/GreenHouse.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/WaterNetwork.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Diagramm.puml" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Borders.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Settings/Structs/GreenHouseSettings.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/WeatherController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Seed.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Range.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Generators/CoalGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/PlantSettings.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/TestGreenHouse.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network/Network.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Humidity.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Illumination.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Temperature.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/TestEternalWaterGenerator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/WeatherParametersStructs/Temperature.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/WeatherParametersStructs/Illumination.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/WeatherParametersStructs/Humidity.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Humidity.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Illumination.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/Parameters/Temperature.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Slot.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherController.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/WeatherRegulator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/GreenHouse.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Plant.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Plants/Diagramm.puml" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tDfD2JfFtzBTNxkOiYoVy0be5o" />
@@ -104,14 +117,14 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34950384" />
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34940413" />
     <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="DefaultPlantUmlFileTemplate" value="UML Class" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -125,10 +138,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="4956">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="4956" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -152,7 +165,14 @@
       <workItem from="1622800198766" duration="2677000" />
       <workItem from="1622836281607" duration="940000" />
       <workItem from="1622884762020" duration="9532000" />
-      <workItem from="1622903223223" duration="1097000" />
+      <workItem from="1622903223223" duration="6252000" />
+      <workItem from="1623079316929" duration="2867000" />
+      <workItem from="1623322740832" duration="11358000" />
+      <workItem from="1623484304650" duration="12748000" />
+      <workItem from="1623589722547" duration="332000" />
+      <workItem from="1623590644240" duration="10360000" />
+      <workItem from="1623677343410" duration="2014000" />
+      <workItem from="1623687133564" duration="5879000" />
     </task>
     <servers />
   </component>

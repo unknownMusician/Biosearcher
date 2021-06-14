@@ -25,7 +25,7 @@ namespace Biosearcher.Buildings.Generators
         {
             LoadProperties();
 
-            CurrentCoal = 10;
+            CurrentCoal = 15f;
         }
 
         private void Start()
@@ -54,13 +54,11 @@ namespace Biosearcher.Buildings.Generators
             else if (CurrentCoal >= NeededCoal)
             {
                 CurrentPossibleProduced = MaxPossibleProduced;
-                ReduceCurrentCoal(NeededCoal);
             }
             else
             {
                 var currentToMaxRatio = new Electricity {energy = CurrentCoal / NeededCoal};
                 CurrentPossibleProduced = MaxPossibleProduced.Multiply(currentToMaxRatio);
-                ReduceCurrentCoal(CurrentCoal);
             }
         }
 
@@ -78,7 +76,6 @@ namespace Biosearcher.Buildings.Generators
         public Electricity Produce()
         {
             RecalculateProducing();
-            Debug.Log($"Produced {CurrentPossibleProduced.Value} energy");
             ReduceCurrentCoal(NeededCoal);
             return CurrentPossibleProduced;
         }
