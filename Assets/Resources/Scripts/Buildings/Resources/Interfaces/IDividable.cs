@@ -2,6 +2,6 @@
 {
     public interface IDividable<TResource>
     {
-        public TResource Divide(TResource a);
+        public float Divide(TResource a);
     }
 }

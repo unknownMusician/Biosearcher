@@ -4,6 +4,6 @@
         IMultipliable<TResource>, IDividable<TResource>,
         System.IComparable<TResource>
     {
-        public float Value { get; set;  }
+        float Value { get; set; }
     }
 }

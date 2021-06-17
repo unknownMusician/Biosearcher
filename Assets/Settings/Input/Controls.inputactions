@@ -332,6 +332,14 @@
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "InteractionStateChange",
+                    "type": "Button",
+                    "id": "004f7f26-3d23-4920-a5f3-b1857e153013",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -376,6 +384,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "MoveStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b40ad086-2346-4ddd-8eaf-a8bfcd035ed2",
+                    "path": "<Keyboard>/f",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InteractionStateChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -504,6 +523,52 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "RemoveStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Grabber",
+            "id": "6dcb8437-3419-4b91-a046-d7d90ff92c0f",
+            "actions": [
+                {
+                    "name": "Drop",
+                    "type": "Button",
+                    "id": "e52e1742-99e5-411d-98ba-78f4b440f8cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Grab",
+                    "type": "Button",
+                    "id": "a11032e3-80f3-495f-99bf-1b683347cae5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8acc2125-d32f-4064-b105-8d95409fcc05",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grab",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d8eb4733-e82d-4864-9e13-9b5604db94bd",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

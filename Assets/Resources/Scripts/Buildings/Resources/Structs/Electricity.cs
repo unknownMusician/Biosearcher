@@ -13,17 +13,20 @@ namespace Biosearcher.Buildings.Resources.Structs
             set => energy = value;
         }
 
-        public int CompareTo(Electricity other) => energy.CompareTo(other.energy);
-
         public Electricity Add(Electricity a) => new Electricity {energy = energy + a.energy};
         public Electricity Subtract(Electricity a) => new Electricity {energy = energy - a.energy};
         public Electricity Multiply(Electricity a) => new Electricity {energy = energy * a.energy};
-        public Electricity Divide(Electricity a) => new Electricity {energy = energy / a.energy};
+        public float Divide(Electricity a) => energy / a.energy;
+        public int CompareTo(Electricity other) => energy.CompareTo(other.energy);
 
 
         public static Electricity operator +(Electricity e1, Electricity e2) => e1.Add(e2);
         public static Electricity operator -(Electricity e1, Electricity e2) => e1.Subtract(e2);
         public static Electricity operator *(Electricity e1, Electricity e2) => e1.Multiply(e2);
-        public static Electricity operator /(Electricity e1, Electricity e2) => e1.Divide(e2);
+        public static float operator /(Electricity e1, Electricity e2) => e1.Divide(e2);
+        public static bool operator >(Electricity e1, Electricity e2) => e1.CompareTo(e2) > 0;
+        public static bool operator >=(Electricity e1, Electricity e2) => e1.CompareTo(e2) >= 0;
+        public static bool operator <(Electricity e1, Electricity e2) => e1.CompareTo(e2) < 0;
+        public static bool operator <=(Electricity e1, Electricity e2) => e1.CompareTo(e2) <= 0;
     }
 }
