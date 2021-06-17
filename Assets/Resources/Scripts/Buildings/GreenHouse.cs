@@ -47,8 +47,8 @@ namespace Biosearcher.Buildings
             _currentPossibleReceivedElectricity = _maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
             _currentPossibleReceivedWater = _maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
 
-            _electricityNetwork = new Network<Electricity>(this);
-            _waterNetwork = new Network<Water>(this);
+            _electricityNetwork = new Network<Electricity>(this, _cyclesPerSecond);
+            _waterNetwork = new Network<Water>(this, _cyclesPerSecond);
         }
 
         public void Receive(Electricity resource)
