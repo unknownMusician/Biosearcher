@@ -7,26 +7,32 @@ namespace Biosearcher.PlayerBehaviour
     [RequireComponent(typeof(PlanetTransform))]
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField] protected Vector3 relativePosition;
-        [SerializeField] protected Transform player;
+        #region Properties
 
-        protected PlayerCameraInput input;
-        protected PlanetTransform planetTransform;
+        [SerializeField] protected Vector3 _relativePosition;
+        [SerializeField] protected Transform _player;
 
-        protected float rotationX;
+        protected PlayerCameraInput _input;
+        protected PlanetTransform _planetTransform;
+
+        protected float _rotationX;
 
         public Quaternion RotationWithoutX { get; protected set; }
 
+        #endregion
+
+        #region MonoBehaviour methods
+
         protected void Awake()
         {
-            planetTransform = GetComponent<PlanetTransform>();
+            _planetTransform = GetComponent<PlanetTransform>();
 
-            input = new PlayerCameraInput(new Presenter(this));
+            _input = new PlayerCameraInput(new Presenter(this));
         }
-        protected void OnDestroy() => input.Dispose();
+        protected void OnDestroy() => _input.Dispose();
 
-        protected void OnEnable() => input.OnEnable();
-        protected void OnDisable() => input.OnDisable();
+        protected void OnEnable() => _input.OnEnable();
+        protected void OnDisable() => _input.OnDisable();
 
         protected void Update()
         {
@@ -35,20 +41,23 @@ namespace Biosearcher.PlayerBehaviour
             RotationWithoutX = Quaternion.FromToRotation(transform.up, transform.position - planetPosition) * transform.rotation;
             transform.rotation = RotationWithoutX;
             //planetTransform.planetRotation = Quaternion.Euler(PlanetEulerAngles);
-            transform.rotation = Quaternion.AngleAxis(-rotationX, transform.right) * RotationWithoutX;
+            transform.rotation = Quaternion.AngleAxis(-_rotationX, transform.right) * RotationWithoutX;
             Move();
         }
 
+        #endregion
+
+        #region Methods
+
         protected void Move()
         {
-            transform.position = player.position + transform.rotation * relativePosition;
+            transform.position = _player.position + transform.rotation * _relativePosition;
         }
-
         protected void Rotate(Vector2 direction)
         {
-            if (Mathf.Abs(rotationX + direction.y) <= 60)
+            if (Mathf.Abs(_rotationX + direction.y) <= 60)
             {
-                rotationX += direction.y;
+                _rotationX += direction.y;
             }
             Vector3 planetPosition = Vector3.zero;
 
@@ -60,6 +69,10 @@ namespace Biosearcher.PlayerBehaviour
             Move();
         }
 
+        #endregion
+
+        #region Classes
+
         public class Presenter
         {
             public PlayerCamera Camera { get; }
@@ -67,5 +80,7 @@ namespace Biosearcher.PlayerBehaviour
             public Presenter(PlayerCamera camera) => Camera = camera;
             public void Rotate(Vector2 direction) => Camera.Rotate(direction);
         }
+
+        #endregion
     }
 }
