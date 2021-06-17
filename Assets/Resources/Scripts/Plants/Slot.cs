@@ -1,5 +1,4 @@
 ﻿using Biosearcher.Buildings.Resources.Structs;
-using Biosearcher.Weather.Parameters;
 using Biosearcher.Weather;
 using UnityEngine;
 
@@ -21,9 +20,9 @@ namespace Biosearcher.Plants
         [SerializeField] private bool controlIllumination;
         [SerializeField] private bool controlTemperature;
 
-        private WeatherRegulator<Humidity> _humidityRegulator;
-        private WeatherRegulator<Illumination> _illuminationRegulator;
-        private WeatherRegulator<Temperature> _temperatureRegulator;
+        private WeatherRegulator _humidityRegulator;
+        private WeatherRegulator _illuminationRegulator;
+        private WeatherRegulator _temperatureRegulator;
         
         private WeatherController _weatherController;
         private Plant _plant;
@@ -76,9 +75,9 @@ namespace Biosearcher.Plants
         
         private void Awake()
         {
-            _humidityRegulator = new WeatherRegulator<Humidity>(HumidityPercentagePerSecond, controlHumidity);
-            _illuminationRegulator = new WeatherRegulator<Illumination>(IlluminationPercentagePerSecond, controlIllumination);
-            _temperatureRegulator = new WeatherRegulator<Temperature>(TemperaturePercentagePerSecond, controlTemperature);
+            _humidityRegulator = new WeatherRegulator(HumidityPercentagePerSecond, controlHumidity);
+            _illuminationRegulator = new WeatherRegulator(IlluminationPercentagePerSecond, controlIllumination);
+            _temperatureRegulator = new WeatherRegulator(TemperaturePercentagePerSecond, controlTemperature);
         }
         private void Start()
         {
@@ -98,26 +97,22 @@ namespace Biosearcher.Plants
             _temperatureRegulator.Reset(_weatherController.GetTemperature(position));
         }
 
-        private void RegulateParameter<TParameter>(WeatherRegulator<TParameter> regulator, float outsideValue, float goalValue, float efficiency)
+        private void RegulateParameter(WeatherRegulator regulator, float outsideValue, float goalValue, float efficiency)
         {
+            if (_plant == null) return;
+
             regulator.Regulate(outsideValue, goalValue, efficiency);
         }
         public void RegulateHumidity(float efficiency)
         {
-            if (_plant == null) return;
-            
             RegulateParameter(_humidityRegulator, _weatherController.GetHumidity(transform.position), _plant.PlantSettings.humidityRange.Average, efficiency);
         }
         public void RegulateIllumination(float efficiency)
         {
-            if (_plant == null) return;
-            
             RegulateParameter(_illuminationRegulator, _weatherController.GetIllumination(transform.position), _plant.PlantSettings.illuminationRange.Average, efficiency);
         }
         public void RegulateTemperature(float efficiency)
         {
-            if (_plant == null) return;
-            
             RegulateParameter(_temperatureRegulator, _weatherController.GetTemperature(transform.position), _plant.PlantSettings.temperatureRange.Average, efficiency);
         }
         
