@@ -1,5 +1,6 @@
 using Biosearcher.PlayerBehaviour;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Biosearcher.InputHandling
@@ -7,25 +8,6 @@ namespace Biosearcher.InputHandling
     public class PlayerInput : System.IDisposable
     {
         protected Player.Presenter playerPresenter;
-        protected UnityEngine.InputSystem.InputAction.CallbackContext callbackContext;
-
-        protected bool _isMoving = false;
-        protected bool IsMoving
-        {
-            get => _isMoving;
-            set
-            {
-                if (_isMoving == value)
-                {
-                    return;
-                }
-                _isMoving = value;
-                if (_isMoving)
-                {
-                    playerPresenter.Player.StartCoroutine(Moving());
-                }
-            }
-        }
 
         public PlayerInput(Player.Presenter playerPresenter)
         {
@@ -39,36 +21,39 @@ namespace Biosearcher.InputHandling
 
         protected void SetInput(Controls controls)
         {
-            //controls.Player.MoveStart.performed += HandlePlayerMoveStart;
-            //controls.Player.MoveStop.performed += HandlePlayerMoveStop;
+            controls.Player.TangentAccelerationStart.performed += HandleTangentAccelerationStart;
+            controls.Player.TangentAccelerationStop.performed += HandleTangentAccelerationStop;
+
+            controls.Player.NormalAccelerationStart.performed += HandleNormalAccelerationStart;
+            controls.Player.NormalAccelerationStop.performed += HandleNormalAccelerationStop;
         }
         protected void UnsetInput(Controls controls)
         {
-            //controls.Player.MoveStart.performed -= HandlePlayerMoveStart;
-            //controls.Player.MoveStop.performed -= HandlePlayerMoveStop;
+            controls.Player.TangentAccelerationStart.performed -= HandleTangentAccelerationStart;
+            controls.Player.TangentAccelerationStop.performed -= HandleTangentAccelerationStop;
+
+            controls.Player.NormalAccelerationStart.performed -= HandleNormalAccelerationStart;
+            controls.Player.NormalAccelerationStop.performed -= HandleNormalAccelerationStop;
         }
 
-        protected void HandlePlayerMoveStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
-            callbackContext = ctx;
-            IsMoving = true;
+            playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
         }
 
-        protected void HandlePlayerMoveStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
-            callbackContext = ctx;
-            IsMoving = false;
+            playerPresenter.TangentAcceleration = 0;
         }
 
-        protected IEnumerator Moving()
+        protected void HandleNormalAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
         {
-            yield return new WaitForFixedUpdate();
-            while (IsMoving)
-            {
-                playerPresenter.Move(callbackContext.ReadValue<Vector2>());
-                yield return new WaitForFixedUpdate();
-            }
-            playerPresenter.Move(Vector2.zero);
+            playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+        }
+
+        protected void HandleNormalAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        {
+            playerPresenter.NormalAcceleration = 0;
         }
     }
 }

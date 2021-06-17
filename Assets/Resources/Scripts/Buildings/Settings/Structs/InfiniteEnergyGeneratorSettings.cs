@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Biosearcher.Buildings.Settings.Structs
 {
     [System.Serializable]
-    public struct CoalGeneratorSettings
+    public struct InfiniteEnergyGeneratorSettings
     {
         [SerializeField] private Electricity maxPossibleEnergyProduced;
         [SerializeField] private float neededCoal;

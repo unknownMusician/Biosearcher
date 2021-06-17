@@ -1,3 +1,4 @@
+using Biosearcher.Buildings.Resources;
 using Biosearcher.Buildings.Resources.Structs;
 using Biosearcher.Buildings.Settings;
 using Biosearcher.Buildings.Types.Interfaces;
@@ -5,33 +6,48 @@ using UnityEngine;
 
 namespace Biosearcher.Buildings
 {
-    public class GreenHouse : MonoBehaviour, IResourceReceiver<Electricity>, IResourceReceiver<Water>
+    public sealed class GreenHouse : Building, IResourceReceiver<Electricity>, IResourceReceiver<Water>
     {
         #region Properties
 
-        [SerializeField] private BuildingsSettings buildingsSettings;
+        [SerializeField] private BuildingsSettings _buildingsSettings;
 
-        private Electricity maxPossibleReceivedElectricity;
-        private Electricity currentPossibleReceivedElectricity;
-        private Water maxPossibleReceivedWater;
-        private Water currentPossibleReceivedWater;
+        private Electricity _maxPossibleReceivedElectricity;
+        private Electricity _currentPossibleReceivedElectricity;
+        private Water _maxPossibleReceivedWater;
+        private Water _currentPossibleReceivedWater;
 
-        Electricity IResourceReceiver<Electricity>.MaxPossibleReceived => maxPossibleReceivedElectricity;
-        Electricity IResourceReceiver<Electricity>.CurrentPossibleReceived => currentPossibleReceivedElectricity;
-        Water IResourceReceiver<Water>.MaxPossibleReceived => maxPossibleReceivedWater;
-        Water IResourceReceiver<Water>.CurrentPossibleReceived => currentPossibleReceivedWater;
+        private Network<Electricity> _electricityNetwork;
+        private Network<Water> _waterNetwork;
+
+        Electricity IResourceReceiver<Electricity>.MaxPossibleReceived => _maxPossibleReceivedElectricity;
+        Electricity IResourceReceiver<Electricity>.CurrentPossibleReceived => _currentPossibleReceivedElectricity;
+        Water IResourceReceiver<Water>.MaxPossibleReceived => _maxPossibleReceivedWater;
+        Water IResourceReceiver<Water>.CurrentPossibleReceived => _currentPossibleReceivedWater;
+
+        Network<Electricity> IResourceMover<Electricity>.Network
+        {
+            get => _electricityNetwork;
+            set => _electricityNetwork = value;
+        }
+        Network<Water> IResourceMover<Water>.Network
+        {
+            get => _waterNetwork;
+            set => _waterNetwork = value;
+        }
 
         #endregion
 
         #region Behaviour methods
-        
-        private void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
             LoadProperties();
-            
+
             //TODO: logic
-            currentPossibleReceivedElectricity = maxPossibleReceivedElectricity;
-            currentPossibleReceivedWater = maxPossibleReceivedWater;
+            _currentPossibleReceivedElectricity = _maxPossibleReceivedElectricity;
+            _currentPossibleReceivedWater = _maxPossibleReceivedWater;
         }
 
         #endregion
@@ -40,15 +56,17 @@ namespace Biosearcher.Buildings
 
         private void LoadProperties()
         {
-            var greenHouseSettings = buildingsSettings.GreenHouseSettings;
+            _electricityNetwork = new Network<Electricity>(this);
+            _waterNetwork = new Network<Water>(this);
 
-            maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
-            maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
+            var greenHouseSettings = _buildingsSettings.GreenHouseSettings;
+
+            _maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
+            _maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
         }
 
         public void Receive(Electricity resource)
         {
-            Debug.Log($"Received {resource.Value} energy");
             //TODO: logic
             return;
         }
@@ -57,6 +75,17 @@ namespace Biosearcher.Buildings
         {
             //TODO: logic
             return;
+        }
+
+        protected override void TryConnect()
+        {
+            TryConnect<Electricity>(this);
+            TryConnect<Water>(this);
+        }
+        protected override void TryDisconnect()
+        {
+            TryDisconnect<Electricity>(this);
+            TryDisconnect<Water>(this);
         }
 
         #endregion
