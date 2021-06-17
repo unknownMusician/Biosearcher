@@ -18,7 +18,6 @@ namespace Biosearcher.Plants
         private bool _isGrowing;
 
         public PlantSettings PlantSettings => _plantSettings;
-
         public Slot Slot
         {
             set
@@ -35,7 +34,55 @@ namespace Biosearcher.Plants
 
         public void Initialize(PlantSettings plantSettings)
         {
-            this._plantSettings = plantSettings;
+            _plantSettings = plantSettings;
+        }
+
+        private bool CheckGrowthConditions(float humidity, float illumination, float temperature)
+        {
+            var humidityCondition = _plantSettings.humidityRange.Contains(humidity);
+            var illuminationCondition = _plantSettings.illuminationRange.Contains(illumination);
+            var temperatureCondition = _plantSettings.temperatureRange.Contains(temperature);
+            
+            // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
+            
+            return humidityCondition && illuminationCondition && temperatureCondition;
+        }
+        
+        private void Grow()
+        {
+            _growthProgress += GrowthTicksPerSecond / _plantSettings.timeToGrow;
+        }
+        private void Corrupt()
+        {
+            _corruptionProgress += GrowthTicksPerSecond / _plantSettings.timeToCorrupt;
+        }
+        
+        private void Tick()
+        {
+            if (_growthProgress >= 1 || _corruptionProgress >= 1)
+            {
+                EndGrowth();
+                return;
+            }
+
+            if (CheckGrowthConditions(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
+            {
+                Grow();
+            }
+            else
+            {
+                Corrupt();
+            }
+        }
+        
+        private IEnumerator GrowthCycle()
+        {
+            var tickDelay = new WaitForSeconds(1 / GrowthTicksPerSecond);
+            while (_isGrowing)
+            {
+                Tick();
+                yield return tickDelay;
+            }
         }
 
         private void StartGrowth()
@@ -47,48 +94,7 @@ namespace Biosearcher.Plants
         {
             _isGrowing = false;
         }
-
-        private bool CheckGrowthConditions(float humidity, float illumination, float temperature)
-        {
-            var humidityCondition = _plantSettings.humidityRange.Contains(humidity);
-            var illuminationCondition = _plantSettings.illuminationRange.Contains(illumination);
-            var temperatureCondition = _plantSettings.temperatureRange.Contains(temperature);
-            
-            Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
-            
-            return humidityCondition && illuminationCondition && temperatureCondition;
-        }
-        private void GrowthTick()
-        {
-            if (_growthProgress >= 1)
-            {
-                EndGrowth();
-                return;
-            }
-            if (_corruptionProgress >= 1)
-            {
-                EndGrowth();
-                return;
-            }
-            
-            if (CheckGrowthConditions(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
-            {
-                _growthProgress += GrowthTicksPerSecond / _plantSettings.timeToGrow;
-            }
-            else
-            {
-                _corruptionProgress += GrowthTicksPerSecond / _plantSettings.timeToCorrupt;
-            }
-        }
-        private IEnumerator GrowthCycle()
-        {
-            while (_isGrowing)
-            {
-                GrowthTick();
-                yield return new WaitForSeconds(1 / GrowthTicksPerSecond);
-            }
-        }
-
+        
         #endregion
     }
 }

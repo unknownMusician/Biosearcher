@@ -2,7 +2,7 @@
 
 namespace Biosearcher.Weather
 {
-    public class WeatherRegulator<TParameter>
+    public class WeatherRegulator
     {
         #region Properties
 
@@ -28,9 +28,11 @@ namespace Biosearcher.Weather
             _preparedness = 0;
             _currentValue = outsideValue;
         }
-        
+
         public void Regulate(float outsideValue, float goalValue, float efficiency)
         {
+            if (!_control) return;
+
             if (Mathf.Approximately(efficiency, 1))
             {
                 _preparedness += _percentagePerSecond;
@@ -39,12 +41,9 @@ namespace Biosearcher.Weather
             {
                 _preparedness -= _percentagePerSecond * (1 - efficiency);
             }
+
             _preparedness = Mathf.Clamp01(_preparedness);
-            
-            if (_control)
-            {
-                _currentValue = Mathf.Lerp(outsideValue, goalValue, _preparedness);
-            }
+            _currentValue = Mathf.Lerp(outsideValue, goalValue, _preparedness);
         }
 
         #endregion
