@@ -10,10 +10,10 @@ protected float _variable;
 var a = "Hello, motherfucker!";
 var a = new ArrayList();
 ```
-### 3. Если внутренности блока `if` занимают больше двух строк, его необходимо инвертировать.
+### 3. Если внутренности блока `if` занимают больше двух строк и если есть возможность инвертировать его, то необходимо сделать это.
 *Неправильно:*
 ```cs
-private void Method()
+void Method(object coolObject, object normalObject, object sadObject)
 {
     if (condition)
     {
@@ -25,7 +25,7 @@ private void Method()
 ```
 *Правильно:*
 ```cs
-private void Method()
+void Method(object coolObject, object normalObject, object sadObject)
 {
     if (!condition)
     {
@@ -38,7 +38,7 @@ private void Method()
 }
 ```
 ```cs
-private void Method()
+void Method(object coolObject, object normalObject)
 {
     if (condition)
     {
@@ -47,10 +47,10 @@ private void Method()
     }
 }
 ```
-### 4. Необходимо оставлять пустую строку в конце скрипта.
+### 4. Необходимо оставлять пустую строку в конце каждого скрипта.
 ### 5. При хэширование наследников `YieldInstruction` (`WaitForSeconds`, `WaitForFixedUpdate` и так далее) название переменной должно соответствовать названию класса.
 ```cs
-protected IEnumerator Moving()
+IEnumerator Moving()
 {
     var waitForFixedUpdate = new WaitForFixedUpdate();
     while (true)
@@ -60,17 +60,17 @@ protected IEnumerator Moving()
     }
 }
 ```
-### 6. Если внутри оператора `if-else` одна строка кода, то её нужно записать с новой строки в фигурных скобках, а не в одной строке с `if-else`.
+## 6. Если внутри оператора `if-else` одна строка кода, то её нужно записать с новой строки в фигурных скобках, а не в одной строке с `if-else`.
 *Неправильно:*
 ```cs
-private void Method()
+void Method()
 {
     if (condition) coolObject.Method();
 }
 ```
 *Правильно:*
 ```cs
-private void Method()
+void Method()
 {
     if (condition)
     {
