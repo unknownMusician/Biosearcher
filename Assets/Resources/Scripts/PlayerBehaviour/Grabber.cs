@@ -7,6 +7,8 @@ namespace Biosearcher.PlayerBehaviour
 {
     public class Grabber : MonoBehaviour
     {
+        #region Properties
+
         [SerializeField] protected LayerMask _grabbableMask;
         [SerializeField] protected float _maxRaycastDistance;
         [SerializeField] protected float _maxInteractDistance;
@@ -19,8 +21,16 @@ namespace Biosearcher.PlayerBehaviour
         protected IGrabbable _grabbed;
         protected GrabberInput _input;
 
+        #endregion
+
+        #region MonoBehaviour methods
+
         protected void Awake() => _input = new GrabberInput(new Presenter(this));
         protected void OnDestroy() => _input.Dispose();
+
+        #endregion
+
+        #region Methods
 
         protected void TryGrab(Vector2 mouseScreenPosition)
         {
@@ -32,7 +42,6 @@ namespace Biosearcher.PlayerBehaviour
                 StartCoroutine(Carrying());
             }
         }
-
         protected void TryDrop()
         {
             if (_grabbed != default)
@@ -51,15 +60,16 @@ namespace Biosearcher.PlayerBehaviour
                 Ray checkRay = _camera.ScreenPointToRay(_input.MousePosition);
 
                 Vector3 carryPosition;
-                if (TryGetClosestHit(checkRay, out RaycastHit hit, ((MonoBehaviour)_grabbed).gameObject))
+                if (TryGetClosestHit(checkRay, out RaycastHit hit, ((MonoBehaviour) _grabbed).gameObject))
                 {
-                    if (Vector3.Distance(hit.point, _player.position) <= _maxInteractDistance)
+                    Vector3 playerPosition = _player.position;
+                    if (Vector3.Distance(hit.point, playerPosition) <= _maxInteractDistance)
                     {
                         carryPosition = hit.point;
                     }
                     else
                     {
-                        carryPosition = (hit.point - _player.position).normalized * _maxInteractDistance + _player.position;
+                        carryPosition = (hit.point - _player.position).normalized * _maxInteractDistance + playerPosition;
                     }
                 }
                 else
@@ -67,7 +77,7 @@ namespace Biosearcher.PlayerBehaviour
                     carryPosition = checkRay.direction * _maxInteractDistanceCamera + _camera.transform.position;
                 }
 
-                ((MonoBehaviour)_grabbed).transform.position = carryPosition;
+                ((MonoBehaviour) _grabbed).transform.position = carryPosition;
 
                 yield return waitForFixedUpdate;
             }
@@ -77,23 +87,31 @@ namespace Biosearcher.PlayerBehaviour
         {
             RaycastHit[] hits = Physics.RaycastAll(checkRay, _maxRaycastDistance, _grabbableMask)
                 .Where(hit => hit.collider.gameObject != noRaycast).ToArray();
+            
             if (hits.Length == 0)
             {
                 hit = default;
                 return false;
             }
+
             hit = hits.OrderBy(hit => Vector3.SqrMagnitude(hit.point - _camera.transform.position)).First();
             return true;
         }
 
+        #endregion
+
+        #region Classes
+
         public class Presenter
         {
-            protected Grabber _grabber;
+            protected readonly Grabber _grabber;
 
             public Presenter(Grabber grabber) => _grabber = grabber;
 
             public void Grab(Vector2 mouseScreenPosition) => _grabber.TryGrab(mouseScreenPosition);
             public void Drop() => _grabber.TryDrop();
         }
+
+        #endregion
     }
 }

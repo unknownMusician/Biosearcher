@@ -1,6 +1,5 @@
 using Biosearcher.InputHandling;
 using Biosearcher.Planet.Orientation;
-using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,91 +8,92 @@ namespace Biosearcher.PlayerBehaviour
 {
     public class Player : MonoBehaviour
     {
+        #region Properties
+
         [Header("Moving - Tangent")]
-        [SerializeField] protected float tangentAcceleration = 100;
-        [SerializeField] protected float maxSpeed = 20;
-        [SerializeField] protected float tangentDamp = 10;
+        [SerializeField] protected float _tangentAcceleration = 100;
+        [SerializeField] protected float _maxSpeed = 20;
+        [SerializeField] protected float _tangentDamp = 10;
         [Header("Moving - Normal")]
-        [SerializeField] protected float normalAcceleration = 20;
-        [SerializeField] protected float maxRotationSpeed = 10;
-        [SerializeField] protected float normalDamp = 10;
+        [SerializeField] protected float _normalAcceleration = 20;
+        [SerializeField] protected float _maxRotationSpeed = 10;
+        [SerializeField] protected float _normalDamp = 10;
         [Header("Stabilizer")]
-        [SerializeField] protected LayerMask groundMask;
-        [SerializeField] protected float groundCheckHeight = 1.5f;
-        [SerializeField] protected float groundDesiredHeight = 1.5f;
-        [SerializeField] protected float springTangentAcceleration = 100;
-        [SerializeField] protected float springTangentDamp = 10;
-        [SerializeField] protected float springNormalAcceleration = 100;
-        [SerializeField] protected float springNormalDamp = 10;
+        [SerializeField] protected LayerMask _groundMask;
+        [SerializeField] protected float _groundCheckHeight = 1.5f;
+        [SerializeField] protected float _groundDesiredHeight = 1.5f;
+        [SerializeField] protected float _springTangentAcceleration = 100;
+        [SerializeField] protected float _springTangentDamp = 10;
+        [SerializeField] protected float _springNormalAcceleration = 100;
+        [SerializeField] protected float _springNormalDamp = 10;
         [Header("Other")]
-        [SerializeField] protected new PlayerCamera camera;
+        [SerializeField] protected PlayerCamera _camera;
 
-        protected PlayerInput input;
-        protected new Rigidbody rigidbody;
-        protected State state;
-        protected PlanetTransform planetTransform;
+        protected PlayerInput _input;
+        protected Rigidbody _rigidbody;
+        protected State _state;
+        protected PlanetTransform _planetTransform;
 
-        protected Vector3? lastFramePositionRelativeToDesiredPosition;
-        protected Vector3 tangentVelocityRelativeToDesiredPosition;
+        protected Vector3? _lastFramePositionRelativeToDesiredPosition;
+        protected Vector3 _tangentVelocityRelativeToDesiredPosition;
 
-        protected Vector3? desiredPosition;
+        protected Vector3? _desiredPosition;
+        
+        protected Quaternion? _lastFrameRotationRelativeToDesiredRotation;
+        protected Quaternion _normalVelocityRelativeToDesiredRotation;
 
+        protected Quaternion? _desiredRotation;
 
-        protected Quaternion? lastFrameRotationRelativeToDesiredRotation;
-        protected Quaternion normalVelocityRelativeToDesiredRotation;
+        #endregion
 
-        protected Quaternion? desiredRotation;
+        #region MonoBehaviour methods
 
         protected void Awake()
         {
-            state = new State(this);
-            rigidbody = GetComponent<Rigidbody>();
-            planetTransform = GetComponent<PlanetTransform>();
-            input = new PlayerInput(new Presenter(this));
+            _state = new State(this);
+            _rigidbody = GetComponent<Rigidbody>();
+            _planetTransform = GetComponent<PlanetTransform>();
+            _input = new PlayerInput(new Presenter(this));
         }
-        protected void OnDestroy() => input.Dispose();
+        protected void OnDestroy() => _input.Dispose();
 
-        protected void OnEnable() => input.OnEnable();
-        protected void OnDisable() => input.OnDisable();
+        protected void OnEnable() => _input.OnEnable();
+        protected void OnDisable() => _input.OnDisable();
 
         protected void Start() => StartCoroutine(Moving());
-
-        protected float TangentAcceleration { get; set; }
-        protected float NormalAcceleration { get; set; }
-
+        
         protected void FixedUpdate()
         {
             Vector3 planetPosition = Vector3.zero;
             // todo
             Color debugColor;
-            Vector3 planetCenterlocalPosition = planetPosition - transform.position;
-            if (Physics.Raycast(transform.position, planetCenterlocalPosition, out RaycastHit hitInfo, groundCheckHeight, groundMask))
+            Vector3 planetCenterLocalPosition = planetPosition - transform.position;
+            if (Physics.Raycast(transform.position, planetCenterLocalPosition, out RaycastHit hitInfo, _groundCheckHeight, _groundMask))
             {
-                desiredPosition = hitInfo.point - planetCenterlocalPosition.normalized * groundDesiredHeight;
+                _desiredPosition = hitInfo.point - planetCenterLocalPosition.normalized * _groundDesiredHeight;
 
-                Vector3 positionRelativeToDesiredPosition = transform.position - (Vector3)desiredPosition;
-                if (lastFramePositionRelativeToDesiredPosition != null)
+                Vector3 positionRelativeToDesiredPosition = transform.position - (Vector3)_desiredPosition;
+                if (_lastFramePositionRelativeToDesiredPosition != null)
                 {
-                    tangentVelocityRelativeToDesiredPosition = ((Vector3)lastFramePositionRelativeToDesiredPosition - positionRelativeToDesiredPosition) / Time.deltaTime;
+                    _tangentVelocityRelativeToDesiredPosition = ((Vector3)_lastFramePositionRelativeToDesiredPosition - positionRelativeToDesiredPosition) / Time.deltaTime;
                 }
                 else
                 {
-                    tangentVelocityRelativeToDesiredPosition = Vector3.zero;
+                    _tangentVelocityRelativeToDesiredPosition = Vector3.zero;
                 }
-                lastFramePositionRelativeToDesiredPosition = positionRelativeToDesiredPosition;
+                _lastFramePositionRelativeToDesiredPosition = positionRelativeToDesiredPosition;
 
-                Vector3 tangentDistance = -planetCenterlocalPosition.normalized * groundDesiredHeight - (transform.position - hitInfo.point);
-                Vector3 tangentAcceleration = tangentDistance.normalized * springTangentAcceleration * (tangentDistance.magnitude * tangentDistance.magnitude);
-                Vector3 tangentDamping = -rigidbody.velocity.normalized * tangentVelocityRelativeToDesiredPosition.magnitude * springTangentDamp;
-                rigidbody.velocity += (tangentAcceleration + tangentDamping) * Time.deltaTime;
-
-
+                Vector3 tangentDistance = -planetCenterLocalPosition.normalized * _groundDesiredHeight - (transform.position - hitInfo.point);
+                Vector3 tangentAcceleration = tangentDistance.normalized * _springTangentAcceleration * (tangentDistance.magnitude * tangentDistance.magnitude);
+                Vector3 tangentDamping = -_rigidbody.velocity.normalized * _tangentVelocityRelativeToDesiredPosition.magnitude * _springTangentDamp;
+                _rigidbody.velocity += (tangentAcceleration + tangentDamping) * Time.deltaTime;
+                
                 Quaternion rotation = transform.rotation;
-                rotation = planetTransform.ToPlanet(rotation);
+                rotation = _planetTransform.ToPlanet(rotation);
                 rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
-                desiredRotation = planetTransform.ToUniverse(rotation);
+                _desiredRotation = _planetTransform.ToUniverse(rotation);
 
-                transform.rotation = (Quaternion)desiredRotation;
+                transform.rotation = (Quaternion)_desiredRotation;
 
                 //Quaternion rotationRelativeToDesiredRotation = Quaternion.Inverse((Quaternion)desiredRotation) * transform.rotation;
                 //if (lastFrameRotationRelativeToDesiredRotation != null)
@@ -106,46 +106,56 @@ namespace Biosearcher.PlayerBehaviour
                 //}
                 //lastFrameRotationRelativeToDesiredRotation = rotationRelativeToDesiredRotation;
 
-
                 //Vector3 normalDistance = (Quaternion.Inverse(transform.rotation) * (Quaternion)desiredRotation).eulerAngles;
                 //Vector3 normalAcceleration = normalDistance.normalized * springNormalAcceleration * (normalDistance.magnitude * normalDistance.magnitude);
                 //Vector3 normalDamping = -rigidbody.angularVelocity.normalized * normalVelocityRelativeToDesiredRotation.eulerAngles.magnitude * springNormalDamp;
                 //rigidbody.angularVelocity += (normalAcceleration + normalDamping) * Time.deltaTime;
-
-
-                state.currentMove = state.MoveOnGround;
+                
+                _state.CurrentMove = _state.MoveOnGround;
                 debugColor = Color.green;
             }
             else
             {
-                desiredPosition = null;
-                desiredRotation = null;
-                state.currentMove = state.MoveInAir;
+                _desiredPosition = null;
+                _desiredRotation = null;
+                _state.CurrentMove = _state.MoveInAir;
                 debugColor = Color.red;
             }
-            Debug.DrawLine(transform.position, transform.position + planetCenterlocalPosition.normalized * groundCheckHeight, debugColor, 0.02f);
+            Debug.DrawLine(transform.position, transform.position + planetCenterLocalPosition.normalized * _groundCheckHeight, debugColor, 0.02f);
         }
-
-        protected IEnumerator Moving()
-        {
-            // todo
-            while (true)
-            {
-                yield return new WaitForFixedUpdate();
-                state.Move();
-            }
-        }
-
+        
         protected void OnDrawGizmos()
         {
-            if (desiredPosition != null)
+            if (_desiredPosition != null)
             {
                 Gizmos.color = Color.green;
-                Gizmos.DrawSphere((Vector3)desiredPosition, 0.1f);
+                Gizmos.DrawSphere((Vector3)_desiredPosition, 0.1f);
             }
             Gizmos.color = Color.magenta;
             Gizmos.DrawSphere(transform.position + (transform.forward + transform.up) / 2, 0.1f);
         }
+
+        #endregion
+        
+        #region Methods
+
+        protected float TangentAcceleration { get; set; }
+        protected float NormalAcceleration { get; set; }
+        
+        protected IEnumerator Moving()
+        {
+            var waitForFixedUpdate = new WaitForFixedUpdate();
+            // todo
+            while (true)
+            {
+                yield return waitForFixedUpdate;
+                _state.Move();
+            }
+        }
+
+        #endregion
+
+        #region Classes
 
         public class Presenter
         {
@@ -162,43 +172,67 @@ namespace Biosearcher.PlayerBehaviour
             }
         }
 
-        public class State
+        protected class State
         {
-            public UnityAction currentMove;
+            #region Properties 
+            
+            private UnityAction _currentMove;
+            protected readonly Player _player;
 
-            protected Player player;
+            public UnityAction CurrentMove
+            {
+                set => _currentMove = value;
+            }
+
+            #endregion
+
+            #region Constructors
 
             public State(Player player, UnityAction moveState)
             {
-                this.player = player;
-                this.currentMove = moveState;
+                _player = player;
+                _currentMove = moveState;
             }
             public State(Player player)
             {
                 // todo
-                this.player = player;
-                this.currentMove = MoveOnGround;
+                _player = player;
+                _currentMove = MoveOnGround;
             }
+
+            #endregion
+
+            #region Methods
+
             public void MoveInAir() { }
             public void MoveOnGround()
             {
+                var playerRigidbody = _player._rigidbody;
+                
                 //player.transform.rotation = player.camera.RotationWithoutX;
-                if (player.rigidbody.velocity.magnitude < player.maxSpeed)
+                if (playerRigidbody.velocity.magnitude < _player._maxSpeed)
                 {
-                    Vector3 acceleration = player.TangentAcceleration * player.tangentAcceleration * player.transform.forward;
-                    player.rigidbody.velocity += acceleration * Time.deltaTime;
+                    Vector3 acceleration = _player.TangentAcceleration * _player._tangentAcceleration * _player.transform.forward;
+                    playerRigidbody.velocity += acceleration * Time.deltaTime;
                 }
-                Vector3 tangentDamping = -player.rigidbody.velocity * player.tangentDamp;
-                player.rigidbody.velocity += tangentDamping * Time.deltaTime;
-                if (player.rigidbody.angularVelocity.magnitude < player.maxRotationSpeed)
+                
+                Vector3 tangentDamping = -playerRigidbody.velocity * _player._tangentDamp;
+                playerRigidbody.velocity += tangentDamping * Time.deltaTime;
+                
+                if (playerRigidbody.angularVelocity.magnitude < _player._maxRotationSpeed)
                 {
-                    Vector3 acceleration = player.planetTransform.ToUniverse(player.NormalAcceleration * player.normalAcceleration * Vector3.up);
-                    player.rigidbody.angularVelocity += acceleration * Time.deltaTime;
+                    Vector3 acceleration = _player._planetTransform.ToUniverse(_player.NormalAcceleration * _player._normalAcceleration * Vector3.up);
+                    playerRigidbody.angularVelocity += acceleration * Time.deltaTime;
                 }
-                Vector3 normalDamping = -player.rigidbody.angularVelocity * player.tangentDamp;
-                player.rigidbody.angularVelocity += normalDamping * Time.deltaTime;
+                
+                Vector3 normalDamping = -playerRigidbody.angularVelocity * _player._tangentDamp;
+                playerRigidbody.angularVelocity += normalDamping * Time.deltaTime;
             }
-            public void Move() => currentMove?.Invoke();
+            public void Move() => _currentMove?.Invoke();
+
+            #endregion
         }
+
+        #endregion
     }
 }

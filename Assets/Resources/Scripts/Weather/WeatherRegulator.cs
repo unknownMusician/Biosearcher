@@ -31,7 +31,10 @@ namespace Biosearcher.Weather
 
         public void Regulate(float outsideValue, float goalValue, float efficiency)
         {
-            if (!_control) return;
+            if (!_control)
+            {
+                return;
+            }
 
             if (Mathf.Approximately(efficiency, 1))
             {

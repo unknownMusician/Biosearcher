@@ -7,11 +7,11 @@ namespace Biosearcher.Tools
     {
         #region Properties
 
-        [SerializeField] float radius;
-        [SerializeField] protected new Transform camera;
-        [SerializeField] protected LayerMask terraformable;
-        [SerializeField] protected float maxTerraformDistance;
-        [SerializeField] protected GameObject terraformSpherePrefab;
+        [SerializeField] protected float _radius;
+        [SerializeField] protected Transform _camera;
+        [SerializeField] protected LayerMask _terraformable;
+        [SerializeField] protected float _maxTerraformDistance;
+        [SerializeField] protected GameObject _terraformSpherePrefab;
 
         protected TerraformerInput _input;
         protected GameObject _terraformSphere;
@@ -40,8 +40,8 @@ namespace Biosearcher.Tools
         protected void Awake()
         {
             _input = new TerraformerInput(new Presenter(this));
-            _terraformSphere = Instantiate(terraformSpherePrefab);
-            _terraformSphere.transform.localScale = Vector3.one * radius * 2;
+            _terraformSphere = Instantiate(_terraformSpherePrefab);
+            _terraformSphere.transform.localScale = Vector3.one * _radius * 2;
         }
         protected void OnDestroy() => _input.Dispose();
 
@@ -50,9 +50,9 @@ namespace Biosearcher.Tools
 
         protected void Update()
         {
-
-            Ray lookRay = new Ray(camera.position, camera.forward);
-            RaycastHit[] hits = Physics.RaycastAll(lookRay, maxTerraformDistance, terraformable);
+            var lookRay = new Ray(_camera.position, _camera.forward);
+            var hits = new RaycastHit[1];
+            Physics.RaycastNonAlloc(lookRay, hits, _maxTerraformDistance, _terraformable);
 
             if (hits.Length == 0)
             {
@@ -63,7 +63,9 @@ namespace Biosearcher.Tools
         }
         
         #endregion
-        
+
+        #region Methods
+
         protected void Add()
         {
             if (TerraformPoint == null) return;
@@ -72,6 +74,10 @@ namespace Biosearcher.Tools
             //landManager.TerraformAdd((Vector3)TerraformPoint, radius);
         }
 
+        #endregion
+
+        #region Classes
+
         public class Presenter
         {
             public Terraformer Terraformer { get; }
@@ -79,5 +85,7 @@ namespace Biosearcher.Tools
             public Presenter(Terraformer player) => Terraformer = player;
             public void Add() => Terraformer.Add();
         }
+
+        #endregion
     }
 }
