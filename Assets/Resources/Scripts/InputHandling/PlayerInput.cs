@@ -1,17 +1,16 @@
 using Biosearcher.PlayerBehaviour;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Biosearcher.InputHandling
 {
     public class PlayerInput : System.IDisposable
     {
-        protected Player.Presenter playerPresenter;
+        protected Player.Presenter _playerPresenter;
 
         public PlayerInput(Player.Presenter playerPresenter)
         {
-            this.playerPresenter = playerPresenter;
+            _playerPresenter = playerPresenter;
             SetInput(CustomInput.controls);
         }
         public void Dispose() => UnsetInput(CustomInput.controls);
@@ -36,24 +35,24 @@ namespace Biosearcher.InputHandling
             controls.Player.NormalAccelerationStop.performed -= HandleNormalAccelerationStop;
         }
 
-        protected void HandleTangentAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStart(InputAction.CallbackContext ctx)
         {
-            playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+            _playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
         }
 
-        protected void HandleTangentAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleTangentAccelerationStop(InputAction.CallbackContext ctx)
         {
-            playerPresenter.TangentAcceleration = 0;
+            _playerPresenter.TangentAcceleration = 0;
         }
 
-        protected void HandleNormalAccelerationStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleNormalAccelerationStart(InputAction.CallbackContext ctx)
         {
-            playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+            _playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
         }
 
-        protected void HandleNormalAccelerationStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleNormalAccelerationStop(InputAction.CallbackContext ctx)
         {
-            playerPresenter.NormalAcceleration = 0;
+            _playerPresenter.NormalAcceleration = 0;
         }
     }
 }
