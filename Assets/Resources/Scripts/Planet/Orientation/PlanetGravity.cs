@@ -6,13 +6,13 @@ namespace Biosearcher.Planet.Orientation
     [RequireComponent(typeof(PlanetTransform))]
     public class PlanetGravity : MonoBehaviour
     {
-        protected new Rigidbody rigidbody;
-        protected PlanetTransform planetTransform;
+        protected Rigidbody _rigidbody;
+        protected PlanetTransform _planetTransform;
 
         protected void Awake()
         {
-            rigidbody = GetComponent<Rigidbody>();
-            planetTransform = GetComponent<PlanetTransform>();
+            _rigidbody = GetComponent<Rigidbody>();
+            _planetTransform = GetComponent<PlanetTransform>();
         }
 
         protected void FixedUpdate()
@@ -20,7 +20,7 @@ namespace Biosearcher.Planet.Orientation
             Vector3 planetPosition = Vector3.zero;
             float planetGravityScale = 9.8f;
             Vector3 gravityDirection = (planetPosition - transform.position).normalized;
-            rigidbody.AddForce(gravityDirection * planetGravityScale * rigidbody.mass);
+            _rigidbody.AddForce(gravityDirection * planetGravityScale * _rigidbody.mass);
         }
     }
 }

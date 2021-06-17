@@ -9,7 +9,7 @@ namespace Biosearcher.Common
     {
         private static CommonMonoBehaviourComponent instance;
         private static CommonMonoBehaviourComponent Instance 
-            => instance ??= new GameObject("Common MonoBehaviour").AddComponent<CommonMonoBehaviourComponent>();
+            => instance ??= new GameObject(typeof(CommonMonoBehaviour).ToString()).AddComponent<CommonMonoBehaviourComponent>();
 
         public static event UnityAction OnDrawGizmos
         {

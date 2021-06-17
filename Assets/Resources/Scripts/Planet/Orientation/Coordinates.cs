@@ -42,7 +42,7 @@ namespace Biosearcher.Planet.Orientation
         {
             return height == other.height && latitude == other.latitude && longitude == other.longitude;
         }
-
+        public override bool Equals(object obj) => base.Equals(obj);
         public override int GetHashCode()
         {
             int hashCode = -1567576899;
@@ -52,14 +52,6 @@ namespace Biosearcher.Planet.Orientation
             return hashCode;
         }
 
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override string ToString()
-        {
-            return $"Coordinates{{r={height}, θ={latitude}, φ={longitude}}}";
-        }
+        public override string ToString() => $"Coordinates{{r={height}, θ={latitude}, φ={longitude}}}";
     }
 }

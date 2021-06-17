@@ -7,9 +7,10 @@ namespace Biosearcher.Plants
     {
         #region Properties
 
+        // todo
         private const float GrowthTicksPerSecond = 1;
         
-        private PlantSettings _plantSettings;
+        private PlantSettings _settings;
         private Slot _slot;
         
         private float _growthProgress;
@@ -17,7 +18,7 @@ namespace Biosearcher.Plants
 
         private bool _isGrowing;
 
-        public PlantSettings PlantSettings => _plantSettings;
+        public PlantSettings Settings => _settings;
         public Slot Slot
         {
             set
@@ -34,14 +35,14 @@ namespace Biosearcher.Plants
 
         public void Initialize(PlantSettings plantSettings)
         {
-            _plantSettings = plantSettings;
+            _settings = plantSettings;
         }
 
         private bool CheckGrowthConditions(float humidity, float illumination, float temperature)
         {
-            var humidityCondition = _plantSettings.humidityRange.Contains(humidity);
-            var illuminationCondition = _plantSettings.illuminationRange.Contains(illumination);
-            var temperatureCondition = _plantSettings.temperatureRange.Contains(temperature);
+            var humidityCondition = _settings.humidityRange.Contains(humidity);
+            var illuminationCondition = _settings.illuminationRange.Contains(illumination);
+            var temperatureCondition = _settings.temperatureRange.Contains(temperature);
             
             // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
             
@@ -50,11 +51,11 @@ namespace Biosearcher.Plants
         
         private void Grow()
         {
-            _growthProgress += GrowthTicksPerSecond / _plantSettings.timeToGrow;
+            _growthProgress += GrowthTicksPerSecond / _settings.timeToGrow;
         }
         private void Corrupt()
         {
-            _corruptionProgress += GrowthTicksPerSecond / _plantSettings.timeToCorrupt;
+            _corruptionProgress += GrowthTicksPerSecond / _settings.timeToCorrupt;
         }
         
         private void Tick()
@@ -77,11 +78,11 @@ namespace Biosearcher.Plants
         
         private IEnumerator GrowthCycle()
         {
-            var tickDelay = new WaitForSeconds(1 / GrowthTicksPerSecond);
+            var waitForSeconds = new WaitForSeconds(1 / GrowthTicksPerSecond);
             while (_isGrowing)
             {
                 Tick();
-                yield return tickDelay;
+                yield return waitForSeconds;
             }
         }
 

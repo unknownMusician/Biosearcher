@@ -5,9 +5,13 @@ namespace Biosearcher.Planet.Orientation
     [ExecuteAlways]
     public class PlanetTransform : MonoBehaviour
     {
-        [SerializeField] protected Coordinates coordinates;
+        [SerializeField] protected Coordinates _coordinates;
+
+        // todo
         protected readonly Vector3 planetPosition = Vector3.zero;
+        // todo
         protected readonly Vector3 planetRotationAxis = Vector3.up;
+
         protected Vector3 PositionRelativeToPlanet => transform.position - planetPosition;
         public Quaternion UniverseToPlanetRotation => Quaternion.FromToRotation(PositionRelativeToPlanet, planetRotationAxis);
         public Quaternion PlanetToUniverseRotation => Quaternion.FromToRotation(planetRotationAxis, PositionRelativeToPlanet);
@@ -30,19 +34,15 @@ namespace Biosearcher.Planet.Orientation
 
         // todo: Add planetEulerAngles
 
-        protected void Update() => coordinates = Coordinates;
+        protected void Update() => _coordinates = Coordinates;
+        protected void OnValidate() => Coordinates = _coordinates;
 
-        protected void OnValidate()
-        {
-            Coordinates = coordinates;
-        }
-
-        protected float ToHeight(Vector3 positionRelativeToPlanet)
+        private static float ToHeight(Vector3 positionRelativeToPlanet)
         {
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Sqrt(p.x * p.x + p.z * p.z + p.y * p.y);
         }
-        protected float ToLatitude(Vector3 positionRelativeToPlanet)
+        private static float ToLatitude(Vector3 positionRelativeToPlanet)
         {
             if (positionRelativeToPlanet == Vector3.zero)
             {
@@ -51,18 +51,18 @@ namespace Biosearcher.Planet.Orientation
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Asin(p.y / Mathf.Sqrt(p.x * p.x + p.y * p.y + p.z * p.z)) * Mathf.Rad2Deg;
         }
-        protected float ToLongitude(Vector3 positionRelativeToPlanet)
+        private static float ToLongitude(Vector3 positionRelativeToPlanet)
         {
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Atan2(p.z, p.x) * Mathf.Rad2Deg;
         }
 
-        public Coordinates ToCoordinates(Vector3 positionRelativeToPlanet)
+        public static Coordinates ToCoordinates(Vector3 positionRelativeToPlanet)
         {
             return new Coordinates(ToHeight(positionRelativeToPlanet), ToLatitude(positionRelativeToPlanet), ToLongitude(positionRelativeToPlanet));
         }
 
-        public Vector3 ToPositionRelativeToPlanet(Coordinates coordinates)
+        public static Vector3 ToPositionRelativeToPlanet(Coordinates coordinates)
         {
             float x = coordinates.height * Mathf.Cos(coordinates.latitude * Mathf.Deg2Rad) * Mathf.Cos(coordinates.longitude * Mathf.Deg2Rad);
             float z = coordinates.height * Mathf.Cos(coordinates.latitude * Mathf.Deg2Rad) * Mathf.Sin(coordinates.longitude * Mathf.Deg2Rad);

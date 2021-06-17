@@ -5,16 +5,16 @@ namespace Biosearcher.Plants
     [System.Serializable]
     public struct Range
     {
-        [SerializeField] private float leftBorder;
-        [SerializeField] private float rightBorder;
+        [SerializeField] private float min;
+        [SerializeField] private float max;
 
-        public float LeftBorder => leftBorder;
-        public float RightBorder => rightBorder;
-        public float Average => (LeftBorder + RightBorder) / 2;
+        public float Min => min;
+        public float Max => max;
+        public float Average => (Min + Max) / 2;
 
         public bool Contains(float value)
         {
-            return leftBorder <= value && value <= rightBorder;
+            return min <= value && value <= max;
         }
     }
 }
