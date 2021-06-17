@@ -345,6 +345,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""InteractionStateChange"",
+                    ""type"": ""Button"",
+                    ""id"": ""004f7f26-3d23-4920-a5f3-b1857e153013"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -389,6 +397,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""MoveStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b40ad086-2346-4ddd-8eaf-a8bfcd035ed2"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InteractionStateChange"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -521,6 +540,52 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Grabber"",
+            ""id"": ""6dcb8437-3419-4b91-a046-d7d90ff92c0f"",
+            ""actions"": [
+                {
+                    ""name"": ""Drop"",
+                    ""type"": ""Button"",
+                    ""id"": ""e52e1742-99e5-411d-98ba-78f4b440f8cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Grab"",
+                    ""type"": ""Button"",
+                    ""id"": ""a11032e3-80f3-495f-99bf-1b683347cae5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""8acc2125-d32f-4064-b105-8d95409fcc05"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grab"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d8eb4733-e82d-4864-9e13-9b5604db94bd"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -564,12 +629,17 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Camera_Move = m_Camera.FindAction("Move", throwIfNotFound: true);
         m_Camera_MoveStart = m_Camera.FindAction("MoveStart", throwIfNotFound: true);
         m_Camera_MoveStop = m_Camera.FindAction("MoveStop", throwIfNotFound: true);
+        m_Camera_InteractionStateChange = m_Camera.FindAction("InteractionStateChange", throwIfNotFound: true);
         // Terraformer
         m_Terraformer = asset.FindActionMap("Terraformer", throwIfNotFound: true);
         m_Terraformer_AddStart = m_Terraformer.FindAction("AddStart", throwIfNotFound: true);
         m_Terraformer_AddStop = m_Terraformer.FindAction("AddStop", throwIfNotFound: true);
         m_Terraformer_RemoveStart = m_Terraformer.FindAction("RemoveStart", throwIfNotFound: true);
         m_Terraformer_RemoveStop = m_Terraformer.FindAction("RemoveStop", throwIfNotFound: true);
+        // Grabber
+        m_Grabber = asset.FindActionMap("Grabber", throwIfNotFound: true);
+        m_Grabber_Drop = m_Grabber.FindAction("Drop", throwIfNotFound: true);
+        m_Grabber_Grab = m_Grabber.FindAction("Grab", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -679,6 +749,7 @@ public class @Controls : IInputActionCollection, IDisposable
     private readonly InputAction m_Camera_Move;
     private readonly InputAction m_Camera_MoveStart;
     private readonly InputAction m_Camera_MoveStop;
+    private readonly InputAction m_Camera_InteractionStateChange;
     public struct CameraActions
     {
         private @Controls m_Wrapper;
@@ -686,6 +757,7 @@ public class @Controls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Camera_Move;
         public InputAction @MoveStart => m_Wrapper.m_Camera_MoveStart;
         public InputAction @MoveStop => m_Wrapper.m_Camera_MoveStop;
+        public InputAction @InteractionStateChange => m_Wrapper.m_Camera_InteractionStateChange;
         public InputActionMap Get() { return m_Wrapper.m_Camera; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -704,6 +776,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveStop.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveStop;
                 @MoveStop.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveStop;
                 @MoveStop.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnMoveStop;
+                @InteractionStateChange.started -= m_Wrapper.m_CameraActionsCallbackInterface.OnInteractionStateChange;
+                @InteractionStateChange.performed -= m_Wrapper.m_CameraActionsCallbackInterface.OnInteractionStateChange;
+                @InteractionStateChange.canceled -= m_Wrapper.m_CameraActionsCallbackInterface.OnInteractionStateChange;
             }
             m_Wrapper.m_CameraActionsCallbackInterface = instance;
             if (instance != null)
@@ -717,6 +792,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @MoveStop.started += instance.OnMoveStop;
                 @MoveStop.performed += instance.OnMoveStop;
                 @MoveStop.canceled += instance.OnMoveStop;
+                @InteractionStateChange.started += instance.OnInteractionStateChange;
+                @InteractionStateChange.performed += instance.OnInteractionStateChange;
+                @InteractionStateChange.canceled += instance.OnInteractionStateChange;
             }
         }
     }
@@ -778,6 +856,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public TerraformerActions @Terraformer => new TerraformerActions(this);
+
+    // Grabber
+    private readonly InputActionMap m_Grabber;
+    private IGrabberActions m_GrabberActionsCallbackInterface;
+    private readonly InputAction m_Grabber_Drop;
+    private readonly InputAction m_Grabber_Grab;
+    public struct GrabberActions
+    {
+        private @Controls m_Wrapper;
+        public GrabberActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Drop => m_Wrapper.m_Grabber_Drop;
+        public InputAction @Grab => m_Wrapper.m_Grabber_Grab;
+        public InputActionMap Get() { return m_Wrapper.m_Grabber; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GrabberActions set) { return set.Get(); }
+        public void SetCallbacks(IGrabberActions instance)
+        {
+            if (m_Wrapper.m_GrabberActionsCallbackInterface != null)
+            {
+                @Drop.started -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
+                @Grab.started -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
+                @Grab.performed -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
+                @Grab.canceled -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
+            }
+            m_Wrapper.m_GrabberActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Drop.started += instance.OnDrop;
+                @Drop.performed += instance.OnDrop;
+                @Drop.canceled += instance.OnDrop;
+                @Grab.started += instance.OnGrab;
+                @Grab.performed += instance.OnGrab;
+                @Grab.canceled += instance.OnGrab;
+            }
+        }
+    }
+    public GrabberActions @Grabber => new GrabberActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -808,6 +927,7 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnMoveStart(InputAction.CallbackContext context);
         void OnMoveStop(InputAction.CallbackContext context);
+        void OnInteractionStateChange(InputAction.CallbackContext context);
     }
     public interface ITerraformerActions
     {
@@ -815,5 +935,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnAddStop(InputAction.CallbackContext context);
         void OnRemoveStart(InputAction.CallbackContext context);
         void OnRemoveStop(InputAction.CallbackContext context);
+    }
+    public interface IGrabberActions
+    {
+        void OnDrop(InputAction.CallbackContext context);
+        void OnGrab(InputAction.CallbackContext context);
     }
 }

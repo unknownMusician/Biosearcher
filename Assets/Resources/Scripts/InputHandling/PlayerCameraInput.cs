@@ -1,20 +1,24 @@
 ﻿using Biosearcher.PlayerBehaviour;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Biosearcher.InputHandling
 {
     public class PlayerCameraInput : System.IDisposable
     {
-        protected PlayerCamera.Presenter cameraPresenter;
-        protected bool isMoving;
+        protected PlayerCamera.Presenter _cameraPresenter;
+        protected bool _isMoving;
 
-        protected const float mouseSpeed = 0.1f;
-        protected const float gamepadSpeed = 1.5f;
+        // todo
+        protected const float MouseSpeed = 0.1f;
+        protected const float GamepadSpeed = 1.5f;
+
+        protected bool isInteracting;
 
         public PlayerCameraInput(PlayerCamera.Presenter cameraPresenter)
         {
-            this.cameraPresenter = cameraPresenter;
+            _cameraPresenter = cameraPresenter;
             SetInput(CustomInput.controls);
         }
         public void Dispose() => UnsetInput(CustomInput.controls);
@@ -27,36 +31,50 @@ namespace Biosearcher.InputHandling
             controls.Camera.Move.performed += HandleCameraMove;
             controls.Camera.MoveStart.performed += HandleCameraMoveStart;
             controls.Camera.MoveStop.performed += HandleCameraMoveStop;
+            controls.Camera.InteractionStateChange.performed += HandleInteractionStateChange;
         }
         protected void UnsetInput(Controls controls)
         {
             controls.Camera.Move.performed -= HandleCameraMove;
             controls.Camera.MoveStart.performed -= HandleCameraMoveStart;
             controls.Camera.MoveStop.performed -= HandleCameraMoveStop;
+            controls.Camera.InteractionStateChange.performed -= HandleInteractionStateChange;
         }
 
-        protected void HandleCameraMove(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleCameraMove(InputAction.CallbackContext ctx)
         {
-            cameraPresenter.Rotate(ctx.ReadValue<Vector2>() * mouseSpeed);
+            if (!isInteracting)
+            {
+                _cameraPresenter.Rotate(ctx.ReadValue<Vector2>() * MouseSpeed);
+            }
         }
 
-        protected void HandleCameraMoveStart(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleCameraMoveStart(InputAction.CallbackContext ctx)
         {
-            isMoving = true;
-            cameraPresenter.Camera.StartCoroutine(Move(ctx));
+            if (!isInteracting)
+            {
+                _isMoving = true;
+                _cameraPresenter.Camera.StartCoroutine(Move(ctx));
+            }
         }
 
-        protected void HandleCameraMoveStop(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleCameraMoveStop(InputAction.CallbackContext ctx)
         {
-            isMoving = false;
+            _isMoving = false;
         }
 
-        protected IEnumerator Move(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+        protected void HandleInteractionStateChange(InputAction.CallbackContext ctx)
+        {
+            isInteracting = !isInteracting;
+            _isMoving = false;
+        }
+
+        protected IEnumerator Move(InputAction.CallbackContext ctx)
         {
             yield return new WaitForFixedUpdate();
-            while (isMoving)
+            while (_isMoving)
             {
-                cameraPresenter.Rotate(ctx.ReadValue<Vector2>() * gamepadSpeed);
+                _cameraPresenter.Rotate(ctx.ReadValue<Vector2>() * GamepadSpeed);
                 yield return new WaitForFixedUpdate();
             }
         }

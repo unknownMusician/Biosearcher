@@ -6,12 +6,13 @@ namespace Biosearcher.Buildings.Settings
     [CreateAssetMenu(fileName = "Buildings Settings", menuName = "Buildings Settings", order = 52)]
     public class BuildingsSettings : ScriptableObject
     {
+        // todo
         // public static readonly string filePath = "/sdfsdf/sdfsdg/sdfsad/fsad/fa/dg";
 
-        [SerializeField] private CoalGeneratorSettings coalGeneratorSettings;
-        [SerializeField] private GreenHouseSettings greenHouseSettings;
+        [SerializeField] private InfiniteEnergyGeneratorSettings _infiniteEnergyGeneratorSettings;
+        [SerializeField] private GreenHouseSettings _greenHouseSettings;
         
-        public CoalGeneratorSettings CoalGeneratorSettings => coalGeneratorSettings;
-        public GreenHouseSettings GreenHouseSettings => greenHouseSettings;
+        public InfiniteEnergyGeneratorSettings InfiniteEnergyGeneratorSettings => _infiniteEnergyGeneratorSettings;
+        public GreenHouseSettings GreenHouseSettings => _greenHouseSettings;
     }
 }
