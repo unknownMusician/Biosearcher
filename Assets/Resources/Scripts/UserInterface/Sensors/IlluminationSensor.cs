@@ -1,9 +1,10 @@
-﻿using UnityEngine;
-
-namespace Biosearcher.UserInterface.Sensors
+﻿namespace Biosearcher.UserInterface.Sensors
 {
-    public class IlluminationSensor : MonoBehaviour
+    public class IlluminationSensor : Sensor
     {
-        
+        public override void UpdateData()
+        {
+            text.text = $"{weatherController.GetIllumination(player.position)}";
+        }
     }
 }
