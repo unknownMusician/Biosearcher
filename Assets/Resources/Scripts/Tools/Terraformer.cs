@@ -5,16 +5,19 @@ namespace Biosearcher.Tools
 {
     public class Terraformer : MonoBehaviour
     {
+        #region Properties
+
         [SerializeField] float radius;
         [SerializeField] protected new Transform camera;
         [SerializeField] protected LayerMask terraformable;
         [SerializeField] protected float maxTerraformDistance;
         [SerializeField] protected GameObject terraformSpherePrefab;
 
-        protected TerraformerInput input;
-        protected GameObject terraformSphere;
+        protected TerraformerInput _input;
+        protected GameObject _terraformSphere;
 
         protected Vector3? _terraformPoint;
+        
         protected Vector3? TerraformPoint
         {
             get => _terraformPoint;
@@ -25,21 +28,25 @@ namespace Biosearcher.Tools
                     return;
                 }
                 _terraformPoint = value;
-                terraformSphere.SetActive(_terraformPoint != null);
-                terraformSphere.transform.position = _terraformPoint ?? default;
+                _terraformSphere.SetActive(_terraformPoint != null);
+                _terraformSphere.transform.position = _terraformPoint ?? default;
             }
         }
 
+        #endregion
+
+        #region MonoBehaviour methods
+
         protected void Awake()
         {
-            input = new TerraformerInput(new Presenter(this));
-            terraformSphere = Instantiate(terraformSpherePrefab);
-            terraformSphere.transform.localScale = Vector3.one * radius * 2;
+            _input = new TerraformerInput(new Presenter(this));
+            _terraformSphere = Instantiate(terraformSpherePrefab);
+            _terraformSphere.transform.localScale = Vector3.one * radius * 2;
         }
-        protected void OnDestroy() => input.Dispose();
+        protected void OnDestroy() => _input.Dispose();
 
-        protected void OnEnable() => input.OnEnable();
-        protected void OnDisable() => input.OnDisable();
+        protected void OnEnable() => _input.OnEnable();
+        protected void OnDisable() => _input.OnDisable();
 
         protected void Update()
         {
@@ -54,13 +61,13 @@ namespace Biosearcher.Tools
             }
             TerraformPoint = hits[0].point;
         }
-
+        
+        #endregion
+        
         protected void Add()
         {
-            if (TerraformPoint == null)
-            {
-                return;
-            }
+            if (TerraformPoint == null) return;
+            
             // todo
             //landManager.TerraformAdd((Vector3)TerraformPoint, radius);
         }
