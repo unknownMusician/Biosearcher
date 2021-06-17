@@ -63,19 +63,13 @@ IEnumerator Moving()
 ## 6. Если внутри оператора `if-else` одна строка кода, то её необходимо записать с новой строки в фигурных скобках, а не в одной строке с `if-else`.
 *Неправильно:*
 ```cs
-void Method()
-{
-    if (condition) coolObject.Method();
-}
+if (condition) coolObject.Method();
 ```
 *Правильно:*
 ```cs
-void Method()
+if (condition)
 {
-    if (condition)
-    {
-        coolObject.Method();
-    }
+    coolObject.Method();
 }
 ```
 ## 7. В конце каждого скрипта должна быть пустая строка.
