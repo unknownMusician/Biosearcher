@@ -1,7 +1,7 @@
 namespace Biosearcher.Buildings.Resources.Interfaces
 {
-    public interface IAddable<TResource>
+    public interface IAddable<T>
     {
-        public TResource Add(TResource a);
+        public T Add(T a);
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Biosearcher.Buildings.Resources.Interfaces
 {
-    public interface IMultipliable<TResource>
+    public interface IMultipliable<T>
     {
-        public TResource Multiply(TResource a);
+        public T Multiply(T a);
     }
 }

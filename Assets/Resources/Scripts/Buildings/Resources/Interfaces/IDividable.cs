@@ -1,7 +1,7 @@
 ﻿namespace Biosearcher.Buildings.Resources.Interfaces
 {
-    public interface IDividable<TResource>
+    public interface IDividable<T>
     {
-        public float Divide(TResource a);
+        public float Divide(T a);
     }
 }

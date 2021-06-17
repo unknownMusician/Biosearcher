@@ -22,8 +22,8 @@ namespace Biosearcher.Common
             remove => Instance._onGizmosSelected -= value;
         }
 
-        public static void StartCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
-        public static void StartCoroutine<T>(this T _, IEnumerator coroutine) => StartCoroutine(coroutine);
+        public static Coroutine StartCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
+        public static Coroutine StartCoroutine<T>(this T _, IEnumerator coroutine) => StartCoroutine(coroutine);
 
         public sealed class CommonMonoBehaviourComponent : MonoBehaviour
         {

@@ -12,13 +12,8 @@ namespace Biosearcher.Buildings.Resources
     {
         #region Properties
 
-        // todo
-        public const float MaxConnectRadius = 5;
-
         private bool _isCycleActive = true;
-
-        // todo
-        private const float CyclesPerSecond = 2;
+        private float _cyclesPerSecond;
 
         private List<IResourceProducer<TResource>> _producers = new List<IResourceProducer<TResource>>();
         private List<IResourceReceiver<TResource>> _receivers = new List<IResourceReceiver<TResource>>();
@@ -27,10 +22,11 @@ namespace Biosearcher.Buildings.Resources
 
         #endregion
 
-        public Network(IResourceMover<TResource> resourceMover, float cyclesPerSecond = CyclesPerSecond)
+        public Network(IResourceMover<TResource> resourceMover, float cyclesPerSecond)
         {
             Connection = new Connections(this, resourceMover);
-            this.StartCoroutine(NetworkCycle(cyclesPerSecond));
+            _cyclesPerSecond = cyclesPerSecond;
+            this.StartCoroutine(NetworkCycle(_cyclesPerSecond));
         }
 
         #region Methods
@@ -157,7 +153,7 @@ namespace Biosearcher.Buildings.Resources
                         continue;
                     }
 
-                    new Network<TResource>(potentialNetwork.First().Mover);
+                    new Network<TResource>(potentialNetwork.First().Mover, _network._cyclesPerSecond);
                 }
                 _network.Dispose();
             }

@@ -1,8 +1,8 @@
 ﻿namespace Biosearcher.Buildings.Resources.Interfaces
 {
-    public interface IResource<TResource> : IAddable<TResource>, ISubtractable<TResource>, 
-        IMultipliable<TResource>, IDividable<TResource>,
-        System.IComparable<TResource>
+    public interface IResource<T> : System.IComparable<T>,
+        IAddable<T>, ISubtractable<T>,
+        IMultipliable<T>, IDividable<T>
     {
         float Value { get; set; }
     }

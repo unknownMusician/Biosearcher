@@ -11,8 +11,6 @@ namespace Biosearcher.Buildings.Generators
     {
         #region Properties
 
-        [SerializeField] protected BuildingsSettings _buildingsSettings;
-
         protected Network<Electricity> _electricityNetwork;
 
         public Electricity MaxPossibleProduced { get; protected set; }
@@ -25,23 +23,16 @@ namespace Biosearcher.Buildings.Generators
         }
 
         #endregion
-        #region Behaviour methods
-
-        protected override void Awake()
-        {
-            base.Awake();
-            LoadProperties();
-        }
-
-        #endregion
 
         #region Methods
 
-        protected void LoadProperties()
+        protected override void LoadBuildingParameters(BuildingsSettings buildingsSettings)
         {
-            _electricityNetwork = new Network<Electricity>(this);
+            base.LoadBuildingParameters(buildingsSettings);
 
-            MaxPossibleProduced = _buildingsSettings.InfiniteEnergyGeneratorSettings.MaxPossibleEnergyProduced;
+            MaxPossibleProduced = buildingsSettings.InfiniteEnergyGeneratorSettings.MaxPossibleEnergyProduced;
+
+            _electricityNetwork = new Network<Electricity>(this);
         }
 
         public Electricity Produce() => CurrentPossibleProduced;

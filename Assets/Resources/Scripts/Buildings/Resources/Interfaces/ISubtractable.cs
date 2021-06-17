@@ -1,7 +1,7 @@
 namespace Biosearcher.Buildings.Resources.Interfaces
 {
-    public interface ISubtractable<TResource>
+    public interface ISubtractable<T>
     {
-        public TResource Subtract(TResource a);
+        public T Subtract(T a);
     }
 }

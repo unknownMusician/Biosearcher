@@ -10,8 +10,6 @@ namespace Biosearcher.Buildings
     {
         #region Properties
 
-        [SerializeField] private BuildingsSettings _buildingsSettings;
-
         private Electricity _maxPossibleReceivedElectricity;
         private Electricity _currentPossibleReceivedElectricity;
         private Water _maxPossibleReceivedWater;
@@ -38,31 +36,19 @@ namespace Biosearcher.Buildings
 
         #endregion
 
-        #region Behaviour methods
-
-        protected override void Awake()
-        {
-            base.Awake();
-            LoadProperties();
-
-            //TODO: logic
-            _currentPossibleReceivedElectricity = _maxPossibleReceivedElectricity;
-            _currentPossibleReceivedWater = _maxPossibleReceivedWater;
-        }
-
-        #endregion
-
         #region Methods
 
-        private void LoadProperties()
+        protected override void LoadBuildingParameters(BuildingsSettings buildingsSettings)
         {
+            base.LoadBuildingParameters(buildingsSettings);
+
+            var greenHouseSettings = buildingsSettings.GreenHouseSettings;
+
+            _currentPossibleReceivedElectricity = _maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
+            _currentPossibleReceivedWater = _maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
+
             _electricityNetwork = new Network<Electricity>(this);
             _waterNetwork = new Network<Water>(this);
-
-            var greenHouseSettings = _buildingsSettings.GreenHouseSettings;
-
-            _maxPossibleReceivedElectricity = greenHouseSettings.MaxPossibleReceivedElectricity;
-            _maxPossibleReceivedWater = greenHouseSettings.MaxPossibleReceivedWater;
         }
 
         public void Receive(Electricity resource)
