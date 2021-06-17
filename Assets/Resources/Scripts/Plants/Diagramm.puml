@@ -30,12 +30,16 @@ class Plant
     
     void Initialize()
     
+    bool CheckGrowthConditions()
+    
+    void Grow()
+    void Corrupt()
+    
+    void Tick()
+    IEnumerator GrowCycle()
+
     void StartGrowth()
     void EndGrowth()
-    
-    bool CheckGrowthConditions()
-    void GrowTick()
-    IEnumerator GrowCycle()
 }
 class Range
 {
@@ -62,9 +66,9 @@ class Slot
     WeatherController weatherController
     Plant plant
     
-    WeatherRegulator<Humidity> humidityRegulator
-    WeatherRegulator<Illumination> illuminationRegulator
-    WeatherRegulator<Temperature> temperatureRegulator
+    WeatherRegulator humidityRegulator
+    WeatherRegulator illuminationRegulator
+    WeatherRegulator temperatureRegulator
     
     Electricity NeededElectricity
     Water NeededWater
@@ -93,23 +97,22 @@ class GreenHouse
     void Receive(Electricity resource)
     void Receive(Water resource)
 }
-class WeatherRegulator<TParameter>
+class WeatherRegulator
 {
     float preparedness
     float percentagePerSecond
     bool control
     float currentValue
-    
-    WeatherRegulator()
-    
-    Reset()
-    Regulate()
+        
+    void Reset()
+    void Regulate()
 }
 
+Seed "1" *- "1" Plant : creates
 Seed o-- PlantSettings
 Plant o-- PlantSettings
 PlantSettings o-- Range
-Slot o-o Plant
+Slot o--o Plant
 GreenHouse o-- Slot
 Slot o-- WeatherRegulator
 
