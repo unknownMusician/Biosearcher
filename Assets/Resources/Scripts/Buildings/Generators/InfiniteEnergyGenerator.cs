@@ -32,7 +32,7 @@ namespace Biosearcher.Buildings.Generators
 
             MaxPossibleProduced = buildingsSettings.InfiniteEnergyGeneratorSettings.MaxPossibleEnergyProduced;
 
-            _electricityNetwork = new Network<Electricity>(this);
+            _electricityNetwork = new Network<Electricity>(this, buildingsSettings.NetworkSettings.CyclesPerSecond);
         }
 
         public Electricity Produce() => CurrentPossibleProduced;

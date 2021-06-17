@@ -24,7 +24,7 @@ namespace Biosearcher.HDRP
         // Project dependent way to retrieve a shader.
         Shader GetNewSkyShader()
         {
-            return UnityEngine.Resources.Load<Shader>("Scripts/HDRP/CustomSky");
+            return Resources.Load<Shader>("Scripts/HDRP/CustomSky");
             //return Resources.Load<Shader>("Shaders/CustomSkybox");
         }
 
