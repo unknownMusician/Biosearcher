@@ -13,7 +13,7 @@ var a = new ArrayList();
 ## 3. Если внутренности блока `if` занимают больше двух строк и если есть возможность инвертировать его, то необходимо сделать это.
 *Неправильно:*
 ```cs
-void Method(object coolObject, object normalObject, object sadObject)
+void Method(bool condition, object coolObject, object normalObject, object sadObject)
 {
     if (condition)
     {
@@ -25,7 +25,7 @@ void Method(object coolObject, object normalObject, object sadObject)
 ```
 *Правильно:*
 ```cs
-void Method(object coolObject, object normalObject, object sadObject)
+void Method(bool condition, object coolObject, object normalObject, object sadObject)
 {
     if (!condition)
     {
@@ -38,7 +38,7 @@ void Method(object coolObject, object normalObject, object sadObject)
 }
 ```
 ```cs
-void Method(object coolObject, object normalObject)
+void Method(bool condition, object coolObject, object normalObject)
 {
     if (condition)
     {
@@ -50,13 +50,13 @@ void Method(object coolObject, object normalObject)
 ## 4. Необходимо оставлять пустую строку в конце каждого скрипта.
 ## 5. При хэширование наследников `YieldInstruction` (`WaitForSeconds`, `WaitForFixedUpdate` и так далее) название переменной должно соответствовать названию класса.
 ```cs
-IEnumerator Moving()
+IEnumerator Moving(State state)
 {
     var waitForFixedUpdate = new WaitForFixedUpdate();
     while (true)
     {
         yield return waitForFixedUpdate;
-        _state.Move();
+        state.Move();
     }
 }
 ```
