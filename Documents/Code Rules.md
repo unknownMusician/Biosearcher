@@ -13,7 +13,7 @@ var a = "Hello, motherfucker!";
 var a = new ArrayList();
 ```
 ## 3. Если внутренности блока `if` занимают больше двух строк и если есть возможность инвертировать его, то необходимо сделать это.
-### 3.1 Один уровень вложенности.
+### 3.1 Один уровень вложенности:
 *Неправильно:*
 ```cs
 void Method(bool condition, object coolObject, object normalObject, object sadObject)
@@ -50,7 +50,7 @@ void Method(bool condition, object coolObject, object normalObject)
     }
 }
 ```
-### 3.2 Два и больше уровня вложенности.
+### 3.2 Два и больше уровня вложенности:
 *Неправильно:*
 ```cs
 void Method(bool condition1, bool condition2, bool condition3, object coolObject)
