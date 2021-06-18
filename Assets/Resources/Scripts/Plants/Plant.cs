@@ -38,12 +38,13 @@ namespace Biosearcher.Plants
             _settings = plantSettings;
         }
 
-        private bool CheckGrowthConditions(float humidity, float illumination, float temperature)
+        private bool AreGrowthConditionsAcceptable(float humidity, float illumination, float temperature)
         {
             var humidityCondition = _settings.humidityRange.Contains(humidity);
             var illuminationCondition = _settings.illuminationRange.Contains(illumination);
             var temperatureCondition = _settings.temperatureRange.Contains(temperature);
             
+            // todo
             // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
             
             return humidityCondition && illuminationCondition && temperatureCondition;
@@ -60,13 +61,14 @@ namespace Biosearcher.Plants
         
         private void Tick()
         {
+            // todo: shouldn't it be after growth and corruption?
             if (_growthProgress >= 1 || _corruptionProgress >= 1)
             {
                 EndGrowth();
                 return;
             }
 
-            if (CheckGrowthConditions(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
+            if (AreGrowthConditionsAcceptable(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
             {
                 Grow();
             }
