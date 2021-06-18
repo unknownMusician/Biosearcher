@@ -85,7 +85,7 @@ void AddFace(float3 face[3], uint faceId, uint cubeArrayId)
     {
         int vertexId = faceId * 3 + i;
         int vertexGlobalId = faceGlobalId * 3 + i;
-        _MeshV3T1[uint2(vertexId, cubeArrayId)] = float4(face[i], vertexGlobalId); // todo: warning (if dimensions == 8)
+        _MeshV3T1[vertexId + cubeArrayId * 15] = float4(face[i], vertexGlobalId); // todo: warning (if dimensions == 8)
     }
 }
 
@@ -138,7 +138,7 @@ void PrepareBuffer(uint cubeIndex)
     
     for (int i = 0; i < 15; i++)
     {
-        _MeshV3T1[uint2(i, cubeIndex)] = float4(0, 0, 0, -1);
+        _MeshV3T1[i + cubeIndex * 15] = float4(0, 0, 0, -1);
     }
 }
 

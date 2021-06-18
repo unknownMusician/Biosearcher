@@ -29,7 +29,7 @@ uniform Texture2D<float> _PointsHash2EdgesIndexesT;
 
 
 uniform RWStructuredBuffer<MarchPoint> _Points;
-uniform RWTexture2D<float4> _MeshV3T1;
+uniform RWStructuredBuffer<float4> _MeshV3T1;
 uniform float3 _ChunkPosition;
 uniform float _SurfaceValue;
 uniform int _CubeSize;

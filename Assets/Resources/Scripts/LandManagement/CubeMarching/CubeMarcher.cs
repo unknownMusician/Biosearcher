@@ -16,12 +16,12 @@ namespace Biosearcher.LandManagement.CubeMarching
         protected readonly int _pointsHash2EdgesHashTextureID = Shader.PropertyToID("_PointsHash2EdgesHashT");
         protected readonly int _pointsHash2EdgesIndexesTextureID = Shader.PropertyToID("_PointsHash2EdgesIndexesT");
         protected readonly int _pointsBufferID = Shader.PropertyToID("_Points");
-        protected readonly int _meshV3T1RenderTextureID = Shader.PropertyToID("_MeshV3T1");
+        protected readonly int _meshV3T1BufferID = Shader.PropertyToID("_MeshV3T1");
 
         protected Texture2D _edgeIndex2PointIndexesTexture;
         protected Texture2D _pointsHash2EdgesHashTexture;
         protected Texture2D _pointsHash2EdgesIndexesTexture;
-        protected RenderTexture _meshV3T1RenderTexture;
+        protected ComputeBuffer _meshV3T1Buffer;
         protected ComputeBuffer _pointsBuffer;
 
         protected ComputeShader _shader;
@@ -29,7 +29,7 @@ namespace Biosearcher.LandManagement.CubeMarching
         protected int _cubesPerChunk;
         protected int _pointsPerChunk;
         protected float _surfaceValue;
-        protected Vector2Int _textureSize;
+        protected int _meshBufferSize;
         protected int _generateMeshKernel;
         protected int _generatePointsKernel;
         protected int _threadGroups;
@@ -54,9 +54,7 @@ namespace Biosearcher.LandManagement.CubeMarching
             _shader = settings.Shader;
             _threadGroups = Mathf.CeilToInt(_cubesPerChunk / (float)CubeNumthreads);
             _pointsBufferSize = (_cubesPerChunk + 1) * (_cubesPerChunk + 1) * (_cubesPerChunk + 1);
-            // todo
-            // textureSize = new Vector2Int(15 * cubesChunkSize, cubesChunkSize * cubesChunkSize);
-            _textureSize = new Vector2Int(15, _cubesPerChunk * _cubesPerChunk * _cubesPerChunk);
+            _meshBufferSize = 15 * _cubesPerChunk * _cubesPerChunk * _cubesPerChunk;
 
             _generateMeshKernel = _shader.FindKernel("GenerateMesh");
             _generatePointsKernel = _shader.FindKernel("GeneratePoints");
@@ -368,10 +366,8 @@ namespace Biosearcher.LandManagement.CubeMarching
             _pointsHash2EdgesIndexesTexture.SetPixelData(pointsHash2EdgesIndexes, 0);
             _pointsHash2EdgesIndexesTexture.Apply();
 
-            _meshV3T1RenderTexture = new RenderTexture(_textureSize.x, _textureSize.y, 1, RenderTextureFormat.ARGBFloat);
-            _meshV3T1RenderTexture.enableRandomWrite = true;
-
             _pointsBuffer = new ComputeBuffer(_pointsBufferSize, sizeof(float) * 4);
+            _meshV3T1Buffer = new ComputeBuffer(_meshBufferSize, sizeof(float) * 4);
         }
         protected void InitializeShader()
         {
@@ -387,8 +383,7 @@ namespace Biosearcher.LandManagement.CubeMarching
 
             _shader.SetBuffer(_generatePointsKernel, _pointsBufferID, _pointsBuffer);
             _shader.SetBuffer(_generateMeshKernel, _pointsBufferID, _pointsBuffer);
-
-            _shader.SetTexture(_generateMeshKernel, _meshV3T1RenderTextureID, _meshV3T1RenderTexture);
+            _shader.SetBuffer(_generateMeshKernel, _meshV3T1BufferID, _meshV3T1Buffer);
         }
 
         public void Dispose()
@@ -396,8 +391,8 @@ namespace Biosearcher.LandManagement.CubeMarching
             Object.Destroy(_edgeIndex2PointIndexesTexture);
             Object.Destroy(_pointsHash2EdgesHashTexture);
             Object.Destroy(_pointsHash2EdgesIndexesTexture);
-            Object.Destroy(_meshV3T1RenderTexture);
             _pointsBuffer.Dispose();
+            _meshV3T1Buffer.Dispose();
         }
 
         public Mesh GenerateMesh(Vector3Int chunkPosition, int cubeSize)
@@ -433,19 +428,13 @@ namespace Biosearcher.LandManagement.CubeMarching
         {
             _shader.Dispatch(_generateMeshKernel, _threadGroups, _threadGroups, _threadGroups);
 
-            RenderTexture.active = _meshV3T1RenderTexture;
-            var meshV3T1Texture = new Texture2D(_textureSize.x, _textureSize.y, TextureFormat.RGBAFloat, false);
-            meshV3T1Texture.ReadPixels(new Rect(0, 0, _textureSize.x, _textureSize.y), 0, 0);
-            meshV3T1Texture.Apply();
-            NativeArray<Vector4> nativeMeshV3T1 = meshV3T1Texture.GetPixelData<Vector4>(0);
-            RenderTexture.active = null;
+            Vector4[] meshV3T1 = new Vector4[_meshBufferSize];
+            _meshV3T1Buffer.GetData(meshV3T1);
 
-            Mesh mesh = ToMesh(nativeMeshV3T1);
-            Object.Destroy(meshV3T1Texture);
-            return mesh;
+            return ToMesh(meshV3T1);
         }
 
-        protected Mesh ToMesh(NativeArray<Vector4> meshV3T1)
+        protected Mesh ToMesh(Vector4[] meshV3T1)
         {
             List<Vector3> newVertices = new List<Vector3>();
             List<int> newTriangles = new List<int>();
