@@ -185,6 +185,7 @@ namespace Biosearcher.Buildings.Resources
 
                 HookEntries(newMoverEntry);
             }
+            // todo: unused
             private void RemoveFromNetwork(Entry removedMoverEntry)
             {
                 IResourceMover<TResource> resourceMover = removedMoverEntry.Mover;
