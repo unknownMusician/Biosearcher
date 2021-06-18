@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b5da823633a7fd408de1d1eacc7c2ca, type: 3}
   m_Name: Land Settings
   m_EditorClassIdentifier: 
-  minHierarchySize: 1
-  maxHierarchySize: 6
-  generatingFrequency: 8
-  cubesPerChunk: 8
-  surfaceValue: 0.76
-  geometryType: 1
-  planetShader: {fileID: 7200000, guid: 9f16f4b261d62fe4aa3998145e237e0b, type: 3}
-  flatShader: {fileID: 7200000, guid: 2e24629c70a4b91409db5c26699be3e0, type: 3}
-  preGenerationDuration: 20
-  seed: 6
-  worldType: 0
-  chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}
+  _minHierarchySize: 0
+  _maxHierarchySize: 5
+  _generatingFrequency: 8
+  _cubesPerChunk: 8
+  _surfaceValue: 0.76
+  _geometryType: 1
+  _planetShader: {fileID: 7200000, guid: 9f16f4b261d62fe4aa3998145e237e0b, type: 3}
+  _flatShader: {fileID: 7200000, guid: 2e24629c70a4b91409db5c26699be3e0, type: 3}
+  _preGenerationDuration: 20
+  _seed: 6
+  _worldType: 0
+  _chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}
