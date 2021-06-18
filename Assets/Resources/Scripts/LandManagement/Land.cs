@@ -12,6 +12,7 @@ namespace Biosearcher.LandManagement
 
         protected ChunkTracker chunkTracker;
         protected GeometryManager geometryManager;
+        protected CubeMarcher cubeMarcher;
         protected IChunkHolder chunksHolder;
         protected readonly Vector3Int PlanetPosition = Vector3Int.zero;
 
@@ -19,13 +20,14 @@ namespace Biosearcher.LandManagement
         {
             Chunk.Initialize(landSettings);
             chunkTracker = new ChunkTracker(this, landSettings, trigger, landSettings.PreGenerationDuration);
-            CubeMarcher cubeMarcher = new CubeMarcher(landSettings);
+            cubeMarcher = new CubeMarcher(landSettings);
             geometryManager = new GeometryManager(this, landSettings, cubeMarcher);
         }
 
         protected void OnDestroy()
         {
             geometryManager.Dispose();
+            cubeMarcher.Dispose();
             chunkTracker.Dispose();
         }
 

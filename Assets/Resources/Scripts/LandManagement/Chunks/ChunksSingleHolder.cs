@@ -4,7 +4,7 @@ namespace Biosearcher.LandManagement.Chunks
 {
     public class ChunksSingleHolder : IChunkHolder
     {
-        protected Chunk child;
+        protected Chunk _child;
 
         protected internal bool IsInitialized { get; protected set; } = false;
         protected internal Vector3Int Position { get; protected set; }
@@ -20,22 +20,22 @@ namespace Biosearcher.LandManagement.Chunks
 
         public void StartInitializing()
         {
-            child = new ChunkWithGeometry(Position, Chunk.Settings.MaxHierarchySize, this, ChunkTracker, GeometryManager);
-            child.Initialized += () =>
+            _child = new ChunkWithGeometry(Position, Chunk.Settings.MaxHierarchySize, this, ChunkTracker, GeometryManager);
+            _child.Initialized += () =>
             {
                 IsInitialized = true;
-                child.Instantiate();
+                _child.Instantiate();
             };
-            child.StartInitializing();
+            _child.StartInitializing();
         }
 
-        public void DrawGizmos() => child.DrawGizmos();
+        public void DrawGizmos() => _child.DrawGizmos();
 
         public void ReplaceChild(Chunk currentChunk, Chunk newChunk)
         {
-            if (child == currentChunk)
+            if (_child == currentChunk)
             {
-                child = newChunk;
+                _child = newChunk;
             }
         }
 

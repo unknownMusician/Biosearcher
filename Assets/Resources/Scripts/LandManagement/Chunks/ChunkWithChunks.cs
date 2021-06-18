@@ -5,8 +5,8 @@ namespace Biosearcher.LandManagement.Chunks
 {
     public class ChunkWithChunks : Chunk, IChunkHolder
     {
-        protected Chunk[] children;
-        protected HashSet<ChunkWithGeometry> needToUniteIntoParent;
+        protected Chunk[] _children;
+        protected HashSet<ChunkWithGeometry> _needToUniteIntoParent;
 
         protected internal ChunkWithChunks(Vector3Int position, int hierarchySize, IChunkHolder parent, ChunkTracker chunkTracker, GeometryManager geometryManager)
             : base(position, hierarchySize, parent, chunkTracker, geometryManager) { }
@@ -31,14 +31,14 @@ namespace Biosearcher.LandManagement.Chunks
         public override void StartInitializing()
         {
             int initializedCount = 0;
-            children = new Chunk[8];
-            needToUniteIntoParent = new HashSet<ChunkWithGeometry>();
+            _children = new Chunk[8];
+            _needToUniteIntoParent = new HashSet<ChunkWithGeometry>();
 
             for (int i = 0; i < 8; i++)
             {
                 var child = CreateChunkWithGeometry(i);
 
-                children[i] = child;
+                _children[i] = child;
                 child.Initialized += () =>
                 {
                     if (++initializedCount == 8)
@@ -53,7 +53,7 @@ namespace Biosearcher.LandManagement.Chunks
 
         protected internal override void Instantiate()
         {
-            foreach (Chunk child in children)
+            foreach (Chunk child in _children)
             {
                 child.Instantiate();
             }
@@ -63,7 +63,7 @@ namespace Biosearcher.LandManagement.Chunks
         {
             base.DrawGizmos();
 
-            foreach (Chunk child in children)
+            foreach (Chunk child in _children)
             {
                 child.DrawGizmos();
             }
@@ -71,23 +71,23 @@ namespace Biosearcher.LandManagement.Chunks
 
         public void TryUnite(ChunkWithGeometry child)
         {
-            if (needToUniteIntoParent.Add(child) && needToUniteIntoParent.Count == 8)
+            if (_needToUniteIntoParent.Add(child) && _needToUniteIntoParent.Count == 8)
             {
                 Unite();
             }
         }
-        public void TryUnUnite(ChunkWithGeometry child) => needToUniteIntoParent.Remove(child);
+        public void TryUnUnite(ChunkWithGeometry child) => _needToUniteIntoParent.Remove(child);
 
         protected void Unite()
         {
-            foreach (ChunkWithGeometry chunk in needToUniteIntoParent)
+            foreach (ChunkWithGeometry chunk in _needToUniteIntoParent)
             {
                 chunk.Hide();
             }
             var newChunk = new ChunkWithGeometry(this);
             newChunk.Initialized += () =>
             {
-                foreach (ChunkWithGeometry chunk in needToUniteIntoParent)
+                foreach (ChunkWithGeometry chunk in _needToUniteIntoParent)
                 {
                     chunk.Destroy();
                 }
@@ -102,9 +102,9 @@ namespace Biosearcher.LandManagement.Chunks
         {
             for (int i = 0; i < 8; i++)
             {
-                if (children[i] == currentChunk)
+                if (_children[i] == currentChunk)
                 {
-                    children[i] = newChunk;
+                    _children[i] = newChunk;
                     return;
                 }
             }

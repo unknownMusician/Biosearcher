@@ -33,8 +33,7 @@ namespace Biosearcher.LandManagement
 
         protected Geometry GenerateChunkJob((Vector3Int chunkPosition, int hierarchySize) input)
         {
-            MarchPoint[] points = cubeMarcher.GeneratePoints(input.chunkPosition, 1 << input.hierarchySize);
-            Mesh generatedMesh = cubeMarcher.GenerateMesh(points);
+            Mesh generatedMesh = cubeMarcher.GenerateMesh(input.chunkPosition, 1 << input.hierarchySize);
 
             GameObject chunkPrefab = settings.ChunkPrefab;
             return new Geometry() { chunkObject = chunkPrefab, chunkMesh = generatedMesh };

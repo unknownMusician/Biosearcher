@@ -86,14 +86,14 @@ namespace Biosearcher.LandManagement
 
             foreach (KeyValuePair<Vector3Int, ChunkWithGeometry> chunkPair in ChunkSize2GeometryChunks[chunkSize])
             {
-                if (Chunk.IsChunkWrongSize(chunkPair.Key, chunkPair.Value.HierarchySize, triggerPosition, out Chunk.ChangeType changeType))
+                if (Chunk.IsChunkWrongSize(chunkPair.Key, chunkPair.Value.HierarchySize, triggerPosition, out Chunk.WrongSizeType changeType))
                 {
                     switch (changeType)
                     {
-                        case Chunk.ChangeType.Unite:
+                        case Chunk.WrongSizeType.TooSmall:
                             chunksToUniteIntoParent.Enqueue(chunkPair.Value);
                             break;
-                        case Chunk.ChangeType.Divide:
+                        case Chunk.WrongSizeType.TooLarge:
                             chunksToDivide.Enqueue(chunkPair.Value);
                             break;
                     }

@@ -7,8 +7,8 @@ namespace Biosearcher.LandManagement.Chunks
 {
     public class ChunksEndlessHolder : IChunkHolder
     {
-        Dictionary<Vector3Int, Chunk> children;
-        List<ChunkWithGeometry> needToBeDestroyed;
+        protected Dictionary<Vector3Int, Chunk> _children;
+        protected List<ChunkWithGeometry> needToBeDestroyed;
 
         protected internal Vector3Int Position { get; protected set; }
         protected internal int HierarchySize { get; protected set; }
@@ -25,18 +25,18 @@ namespace Biosearcher.LandManagement.Chunks
 
         public void StartInitializing()
         {
-            children = new Dictionary<Vector3Int, Chunk>();
+            _children = new Dictionary<Vector3Int, Chunk>();
             needToBeDestroyed = new List<ChunkWithGeometry>();
 
             var chunk = new ChunkWithGeometry(Position, HierarchySize, this, ChunkTracker, GeometryManager);
-            children.Add(Position, chunk);
+            _children.Add(Position, chunk);
             chunk.Initialized += chunk.Instantiate;
             chunk.StartInitializing();
         }
 
         public void DrawGizmos()
         {
-            foreach (KeyValuePair<Vector3Int, Chunk> pair in children)
+            foreach (KeyValuePair<Vector3Int, Chunk> pair in _children)
             {
                 pair.Value.DrawGizmos();
             }
@@ -52,8 +52,7 @@ namespace Biosearcher.LandManagement.Chunks
                     destroying.Enqueue(chunk);
                 }
             }
-            int size = destroying.Count;
-            for (int i = 0; i < size; i++)
+            for (int i = 0, size = destroying.Count; i < size; i++)
             {
                 ChunkWithGeometry destroingChunk = destroying.Dequeue();
                 needToBeDestroyed.Remove(destroingChunk);
@@ -75,10 +74,10 @@ namespace Biosearcher.LandManagement.Chunks
                 int z = ((i - y) / 9) % 3 - 1;
 
                 Vector3Int newPosition = chunk.Position + new Vector3Int(x, y, z) * Chunk.HierarchySize2WorldSize(HierarchySize);
-                if (!children.ContainsKey(newPosition))
+                if (!_children.ContainsKey(newPosition))
                 {
                     var newChunk = new ChunkWithGeometry(newPosition, HierarchySize, this, ChunkTracker, GeometryManager);
-                    children.Add(newPosition, newChunk);
+                    _children.Add(newPosition, newChunk);
                     newChunk.Initialized += newChunk.Instantiate;
                     newChunk.StartInitializing();
                 }
@@ -98,12 +97,12 @@ namespace Biosearcher.LandManagement.Chunks
                 int z = ((i - y) / 9) % 3 - 1;
 
                 Vector3Int newPosition = chunk.Position + new Vector3Int(x, y, z) * Chunk.HierarchySize2WorldSize(HierarchySize);
-                if (children.ContainsKey(newPosition) && children[newPosition] is ChunkWithChunks)
+                if(_children.TryGetValue(newPosition, out Chunk neighbourChunk) && neighbourChunk is ChunkWithChunks)
                 {
                     return;
                 }
             }
-            children.Remove(chunk.Position);
+            _children.Remove(chunk.Position);
             chunk.Hide();
             if (!chunk.IsInitialized)
             {
@@ -127,7 +126,7 @@ namespace Biosearcher.LandManagement.Chunks
                 int z = ((i - y) / 9) % 3 - 1;
 
                 Vector3Int newPosition = chunk.Position + new Vector3Int(x, y, z) * Chunk.HierarchySize2WorldSize(HierarchySize);
-                if (children.ContainsKey(newPosition) && children[newPosition] is ChunkWithGeometry geometryChunk)
+                if(_children.TryGetValue(newPosition, out Chunk neighbourChunk) && neighbourChunk is ChunkWithGeometry geometryChunk)
                 {
                     DestroyIfCan(geometryChunk);
                 }
@@ -138,7 +137,7 @@ namespace Biosearcher.LandManagement.Chunks
         public void ReplaceChild(Chunk currentChunk, Chunk newChunk)
         {
             Vector3Int? chunkPosition = null;
-            foreach (KeyValuePair<Vector3Int, Chunk> pair in children)
+            foreach (KeyValuePair<Vector3Int, Chunk> pair in _children)
             {
                 if (pair.Value == currentChunk)
                 {
@@ -148,7 +147,7 @@ namespace Biosearcher.LandManagement.Chunks
             }
             if (chunkPosition != null)
             {
-                children[(Vector3Int)chunkPosition] = newChunk;
+                _children[(Vector3Int)chunkPosition] = newChunk;
 
                 if (newChunk is ChunkWithGeometry geometryChunk)
                 {
