@@ -5,28 +5,38 @@ namespace Biosearcher.LandManagement
 {
     public class TriggerTracker : System.IDisposable
     {
-        protected ChunkTracker chunkTracker;
-        protected Transform trigger;
-        protected bool isAlive = true;
+        #region Properties
+
+        protected readonly ChunkTracker _chunkTracker;
+        protected readonly Transform _trigger;
+        protected bool _isAlive = true;
+
+        #endregion
 
         public TriggerTracker(ChunkTracker chunkTracker, Transform trigger, MonoBehaviour behaviour)
         {
-            this.chunkTracker = chunkTracker;
-            this.trigger = trigger;
+            this._chunkTracker = chunkTracker;
+            this._trigger = trigger;
 
             behaviour.StartCoroutine(Tracking());
         }
 
+        #region Methods
+
         protected IEnumerator Tracking()
         {
-            yield return new WaitForFixedUpdate();
-            while (isAlive)
+            var waitForFixedUpdate = new WaitForFixedUpdate();
+            
+            yield return waitForFixedUpdate;
+            while (_isAlive)
             {
-                chunkTracker.SetTriggerPosition(Vector3Int.RoundToInt(trigger.position));
-                yield return new WaitForFixedUpdate();
+                _chunkTracker.SetTriggerPosition(Vector3Int.RoundToInt(_trigger.position));
+                yield return waitForFixedUpdate;
             }
         }
 
-        public void Dispose() => isAlive = false;
+        public void Dispose() => _isAlive = false;
+
+        #endregion
     }
 }

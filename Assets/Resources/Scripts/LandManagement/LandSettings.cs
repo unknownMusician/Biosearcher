@@ -2,54 +2,68 @@
 
 namespace Biosearcher.LandManagement
 {
+    public enum MarchingGeometryType
+    {
+        Flat, 
+        Planet
+    }
+
+    public enum WorldType
+    {
+        SingleChunk, 
+        Endless
+    }
+    
     [CreateAssetMenu(fileName = "Land Settings", menuName = "Land Settings", order = 52)]
     public class LandSettings : ScriptableObject
     {
-        [Header("Chunk")]
-        [SerializeField] protected int minHierarchySize = 0;
-        [SerializeField] protected int maxHierarchySize = 5;
-        [SerializeField] protected int generatingFrequency = 8;
-        [Header("Marching")]
-        // If changing this, change numthreads in MarchingCubesFlat.compute and MarchingCubesPlanet.compute
-        [Tooltip("If changing this, change numthreads in MarchingCubesFlat.compute and MarchingCubesPlanet.compute")]
-        [SerializeField] protected int cubesPerChunk = 7;
-        [SerializeField] [Range(0, 1)] protected float surfaceValue = 0.76f;
-        [SerializeField] protected MarchingGeometryType geometryType = MarchingGeometryType.Flat;
-        [SerializeField] protected ComputeShader planetShader;
-        [SerializeField] protected ComputeShader flatShader;
-        [Header("Generation")]
-        [SerializeField] protected float preGenerationDuration = 20;
-        [SerializeField] protected float seed = 6;
-        [SerializeField] protected WorldType worldType = WorldType.Endless;
-        [SerializeField] protected GameObject chunkPrefab;
+        #region Properties
 
-        public int MinHierarchySize => minHierarchySize;
-        public int MaxHierarchySize => maxHierarchySize;
-        public int GeneratingFrequency => generatingFrequency;
-        public int CubesPerChunk => cubesPerChunk;
-        public int PointsPerChunk => cubesPerChunk + 1;
-        public float SurfaceValue => surfaceValue;
-        public float PreGenerationDuration => preGenerationDuration;
-        public float Seed => seed;
-        public WorldType WorldType => worldType;
-        public GameObject ChunkPrefab => chunkPrefab;
+        [Header("Chunk")]
+        [SerializeField] protected int _minHierarchySize = 0;
+        [SerializeField] protected int _maxHierarchySize = 5;
+        [SerializeField] protected int _generatingFrequency = 8;
+        [Header("Marching")]
+        [Tooltip("If changing this, change numthreads in MarchingCubesFlat.compute and MarchingCubesPlanet.compute")]
+        [SerializeField] protected int _cubesPerChunk = 7;
+        [SerializeField] [Range(0, 1)] protected float _surfaceValue = 0.76f;
+        [SerializeField] protected MarchingGeometryType _geometryType = MarchingGeometryType.Flat;
+        [SerializeField] protected ComputeShader _planetShader;
+        [SerializeField] protected ComputeShader _flatShader;
+        [Header("Generation")]
+        [SerializeField] protected float _preGenerationDuration = 20;
+        [SerializeField] protected float _seed = 6;
+        [SerializeField] protected WorldType _worldType = WorldType.Endless;
+        [SerializeField] protected GameObject _chunkPrefab;
+
+        public int MinHierarchySize => _minHierarchySize;
+        public int MaxHierarchySize => _maxHierarchySize;
+        public int GeneratingFrequency => _generatingFrequency;
+        
+        public int CubesPerChunk => _cubesPerChunk;
+        public int PointsPerChunk => _cubesPerChunk + 1;
+        public float SurfaceValue => _surfaceValue;
+        
+        public float PreGenerationDuration => _preGenerationDuration;
+        public float Seed => _seed;
+        public WorldType WorldType => _worldType;
+        public GameObject ChunkPrefab => _chunkPrefab;
         public ComputeShader Shader
         {
             get
             {
-                switch (geometryType)
+                switch (_geometryType)
                 {
                     case MarchingGeometryType.Flat:
-                        return flatShader;
+                        return _flatShader;
                     case MarchingGeometryType.Planet:
-                        return planetShader;
+                        return _planetShader;
                     default:
-                        return flatShader;
+                        return _flatShader;
                 }
             }
         }
-    }
 
-    public enum MarchingGeometryType { Flat, Planet }
-    public enum WorldType { SingleChunk, Endless }
+        #endregion
+    }
 }

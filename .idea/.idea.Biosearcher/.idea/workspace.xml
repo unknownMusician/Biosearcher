@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="834304b2-68b3-4141-962c-e760f8d46c9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/GeometryExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/GeometryExtensions.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Grabber.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Grabber.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/IGrabbable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/IGrabbable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/PlayerCamera.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/PlayerCamera.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Tools/Terraformer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Tools/Terraformer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Documents/Code Rules.md" beforeDir="false" afterPath="$PROJECT_DIR$/Documents/Code Rules.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/GeometryManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/GeometryManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/LandSettings.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/LandSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/QueueWorker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/QueueWorker.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/TriggerTracker.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/TriggerTracker.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" afterDir="false" />
@@ -47,10 +43,6 @@
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Generator.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/NetworkContentTest.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Interfaces/IResource.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Structs/Water.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Resources/Structs/Electricity.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/CoalGenerator.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Buildings/Network.cs" />
@@ -95,9 +87,13 @@
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/IGrabbable.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Player.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/PlayerCamera.cs" />
-      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Grabber.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Weather/WeatherRegulator.cs" />
       <option value="$PROJECT_DIR$/Assets/Resources/Scripts/Tools/Terraformer.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/PlayerBehaviour/Grabber.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/GeometryManager.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/QueueWorker.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/LandSettings.cs" />
+      <option value="$PROJECT_DIR$/Assets/Resources/Scripts/LandManagement/TriggerTracker.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tDfD2JfFtzBTNxkOiYoVy0be5o" />
@@ -162,6 +158,7 @@
       <workItem from="1623590644240" duration="10360000" />
       <workItem from="1623677343410" duration="2014000" />
       <workItem from="1623687133564" duration="5879000" />
+      <workItem from="1624031539676" duration="2245000" />
     </task>
     <servers />
   </component>

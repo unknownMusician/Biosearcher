@@ -16,7 +16,7 @@ namespace Biosearcher.LandManagement
             this.settings = settings;
             this.land = land;
             this.cubeMarcher = cubeMarcher;
-            generateWorker = new QueueWorker<(Vector3Int, int), Geometry>(land, GenerateChunkJob, settings.GeneratingFrequency);
+            generateWorker = new QueueWorker<(Vector3Int, int), Geometry>(GenerateChunkJob, settings.GeneratingFrequency);
         }
 
         protected internal void Create(ChunkWithGeometry chunk)
