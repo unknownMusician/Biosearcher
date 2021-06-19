@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using Biosearcher.Common;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Biosearcher.LandManagement
 {
-    // todo: do not do job, when there are no requests
     public class QueueWorker<I, O> : System.IDisposable
     {
         #region Properties
@@ -33,11 +33,6 @@ namespace Biosearcher.LandManagement
         {
             var request = new Request() { input = input, onJobDone = onJobDone };
             _requests.Enqueue(request);
-            if (!_isAlive)
-            {
-                _isAlive = true;
-                this.StartCoroutine(Job());
-            }
         }
         public void TryRemoveRequest(I input)
         {
@@ -56,21 +51,20 @@ namespace Biosearcher.LandManagement
                 {
                     if (_requests.Count <= 0)
                     {
-                        _isAlive = false;
                         break;
                     }
-                    
+
                     Request request = _requests.Dequeue();
                     if (request.isCanceled)
                     {
                         i--;
                         continue;
                     }
-                    
+
                     O output = _job.Invoke(request.input);
                     request.onJobDone?.Invoke(output);
                 }
-                
+
                 yield return null;
             }
         }

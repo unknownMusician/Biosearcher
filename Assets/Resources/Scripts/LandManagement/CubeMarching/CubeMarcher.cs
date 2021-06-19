@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Profiling;
 
 namespace Biosearcher.LandManagement.CubeMarching
 {
@@ -23,6 +24,7 @@ namespace Biosearcher.LandManagement.CubeMarching
         protected Texture2D _pointsHash2EdgesIndexesTexture;
         protected ComputeBuffer _meshV3T1Buffer;
         protected ComputeBuffer _pointsBuffer;
+        protected Vector4[] _meshV3T1Values;
 
         protected ComputeShader _shader;
         protected float _seed;
@@ -368,6 +370,8 @@ namespace Biosearcher.LandManagement.CubeMarching
 
             _pointsBuffer = new ComputeBuffer(_pointsBufferSize, sizeof(float) * 4);
             _meshV3T1Buffer = new ComputeBuffer(_meshBufferSize, sizeof(float) * 4);
+
+            _meshV3T1Values = new Vector4[_meshBufferSize];
         }
         protected void InitializeShader()
         {
@@ -397,8 +401,15 @@ namespace Biosearcher.LandManagement.CubeMarching
 
         public Mesh GenerateMesh(Vector3Int chunkPosition, int cubeSize)
         {
+            Profiler.BeginSample("CubeMarcher.GenerateMesh");
+            Profiler.BeginSample("CubeMarcher.DispatchPointsKernel");
             DispatchPointsKernel(chunkPosition, cubeSize);
-            return DispatchCubesKernel();
+            Profiler.EndSample();
+            Profiler.BeginSample("CubeMarcher.DispatchCubesKernel");
+            Mesh mesh = DispatchCubesKernel();
+            Profiler.EndSample();
+            Profiler.EndSample();
+            return mesh;
         }
 
         public MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)
@@ -428,45 +439,55 @@ namespace Biosearcher.LandManagement.CubeMarching
         {
             _shader.Dispatch(_generateMeshKernel, _threadGroups, _threadGroups, _threadGroups);
 
-            Vector4[] meshV3T1 = new Vector4[_meshBufferSize];
-            _meshV3T1Buffer.GetData(meshV3T1);
+            Profiler.BeginSample("CubeMarcher.ReadMeshBuffer");
+            _meshV3T1Buffer.GetData(_meshV3T1Values);
+            Profiler.EndSample();
 
-            return ToMesh(meshV3T1);
+            Profiler.BeginSample("CubeMarcher.ToMesh");
+            Mesh mesh = ToMesh(_meshV3T1Values);
+            Profiler.EndSample();
+            return mesh;
         }
 
         protected Mesh ToMesh(Vector4[] meshV3T1)
         {
             List<Vector3> newVertices = new List<Vector3>();
             List<int> newTriangles = new List<int>();
-            int vertexCounter = 0;
-            for (int i = 0; i < meshV3T1.Length / 3; i++)
+            int i, j;
+            int counter = 0;
+            Vector4 facePart;
+            Vector3[] faceVertices = new Vector3[3];
+            int[] faceTriangles = new int[3];
+            for (i = 0; i < meshV3T1.Length; i += 3)
             {
-                bool faceExist = true;
-                for (int j = 0; j < 3; j++)
+                for (j = 0; j < 3; j++)
                 {
-                    if (meshV3T1[i * 3 + j].w == -1)
+                    facePart = meshV3T1[i + j];
+                    if (facePart.w == -1)
                     {
-                        faceExist = false;
+                        break;
                     }
+                    faceVertices[j] = facePart;
+                    faceTriangles[j] = counter + j;
                 }
-                if (!faceExist)
+                if (j < 3)
                 {
                     continue;
                 }
-                for (int j = 0; j < 3; j++)
-                {
-                    Color newVertex = meshV3T1[i * 3 + j];
-                    newVertices.Add(new Vector3(newVertex.r, newVertex.g, newVertex.b));
-                    newTriangles.Add(vertexCounter);
-                    vertexCounter++;
-                }
+                Profiler.BeginSample("CubeMarcher.AddToList");
+                newVertices.AddRange(faceVertices);
+                newTriangles.AddRange(faceTriangles);
+                Profiler.EndSample();
+                counter += 3;
             }
 
+            Profiler.BeginSample("CubeMarcher.MeshInstantiatingAndAssigning");
             var mesh = new Mesh();
             mesh.Clear();
             mesh.vertices = newVertices.ToArray();
             mesh.triangles = newTriangles.ToArray();
             mesh.RecalculateNormals();
+            Profiler.EndSample();
             return mesh;
         }
     }

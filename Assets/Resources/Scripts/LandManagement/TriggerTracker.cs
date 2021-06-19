@@ -1,3 +1,4 @@
+using Biosearcher.Common;
 using System.Collections;
 using UnityEngine;
 
@@ -13,12 +14,12 @@ namespace Biosearcher.LandManagement
 
         #endregion
 
-        public TriggerTracker(ChunkTracker chunkTracker, Transform trigger, MonoBehaviour behaviour)
+        public TriggerTracker(ChunkTracker chunkTracker, Transform trigger)
         {
-            this._chunkTracker = chunkTracker;
-            this._trigger = trigger;
+            _chunkTracker = chunkTracker;
+            _trigger = trigger;
 
-            behaviour.StartCoroutine(Tracking());
+            CommonMonoBehaviour.StartCoroutine(Tracking());
         }
 
         #region Methods
@@ -26,7 +27,7 @@ namespace Biosearcher.LandManagement
         protected IEnumerator Tracking()
         {
             var waitForFixedUpdate = new WaitForFixedUpdate();
-            
+
             yield return waitForFixedUpdate;
             while (_isAlive)
             {

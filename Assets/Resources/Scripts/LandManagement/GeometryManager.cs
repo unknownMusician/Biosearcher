@@ -6,23 +6,23 @@ namespace Biosearcher.LandManagement
 {
     public class GeometryManager : System.IDisposable
     {
-        protected QueueWorker<(Vector3Int, int), Geometry> generateWorker;
-        protected LandSettings settings;
-        protected Land land;
-        protected CubeMarcher cubeMarcher;
+        protected QueueWorker<(Vector3Int, int), Geometry> _generateWorker;
+        protected LandSettings _settings;
+        protected Land _land;
+        protected CubeMarcher _cubeMarcher;
 
         public GeometryManager(Land land, LandSettings settings, CubeMarcher cubeMarcher)
         {
-            this.settings = settings;
-            this.land = land;
-            this.cubeMarcher = cubeMarcher;
-            generateWorker = new QueueWorker<(Vector3Int, int), Geometry>(GenerateChunkJob, settings.GeneratingFrequency);
+            _settings = settings;
+            _land = land;
+            _cubeMarcher = cubeMarcher;
+            _generateWorker = new QueueWorker<(Vector3Int, int), Geometry>(GenerateChunkJob, settings.GeneratingFrequency);
         }
 
         protected internal void Create(ChunkWithGeometry chunk)
         {
             var input = (chunk.Position, chunk.HierarchySize);
-            generateWorker.MakeRequest(input, output => OnWorkerJobDone(output, chunk));
+            _generateWorker.MakeRequest(input, output => OnWorkerJobDone(output, chunk));
         }
 
         protected internal void Clear(Geometry geometry, ChunkWithGeometry chunk)
@@ -33,15 +33,15 @@ namespace Biosearcher.LandManagement
 
         protected Geometry GenerateChunkJob((Vector3Int chunkPosition, int hierarchySize) input)
         {
-            Mesh generatedMesh = cubeMarcher.GenerateMesh(input.chunkPosition, 1 << input.hierarchySize);
+            Mesh generatedMesh = _cubeMarcher.GenerateMesh(input.chunkPosition, 1 << input.hierarchySize);
+            GameObject chunkPrefab = _settings.ChunkPrefab;
 
-            GameObject chunkPrefab = settings.ChunkPrefab;
             return new Geometry() { chunkObject = chunkPrefab, chunkMesh = generatedMesh };
         }
 
         protected internal Geometry InstantiateChunk(Geometry geometry, ChunkWithGeometry chunk)
         {
-            GameObject generatedChunkObject = GameObject.Instantiate(settings.ChunkPrefab, chunk.Position, Quaternion.identity, land.transform);
+            GameObject generatedChunkObject = Object.Instantiate(_settings.ChunkPrefab, chunk.Position, Quaternion.identity, _land.transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = geometry.chunkMesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = geometry.chunkMesh;
             return new Geometry() { chunkMesh = geometry.chunkMesh, chunkObject = generatedChunkObject };
@@ -49,6 +49,6 @@ namespace Biosearcher.LandManagement
 
         protected void OnWorkerJobDone(Geometry output, ChunkWithGeometry chunk) => chunk.Initialize(output);
 
-        public void Dispose() => generateWorker.Dispose();
+        public void Dispose() => _generateWorker.Dispose();
     }
 }

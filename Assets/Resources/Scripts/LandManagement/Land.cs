@@ -7,49 +7,50 @@ namespace Biosearcher.LandManagement
 {
     public class Land : MonoBehaviour
     {
-        [SerializeField] protected Transform trigger;
-        [SerializeField] protected LandSettings landSettings;
+        [SerializeField] protected Transform _trigger;
+        [SerializeField] protected LandSettings _landSettings;
 
-        protected ChunkTracker chunkTracker;
-        protected GeometryManager geometryManager;
-        protected CubeMarcher cubeMarcher;
-        protected IChunkHolder chunksHolder;
+        protected ChunkTracker _chunkTracker;
+        protected GeometryManager _geometryManager;
+        protected CubeMarcher _cubeMarcher;
+        protected IChunkHolder _chunksHolder;
+        // TODO: Make manager & settings.
         protected readonly Vector3Int PlanetPosition = Vector3Int.zero;
 
         protected void Awake()
         {
-            Chunk.Initialize(landSettings);
-            chunkTracker = new ChunkTracker(this, landSettings, trigger, landSettings.PreGenerationDuration);
-            cubeMarcher = new CubeMarcher(landSettings);
-            geometryManager = new GeometryManager(this, landSettings, cubeMarcher);
+            Chunk.Initialize(_landSettings);
+            _chunkTracker = new ChunkTracker(_landSettings, _trigger, _landSettings.PreGenerationDuration);
+            _cubeMarcher = new CubeMarcher(_landSettings);
+            _geometryManager = new GeometryManager(this, _landSettings, _cubeMarcher);
         }
 
         protected void OnDestroy()
         {
-            geometryManager.Dispose();
-            cubeMarcher.Dispose();
-            chunkTracker.Dispose();
+            _geometryManager.Dispose();
+            _cubeMarcher.Dispose();
+            _chunkTracker.Dispose();
         }
 
-        protected void Start() => InitializeChunksHolder(landSettings.WorldType);
+        protected void Start() => InitializeChunksHolder(_landSettings.WorldType);
 
-        protected void OnDrawGizmos() => chunksHolder?.DrawGizmos();
+        protected void OnDrawGizmos() => _chunksHolder?.DrawGizmos();
 
         protected void InitializeChunksHolder(WorldType landType)
         {
             switch (landType)
             {
                 case WorldType.Endless:
-                    chunksHolder = new ChunksEndlessHolder(PlanetPosition, chunkTracker, geometryManager);
+                    _chunksHolder = new ChunksEndlessHolder(PlanetPosition, _chunkTracker, _geometryManager);
                     break;
                 case WorldType.SingleChunk:
-                    chunksHolder = new ChunksSingleHolder(PlanetPosition, chunkTracker, geometryManager);
+                    _chunksHolder = new ChunksSingleHolder(PlanetPosition, _chunkTracker, _geometryManager);
                     break;
                 default:
-                    chunksHolder = new ChunksEndlessHolder(PlanetPosition, chunkTracker, geometryManager);
+                    _chunksHolder = new ChunksEndlessHolder(PlanetPosition, _chunkTracker, _geometryManager);
                     break;
             }
-            chunksHolder.StartInitializing();
+            _chunksHolder.StartInitializing();
         }
     }
 }

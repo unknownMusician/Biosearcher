@@ -1,29 +1,29 @@
-﻿using Biosearcher.LandManagement.Chunks;
+﻿using Biosearcher.Common;
+using Biosearcher.LandManagement.Chunks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Profiling;
 
 namespace Biosearcher.LandManagement
 {
     public class ChunkTracker : System.IDisposable
     {
-        protected TriggerTracker triggerTracker;
-        protected MonoBehaviour behaviour;
-        protected LandSettings settings;
-        protected Transform trigger;
+        protected TriggerTracker _triggerTracker;
+        protected LandSettings _settings;
+        protected Transform _trigger;
 
-        protected Dictionary<Vector3Int, ChunkWithGeometry>[] ChunkSize2GeometryChunks;
-        protected Vector3Int[] ChunkSize2PlayerPosition;
+        protected Dictionary<Vector3Int, ChunkWithGeometry>[] _chunkSize2GeometryChunks;
+        protected Vector3Int[] _chunkSize2PlayerPosition;
 
-        public ChunkTracker(MonoBehaviour behaviour, LandSettings settings, Transform trigger, float preGenerationDuration)
+        public ChunkTracker(LandSettings settings, Transform trigger, float preGenerationDuration)
         {
-            this.behaviour = behaviour;
-            this.settings = settings;
-            this.trigger = trigger;
+            _settings = settings;
+            _trigger = trigger;
 
             Initialize();
-            behaviour.StartCoroutine(PreGenerating(preGenerationDuration));
+            CommonMonoBehaviour.StartCoroutine(PreGenerating(preGenerationDuration));
         }
 
         protected IEnumerator PreGenerating(float duration)
@@ -31,7 +31,7 @@ namespace Biosearcher.LandManagement
             yield return null;
             while (duration > 0)
             {
-                TriggerPositionChanged(Chunk.RoundPosition(Vector3Int.RoundToInt(trigger.position), 0), 0, true);
+                TriggerPositionChanged(Chunk.RoundPosition(Vector3Int.RoundToInt(_trigger.position), 0), 0, true);
 
                 duration -= Time.deltaTime;
                 yield return null;
@@ -40,23 +40,23 @@ namespace Biosearcher.LandManagement
 
         protected void Initialize()
         {
-            int arraySize = settings.MaxHierarchySize + 1;
-            ChunkSize2GeometryChunks = new Dictionary<Vector3Int, ChunkWithGeometry>[arraySize];
-            ChunkSize2PlayerPosition = new Vector3Int[arraySize];
+            int arraySize = _settings.MaxHierarchySize + 1;
+            _chunkSize2GeometryChunks = new Dictionary<Vector3Int, ChunkWithGeometry>[arraySize];
+            _chunkSize2PlayerPosition = new Vector3Int[arraySize];
             for (int i = 0; i < arraySize; i++)
             {
-                ChunkSize2GeometryChunks[i] = new Dictionary<Vector3Int, ChunkWithGeometry>();
-                ChunkSize2PlayerPosition[i] = Chunk.RoundPosition(Vector3Int.RoundToInt(trigger.position), i);
+                _chunkSize2GeometryChunks[i] = new Dictionary<Vector3Int, ChunkWithGeometry>();
+                _chunkSize2PlayerPosition[i] = Chunk.RoundPosition(Vector3Int.RoundToInt(_trigger.position), i);
             }
 
-            TryCreateTracker(trigger);
+            TryCreateTracker(_trigger);
         }
 
         protected void TryCreateTracker(Transform trigger)
         {
             if (trigger != null)
             {
-                triggerTracker = new TriggerTracker(this, trigger, behaviour);
+                _triggerTracker = new TriggerTracker(this, trigger);
             }
             else
             {
@@ -84,7 +84,7 @@ namespace Biosearcher.LandManagement
             chunksToUniteIntoParent = new Queue<ChunkWithGeometry>();
             chunksToDivide = new Queue<ChunkWithGeometry>();
 
-            foreach (KeyValuePair<Vector3Int, ChunkWithGeometry> chunkPair in ChunkSize2GeometryChunks[chunkSize])
+            foreach (KeyValuePair<Vector3Int, ChunkWithGeometry> chunkPair in _chunkSize2GeometryChunks[chunkSize])
             {
                 if (Chunk.IsChunkWrongSize(chunkPair.Key, chunkPair.Value.HierarchySize, triggerPosition, out Chunk.WrongSizeType changeType))
                 {
@@ -107,7 +107,8 @@ namespace Biosearcher.LandManagement
 
         protected void TriggerPositionChanged(Vector3Int triggerPosition, int chunkSize, bool isPreGenerating = false)
         {
-            ChunkSize2PlayerPosition[chunkSize] = triggerPosition;
+            Profiler.BeginSample("ChunkTracker.TriggerPositionChanged");
+            _chunkSize2PlayerPosition[chunkSize] = triggerPosition;
 
             GetChunksToChange(chunkSize, triggerPosition,
                 out Queue<ChunkWithGeometry> chunksToUnUniteIntoParent,
@@ -118,31 +119,36 @@ namespace Biosearcher.LandManagement
             ForEach(chunksToUniteIntoParent, chunk => chunk.TryUniteIntoParent());
             ForEach(chunksToDivide, chunk => chunk.Divide());
 
-            int nextChunkSize = chunkSize + 1;
-            if (nextChunkSize > settings.MaxHierarchySize)
+            chunkSize++;
+            if (chunkSize > _settings.MaxHierarchySize)
             {
+                Profiler.EndSample();
                 return;
             }
-            Vector3Int nextSizePosition = Chunk.RoundPosition(triggerPosition, nextChunkSize);
-            if (nextSizePosition != ChunkSize2PlayerPosition[nextChunkSize] || isPreGenerating)
+            triggerPosition = Chunk.RoundPosition(triggerPosition, chunkSize);
+            if (triggerPosition != _chunkSize2PlayerPosition[chunkSize] || isPreGenerating)
             {
-                TriggerPositionChanged(nextSizePosition, nextChunkSize, isPreGenerating);
+                Profiler.EndSample();
+                TriggerPositionChanged(triggerPosition, chunkSize, isPreGenerating);
+            }
+            else
+            {
+                Profiler.EndSample();
             }
         }
 
         public void SetTriggerPosition(Vector3Int triggerPosition)
         {
             Vector3Int nextSizePosition = Chunk.RoundPosition(triggerPosition, 0);
-            if (nextSizePosition != ChunkSize2PlayerPosition[0])
+            if (nextSizePosition != _chunkSize2PlayerPosition[0])
             {
                 TriggerPositionChanged(nextSizePosition, 0);
             }
         }
 
-        public void TrackChunk(ChunkWithGeometry chunk) => ChunkSize2GeometryChunks[chunk.HierarchySize].Add(chunk.Position, chunk);
+        public void TrackChunk(ChunkWithGeometry chunk) => _chunkSize2GeometryChunks[chunk.HierarchySize].Add(chunk.Position, chunk);
+        public void UnTrackChunk(ChunkWithGeometry chunk) => _chunkSize2GeometryChunks[chunk.HierarchySize].Remove(chunk.Position);
 
-        public void UnTrackChunk(ChunkWithGeometry chunk) => ChunkSize2GeometryChunks[chunk.HierarchySize].Remove(chunk.Position);
-
-        public void Dispose() => triggerTracker.Dispose();
+        public void Dispose() => _triggerTracker.Dispose();
     }
 }

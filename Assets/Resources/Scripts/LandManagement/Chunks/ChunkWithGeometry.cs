@@ -5,7 +5,7 @@ namespace Biosearcher.LandManagement.Chunks
 {
     public class ChunkWithGeometry : Chunk
     {
-        protected Geometry geometry;
+        protected Geometry _geometry;
 
         protected internal ChunkWithGeometry(Vector3Int position, int hierarchySize, IChunkHolder parent, ChunkTracker chunkTracker, GeometryManager geometryManager)
             : base(position, hierarchySize, parent, chunkTracker, geometryManager) { }
@@ -15,7 +15,7 @@ namespace Biosearcher.LandManagement.Chunks
 
         protected internal override void Instantiate()
         {
-            geometry = GeometryManager.InstantiateChunk(geometry, this);
+            _geometry = GeometryManager.InstantiateChunk(_geometry, this);
             Show();
         }
 
@@ -25,8 +25,8 @@ namespace Biosearcher.LandManagement.Chunks
 
             float colorValue = (HierarchySize / 8f) * 2f * Mathf.PI;
             Gizmos.color = new Color(Mathf.Sin(colorValue), Mathf.Cos(colorValue), -Mathf.Sin(colorValue));
-            int fullSize = HierarchySize2WorldSize(HierarchySize);
-            Gizmos.DrawWireCube(Position, new Vector3(fullSize, fullSize, fullSize));
+            int worldSize = HierarchySize2WorldSize(HierarchySize);
+            Gizmos.DrawWireCube(Position, new Vector3(worldSize, worldSize, worldSize));
         }
 
         protected internal void TryUniteIntoParent() => Parent.TryUnite(this);
@@ -34,7 +34,7 @@ namespace Biosearcher.LandManagement.Chunks
 
         protected internal void Initialize(Geometry geometry)
         {
-            this.geometry = geometry;
+            _geometry = geometry;
             IsInitialized = true;
             Initialized?.Invoke();
         }
@@ -57,8 +57,8 @@ namespace Biosearcher.LandManagement.Chunks
         protected void Show() => ChunkTracker.TrackChunk(this);
         protected internal void Destroy()
         {
-            GeometryManager.Clear(geometry, this);
-            geometry = default;
+            GeometryManager.Clear(_geometry, this);
+            _geometry = default;
             IsInitialized = false;
         }
     }

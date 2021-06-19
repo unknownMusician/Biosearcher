@@ -14,35 +14,36 @@ uint MatrixId2ArrayId(uint3 id, int base)
     return MatrixId2ArrayId(id.x, id.y, id.z, base);
 }
 
-uint2 MatrixId2TextureId(uint x, uint y, uint z, int base)
-{
-    return uint2(x + y * base, z);
-}
-
-uint2 MatrixId2TextureId(uint3 id, int base)
-{
-    return MatrixId2ArrayId(id.x, id.y, id.z, base);
-}
-
 MarchCube GenerateCube(RWStructuredBuffer<MarchPoint> points, uint3 id)
 {
     MarchPoint cubePoints[8];
-    int counter = 0;
+    //int counter = 0;
     
-    for (int y = 0; y < 2; y++) // todo
+    int x, y, z;
+    for (int i = 0; i < 8; i++)
     {
-        for (int z = 0; z < 2; z++)
-        {
-            for (int x = 0; x < 2; x++)
-            {
-                uint localXIndex = z == 0 ? x : 1 - x; // todo: ((1 - x) * y + x * (1 - y));
-                uint localYIndex = y;
-                uint localZIndex = 1 - z;
-                cubePoints[counter] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
-                counter++;
-            }
-        }
+        int x = i & 1;
+        int z = (i & 2) >> 1;
+        int y = (i & 4) >> 2;
+        uint localXIndex = ((1 - x) & z) | (x & (1 - z));
+        uint localYIndex = y;
+        uint localZIndex = 1 - z;
+        cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
     }
+    //for (y = 0; y < 2; y++) // todo
+    //{
+    //    for (z = 0; z < 2; z++)
+    //    {
+    //        for (x = 0; x < 2; x++)
+    //        {
+    //            uint localXIndex = ((1 - x) & z) | (x & (1 - z));
+    //            uint localYIndex = y;
+    //            uint localZIndex = 1 - z;
+    //            cubePoints[counter] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
+    //            counter++;
+    //        }
+    //    }
+    //}
     
     MarchCube marchCube;
     marchCube.points = cubePoints;
