@@ -318,8 +318,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cda8ef8a5cffebb4193a6f75dc480cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trigger: {fileID: 2114856212}
-  landSettings: {fileID: 11400000, guid: f8d38b6d4dfad054a951c16a39824d1f, type: 2}
+  _trigger: {fileID: 2114856212}
+  _landSettings: {fileID: 11400000, guid: f8d38b6d4dfad054a951c16a39824d1f, type: 2}
 --- !u!4 &334928271
 Transform:
   m_ObjectHideFlags: 0
@@ -2680,7 +2680,7 @@ MonoBehaviour:
   _springTangentDamp: 10
   _springNormalAcceleration: 100
   _springNormalDamp: 10
-  _camera: {fileID: 0}
+  _camera: {fileID: 1687258583}
 --- !u!54 &2114856209
 Rigidbody:
   m_ObjectHideFlags: 0
