@@ -12,7 +12,7 @@ namespace Biosearcher.InputHandling
 
         public GrabberInput(Grabber.Presenter grabberPresenter)
         {
-            this._grabberPresenter = grabberPresenter;
+            _grabberPresenter = grabberPresenter;
             SetInput(CustomInput.controls);
         }
 

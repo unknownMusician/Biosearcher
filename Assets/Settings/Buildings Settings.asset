@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1fb4636bed1204f9eb92f307a67cea, type: 3}
   m_Name: Buildings Settings
   m_EditorClassIdentifier: Assembly-CSharp:Biosearcher.Buildings.Settings:BuildingsSettings
-  coalGeneratorSettings:
-    maxPossibleEnergyProduced:
-      energy: 3
-    neededCoal: 1
-  greenHouseSettings:
-    maxPossibleReceivedElectricity:
-      energy: 5
-    maxPossibleReceivedWater:
+  _networkSettings:
+    _maxConnectRadius: 4
+    _cyclesPerSecond: 2
+  _infiniteEnergyGeneratorSettings:
+    _maxPossibleEnergyProduced:
+      energy: 0
+    _neededCoal: 0
+  _greenHouseSettings:
+    _maxPossibleReceivedElectricity:
+      energy: 0
+    _maxPossibleReceivedWater:
       volume: 0
-    amountOfSlots: 3
+    _amountOfSlots: 0

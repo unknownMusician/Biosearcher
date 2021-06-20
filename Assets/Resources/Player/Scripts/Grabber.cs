@@ -28,6 +28,9 @@ namespace Biosearcher.Player
         protected void Awake() => _input = new GrabberInput(new Presenter(this));
         protected void OnDestroy() => _input.Dispose();
 
+        protected void OnEnable() => _input.OnEnable();
+        protected void OnDisable() => _input.OnDisable();
+
         #endregion
 
         #region Methods
