@@ -1,5 +1,5 @@
 ﻿using Biosearcher.LandManagement.Chunks;
-using Biosearcher.LandManagement.CubeMarching;
+using Biosearcher.LandManagement.Settings;
 using UnityEngine;
 
 namespace Biosearcher.LandManagement
@@ -11,7 +11,6 @@ namespace Biosearcher.LandManagement
 
         protected ChunkTracker _chunkTracker;
         protected GeometryManager _geometryManager;
-        protected CubeMarcher _cubeMarcher;
         protected IChunkHolder _chunksHolder;
         // TODO: Make manager & settings.
         protected readonly Vector3Int PlanetPosition = Vector3Int.zero;
@@ -20,14 +19,12 @@ namespace Biosearcher.LandManagement
         {
             Chunk.Initialize(_landSettings);
             _chunkTracker = new ChunkTracker(_landSettings, _trigger);
-            _cubeMarcher = new CubeMarcher(_landSettings);
-            _geometryManager = new GeometryManager(this, _landSettings, _cubeMarcher);
+            _geometryManager = new GeometryManager(this, _landSettings);
         }
 
         protected void OnDestroy()
         {
             _geometryManager.Dispose();
-            _cubeMarcher.Dispose();
             _chunkTracker.Dispose();
         }
 

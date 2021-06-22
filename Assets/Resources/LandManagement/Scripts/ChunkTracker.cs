@@ -1,5 +1,6 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.LandManagement.Chunks;
+using Biosearcher.LandManagement.Settings;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

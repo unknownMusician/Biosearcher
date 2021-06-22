@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Biosearcher.LandManagement.Settings;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Biosearcher.LandManagement.Chunks
@@ -41,7 +42,8 @@ namespace Biosearcher.LandManagement.Chunks
             return (size == 0 ? 0 : HierarchySize2WorldSize(size) + HierarchySize2WorldSize(2), HierarchySize2WorldSize(size + 1) + HierarchySize2WorldSize(2));
         }
 
-        protected internal static int HierarchySize2WorldSize(int size) => Settings.CubesPerChunk << size;
+        protected internal static int HierarchySize2WorldSize(int size) => Settings.CubesPerChunk1D << size;
+        protected internal static int HierarchySize2CubeSize(int size) => 1 << size;
 
         protected static bool IsChunkTooSmallByAxis(float chunkPosition, float triggerPosition, float maxDistance)
         {

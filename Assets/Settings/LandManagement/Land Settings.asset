@@ -9,17 +9,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b5da823633a7fd408de1d1eacc7c2ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ec6b98b16df2f5489aca0ffc9db8bf1, type: 3}
   m_Name: Land Settings
   m_EditorClassIdentifier: 
-  _minHierarchySize: 0
+  _minHierarchySize: 2
   _maxHierarchySize: 5
   _generatingFrequency: 8
-  _cubesPerChunk: 14
+  _cubesPerChunk1D: 8
   _surfaceValue: 0.76
   _geometryType: 1
-  _planetShader: {fileID: 7200000, guid: 9f16f4b261d62fe4aa3998145e237e0b, type: 3}
-  _flatShader: {fileID: 7200000, guid: 2e24629c70a4b91409db5c26699be3e0, type: 3}
+  _cubeMarchingType: 1
+  _asyncType: 0
+  _planetShader: {fileID: 7200000, guid: 48e61c2a1872c9c42bf7c13f3c65adf7, type: 3}
+  _flatShader: {fileID: 7200000, guid: 42e6313a71a50a44097e4fbfba55078d, type: 3}
   _preGenerationDuration: 20
   _seed: 6
   _worldType: 0
