@@ -1,4 +1,6 @@
-﻿using Biosearcher.Plants;
+﻿using System.Linq;
+using Biosearcher.Plants;
+using Biosearcher.Player;
 using UnityEngine;
 
 namespace Biosearcher.Buildings.GreenHouses
@@ -9,41 +11,68 @@ namespace Biosearcher.Buildings.GreenHouses
 
         // todo: shouldn't it be in ScriptableObject
         [SerializeField] protected Slot[] _slots;
+        protected Capsule[] _capsules;
 
         #endregion
 
         #region Methods
 
+        protected new virtual void Awake()
+        {
+            _capsules = new Capsule[_slots.Length];
+            base.Awake();
+        }
         protected virtual void Start() => RecalculateNeededResourcesForAllSlots();
 
         protected virtual void RecalculateNeededResourcesForAllSlots()
         {
             PreRecalculateNeededResources();
-            foreach (Slot slot in _slots)
+            foreach (Capsule capsule in _capsules)
             {
-                if (slot != null)
+                if (capsule != null)
                 {
-                    RecalculateNeededResources(slot);
+                    RecalculateNeededResources(capsule);
                 }
             }
         }
 
         protected abstract void PreRecalculateNeededResources();
-        protected abstract void RecalculateNeededResources(Slot slot);
+        protected abstract void RecalculateNeededResources(Capsule capsule);
 
-        public void Plant(Seed seed, int slotNumber)
+        public void Plant(Seed seed, int capsuleNumber)
         {
             // todo
             Vector3 position = Vector3.zero;
             Quaternion rotation = Quaternion.identity;
-            Transform parent = _slots[slotNumber].transform;
-            _slots[slotNumber].Plant = seed.Plant(position, rotation, parent);
+            Transform parent = _capsules[capsuleNumber].transform;
+            _capsules[capsuleNumber].Plant = seed.Plant(position, rotation, parent);
             RecalculateNeededResourcesForAllSlots();
             Destroy(seed.gameObject);
         }
-        public void ChangeSlot(Slot slot, int slotNumber)
+        public void Plant(Seed seed, Capsule capsule)
         {
-            _slots[slotNumber] = slot;
+            var capsuleTransform = capsule.transform;
+            
+            Vector3 position = capsuleTransform.position;
+            Quaternion rotation = capsuleTransform.rotation;
+            capsule.Plant = seed.Plant(position, rotation, capsuleTransform);
+            RecalculateNeededResourcesForAllSlots();
+            Destroy(seed.gameObject);
+        }
+        
+        //todo: капсула должна ложиться в массив капсул
+        public void ChangeCapsule(Capsule capsule, int slotNumber)
+        {
+            _slots[slotNumber].Capsule = capsule;
+            capsule.GreenHouse = this;
+            capsule.transform.parent = _slots[slotNumber].transform;
+            RecalculateNeededResourcesForAllSlots();
+        }
+        public void ChangeCapsule(Capsule capsule, Slot slot)
+        {
+            slot.Capsule = capsule;
+            capsule.GreenHouse = this;
+            capsule.transform.parent = slot.transform;
             RecalculateNeededResourcesForAllSlots();
         }
 

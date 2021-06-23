@@ -11,7 +11,7 @@ namespace Biosearcher.Plants
         private const float GrowthTicksPerSecond = 1;
         
         private PlantSettings _settings;
-        private Slot _slot;
+        private Capsule _capsule;
         
         private float _growthProgress;
         private float _corruptionProgress;
@@ -19,12 +19,12 @@ namespace Biosearcher.Plants
         private bool _isGrowing;
 
         public PlantSettings Settings => _settings;
-        public Slot Slot
+        public Capsule Capsule
         {
             set
             {
                 EndGrowth();
-                _slot = value;
+                _capsule = value;
                 StartGrowth();
             }
         }
@@ -68,7 +68,7 @@ namespace Biosearcher.Plants
                 return;
             }
 
-            if (AreGrowthConditionsAcceptable(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
+            if (AreGrowthConditionsAcceptable(_capsule.CurrentHumidity, _capsule.CurrentIllumination, _capsule.CurrentTemperature))
             {
                 Grow();
             }

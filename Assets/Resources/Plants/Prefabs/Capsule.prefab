@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5766463658093642290
+--- !u!1 &5326555828288832768
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,78 +8,78 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9152279715277255770}
-  - component: {fileID: 838492781283842941}
-  - component: {fileID: 6582516904764174912}
-  - component: {fileID: 7403429108175475707}
-  - component: {fileID: 7214285178272357656}
-  - component: {fileID: 1980613371728579585}
-  - component: {fileID: 802996290098369221}
-  - component: {fileID: 4814253572634545825}
+  - component: {fileID: 7416953055716012904}
+  - component: {fileID: 1319500630544964687}
+  - component: {fileID: 4806728760409109874}
+  - component: {fileID: 9174784499563123913}
+  - component: {fileID: 9075712355696138794}
+  - component: {fileID: 1353880034970654199}
+  - component: {fileID: 7750874521279604255}
+  - component: {fileID: 6131166631306072258}
   m_Layer: 0
-  m_Name: Seed
+  m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9152279715277255770
+--- !u!4 &7416953055716012904
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -110, y: 0, z: 0.000009616506}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &838492781283842941
+--- !u!114 &1319500630544964687
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1ed62755c9e48da4d93a2f8a6ec6a160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 0
+    height: 110
     latitude: 0
-    longitude: 0
---- !u!114 &6582516904764174912
+    longitude: -180
+--- !u!114 &4806728760409109874
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718ead5f3fc587c4dbc4c67b8307bc20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!33 &7403429108175475707
+--- !u!33 &9174784499563123913
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7214285178272357656
+  m_GameObject: {fileID: 5326555828288832768}
+  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &9075712355696138794
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8caacb3a5aa81174b91307cc6f648291, type: 2}
+  - {fileID: 2100000, guid: 30cc5213fa35a214e86ba38021ce2ae3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -115,30 +115,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1980613371728579585
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f43112500b4a30a0ee7ad1ac8b040c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minDistanceToGround: 2
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _plantSettings: {fileID: 11400000, guid: 477a1dfb319edcf4db910b9c396b5c9f, type: 2}
---- !u!54 &802996290098369221
+--- !u!54 &1353880034970654199
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -148,16 +131,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &4814253572634545825
-SphereCollider:
+--- !u!136 &7750874521279604255
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766463658093642290}
+  m_GameObject: {fileID: 5326555828288832768}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6131166631306072258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5326555828288832768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 906fe1a9eb7f47e9b8c13c5d1941c108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minDistanceToGround: 2
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _greenHouse: {fileID: 0}
+  _controlHumidity: 0
+  _controlIllumination: 0
+  _controlTemperature: 0

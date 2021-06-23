@@ -49,7 +49,7 @@ class Range
     
     bool Contains()
 }
-class Slot
+class Capsule
 {   
     Electricity ElectricityToControlIllumination
     Electricity ElectricityToControlTemperature
@@ -86,7 +86,7 @@ class Slot
 }
 class GreenHouse
 {
-    Slot[] slots
+    Capsule[] capsules
     
     void RecalculateNeededElectricity()
     void RecalculateNeededWater()
@@ -112,8 +112,8 @@ Seed "1" *- "1" Plant : creates
 Seed o-- PlantSettings
 Plant o-- PlantSettings
 PlantSettings o-- Range
-Slot o--o Plant
-GreenHouse o-- Slot
-Slot o-- WeatherRegulator
+Capsule o--o Plant
+GreenHouse o-- Capsule
+Capsule o-- WeatherRegulator
 
 @enduml

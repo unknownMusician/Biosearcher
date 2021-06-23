@@ -573,6 +573,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Inserter",
+            "id": "5686c3ff-3e1c-4525-aa1e-69c8d3d49b3b",
+            "actions": [
+                {
+                    "name": "Insert",
+                    "type": "Button",
+                    "id": "d8aa2818-e183-4024-80a4-ede9f31b8139",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "98fcfa80-3dcc-46b2-9eb7-ff34f60091cc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Insert",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

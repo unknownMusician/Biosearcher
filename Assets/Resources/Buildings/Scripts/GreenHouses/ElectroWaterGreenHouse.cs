@@ -57,10 +57,10 @@ namespace Biosearcher.Buildings.GreenHouses
             _currentPossibleReceivedWater = default;
         }
 
-        protected override void RecalculateNeededResources(Slot slot)
+        protected override void RecalculateNeededResources(Capsule capsule)
         {
-            _currentPossibleReceivedElectricity += slot.NeededElectricity;
-            _currentPossibleReceivedWater += slot.NeededWater;
+            _currentPossibleReceivedElectricity += capsule.NeededElectricity;
+            _currentPossibleReceivedWater += capsule.NeededWater;
         }
 
         protected override void TryConnect()
@@ -77,23 +77,23 @@ namespace Biosearcher.Buildings.GreenHouses
         public void Receive(Electricity resource)
         {
             var efficiency = (resource / _currentPossibleReceivedElectricity);
-            foreach (Slot slot in _slots)
+            foreach (Capsule capsule in _capsules)
             {
-                if (slot != null)
+                if (capsule != null)
                 {
-                    slot.RegulateIllumination(efficiency);
-                    slot.RegulateTemperature(efficiency);
+                    capsule.RegulateIllumination(efficiency);
+                    capsule.RegulateTemperature(efficiency);
                 }
             }
         }
         public void Receive(Water resource)
         {
             var efficiency = (resource / _currentPossibleReceivedWater);
-            foreach (Slot slot in _slots)
+            foreach (Capsule capsule in _capsules)
             {
-                if (slot != null)
+                if (capsule != null)
                 {
-                    slot.RegulateHumidity(efficiency);
+                    capsule.RegulateHumidity(efficiency);
                 }
             }
         }

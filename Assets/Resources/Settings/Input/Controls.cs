@@ -586,6 +586,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Inserter"",
+            ""id"": ""5686c3ff-3e1c-4525-aa1e-69c8d3d49b3b"",
+            ""actions"": [
+                {
+                    ""name"": ""Insert"",
+                    ""type"": ""Button"",
+                    ""id"": ""d8aa2818-e183-4024-80a4-ede9f31b8139"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""98fcfa80-3dcc-46b2-9eb7-ff34f60091cc"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Insert"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -640,6 +667,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Grabber = asset.FindActionMap("Grabber", throwIfNotFound: true);
         m_Grabber_Drop = m_Grabber.FindAction("Drop", throwIfNotFound: true);
         m_Grabber_Grab = m_Grabber.FindAction("Grab", throwIfNotFound: true);
+        // Inserter
+        m_Inserter = asset.FindActionMap("Inserter", throwIfNotFound: true);
+        m_Inserter_Insert = m_Inserter.FindAction("Insert", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -897,6 +927,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public GrabberActions @Grabber => new GrabberActions(this);
+
+    // Inserter
+    private readonly InputActionMap m_Inserter;
+    private IInserterActions m_InserterActionsCallbackInterface;
+    private readonly InputAction m_Inserter_Insert;
+    public struct InserterActions
+    {
+        private @Controls m_Wrapper;
+        public InserterActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Insert => m_Wrapper.m_Inserter_Insert;
+        public InputActionMap Get() { return m_Wrapper.m_Inserter; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(InserterActions set) { return set.Get(); }
+        public void SetCallbacks(IInserterActions instance)
+        {
+            if (m_Wrapper.m_InserterActionsCallbackInterface != null)
+            {
+                @Insert.started -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
+                @Insert.performed -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
+                @Insert.canceled -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
+            }
+            m_Wrapper.m_InserterActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Insert.started += instance.OnInsert;
+                @Insert.performed += instance.OnInsert;
+                @Insert.canceled += instance.OnInsert;
+            }
+        }
+    }
+    public InserterActions @Inserter => new InserterActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -940,5 +1003,9 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnDrop(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
+    }
+    public interface IInserterActions
+    {
+        void OnInsert(InputAction.CallbackContext context);
     }
 }

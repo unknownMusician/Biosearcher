@@ -1,10 +1,13 @@
-﻿using Biosearcher.InputHandling;
+﻿using System;
+using Biosearcher.InputHandling;
 using System.Collections;
 using System.Linq;
+using Biosearcher.Planet.Orientation;
 using UnityEngine;
 
 namespace Biosearcher.Player
 {
+    [RequireComponent(typeof(PlanetTransform))]
     public class Grabber : MonoBehaviour
     {
         #region Properties
@@ -14,18 +17,28 @@ namespace Biosearcher.Player
         [SerializeField] protected float _maxInteractDistance;
         [SerializeField] protected float _maxInteractDistanceCamera;
         [SerializeField] protected float _carryHeight;
-
+        [Space]
         [SerializeField] protected Camera _camera;
         [SerializeField] protected Transform _player;
 
-        protected IGrabbable _grabbed;
+        protected PlanetTransform _planetTransform;
+        protected Inserter _inserter;
+        
         protected GrabberInput _input;
+        
+        protected IGrabbable _grabbed;
 
         #endregion
 
         #region MonoBehaviour methods
 
-        protected void Awake() => _input = new GrabberInput(new Presenter(this));
+        protected void Awake()
+        {
+            _planetTransform = GetComponent<PlanetTransform>();
+            _inserter = GetComponent<Inserter>();
+            
+            _input = new GrabberInput(new Presenter(this));
+        }
         protected void OnDestroy() => _input.Dispose();
 
         protected void OnEnable() => _input.OnEnable();
@@ -45,13 +58,46 @@ namespace Biosearcher.Player
                 StartCoroutine(Carrying());
             }
         }
-        protected void TryDrop()
+        public void TryDrop()
         {
             if (_grabbed != default)
             {
                 _grabbed.Drop();
                 _grabbed = default;
             }
+        }
+
+        protected void PrepareToInsert(RaycastHit hit, IInsertFriendly insertFriendly, IInsertable insertable, ref Vector3 carryPosition)
+        {
+            foreach (Type insertableType in insertFriendly.GetInsertableType())
+            {
+                if (insertableType != insertable.GetType())
+                {
+                    continue;
+                }
+                            
+                _inserter.SetInsertStuff(insertable, insertFriendly);
+                carryPosition = insertFriendly.GetAlignmentPosition();
+
+                return;
+            }
+            GrabOnCustomDistance(hit, ref carryPosition);
+        }
+        protected void GrabOnCustomDistance(RaycastHit hit, ref Vector3 carryPosition)
+        {
+            Vector3 playerPosition = _player.position;
+            if (Vector3.Distance(hit.point, playerPosition) <= _maxInteractDistance)
+            {
+                carryPosition = hit.point;
+            }
+            else
+            {
+                carryPosition = (hit.point - _player.position).normalized * _maxInteractDistance + playerPosition;
+            }
+        }
+        protected void GrabOnMaxDistance(Ray checkRay, ref Vector3 carryPosition)
+        {
+            carryPosition = checkRay.direction * _maxInteractDistanceCamera + _camera.transform.position;
         }
 
         protected IEnumerator Carrying()
@@ -62,25 +108,27 @@ namespace Biosearcher.Player
             {
                 Ray checkRay = _camera.ScreenPointToRay(_input.MousePosition);
 
-                Vector3 carryPosition;
+                MonoBehaviour grabbedMonoBehaviour = (MonoBehaviour) _grabbed;
+                Vector3 carryPosition = default;
                 if (TryGetClosestHit(checkRay, out RaycastHit hit, ((MonoBehaviour) _grabbed).gameObject))
                 {
-                    Vector3 playerPosition = _player.position;
-                    if (Vector3.Distance(hit.point, playerPosition) <= _maxInteractDistance)
+                    if (grabbedMonoBehaviour.TryGetComponent(out IInsertable insertable) &&
+                        hit.collider.TryGetComponent(out IInsertFriendly insertFriendly))
                     {
-                        carryPosition = hit.point;
+                        PrepareToInsert(hit, insertFriendly, insertable, ref carryPosition);
                     }
                     else
                     {
-                        carryPosition = (hit.point - _player.position).normalized * _maxInteractDistance + playerPosition;
+                        GrabOnCustomDistance(hit, ref carryPosition);
                     }
                 }
                 else
                 {
-                    carryPosition = checkRay.direction * _maxInteractDistanceCamera + _camera.transform.position;
+                    GrabOnMaxDistance(checkRay, ref carryPosition);
                 }
 
-                ((MonoBehaviour) _grabbed).transform.position = carryPosition;
+                grabbedMonoBehaviour.transform.position = carryPosition;
+                grabbedMonoBehaviour.transform.rotation = _planetTransform.ToUniverse(Quaternion.Euler(Vector3.up));;
 
                 yield return waitForFixedUpdate;
             }
@@ -89,14 +137,16 @@ namespace Biosearcher.Player
         protected bool TryGetClosestHit(Ray checkRay, out RaycastHit hit, GameObject noRaycast = null)
         {
             RaycastHit[] hits = Physics.RaycastAll(checkRay, _maxRaycastDistance, _grabbableMask)
-                .Where(hit => hit.collider.gameObject != noRaycast).ToArray();
-            
+                .Where(hit => hit.collider.gameObject != noRaycast)
+                .Where(hit => hit.collider.transform.parent == null || hit.collider.transform.parent.gameObject != noRaycast)
+                .ToArray();
+
             if (hits.Length == 0)
             {
                 hit = default;
                 return false;
             }
-
+            
             hit = hits.OrderBy(hit => Vector3.SqrMagnitude(hit.point - _camera.transform.position)).First();
             return true;
         }
