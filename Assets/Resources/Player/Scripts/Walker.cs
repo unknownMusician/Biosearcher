@@ -1,5 +1,6 @@
 using Biosearcher.InputHandling;
 using Biosearcher.Planet.Orientation;
+using Biosearcher.Refactoring;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -62,6 +63,7 @@ namespace Biosearcher.Player
 
         protected void Start() => StartCoroutine(Moving());
         
+        [NeedsRefactor]
         protected void FixedUpdate()
         {
             Vector3 planetPosition = Vector3.zero;
@@ -141,7 +143,8 @@ namespace Biosearcher.Player
 
         protected float TangentAcceleration { get; set; }
         protected float NormalAcceleration { get; set; }
-        
+
+        [NeedsRefactor]
         protected IEnumerator Moving()
         {
             var waitForFixedUpdate = new WaitForFixedUpdate();
@@ -193,6 +196,8 @@ namespace Biosearcher.Player
                 _player = player;
                 _currentMove = moveState;
             }
+
+            [NeedsRefactor]
             public State(Walker player)
             {
                 // todo

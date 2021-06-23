@@ -30,20 +30,6 @@ MarchCube GenerateCube(RWStructuredBuffer<MarchPoint> points, uint3 id)
         uint localZIndex = 1 - z;
         cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
     }
-    //for (y = 0; y < 2; y++) // todo
-    //{
-    //    for (z = 0; z < 2; z++)
-    //    {
-    //        for (x = 0; x < 2; x++)
-    //        {
-    //            uint localXIndex = ((1 - x) & z) | (x & (1 - z));
-    //            uint localYIndex = y;
-    //            uint localZIndex = 1 - z;
-    //            cubePoints[counter] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
-    //            counter++;
-    //        }
-    //    }
-    //}
     
     MarchCube marchCube;
     marchCube.points = cubePoints;

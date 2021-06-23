@@ -5,7 +5,8 @@ using System;
 
 namespace Biosearcher.Refactoring
 {
-    public static class ClassFileFinder
+    [NeedsRefactor(Needs.Optimization)]
+    internal static class ClassFileFinder
     {
         private static List<string> classFiles;
 
@@ -67,21 +68,30 @@ namespace Biosearcher.Refactoring
 
         private static string GetTextToSearch(Type type)
         {
+            string typeName = type.Name;
+            if (type.IsGenericType)
+            {
+                int genericBracketIndex = typeName.IndexOf("`");
+                if (genericBracketIndex != -1)
+                {
+                    typeName = typeName.Substring(0, genericBracketIndex + 1);
+                }
+            }
             if (type.IsClass)
             {
-                return $"class {type.Name}";
+                return $"class {typeName}";
             }
             else if (type.IsInterface)
             {
-                return $"interface {type.Name}";
+                return $"interface {typeName}";
             }
             else if (type.IsEnum)
             {
-                return $"enum {type.Name}";
+                return $"enum {typeName}";
             }
             else
             {
-                return $"struct {type.Name}";
+                return $"struct {typeName}";
             }
         }
 
@@ -108,20 +118,88 @@ namespace Biosearcher.Refactoring
         }
     }
 
-    public sealed class TypeFileDetails
+    [NeedsRefactor(Needs.Implementation)]
+    internal static class TypeFileFinderNew
     {
-        public string TypeName { get; private set; }
-        public string Path { get; private set; }
+        private static List<string> csFileGlobalPaths;
 
-        internal TypeFileDetails(string typeName, string path)
+
+
+
+        private static Dictionary<string, DateTime> filePathToWriteTimes;
+        private static Dictionary<string, IEnumerable<Log>> filePathToLogs;
+
+
+
+        private static void OnUnityStart()
         {
-            TypeName = typeName;
-            Path = ToAssetPath(path);
+            FindAllScriptFiles(Application.dataPath);
+            ReadHashes();
         }
 
-        private string ToAssetPath(string globalPath)
+        [NeedsRefactor]
+        private static void OnSomeFilesChanged()
         {
-            return globalPath.Substring(globalPath.IndexOf("Assets"));
+            for (int i = 0; i < csFileGlobalPaths.Count; i++)
+            {
+                DateTime writeTime = File.GetLastWriteTime(csFileGlobalPaths[i]);
+                if (filePathToWriteTimes.ContainsKey(csFileGlobalPaths[i]))
+                {
+                    if(filePathToWriteTimes[csFileGlobalPaths[i]] == writeTime)
+                    {
+                        // file not changed
+                        continue;
+                    }
+                    // file changed
+                    CheckFileForAttributes();
+                    filePathToWriteTimes[csFileGlobalPaths[i]] = writeTime;
+                }
+                // file created
+                CheckFileForAttributes();
+                filePathToWriteTimes.Add(csFileGlobalPaths[i], writeTime);
+                // todo
+            }
+            // todo
+            // need to check if file been deleted
+        }
+
+        [NeedsRefactor(Needs.Implementation)]
+        public static void CheckFileForAttributes()
+        {
+            // todo
+        }
+
+        public static void ReadHashes()
+        {
+            filePathToWriteTimes = new Dictionary<string, string>();
+            string fileBody;
+            for (int i = 0; i < csFileGlobalPaths.Count; i++)
+            {
+                fileBody = File.ReadAllText(csFileGlobalPaths[i]);
+                filePathToWriteTimes.Add(csFileGlobalPaths[i], GetHash(fileBody));
+            }
+        }
+
+        private static void FindAllScriptFiles(string startDir)
+        {
+            try
+            {
+                foreach (string file in Directory.GetFiles(startDir))
+                {
+                    if (file.EndsWith(".cs"))
+                    {
+                        csFileGlobalPaths.Add(file);
+                    }
+                }
+                foreach (string dir in Directory.GetDirectories(startDir))
+                {
+                    FindAllScriptFiles(dir);
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.LogError(ex.Message);
+            }
         }
     }
 }

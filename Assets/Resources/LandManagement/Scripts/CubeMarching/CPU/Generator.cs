@@ -1,5 +1,6 @@
 ﻿//#define GENERATOR_PROFILING
 
+using Biosearcher.Refactoring;
 using UnityEngine;
 #if GENERATOR_PROFILING
 using UnityEngine.Profiling;
@@ -38,6 +39,8 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             Profiler.EndSample();
 #endif
         }
+
+        [NeedsRefactor]
         protected void GeneratePoint(Vector3Int threadId, ref TempPointsBuffer tempBuffer)
         {
 #if GENERATOR_PROFILING
@@ -106,7 +109,10 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
     internal sealed class PlanetGenerator : Generator
     {
+
         internal PlanetGenerator(ref ConstantBuffer constantInputOutput) : base(ref constantInputOutput) { }
+        
+        [NeedsRefactor]
         protected override float GenerateValue(Vector3 position)
         {
 #if GENERATOR_PROFILING
@@ -149,6 +155,8 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
     internal sealed class FlatGenerator : Generator
     {
         internal FlatGenerator(ref ConstantBuffer constantInputOutput) : base(ref constantInputOutput) { }
+
+        [NeedsRefactor]
         protected override float GenerateValue(Vector3 position)
         {
 #if GENERATOR_PROFILING

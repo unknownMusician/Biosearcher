@@ -1,3 +1,4 @@
+using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Sky
@@ -6,6 +7,7 @@ namespace Biosearcher.Sky
     {
         [SerializeField] protected Light _starLight;
 
+        [NeedsRefactor]
         protected void FixedUpdate()
         {
             // todo

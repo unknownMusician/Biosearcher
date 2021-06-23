@@ -1,4 +1,5 @@
 ﻿using Biosearcher.Plants;
+using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Buildings.GreenHouses
@@ -7,7 +8,7 @@ namespace Biosearcher.Buildings.GreenHouses
     {
         #region Properties
 
-        // todo: shouldn't it be in ScriptableObject
+        [NeedsRefactor("Move to ScriptableObject?")]
         [SerializeField] protected Slot[] _slots;
 
         #endregion
@@ -31,6 +32,7 @@ namespace Biosearcher.Buildings.GreenHouses
         protected abstract void PreRecalculateNeededResources();
         protected abstract void RecalculateNeededResources(Slot slot);
 
+        [NeedsRefactor]
         public void Plant(Seed seed, int slotNumber)
         {
             // todo

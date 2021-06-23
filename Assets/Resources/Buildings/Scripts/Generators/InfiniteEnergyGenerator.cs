@@ -2,11 +2,11 @@ using Biosearcher.Buildings.Resources;
 using Biosearcher.Buildings.Resources.Structs;
 using Biosearcher.Buildings.Settings;
 using Biosearcher.Buildings.Types.Interfaces;
-using UnityEngine;
+using Biosearcher.Refactoring;
 
 namespace Biosearcher.Buildings.Generators
 {
-    // todo: remove
+    [NeedsRefactor(Needs.Remove)]
     public class InfiniteEnergyGenerator : Building, IResourceProducer<Electricity>
     {
         #region Properties

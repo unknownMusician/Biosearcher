@@ -1,4 +1,5 @@
 ﻿using Biosearcher.Common;
+using Biosearcher.Refactoring;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -92,6 +93,7 @@ namespace Biosearcher.LandManagement.QueueWorkers
             }
         }
 
+        [NeedsRefactor]
         public override void Dispose()
         {
             base.Dispose();

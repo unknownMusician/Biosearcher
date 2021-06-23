@@ -1,21 +1,23 @@
-﻿using System.Collections;
+﻿using Biosearcher.Refactoring;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Biosearcher.Common
 {
-    // todo
+    [NeedsRefactor]
     public static class CommonMonoBehaviour
     {
         private static CommonMonoBehaviourComponent instance;
         public static CommonMonoBehaviourComponent Instance
         {
+            [NeedsRefactor("if nobody calls Instance, Awake will not be called in the start")]
             get
             {
                 if (instance == null)
                 {
                     instance = new GameObject(nameof(CommonMonoBehaviour)).AddComponent<CommonMonoBehaviourComponent>();
-                    // todo: may not be created in the start of the scene
+
                     CommonConstMethods.Awake(instance);
                 }
                 return instance;

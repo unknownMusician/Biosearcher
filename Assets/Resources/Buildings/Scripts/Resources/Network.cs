@@ -5,6 +5,7 @@ using Biosearcher.Common;
 using Biosearcher.Buildings.Resources.Interfaces;
 using Biosearcher.Buildings.Types.Interfaces;
 using UnityEngine;
+using Biosearcher.Refactoring;
 
 namespace Biosearcher.Buildings.Resources
 {
@@ -185,7 +186,8 @@ namespace Biosearcher.Buildings.Resources
 
                 HookEntries(newMoverEntry);
             }
-            // todo: unused
+
+            [NeedsRefactor(Needs.Remove)]
             private void RemoveFromNetwork(Entry removedMoverEntry)
             {
                 IResourceMover<TResource> resourceMover = removedMoverEntry.Mover;
@@ -201,7 +203,7 @@ namespace Biosearcher.Buildings.Resources
                 _movers.Remove(removedMoverEntry);
             }
 
-            // todo: optimiztion
+            [NeedsRefactor(Needs.Optimization)]
             private Entry EntryOrDefault(IResourceMover<TResource> resourceMover)
             {
                 return _movers.Where(entry => entry.Mover == resourceMover).FirstOrDefault();
@@ -218,7 +220,8 @@ namespace Biosearcher.Buildings.Resources
             }
 
             public void Dispose() => CommonMonoBehaviour.OnDrawGizmos -= OnDrawGizmos;
-            // todo: optimization
+
+            [NeedsRefactor(Needs.Optimization)]
             private void OnDrawGizmos()
             {
                 Gizmos.color = Color.white;

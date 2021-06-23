@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 267788471}
   - component: {fileID: 267788470}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -274,7 +274,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &267788477
 Transform:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267788469}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 451668856}
   - component: {fileID: 451668855}
   m_Layer: 0
-  m_Name: GreenHouse
+  m_Name: ElectroWater GreenHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &451668862
 Transform:
   m_ObjectHideFlags: 0
@@ -492,7 +492,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 451668854}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 804171053}
   - component: {fileID: 804171052}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &804171059
 Transform:
   m_ObjectHideFlags: 0
@@ -653,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 804171051}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   - component: {fileID: 846834587}
   - component: {fileID: 846834586}
   m_Layer: 0
-  m_Name: GreenHouse
+  m_Name: ElectroWater GreenHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -808,7 +808,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &846834593
 Transform:
   m_ObjectHideFlags: 0
@@ -817,7 +817,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846834585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -887,7 +887,7 @@ GameObject:
   - component: {fileID: 1051263867}
   - component: {fileID: 1051263866}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1051263873
 Transform:
   m_ObjectHideFlags: 0
@@ -1025,7 +1025,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051263865}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1223,7 +1223,7 @@ GameObject:
   - component: {fileID: 1283021655}
   - component: {fileID: 1283021654}
   m_Layer: 0
-  m_Name: GreenHouse
+  m_Name: ElectroWater GreenHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1355,7 +1355,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1283021661
 Transform:
   m_ObjectHideFlags: 0
@@ -1364,7 +1364,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283021653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1392,7 +1392,7 @@ GameObject:
   - component: {fileID: 1382244934}
   - component: {fileID: 1382244933}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1521,7 +1521,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1382244940
 Transform:
   m_ObjectHideFlags: 0
@@ -1530,7 +1530,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1382244932}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1553,7 +1553,7 @@ GameObject:
   - component: {fileID: 1442410909}
   - component: {fileID: 1442410908}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1682,7 +1682,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1442410915
 Transform:
   m_ObjectHideFlags: 0
@@ -1691,7 +1691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442410907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1760,7 +1760,7 @@ GameObject:
   - component: {fileID: 1543543666}
   - component: {fileID: 1543543665}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1870,7 +1870,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1543543664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1903,7 +1903,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!1 &1687258581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1998,7 +1998,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2133,7 +2133,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!114 &1732086772 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8437317130164429899, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
@@ -2162,7 +2162,7 @@ GameObject:
   - component: {fileID: 1813493319}
   - component: {fileID: 1813493318}
   m_Layer: 0
-  m_Name: GreenHouse
+  m_Name: ElectroWater GreenHouse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2294,7 +2294,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1813493325
 Transform:
   m_ObjectHideFlags: 0
@@ -2303,7 +2303,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813493317}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2326,7 +2326,7 @@ GameObject:
   - component: {fileID: 1949029465}
   - component: {fileID: 1949029464}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2455,7 +2455,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1949029471
 Transform:
   m_ObjectHideFlags: 0
@@ -2464,7 +2464,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949029463}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2487,7 +2487,7 @@ GameObject:
   - component: {fileID: 1959712497}
   - component: {fileID: 1959712496}
   m_Layer: 0
-  m_Name: Coal Generator
+  m_Name: InfEnergy Generator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2616,7 +2616,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &1959712503
 Transform:
   m_ObjectHideFlags: 0
@@ -2625,7 +2625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1959712495}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2724,7 +2724,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &2114856212
 Transform:
   m_ObjectHideFlags: 0
@@ -2733,7 +2733,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114856207}
   m_LocalRotation: {x: 0, y: 0, z: 0.7355061, w: 0.6775182}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347979130}

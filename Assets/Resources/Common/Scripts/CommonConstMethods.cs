@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace Biosearcher.Common
 {
-    [NeedsRefactor(Need.Optimization, Need.Reformat, Need.Remove)]
+    [NeedsRefactor(Needs.Remove)]
     public static class CommonConstMethods
     {
-        [NeedsRefactor(Need.Optimization | Need.Reformat)]
+        [NeedsRefactor(Needs.Remove)]
         public static void Awake(MonoBehaviour behaviour)
         {
             // todo

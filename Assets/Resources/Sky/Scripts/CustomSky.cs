@@ -1,3 +1,4 @@
+using Biosearcher.Refactoring;
 using System;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -25,6 +26,7 @@ namespace Biosearcher.Sky
             return base.GetHashCode();
         }
 
+        [NeedsRefactor]
         public override int GetHashCode(Camera camera)
         {
             // Implement if your sky depends on the camera settings (like position for instance)

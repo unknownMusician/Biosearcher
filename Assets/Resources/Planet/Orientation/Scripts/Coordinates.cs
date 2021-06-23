@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Biosearcher.Refactoring;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,15 +9,18 @@ namespace Biosearcher.Planet.Orientation
     /// (Height - r, Latitude - θ, Longitude - φ)
     /// </summary>
     [System.Serializable]
+    [NeedsRefactor("Create Custom Editor")]
     public struct Coordinates : System.IEquatable<Coordinates>
     {
         public static Coordinates Up => new Coordinates(1, 0, 0);
         public static Coordinates Down => new Coordinates(-1, 0, 0);
         public static Coordinates Zero => new Coordinates(0, 0, 0);
 
-        // todo: maybe use double
+        [NeedsRefactor("maybe use double")]
         public float height;
+        [NeedsRefactor("maybe use double")]
         public float latitude;
+        [NeedsRefactor("maybe use double")]
         public float longitude;
 
         public Coordinates(float height, float latitude, float longitude)

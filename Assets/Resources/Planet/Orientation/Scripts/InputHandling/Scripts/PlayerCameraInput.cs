@@ -1,4 +1,5 @@
 ﻿using Biosearcher.Player;
+using Biosearcher.Refactoring;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,6 +12,7 @@ namespace Biosearcher.InputHandling
         protected bool _isMoving;
 
         // todo
+        [NeedsRefactor]
         protected const float MouseSpeed = 0.1f;
         protected const float GamepadSpeed = 1.5f;
 

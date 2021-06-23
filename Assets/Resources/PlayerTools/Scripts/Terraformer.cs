@@ -1,4 +1,5 @@
 using Biosearcher.InputHandling;
+using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.PlayerTools
@@ -66,6 +67,7 @@ namespace Biosearcher.PlayerTools
 
         #region Methods
 
+        [NeedsRefactor(Needs.Remove)]
         protected void Add()
         {
             if (TerraformPoint == null) return;

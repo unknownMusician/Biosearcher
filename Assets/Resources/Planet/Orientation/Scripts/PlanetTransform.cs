@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Biosearcher.Refactoring;
+using UnityEngine;
 
 namespace Biosearcher.Planet.Orientation
 {
@@ -7,9 +8,9 @@ namespace Biosearcher.Planet.Orientation
     {
         [SerializeField] protected Coordinates _coordinates;
 
-        // todo
+        [NeedsRefactor]
         protected readonly Vector3 planetPosition = Vector3.zero;
-        // todo
+        [NeedsRefactor]
         protected readonly Vector3 planetRotationAxis = Vector3.up;
 
         protected Vector3 PositionRelativeToPlanet => transform.position - planetPosition;
@@ -32,7 +33,8 @@ namespace Biosearcher.Planet.Orientation
             set => transform.rotation = ToUniverse(value);
         }
 
-        // todo: Add planetEulerAngles
+        [NeedsRefactor(Needs.Implementation)]
+        private Vector3 planetEulerAngles;
 
         protected void Update() => _coordinates = Coordinates;
         protected void OnValidate() => Coordinates = _coordinates;

@@ -1,4 +1,5 @@
 ﻿using Biosearcher.Common;
+using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.LandManagement.Settings
@@ -7,7 +8,7 @@ namespace Biosearcher.LandManagement.Settings
     public sealed class LandSettings : ScriptableObject
     {
         #region Properties
-        // todo: rename
+        [NeedsRefactor(Needs.Rename)]
         [Header("Chunk")]
         [SerializeField] private int _minHierarchySize = 0;
         [SerializeField] private int _maxHierarchySize = 5;

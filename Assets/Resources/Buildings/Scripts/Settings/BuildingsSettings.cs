@@ -1,4 +1,5 @@
 using Biosearcher.Buildings.Settings.Structs;
+using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Buildings.Settings
@@ -6,8 +7,8 @@ namespace Biosearcher.Buildings.Settings
     [CreateAssetMenu(fileName = "Buildings Settings", menuName = "Buildings Settings", order = 52)]
     public sealed class BuildingsSettings : ScriptableObject
     {
-        // todo
-        // public static readonly string filePath = "/sdfsdf/sdfsdg/sdfsad/fsad/fa/dg";
+        [NeedsRefactor(Needs.Implementation)]
+        public static readonly string filePath = "/sdfsdf/sdfsdg/sdfsad/fsad/fa/dg";
         [Header("Common")]
         [SerializeField] private NetworkSettings _networkSettings;
         [Header("Buildings")]

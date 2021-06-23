@@ -1,3 +1,4 @@
+using Biosearcher.Refactoring;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
@@ -39,6 +40,7 @@ namespace Biosearcher.Sky
             return true;
         }
 
+        [NeedsRefactor]
         public override void RenderSky(BuiltinSkyParameters builtinParams, bool renderForCubemap, bool renderSunDisk)
         {
             // todo

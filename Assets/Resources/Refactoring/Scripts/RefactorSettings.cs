@@ -79,7 +79,7 @@ namespace Biosearcher.Refactoring
             _showInConsole = serializedObject.FindProperty("_showInConsole");
         }
 
-        [NeedsRefactor(Need.Reformat)]
+        [NeedsRefactor(Needs.Reformat)]
         public override void OnInspectorGUI()
         {
             Log[] logs = NeedsRefactorAttribute.Logs;

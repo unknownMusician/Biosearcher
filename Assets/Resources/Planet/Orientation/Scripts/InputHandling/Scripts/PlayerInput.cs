@@ -1,4 +1,5 @@
 using Biosearcher.Player;
+using Biosearcher.Refactoring;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -35,9 +36,10 @@ namespace Biosearcher.InputHandling
             controls.Player.NormalAccelerationStop.performed -= HandleNormalAccelerationStop;
         }
 
+        [NeedsRefactor("small gamepad trigger press would not matter")]
         protected void HandleTangentAccelerationStart(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+            _playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>());
         }
 
         protected void HandleTangentAccelerationStop(InputAction.CallbackContext ctx)
@@ -45,9 +47,10 @@ namespace Biosearcher.InputHandling
             _playerPresenter.TangentAcceleration = 0;
         }
 
+        [NeedsRefactor("small gamepad trigger press would not matter")]
         protected void HandleNormalAccelerationStart(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>()); // todo: small gamepad trigger press would not matter
+            _playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>());
         }
 
         protected void HandleNormalAccelerationStop(InputAction.CallbackContext ctx)

@@ -16,7 +16,7 @@ namespace Biosearcher.Refactoring
                 BindingFlags.Public |
                 BindingFlags.NonPublic;
 
-        private readonly static int needCount = Enum.GetNames(typeof(Need)).Length;
+        private readonly static int needCount = Enum.GetNames(typeof(Needs)).Length;
 
         private readonly string _neededAction;
 
@@ -33,19 +33,19 @@ namespace Biosearcher.Refactoring
         }
         public NeedsRefactorAttribute()
 #if UNITY_EDITOR
-            : this(Need.Refactor.ToString())
+            : this(Needs.Refactor.ToString())
 #endif
         { }
-        public NeedsRefactorAttribute(Need neededAction)
+        public NeedsRefactorAttribute(Needs neededAction)
 #if UNITY_EDITOR
             : this(NeedsToString(neededAction))
 #endif
         { }
-        public NeedsRefactorAttribute(params Need[] neededActions)
+        public NeedsRefactorAttribute(params Needs[] neededActions)
         {
 #if UNITY_EDITOR
-            Need finalNeed = 0;
-            foreach (Need need in neededActions)
+            Needs finalNeed = 0;
+            foreach (Needs need in neededActions)
             {
                 finalNeed |= need;
             }
@@ -54,13 +54,13 @@ namespace Biosearcher.Refactoring
         }
 
 #if UNITY_EDITOR
-        private static string NeedsToString(Need neededAction)
+        private static string NeedsToString(Needs neededAction)
         {
             System.Text.StringBuilder neededActionBuilder = new System.Text.StringBuilder();
             int neededActionInt = (int)neededAction;
             if (neededActionInt == 0)
             {
-                return Need.Refactor.ToString();
+                return Needs.Refactor.ToString();
             }
             for (int i = 0; i < needCount - 1; i++)
             {
@@ -70,14 +70,14 @@ namespace Biosearcher.Refactoring
                     continue;
                 }
 
-                neededActionBuilder.Append($"{(Need)needInt}, ");
+                neededActionBuilder.Append($"{(Needs)needInt}, ");
             }
             neededActionBuilder.Remove(neededActionBuilder.Length - 2, 2);
             return neededActionBuilder.ToString();
         }
 
         [UnityEditor.InitializeOnLoadMethod]
-        public static void CheckAssembly()
+        internal static void CheckAssembly()
         {
             RefactorSettings.Parameters parameters = RefactorSettings.GetParamsSafe();
             if (parameters.enabled)
@@ -157,7 +157,7 @@ namespace Biosearcher.Refactoring
     }
 
 #if UNITY_EDITOR
-    internal static class NeedsRefactorAttributeEstensions
+    internal static class NeedsRefactorAttributeExtensions
     {
         internal static bool TryGetCustomAttribute(this MemberInfo element, out NeedsRefactorAttribute attribute)
         {
@@ -167,12 +167,16 @@ namespace Biosearcher.Refactoring
     }
 #endif
 
-    public enum Need
+    public enum Needs
     {
         Refactor = 0,
+
         Reformat = 1,
         Optimization = 2,
         Review = 4,
         Remove = 8,
+        Implementation = 16,
+        Rename = 32,
+        RemoveTodo = 64,
     }
 }

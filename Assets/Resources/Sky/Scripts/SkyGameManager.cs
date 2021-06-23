@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Biosearcher.Refactoring;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
@@ -7,7 +6,8 @@ namespace Biosearcher.Sky
 {
     public class SkyGameManager : MonoBehaviour
     {
-        protected static SkyGameManager instance; // todo: ScriptableObject
+        [NeedsRefactor("ScriptableObject")]
+        protected static SkyGameManager instance;
 
         public static Vector3 playerPosition;
         public static Vector3 planetPosition;
@@ -32,6 +32,7 @@ namespace Biosearcher.Sky
             mainStarMaterial.SetFloat("_EmissionStrenght", 0);
         }
 
+        [NeedsRefactor(Needs.RemoveTodo)]
         protected void Update()
         {
             mainStarLight.intensity = MainStarIntensity;
