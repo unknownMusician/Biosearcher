@@ -5,19 +5,21 @@ namespace Biosearcher.Common
 {
     public static class CollectionsExtension
     {
-        public static void Foreach<T>(this IEnumerable<T> collection, System.Action<T> action)
+        public static IEnumerable<T> Foreach<T>(this IEnumerable<T> collection, System.Action<T> action)
         {
             foreach (T element in collection)
             {
                 action?.Invoke(element);
             }
+            return collection;
         }
-        public static void Foreach(this IEnumerable collection, System.Action<object> action)
+        public static IEnumerable Foreach(this IEnumerable collection, System.Action<object> action)
         {
             foreach (object element in collection)
             {
                 action?.Invoke(element);
             }
+            return collection;
         }
     }
 }

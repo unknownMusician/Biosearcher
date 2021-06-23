@@ -8,8 +8,19 @@ namespace Biosearcher.Common
     public static class CommonMonoBehaviour
     {
         private static CommonMonoBehaviourComponent instance;
-        private static CommonMonoBehaviourComponent Instance 
-            => instance ??= new GameObject(typeof(CommonMonoBehaviour).ToString()).AddComponent<CommonMonoBehaviourComponent>();
+        public static CommonMonoBehaviourComponent Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new GameObject(nameof(CommonMonoBehaviour)).AddComponent<CommonMonoBehaviourComponent>();
+                    // todo: may not be created in the start of the scene
+                    CommonConstMethods.Awake(instance);
+                }
+                return instance;
+            }
+        }
 
         public static event UnityAction OnDrawGizmos
         {
@@ -32,6 +43,8 @@ namespace Biosearcher.Common
 
             private void OnDrawGizmos() => _onGizmos?.Invoke();
             private void OnDrawGizmosSelected() => _onGizmosSelected?.Invoke();
+
+            private void OnDestroy() => instance = null;
         }
     }
 }
