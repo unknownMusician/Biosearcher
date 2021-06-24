@@ -71,6 +71,7 @@ namespace Biosearcher.Player
         {
             foreach (Type insertableType in insertFriendly.GetInsertableType())
             {
+                // todo:  || !insertable.GetType().IsSubclassOf(insertableType)
                 if (insertableType != insertable.GetType())
                 {
                     continue;
