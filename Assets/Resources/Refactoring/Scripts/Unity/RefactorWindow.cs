@@ -14,10 +14,10 @@ namespace Biosearcher.Refactoring
         private GUIStyle _labelStyle;
         private GUIStyle _logStyle;
 
-        private string _logNamespace;
+        private string _logNamespace = "";
         private float _horizontalWidth;
         private Vector2 _scrollPosition;
-        private bool _showParameters;
+        [SerializeField] private bool _showParameters;
 
         [MenuItem("Window/Biosearcher/Refactor")]
         private static void Init() => GetWindow<RefactorWindow>(false, "Refactor", true);
@@ -38,14 +38,15 @@ namespace Biosearcher.Refactoring
                 richText = true,
                 wordWrap = true
             };
+
             refactorSettings = Resources.Load<RefactorSettings>("Settings/Refactor Settings");
         }
 
         private void OnGUI()
         {
-            RefactorSettings.Parameters parameters = refactorSettings.Params;
+            RefactorSettings.Parameters parameters = refactorSettings.GetParamsSafe();
 
-            TryShowParameters(refactorSettings.Params);
+            TryShowParameters(parameters);
             ShowNamespaceFilter();
             ShowLogs(parameters);
         }
@@ -65,13 +66,11 @@ namespace Biosearcher.Refactoring
                     EditorGUILayout.Toggle("Show In Console", parameters.showInConsole);
                     GUI.enabled = true;
                 }
-
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
                 EditorGUILayout.LabelField("<color=#c4c4c4>Need Refactor:</color>", _headerStyle);
             }
             EditorGUILayout.EndFoldoutHeaderGroup();
-
         }
 
         private void ShowNamespaceFilter()

@@ -1,6 +1,6 @@
 ﻿namespace Biosearcher.Refactoring
 {
-    internal readonly struct Log
+    public readonly struct Log
     {
         public string Text { get; }
         public string FilePath { get; }

@@ -42,5 +42,4 @@ namespace Biosearcher.Refactoring
         }
     }
 }
-
 #endif

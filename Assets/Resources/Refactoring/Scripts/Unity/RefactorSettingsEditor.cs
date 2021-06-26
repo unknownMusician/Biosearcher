@@ -42,15 +42,11 @@ namespace Biosearcher.Refactoring
             _showInConsole = serializedObject.FindProperty("_showInConsole");
         }
 
-        [NeedsRefactor(Needs.Reformat)]
         public override void OnInspectorGUI()
         {
             HandleRefactorProperties();
-
             ShowRefactorHeader();
-
             ShowNamespcaeFilter();
-
             ShowLogs();
         }
 
@@ -69,6 +65,7 @@ namespace Biosearcher.Refactoring
         private void ShowRefactorHeader()
         {
             EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("<color=#c4c4c4>Need Refactor:</color>", _headerStyle);
         }
 
