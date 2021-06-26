@@ -4,7 +4,6 @@ using System.Reflection;
 
 namespace Biosearcher.Refactoring.FileInput
 {
-    [NeedsRefactor]
     public struct FileInfo
     {
         public DateTime writeTime;
@@ -12,14 +11,12 @@ namespace Biosearcher.Refactoring.FileInput
         public List<Log> logs;
     }
 
-    [NeedsRefactor]
     public struct SearchedTypeInfo
     {
         public SearchedTitleInfo titleInfo;
         public List<SearchedMemberInfo> memberInfos;
     }
 
-    [NeedsRefactor]
     public struct FoundTypeInfo
     {
         public FoundTitleInfo titleInfo;
@@ -27,14 +24,12 @@ namespace Biosearcher.Refactoring.FileInput
         public string filePath;
     }
 
-    [NeedsRefactor]
     public struct SearchedTitleInfo
     {
         public Type type;
         public NeedsRefactorAttribute attribute;
     }
 
-    [NeedsRefactor]
     public struct FoundTitleInfo
     {
         public SearchedTitleInfo titleInfo;
@@ -42,14 +37,12 @@ namespace Biosearcher.Refactoring.FileInput
         public int columnNumber;
     }
 
-    [NeedsRefactor]
     public struct SearchedMemberInfo
     {
         public MemberInfo member;
         public NeedsRefactorAttribute attribute;
     }
 
-    [NeedsRefactor]
     public struct FoundMemberInfo
     {
         public SearchedMemberInfo memberInfo;

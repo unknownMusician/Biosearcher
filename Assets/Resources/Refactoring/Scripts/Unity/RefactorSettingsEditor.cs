@@ -1,5 +1,7 @@
 ﻿#if UNITY_EDITOR
 
+using Biosearcher.Common;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -7,6 +9,7 @@ using UnityEngine;
 namespace Biosearcher.Refactoring
 {
     [CustomEditor(typeof(RefactorSettings))]
+    [NeedsRefactor(Needs.Optimization, Needs.Review)]
     internal sealed class RefactorSettingsEditor : Editor
     {
         private SerializedProperty _refactorCheckEnabled;
@@ -16,7 +19,7 @@ namespace Biosearcher.Refactoring
         private GUIStyle _labelStyle;
         private GUIStyle _logStyle;
 
-        private string _logNamespace;
+        private string _logNamespace = "";
         private float _horizontalWidth;
 
         void OnEnable()
@@ -46,8 +49,11 @@ namespace Biosearcher.Refactoring
         {
             HandleRefactorProperties();
             ShowRefactorHeader();
-            ShowNamespcaeFilter();
-            ShowLogs();
+
+            Log[] logs = RefactorManager.Logs;
+
+            ShowNamespcaeFilter(logs);
+            ShowLogs(logs);
         }
 
         private void HandleRefactorProperties()
@@ -69,7 +75,7 @@ namespace Biosearcher.Refactoring
             EditorGUILayout.LabelField("<color=#c4c4c4>Need Refactor:</color>", _headerStyle);
         }
 
-        private void ShowNamespcaeFilter()
+        private void ShowNamespcaeFilter(Log[] logs)
         {
             float newHorizontalWidth = EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true)).width;
 
@@ -78,27 +84,29 @@ namespace Biosearcher.Refactoring
             float labelWidth = 120;
             EditorGUILayout.LabelField("<color=#c4c4c4>Namespace filter: </color>", _labelStyle, GUILayout.MaxWidth(labelWidth));
 
+            ShowDropDown(labelWidth, logs);
+
             float namespaceTextAreaWidth = Mathf.Max(_horizontalWidth - labelWidth, labelWidth);
             _logNamespace = EditorGUILayout.TextArea(_logNamespace, GUILayout.MinWidth(labelWidth),
-                GUILayout.Width(namespaceTextAreaWidth), GUILayout.ExpandHeight(true)) ?? "";
+                GUILayout.Width(namespaceTextAreaWidth), GUILayout.ExpandHeight(true));
 
             EditorGUILayout.EndHorizontal();
         }
 
-        private void ShowLogs()
+        private void ShowLogs(Log[] logs)
         {
-            Log[] logs = RefactorManager.Logs.Where(log => log.Namespace.ToLower().Contains(_logNamespace.ToLower())).ToArray();
+            Log[] filteredLogs = logs.Where(log => log.Namespace.ToLower().Contains(_logNamespace.ToLower())).ToArray();
 
             int i;
-            for (i = 0; i < logs.Length; i++)
+            for (i = 0; i < filteredLogs.Length; i++)
             {
                 Rect verticalRect = EditorGUILayout.BeginVertical("Button");
 
                 if (GUI.Button(verticalRect, GUIContent.none))
                 {
-                    UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(logs[i].FilePath, logs[i].LineNumber, logs[i].ColumnNumber);
+                    UnityEditorInternal.InternalEditorUtility.OpenFileAtLineExternal(filteredLogs[i].FilePath, filteredLogs[i].LineNumber, filteredLogs[i].ColumnNumber);
                 }
-                EditorGUILayout.LabelField($"<color=#ffffff>{logs[i].Text}</color>", _logStyle, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
+                EditorGUILayout.LabelField($"<color=#ffffff>{filteredLogs[i].Text}</color>", _logStyle, GUILayout.ExpandWidth(true), GUILayout.ExpandHeight(true));
 
                 EditorGUILayout.EndVertical();
             }
@@ -107,6 +115,44 @@ namespace Biosearcher.Refactoring
                 EditorGUILayout.HelpBox($"Bro, nice job! There is nothing to refactor{(_logNamespace == "s" ? "" : " in this namespace")}. Come back later! See you soooooooon. \n\n You still here?  ⊙﹏⊙",
                     MessageType.None, true);
             }
+        }
+
+        private void ShowDropDown(float labelWidth, Log[] logs)
+        {
+            if (EditorGUILayout.DropdownButton(new GUIContent("Biosearcher..."), FocusType.Keyboard, GUILayout.Width(labelWidth)))
+            {
+                GUI.FocusControl("");
+                var menu = new GenericMenu();
+
+                menu.AddItem(new GUIContent("[Biosearcher]"), "Biosearcher".Contains(_logNamespace), () => _logNamespace = "");
+                menu.AddSeparator("");
+
+                ToDropdownNamespaces(logs.Select(log => log.Namespace.Substring(log.Namespace.IndexOf('.') + 1)))
+                    .Foreach(@namespace =>
+                    {
+                        menu.AddItem(new GUIContent(@namespace.Replace('.', '/') + $"/[{@namespace.Split('.').Last()}]"),
+                            @namespace.Contains(_logNamespace), () => _logNamespace = @namespace);
+                        menu.AddSeparator(@namespace.Replace('.', '/') + "/");
+                    });
+
+                menu.ShowAsContext();
+            }
+        }
+
+        private static List<string> ToDropdownNamespaces(IEnumerable<string> namespaces)
+        {
+            //namespaces = namespaces.Select(@namespace => @namespace.Replace('.', '/'));
+
+            var finNamespaces = new List<string>();
+
+            for (int i = 0; namespaces.Count() > 0; i++)
+            {
+                namespaces = namespaces.Where(@namespace => @namespace.Split('.').Length > i);
+                namespaces.Select(@namespace => @namespace.Split('.').Length == i + 1 ? @namespace : @namespace.Substring(0, @namespace.IndexOf(@namespace.Split('.')[i + 1]) - 1))
+                    .Distinct().Foreach(@namespace => finNamespaces.Add(@namespace));
+            }
+
+            return finNamespaces;
         }
     }
 }

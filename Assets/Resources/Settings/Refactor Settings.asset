@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1417b8606c794fe4fb3bd1cdf65c86e3, type: 3}
   m_Name: Refactor Settings
   m_EditorClassIdentifier: 
-  _refactorCheckEnabled: 0
+  _refactorCheckEnabled: 1
   _showInConsole: 0

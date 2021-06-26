@@ -11,7 +11,6 @@ using UnityEngine.Profiling;
 
 namespace Biosearcher.Refactoring
 {
-    [NeedsRefactor]
     internal static class RefactorManager
     {
         private static Dictionary<string, FileInfo> fileInfos;
