@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Refactor Settings
   m_EditorClassIdentifier: 
   _refactorCheckEnabled: 1
-  _showInConsole: 1
+  _showInConsole: 0

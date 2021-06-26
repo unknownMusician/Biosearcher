@@ -21,5 +21,18 @@ namespace Biosearcher.Common
             }
             return collection;
         }
+        public static void Deconstruct<K, V>(this KeyValuePair<K, V> pair, out K key, out V value)
+        {
+            key = pair.Key;
+            value = pair.Value;
+        }
+        public static void SafeAddToValueCollection<K, V, TCollection>(this IDictionary<K, TCollection> dictionary, K key, V value) where TCollection : ICollection<V>, new()
+        {
+            if (!dictionary.TryGetValue(key, out TCollection valueList))
+            {
+                valueList = dictionary[key] = new TCollection();
+            }
+            valueList.Add(value);
+        }
     }
 }

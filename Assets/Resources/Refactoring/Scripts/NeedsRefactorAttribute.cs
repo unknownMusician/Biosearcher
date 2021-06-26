@@ -11,24 +11,15 @@ namespace Biosearcher.Refactoring
     public sealed class NeedsRefactorAttribute : Attribute
     {
 #if UNITY_EDITOR
-        private const BindingFlags MembersFlags = BindingFlags.Instance |
-                BindingFlags.Static |
-                BindingFlags.Public |
-                BindingFlags.NonPublic;
-
         private readonly static int needCount = Enum.GetNames(typeof(Needs)).Length;
 
-        private readonly string _neededAction;
-
-        public static Log[] Logs { get; private set; }
-
-        private static RefactorSettings RefactorSettings => Resources.Load<RefactorSettings>("Settings/Refactor Settings");
+        internal string NeededAction { get; }
 #endif
 
         public NeedsRefactorAttribute(string neededAction)
         {
 #if UNITY_EDITOR
-            _neededAction = neededAction;
+            NeededAction = neededAction;
 #endif
         }
         public NeedsRefactorAttribute()
@@ -49,7 +40,7 @@ namespace Biosearcher.Refactoring
             {
                 finalNeed |= need;
             }
-            _neededAction = NeedsToString(finalNeed);
+            NeededAction = NeedsToString(finalNeed);
 #endif
         }
 
@@ -75,85 +66,7 @@ namespace Biosearcher.Refactoring
             neededActionBuilder.Remove(neededActionBuilder.Length - 2, 2);
             return neededActionBuilder.ToString();
         }
-
-        [UnityEditor.InitializeOnLoadMethod]
-        internal static void CheckAssembly()
-        {
-            RefactorSettings.Parameters parameters = RefactorSettings.GetParamsSafe();
-            if (parameters.enabled)
-            {
-                Logs = CreateLogs();
-                if (parameters.showInConsole)
-                {
-                    Logs.Foreach(log => Debug.LogWarningFormat(log.text));
-                }
-            }
-            else
-            {
-                Logs = new Log[0];
-            }
-        }
-
-        private static Log[] CreateLogs()
-        {
-            var logs = new List<Log>();
-
-            Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Namespace != null && t.Namespace.Contains(nameof(Biosearcher)))
-                //.Where(t => t.IsInterface || t.IsClass || t.IsEnum)
-                .Foreach(t => AppendFullTypeLogsIfNeeded(t, logs));
-
-            return logs.ToArray();
-        }
-
-        private static void AppendFullTypeLogsIfNeeded(Type type, List<Log> logs)
-        {
-            if (type.TryGetCustomAttribute(out NeedsRefactorAttribute attribute))
-            {
-                logs.Add(GetLog(type, attribute));
-            }
-            type.GetMembers(MembersFlags).Foreach(m => AppendMemberLogIfNeeded(m, type, logs));
-        }
-        private static void AppendMemberLogIfNeeded(MemberInfo member, Type memberParent, List<Log> logs)
-        {
-            if (member.TryGetCustomAttribute(out NeedsRefactorAttribute attribute))
-            {
-                logs.Add(GetLog(member, memberParent, attribute));
-            }
-        }
-
-        private static Log GetLog(Type type, NeedsRefactorAttribute attribute)
-        {
-            return new Log
-            {
-                filePath = ClassFileFinder.FindTypePathOrDefault(type),
-                text = GetLogText(type.Namespace, type.Name, attribute),
-            };
-        }
-        private static Log GetLog(MemberInfo member, Type memberParent, NeedsRefactorAttribute attribute)
-        {
-            return new Log
-            {
-                filePath = ClassFileFinder.FindTypePathOrDefault(memberParent),
-                text = GetLogText(memberParent.Namespace, memberParent.Name, member.Name, attribute),
-            };
-        }
-        private static string GetLogText(string @namespace, string shortName, NeedsRefactorAttribute attribute)
-        {
-            return $"<b><color=#99ccff>{@namespace}</color>. <color=#99ff99>{shortName}</color></b> needs <color=#ff6699>{attribute._neededAction}</color>.";
-        }
-        private static string GetLogText(string @namespace, string shortName, string memberName, NeedsRefactorAttribute attribute)
-        {
-            return $"<b><color=#99ccff>{@namespace}</color>. <color=#99ff99>{shortName}</color>. " +
-                $"<color=#ffff99>{memberName}</color></b> needs <color=#ff6699>{attribute._neededAction}</color>.";
-        }
 #endif
-    }
-
-    public struct Log
-    {
-        public string text;
-        public string filePath;
     }
 
 #if UNITY_EDITOR
@@ -167,6 +80,7 @@ namespace Biosearcher.Refactoring
     }
 #endif
 
+    [Flags]
     public enum Needs
     {
         Refactor = 0,
@@ -178,5 +92,6 @@ namespace Biosearcher.Refactoring
         Implementation = 16,
         Rename = 32,
         RemoveTodo = 64,
+        MakeOwnClass = 128,
     }
 }
