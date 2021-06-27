@@ -15,6 +15,7 @@ namespace Biosearcher.Buildings
         [SerializeField] protected LayerMask _groundMask;
         [SerializeField] protected float _minDistanceToGround;
         [SerializeField] protected BuildingsSettings _buildingsSettings;
+        [Space]
 
         protected Rigidbody _rigidbody;
         protected Collider _collider;
