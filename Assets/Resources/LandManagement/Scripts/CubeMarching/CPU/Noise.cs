@@ -1,7 +1,5 @@
-//#define NOISE_PROFILING
-
 using UnityEngine;
-#if NOISE_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -11,11 +9,11 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
     {
         internal static float Get(Vector3 position)
         {
-#if NOISE_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("Noise.Get");
 #endif
             float noise = Mathf.Abs((Mathf.Sin(Vector3.Dot(position, new Vector3(12.9898f, 78.233f, 128.544f) * 2.0f) * position.magnitude) * 43758.5453f) % 1);
-#if NOISE_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return noise;
@@ -33,7 +31,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
         internal static float Gradient(Vector3 position)
         {
-#if NOISE_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("Noise.Gradient");
 #endif
             Vector3Int wholePart = Vector3Int.FloorToInt(position);
@@ -57,7 +55,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             }
             float gradient = Mathf.Lerp(noisesZ[0], noisesZ[1], fractPart.z);
 
-#if NOISE_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return gradient;

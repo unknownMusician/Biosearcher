@@ -1,8 +1,6 @@
-//#define CUBE_MARCHER_CPU_PROFILING
-
 using Biosearcher.LandManagement.Settings;
 using UnityEngine;
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -404,12 +402,12 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 
         public override MeshData GenerateMeshData(Vector3Int chunkPosition, int cubeSize)
         {
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("CubeMarcher.GenerateMesh");
 #endif
             DispatchPointsKernel(chunkPosition, cubeSize);
             MeshData meshData = DispatchCubesKernel();
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return meshData;
@@ -433,34 +431,34 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 
         protected void DispatchPointsKernel(Vector3Int chunkPosition, int cubeSize)
         {
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("CubeMarcher.DispatchPointsKernel");
 #endif
             _shader.SetVector(_chunkPositionID, (Vector3)chunkPosition);
             _shader.SetInt(_cubeSizeID, cubeSize);
 
             _shader.Dispatch(_generatePointsKernel, _threadGroups, _threadGroups, _threadGroups);
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
         protected MeshData DispatchCubesKernel()
         {
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("CubeMarcher.DispatchCubesKernel");
 #endif
             _shader.Dispatch(_generateMeshKernel, _threadGroups, _threadGroups, _threadGroups);
 
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("CubeMarcher.ReadMeshBuffer");
 #endif
             _meshV3T1Buffer.GetData(_meshV3T1Values);
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             MeshData meshData = ToMeshData(_meshV3T1Values);
 
-#if CUBE_MARCHER_CPU_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return meshData;

@@ -1,8 +1,6 @@
-﻿//#define CUBE_MARCHER_PROFILING
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -25,7 +23,7 @@ namespace Biosearcher.LandManagement.CubeMarching
 
         protected MeshData ToMeshData(Vector4[] meshV3T1)
         {
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("ToMeshData");
 #endif
 
@@ -52,26 +50,26 @@ namespace Biosearcher.LandManagement.CubeMarching
                 {
                     continue;
                 }
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
                 Profiler.BeginSample("AddToList");
 #endif
                 newVertices.AddRange(faceVertices);
                 newTriangles.AddRange(faceTriangles);
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
                 Profiler.EndSample();
 #endif
                 counter += 3;
             }
 
             var meshData = new MeshData(newVertices.ToArray(), newTriangles.ToArray());
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return meshData;
         }
         protected Mesh ToMesh(Vector3[] cleanVertices, int[] cleanTriangles)
         {
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("MeshInstantiatingAndAssigning");
 #endif
             var mesh = new Mesh();
@@ -79,7 +77,7 @@ namespace Biosearcher.LandManagement.CubeMarching
             mesh.vertices = cleanVertices;
             mesh.triangles = cleanTriangles;
             mesh.RecalculateNormals();
-#if CUBE_MARCHER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return mesh;

@@ -1,10 +1,8 @@
-﻿//#define DIRECTORY_READER_PROFILING
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -14,7 +12,7 @@ namespace Biosearcher.Refactoring.FileInput
     {
         public static void GetFilePaths(out List<string> changedFilePaths, out List<string> notChangedFilePaths, Dictionary<string, FileInfo> fileInfos)
         {
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetFilePaths));
 #endif
 
@@ -24,13 +22,13 @@ namespace Biosearcher.Refactoring.FileInput
             changedFilePaths = changedFilePathsList;
             notChangedFilePaths = notChangedFilePathsList;
 
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
         public static List<string> GetFilePaths()
         {
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetFilePaths));
 #endif
 
@@ -38,7 +36,7 @@ namespace Biosearcher.Refactoring.FileInput
 
             ForeachScriptFile(filePathsList.Add);
 
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -47,7 +45,7 @@ namespace Biosearcher.Refactoring.FileInput
 
         public static void AddFilePath(string filePath, List<string> changedFilePaths, List<string> notChangedFilePaths, Dictionary<string, FileInfo> fileInfos)
         {
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(AddFilePath));
 #endif
 
@@ -60,7 +58,7 @@ namespace Biosearcher.Refactoring.FileInput
                 changedFilePaths.Add(filePath);
             }
 
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
@@ -68,7 +66,7 @@ namespace Biosearcher.Refactoring.FileInput
         public static void ForeachScriptFile(Action<string> action) => ForeachScriptFile(Application.dataPath, action);
         public static void ForeachScriptFile(string startDir, Action<string> action)
         {
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(ForeachScriptFile));
 #endif
 
@@ -91,7 +89,7 @@ namespace Biosearcher.Refactoring.FileInput
                 Debug.LogError(ex.Message);
             }
 
-#if DIRECTORY_READER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }

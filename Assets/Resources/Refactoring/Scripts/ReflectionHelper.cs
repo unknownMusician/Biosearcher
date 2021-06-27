@@ -1,11 +1,9 @@
-﻿//#define REFLECTION_HELPER_PROFILING
-
-using Biosearcher.Refactoring.FileInput;
+﻿using Biosearcher.Refactoring.FileInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -23,14 +21,14 @@ namespace Biosearcher.Refactoring
         }
         private static IEnumerable<Type> GetAllTypes()
         {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetAllTypes));
 #endif
 
             IEnumerable<Type> types = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(t => t.Namespace != null && t.Namespace.Contains(nameof(Biosearcher)));
 
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -38,7 +36,7 @@ namespace Biosearcher.Refactoring
         }
         internal static IEnumerable<SearchedTypeInfo> GetSearchedTypeInfos()
         {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetSearchedTypeInfos));
 #endif
 
@@ -47,7 +45,7 @@ namespace Biosearcher.Refactoring
                 .Where(info => info != null)
                 .Cast<SearchedTypeInfo>();
 
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -55,13 +53,13 @@ namespace Biosearcher.Refactoring
         }
         private static SearchedTypeInfo? GetSearchedTypeInfoOrNull(Type type)
         {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetSearchedTypeInfoOrNull));
 #endif
 
             if (!type.TryGetCustomAttribute(out NeedsRefactorAttribute attribute))
             {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
                 Profiler.EndSample();
 #endif
 
@@ -80,7 +78,7 @@ namespace Biosearcher.Refactoring
                 memberInfos = searchedMemberInfos
             };
 
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -88,13 +86,13 @@ namespace Biosearcher.Refactoring
         }
         private static SearchedMemberInfo? GetSearchedMemberInfoOrNull(MemberInfo member)
         {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetSearchedMemberInfoOrNull));
 #endif
 
             if (!member.TryGetCustomAttribute(out NeedsRefactorAttribute attribute))
             {
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
                 Profiler.EndSample();
 #endif
 
@@ -107,7 +105,7 @@ namespace Biosearcher.Refactoring
                 attribute = attribute
             };
 
-#if REFLECTION_HELPER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 

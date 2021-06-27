@@ -1,11 +1,9 @@
-﻿//#define LOGGER_PROFILING
-
-using Biosearcher.Common;
+﻿using Biosearcher.Common;
 using Biosearcher.Refactoring.FileInput;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-#if LOGGER_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -15,7 +13,7 @@ namespace Biosearcher.Refactoring
     {
         internal static List<Log> ToLogs(List<FoundTypeInfo> foundTypeInfos)
         {
-#if LOGGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(ToLogs));
 #endif
 
@@ -39,7 +37,7 @@ namespace Biosearcher.Refactoring
                             member.columnNumber)));
             }
 
-#if LOGGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -58,13 +56,13 @@ namespace Biosearcher.Refactoring
 
         internal static void LogAll(IEnumerable<Log> logs)
         {
-#if LOGGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(LogAll));
 #endif
 
             logs.Foreach(log => Debug.LogWarningFormat(log.Text));
 
-#if LOGGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }

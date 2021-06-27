@@ -1,11 +1,9 @@
-﻿//#define REFACTOR_MANAGER_PROFILING
-
-using Biosearcher.Refactoring.FileInput;
+﻿using Biosearcher.Refactoring.FileInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -36,7 +34,7 @@ namespace Biosearcher.Refactoring
 
         private static void OnChange(Action fileUpdateAction)
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample($"RefactorManager.{nameof(OnChange)}");
 #endif
 
@@ -63,14 +61,14 @@ namespace Biosearcher.Refactoring
                 Debug.LogError(ex.Message);
             }
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
 
         private static void FillFileInfos()
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(FillFileInfos));
 #endif
 
@@ -80,13 +78,13 @@ namespace Biosearcher.Refactoring
 
             fileInfos = GetChangedFileInfos(filePaths, changedTypes);
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
         private static void UpdateFileInfos()
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(UpdateFileInfos));
 #endif
 
@@ -98,14 +96,14 @@ namespace Biosearcher.Refactoring
 
             fileInfos = CombineLogs(changedFileInfos, notChangedFilePaths);
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
 
         private static Dictionary<string, FileInfo> CombineLogs(IDictionary<string, FileInfo> changedLogs, IEnumerable<string> notChangedFilePaths)
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(CombineLogs));
 #endif
 
@@ -116,7 +114,7 @@ namespace Biosearcher.Refactoring
                 newLogs.Add(notChangedFilePath, fileInfos[notChangedFilePath]);
             }
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -124,7 +122,7 @@ namespace Biosearcher.Refactoring
         }
         private static Dictionary<string, FileInfo> GetChangedFileInfos(IEnumerable<string> changedFilePaths, IEnumerable<SearchedTypeInfo> changedTypes)
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetChangedFileInfos));
 #endif
 
@@ -137,7 +135,7 @@ namespace Biosearcher.Refactoring
                 newFileInfos.Add(filePath, fileInfo);
             }
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 
@@ -146,7 +144,7 @@ namespace Biosearcher.Refactoring
         
         private static List<SearchedTypeInfo> GetChangedTypes(IEnumerable<string> notChangedFilePaths)
         {
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetChangedTypes));
 #endif
 
@@ -169,7 +167,7 @@ namespace Biosearcher.Refactoring
                 }
             }
 
-#if REFACTOR_MANAGER_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
 

@@ -1,8 +1,6 @@
-﻿//#define GENERATOR_PROFILING
-
-using Biosearcher.Refactoring;
+﻿using Biosearcher.Refactoring;
 using UnityEngine;
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
@@ -20,7 +18,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
         }
         protected internal void GeneratePoints(ref TempPointsBuffer tempBuffer)
         {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("GeneratePoints");
 #endif
             int x, y, z;
@@ -35,7 +33,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
                     }
                 }
             }
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
@@ -43,12 +41,12 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
         [NeedsRefactor]
         protected void GeneratePoint(Vector3Int threadId, ref TempPointsBuffer tempBuffer)
         {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("GenerateSinglePoint");
 #endif
             if (threadId.x >= _constantInputOutput.pointsPerChunk || threadId.y >= _constantInputOutput.pointsPerChunk || threadId.z >= _constantInputOutput.pointsPerChunk)
             {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
                 Profiler.EndSample();
 #endif
                 return;
@@ -63,7 +61,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
                     position = position,
                     value = GenerateValue(position + tempBuffer.chunkPosition)
                 };
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
@@ -71,7 +69,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
         protected internal void GenerateMesh(ref TempMeshBuffer tempBuffer)
         {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("GenerateMesh");
 #endif
             int x, y, z;
@@ -87,7 +85,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
                     }
                 }
             }
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
         }
@@ -115,7 +113,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
         [NeedsRefactor]
         protected override float GenerateValue(Vector3 position)
         {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("GenerateValue");
 #endif
             float result = 1;
@@ -145,7 +143,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
             result *= 1 - Mathf.Clamp01(planetRadius);
 
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return result;
@@ -159,7 +157,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
         [NeedsRefactor]
         protected override float GenerateValue(Vector3 position)
         {
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.BeginSample("GenerateValue");
 #endif
             float result = 1;
@@ -192,7 +190,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
             result *= 1 - Mathf.Clamp01(planetRadius);
 
-#if GENERATOR_PROFILING
+#if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return result;
