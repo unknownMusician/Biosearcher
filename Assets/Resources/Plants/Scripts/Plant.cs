@@ -1,5 +1,4 @@
-﻿using Biosearcher.Refactoring;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Biosearcher.Plants
@@ -8,24 +7,24 @@ namespace Biosearcher.Plants
     {
         #region Properties
 
-        [NeedsRefactor]
+        // todo
         private const float GrowthTicksPerSecond = 1;
-
+        
         private PlantSettings _settings;
-        private Slot _slot;
-
+        private Capsule _capsule;
+        
         private float _growthProgress;
         private float _corruptionProgress;
 
         private bool _isGrowing;
 
         public PlantSettings Settings => _settings;
-        public Slot Slot
+        public Capsule Capsule
         {
             set
             {
                 EndGrowth();
-                _slot = value;
+                _capsule = value;
                 StartGrowth();
             }
         }
@@ -39,19 +38,18 @@ namespace Biosearcher.Plants
             _settings = plantSettings;
         }
 
-        [NeedsRefactor(Needs.RemoveTodo)]
         private bool AreGrowthConditionsAcceptable(float humidity, float illumination, float temperature)
         {
             var humidityCondition = _settings.humidityRange.Contains(humidity);
             var illuminationCondition = _settings.illuminationRange.Contains(illumination);
             var temperatureCondition = _settings.temperatureRange.Contains(temperature);
-
+            
             // todo
             // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
-
+            
             return humidityCondition && illuminationCondition && temperatureCondition;
         }
-
+        
         private void Grow()
         {
             _growthProgress += GrowthTicksPerSecond / _settings.timeToGrow;
@@ -61,7 +59,6 @@ namespace Biosearcher.Plants
             _corruptionProgress += GrowthTicksPerSecond / _settings.timeToCorrupt;
         }
         
-        [NeedsRefactor("shouldn't it be after growth and corruption?")]
         private void Tick()
         {
             // todo: shouldn't it be after growth and corruption?
@@ -71,7 +68,7 @@ namespace Biosearcher.Plants
                 return;
             }
 
-            if (AreGrowthConditionsAcceptable(_slot.CurrentHumidity, _slot.CurrentIllumination, _slot.CurrentTemperature))
+            if (AreGrowthConditionsAcceptable(_capsule.CurrentHumidity, _capsule.CurrentIllumination, _capsule.CurrentTemperature))
             {
                 Grow();
             }
@@ -80,7 +77,7 @@ namespace Biosearcher.Plants
                 Corrupt();
             }
         }
-
+        
         private IEnumerator GrowthCycle()
         {
             var waitForSeconds = new WaitForSeconds(1 / GrowthTicksPerSecond);
@@ -100,7 +97,7 @@ namespace Biosearcher.Plants
         {
             _isGrowing = false;
         }
-
+        
         #endregion
     }
 }
