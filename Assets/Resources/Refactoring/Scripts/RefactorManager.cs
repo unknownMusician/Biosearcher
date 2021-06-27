@@ -1,4 +1,4 @@
-﻿#define REFACTOR_MANAGER_PROFILING
+﻿//#define REFACTOR_MANAGER_PROFILING
 
 using Biosearcher.Refactoring.FileInput;
 using System;

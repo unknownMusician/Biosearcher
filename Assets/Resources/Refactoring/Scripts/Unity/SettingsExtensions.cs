@@ -2,7 +2,7 @@
 
 namespace Biosearcher.Refactoring
 {
-    internal static class RefactorSettingsExtensions
+    internal static class SettingsExtensions
     {
         internal static RefactorSettings.Parameters GetParamsSafe(this RefactorSettings settings)
         {

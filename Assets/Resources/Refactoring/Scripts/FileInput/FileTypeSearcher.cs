@@ -1,4 +1,4 @@
-﻿#define FILE_TYPE_SEARCHER_PROFILING
+﻿//#define FILE_TYPE_SEARCHER_PROFILING
 
 using Biosearcher.Common;
 using System;

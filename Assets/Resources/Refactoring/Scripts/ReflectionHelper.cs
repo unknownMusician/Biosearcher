@@ -1,4 +1,4 @@
-﻿#define REFLECTION_HELPER_PROFILING
+﻿//#define REFLECTION_HELPER_PROFILING
 
 using Biosearcher.Refactoring.FileInput;
 using System;

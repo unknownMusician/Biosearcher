@@ -31,7 +31,7 @@ namespace Biosearcher.Refactoring
 #if UNITY_EDITOR
             Needs finalNeed = 0;
             neededActions.Foreach(need => finalNeed |= need);
-            finalNeed.ToString();
+            NeededAction = finalNeed.ToString();
 #endif
         }
     }

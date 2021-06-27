@@ -1,4 +1,4 @@
-﻿#define LOGGER_PROFILING
+﻿//#define LOGGER_PROFILING
 
 using Biosearcher.Common;
 using Biosearcher.Refactoring.FileInput;
@@ -11,7 +11,7 @@ using UnityEngine.Profiling;
 
 namespace Biosearcher.Refactoring
 {
-    internal class Logger
+    internal static class Logger
     {
         internal static List<Log> ToLogs(List<FoundTypeInfo> foundTypeInfos)
         {

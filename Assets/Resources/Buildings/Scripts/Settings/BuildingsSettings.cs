@@ -8,7 +8,7 @@ namespace Biosearcher.Buildings.Settings
     public sealed class BuildingsSettings : ScriptableObject
     {
         [NeedsRefactor(Needs.Implementation)]
-        public static readonly string filePath = "/sdfsdf/sdfsdg/sdfsad/fsad/fa/dg";
+        public const string filePath = "/sdfsdf/sdfsdg/sdfsad/fsad/fa/dg";
         [Header("Common")]
         [SerializeField] private NetworkSettings _networkSettings;
         [Header("Buildings")]

@@ -8,8 +8,8 @@ namespace Biosearcher.LandManagement.Settings
     public sealed class LandSettings : ScriptableObject
     {
         #region Properties
-        [NeedsRefactor(Needs.Rename)]
         [Header("Chunk")]
+        [NeedsRefactor(Needs.Rename)]
         [SerializeField] private int _minHierarchySize = 0;
         [SerializeField] private int _maxHierarchySize = 5;
         [SerializeField] private int _generatingFrequency = 8;

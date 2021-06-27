@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Biosearcher.PlayerTools
 {
+    [NeedsRefactor(Needs.Remove, Needs.Implementation)]
     public class Terraformer : MonoBehaviour
     {
         #region Properties

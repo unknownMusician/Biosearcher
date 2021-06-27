@@ -1,4 +1,4 @@
-﻿#define DIRECTORY_READER_PROFILING
+﻿//#define DIRECTORY_READER_PROFILING
 
 using System;
 using System.Collections.Generic;
