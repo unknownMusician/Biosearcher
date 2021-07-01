@@ -1,6 +1,6 @@
 ﻿using System;
 using Biosearcher.Buildings.GreenHouses;
-using Biosearcher.Planet.Orientation;
+using Biosearcher.Planets.Orientation;
 using Biosearcher.Player;
 using UnityEngine;
 

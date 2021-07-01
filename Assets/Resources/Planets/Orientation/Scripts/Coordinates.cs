@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 using UnityEngine;
 
-namespace Biosearcher.Planet.Orientation
+namespace Biosearcher.Planets.Orientation
 {
     /// <summary>
     /// (Height - r, Latitude - θ, Longitude - φ)

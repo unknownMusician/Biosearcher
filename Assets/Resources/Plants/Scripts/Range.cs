@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using Biosearcher.Refactoring;
+using UnityEngine;
 
 namespace Biosearcher.Plants
 {
     [System.Serializable]
+    [NeedsRefactor("Make less specific (there are calls from other namespaces)")]
     public struct Range
     {
         [SerializeField] private float min;

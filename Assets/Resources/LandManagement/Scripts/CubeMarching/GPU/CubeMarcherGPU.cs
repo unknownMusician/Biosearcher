@@ -8,17 +8,17 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 {
     public class CubeMarcherGPU : CubeMarcher
     {
-        protected readonly int _pointsPerChunkID = Shader.PropertyToID("_PointsPerChunk");
-        protected readonly int _cubesPerChunkID = Shader.PropertyToID("_CubesPerChunk");
-        protected readonly int _surfaceValueID = Shader.PropertyToID("_SurfaceValue");
-        protected readonly int _seedID = Shader.PropertyToID("_Seed");
-        protected readonly int _chunkPositionID = Shader.PropertyToID("_ChunkPosition");
-        protected readonly int _cubeSizeID = Shader.PropertyToID("_CubeSize");
-        protected readonly int _edgeIndex2PointIndexesTextureID = Shader.PropertyToID("_EdgeIndex2PointIndexesT");
-        protected readonly int _pointsHash2EdgesHashTextureID = Shader.PropertyToID("_PointsHash2EdgesHashT");
-        protected readonly int _pointsHash2EdgesIndexesTextureID = Shader.PropertyToID("_PointsHash2EdgesIndexesT");
-        protected readonly int _pointsBufferID = Shader.PropertyToID("_Points");
-        protected readonly int _meshV3T1BufferID = Shader.PropertyToID("_MeshV3T1");
+        protected readonly int _pointsPerChunkId = Shader.PropertyToID("_PointsPerChunk");
+        protected readonly int _cubesPerChunkId = Shader.PropertyToID("_CubesPerChunk");
+        protected readonly int _surfaceValueId = Shader.PropertyToID("_SurfaceValue");
+        protected readonly int _seedId = Shader.PropertyToID("_Seed");
+        protected readonly int _chunkPositionId = Shader.PropertyToID("_ChunkPosition");
+        protected readonly int _cubeSizeId = Shader.PropertyToID("_CubeSize");
+        protected readonly int _edgeIndex2PointIndexesTextureId = Shader.PropertyToID("_EdgeIndex2PointIndexesT");
+        protected readonly int _pointsHash2EdgesHashTextureId = Shader.PropertyToID("_PointsHash2EdgesHashT");
+        protected readonly int _pointsHash2EdgesIndexesTextureId = Shader.PropertyToID("_PointsHash2EdgesIndexesT");
+        protected readonly int _pointsBufferId = Shader.PropertyToID("_Points");
+        protected readonly int _meshV3T1BufferId = Shader.PropertyToID("_MeshV3T1");
 
         protected Texture2D _edgeIndex2PointIndexesTexture;
         protected Texture2D _pointsHash2EdgesHashTexture;
@@ -376,19 +376,19 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
         }
         protected void InitializeShader()
         {
-            _shader.SetInt(_pointsPerChunkID, _pointsPerChunk);
-            _shader.SetInt(_cubesPerChunkID, _cubesPerChunk);
+            _shader.SetInt(_pointsPerChunkId, _pointsPerChunk);
+            _shader.SetInt(_cubesPerChunkId, _cubesPerChunk);
 
-            _shader.SetFloat(_surfaceValueID, _surfaceValue);
-            _shader.SetFloat(_seedID, _seed);
+            _shader.SetFloat(_surfaceValueId, _surfaceValue);
+            _shader.SetFloat(_seedId, _seed);
 
-            _shader.SetTexture(_generateMeshKernel, _edgeIndex2PointIndexesTextureID, _edgeIndex2PointIndexesTexture);
-            _shader.SetTexture(_generateMeshKernel, _pointsHash2EdgesHashTextureID, _pointsHash2EdgesHashTexture);
-            _shader.SetTexture(_generateMeshKernel, _pointsHash2EdgesIndexesTextureID, _pointsHash2EdgesIndexesTexture);
+            _shader.SetTexture(_generateMeshKernel, _edgeIndex2PointIndexesTextureId, _edgeIndex2PointIndexesTexture);
+            _shader.SetTexture(_generateMeshKernel, _pointsHash2EdgesHashTextureId, _pointsHash2EdgesHashTexture);
+            _shader.SetTexture(_generateMeshKernel, _pointsHash2EdgesIndexesTextureId, _pointsHash2EdgesIndexesTexture);
 
-            _shader.SetBuffer(_generatePointsKernel, _pointsBufferID, _pointsBuffer);
-            _shader.SetBuffer(_generateMeshKernel, _pointsBufferID, _pointsBuffer);
-            _shader.SetBuffer(_generateMeshKernel, _meshV3T1BufferID, _meshV3T1Buffer);
+            _shader.SetBuffer(_generatePointsKernel, _pointsBufferId, _pointsBuffer);
+            _shader.SetBuffer(_generateMeshKernel, _pointsBufferId, _pointsBuffer);
+            _shader.SetBuffer(_generateMeshKernel, _meshV3T1BufferId, _meshV3T1Buffer);
         }
 
         public override void Dispose()
@@ -434,8 +434,8 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 #if BIOSEARCHER_PROFILING
             Profiler.BeginSample("CubeMarcher.DispatchPointsKernel");
 #endif
-            _shader.SetVector(_chunkPositionID, (Vector3)chunkPosition);
-            _shader.SetInt(_cubeSizeID, cubeSize);
+            _shader.SetVector(_chunkPositionId, (Vector3)chunkPosition);
+            _shader.SetInt(_cubeSizeId, cubeSize);
 
             _shader.Dispatch(_generatePointsKernel, _threadGroups, _threadGroups, _threadGroups);
 #if BIOSEARCHER_PROFILING

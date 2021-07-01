@@ -10,22 +10,20 @@ namespace Biosearcher.Refactoring
         internal string NeededAction { get; }
 #endif
 
-        public NeedsRefactorAttribute(string neededAction)
-        {
-#if UNITY_EDITOR
-            NeededAction = neededAction;
-#endif
-        }
         public NeedsRefactorAttribute()
 #if UNITY_EDITOR
             : this(Needs.Refactor.ToString())
 #endif
         { }
-        public NeedsRefactorAttribute(Needs neededAction)
+        public NeedsRefactorAttribute(string neededAction, params Needs[] neededActions)
 #if UNITY_EDITOR
-            : this(neededAction.ToString())
+            : this(neededActions)
 #endif
-        { }
+        {
+#if UNITY_EDITOR
+            NeededAction = $"{neededAction}, {NeededAction}";
+#endif
+        }
         public NeedsRefactorAttribute(params Needs[] neededActions)
         {
 #if UNITY_EDITOR

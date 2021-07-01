@@ -2,7 +2,7 @@
 using Biosearcher.InputHandling;
 using System.Collections;
 using System.Linq;
-using Biosearcher.Planet.Orientation;
+using Biosearcher.Planets.Orientation;
 using UnityEngine;
 
 namespace Biosearcher.Player

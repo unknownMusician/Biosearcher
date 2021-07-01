@@ -15,5 +15,6 @@ namespace Biosearcher.Refactoring
         Rename              = 1 << 5,
         RemoveTodo          = 1 << 6,
         MakeOwnFile         = 1 << 7,
+        Check               = 1 << 8,
     }
 }

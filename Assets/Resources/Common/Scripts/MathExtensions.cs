@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Biosearcher.Refactoring;
+using UnityEngine;
 
 namespace Biosearcher.Common
 {
@@ -44,6 +45,13 @@ namespace Biosearcher.Common
             y = v.y;
         }
 
+        public static void Deconstruct(this Vector3 v, out float x, out float y, out float z)
+        {
+            x = v.x;
+            y = v.y;
+            z = v.z;
+        }
+
         public static Quaternion SmoothDamp(this Quaternion current, Quaternion target, ref Quaternion velocity,
             float smoothTime)
         {
@@ -64,5 +72,21 @@ namespace Biosearcher.Common
 
         public static int GetEven(this int n) => n & ~1;
         public static void MakeEven(this ref int n) => n &= ~1;
+
+        public static void MakeCycleDegrees(this ref float angle) => angle = GetCycleDegrees(angle);
+
+        [NeedsRefactor(Needs.Optimization)]
+        public static float GetCycleDegrees(this float angle)
+        {
+            if (angle >= 360)
+            {
+                return angle - 360 * (Mathf.FloorToInt(angle) / 360);
+            }
+            else if (angle < 0)
+            {
+                return angle + 360 * (Mathf.FloorToInt(angle) / 360);
+            }
+            return angle;
+        }
     }
 }

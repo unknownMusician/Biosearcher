@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Biosearcher.Planet.Orientation
+namespace Biosearcher.Planets.Orientation
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(PlanetTransform))]

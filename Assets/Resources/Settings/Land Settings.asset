@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec6b98b16df2f5489aca0ffc9db8bf1, type: 3}
   m_Name: Land Settings
   m_EditorClassIdentifier: 
-  _minHierarchySize: 2
+  _minHierarchySize: 1
   _maxHierarchySize: 5
-  _generatingFrequency: 8
-  _cubesPerChunk1D: 8
+  _generatingFrequency: 16
+  _cubesPerChunk1D: 16
   _surfaceValue: 0.76
   _geometryType: 1
-  _cubeMarchingType: 1
+  _cubeMarchingType: 0
   _asyncType: 0
   _planetShader: {fileID: 7200000, guid: 48e61c2a1872c9c42bf7c13f3c65adf7, type: 3}
   _flatShader: {fileID: 7200000, guid: 42e6313a71a50a44097e4fbfba55078d, type: 3}

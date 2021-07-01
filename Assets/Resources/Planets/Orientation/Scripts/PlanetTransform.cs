@@ -1,7 +1,7 @@
 ﻿using Biosearcher.Refactoring;
 using UnityEngine;
 
-namespace Biosearcher.Planet.Orientation
+namespace Biosearcher.Planets.Orientation
 {
     [ExecuteAlways]
     public class PlanetTransform : MonoBehaviour
@@ -39,12 +39,12 @@ namespace Biosearcher.Planet.Orientation
         protected void Update() => _coordinates = Coordinates;
         protected void OnValidate() => Coordinates = _coordinates;
 
-        private static float ToHeight(Vector3 positionRelativeToPlanet)
+        public static float ToHeight(Vector3 positionRelativeToPlanet)
         {
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Sqrt(p.x * p.x + p.z * p.z + p.y * p.y);
         }
-        private static float ToLatitude(Vector3 positionRelativeToPlanet)
+        public static float ToLatitude(Vector3 positionRelativeToPlanet)
         {
             if (positionRelativeToPlanet == Vector3.zero)
             {
@@ -53,7 +53,7 @@ namespace Biosearcher.Planet.Orientation
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Asin(p.y / Mathf.Sqrt(p.x * p.x + p.y * p.y + p.z * p.z)) * Mathf.Rad2Deg;
         }
-        private static float ToLongitude(Vector3 positionRelativeToPlanet)
+        public static float ToLongitude(Vector3 positionRelativeToPlanet)
         {
             Vector3 p = positionRelativeToPlanet;
             return Mathf.Atan2(p.z, p.x) * Mathf.Rad2Deg;

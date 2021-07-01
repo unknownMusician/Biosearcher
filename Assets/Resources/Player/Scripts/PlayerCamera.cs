@@ -1,5 +1,5 @@
 using Biosearcher.InputHandling;
-using Biosearcher.Planet.Orientation;
+using Biosearcher.Planets.Orientation;
 using UnityEngine;
 
 namespace Biosearcher.Player

@@ -1,8 +1,9 @@
 ﻿using System;
 using Biosearcher.Buildings.GreenHouses;
 using Biosearcher.Buildings.Resources.Structs;
-using Biosearcher.Planet.Orientation;
+using Biosearcher.Planets.Orientation;
 using Biosearcher.Player;
+using Biosearcher.Refactoring;
 using Biosearcher.Weather;
 using UnityEngine;
 
@@ -133,6 +134,7 @@ namespace Biosearcher.Plants
             _temperatureRegulator.Reset(WeatherController.GetTemperature(position));
         }
 
+        [NeedsRefactor(Needs.Remove)]
         private void RegulateParameter(WeatherRegulator regulator, float outsideValue, float goalValue, float efficiency)
         {
             regulator.Regulate(outsideValue, goalValue, efficiency);
