@@ -11,9 +11,11 @@ namespace Biosearcher.Plants
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public sealed class Capsule : MonoBehaviour, IInsertFriendly, IInsertable
+    public sealed class Capsule : MonoBehaviour, IInsertFriendly<Seed>, IInsertable
     {
         #region Properties
+
+        private LayerMask _realMask;
 
         private static readonly Electricity ElectricityToControlIllumination = new Electricity { energy = 1 };
         private static readonly Electricity ElectricityToControlTemperature = new Electricity { energy = 1 };
@@ -160,34 +162,41 @@ namespace Biosearcher.Plants
                 RegulateParameter(_temperatureRegulator, WeatherController.GetTemperature(transform.position), _plant.Settings.temperatureRange.Average, efficiency);
             }
         }
-
-        #endregion
-
-        public Type[] GetInsertableType()
-        {
-            return new Type[] {typeof(Seed)};
-        }
-        public Vector3 GetAlignmentPosition()
-        {
-            return transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
-        }
-        public void Insert(IInsertable insertable)
-        {
-            _greenHouse.Plant((Seed) insertable, this);
-        }
         
-        public void Drop()
+        public bool TryInsert(Seed insertable)
         {
+            _greenHouse.Plant(insertable, this);
+            return true;
+        }
+        public bool TryAlign(Seed insertable)
+        {
+            insertable.transform.position = transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
+            return true;
+        }
+        public void HandleGrab()
+        {
+            this.HandleGrabDefault(out _realMask);
+
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+        }
+        public void HandleDrop()
+        {
+            this.HandleDropDefault(_realMask);
+
             if (Physics.OverlapSphere(transform.position, _minDistanceToGround, _groundMask).Length == 0)
             {
                 _rigidbody.isKinematic = false;
             }
             _collider.enabled = true;
         }
-        public void Grab()
+        public void HandleInsert()
         {
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
+            this.HandleInsertDefault(_realMask);
         }
+        public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
+        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
+
+        #endregion
     }
 }

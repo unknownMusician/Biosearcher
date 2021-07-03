@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Biosearcher.Plants
 {
-    public class Slot : MonoBehaviour, IInsertFriendly
+    public class Slot : MonoBehaviour, IInsertFriendly<Capsule>
     {
         private GreenHouse _greenHouse;
         private PlanetTransform _planetTransform;
@@ -30,20 +30,16 @@ namespace Biosearcher.Plants
             }
         }
 
-        public Type[] GetInsertableType()
+        public bool TryInsert(Capsule insertable)
         {
-            return new Type[] {typeof(Capsule)};
+            _greenHouse.ChangeCapsule(insertable, this);
+            return true;
         }
 
-        public Vector3 GetAlignmentPosition()
+        public bool TryAlign(Capsule insertable)
         {
-            return transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
-        }
-
-        public void Insert(IInsertable insertable)
-        {
-            Debug.Log("Inserted!");
-            _greenHouse.ChangeCapsule((Capsule) insertable, this);
+            insertable.transform.position = transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
+            return true;
         }
     }
 }

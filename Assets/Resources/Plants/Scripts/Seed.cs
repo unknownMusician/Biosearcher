@@ -5,9 +5,11 @@ namespace Biosearcher.Plants
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public class Seed : MonoBehaviour, IInsertable, IGrabbable
+    public class Seed : MonoBehaviour, IInsertable
     {
         #region Properties
+
+        private LayerMask _realMask;
 
         [SerializeField] private float _minDistanceToGround;
         [SerializeField] private LayerMask _groundMask;
@@ -40,20 +42,30 @@ namespace Biosearcher.Plants
 
             return plant; 
         }
-
-        public void Drop()
+        
+        public void HandleGrab()
         {
+            this.HandleGrabDefault(out _realMask);
+
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+        }
+        public void HandleDrop()
+        {
+            this.HandleDropDefault(_realMask);
+
             if (Physics.OverlapSphere(transform.position, _minDistanceToGround, _groundMask).Length == 0)
             {
                 _rigidbody.isKinematic = false;
             }
             _collider.enabled = true;
         }
-        public void Grab()
+        public void HandleInsert()
         {
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
+            this.HandleInsertDefault(_realMask);
         }
+        public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
+        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
 
         #endregion
     }

@@ -176,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9152279715277255770, guid: 60977c15613beb64db50cf6f36ef7066, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.000009616506
+      value: -0.000009616506
       objectReference: {fileID: 0}
     - target: {fileID: 9152279715277255770, guid: 60977c15613beb64db50cf6f36ef7066, type: 3}
       propertyPath: m_LocalRotation.w
@@ -650,7 +650,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: -0.000011120177}
+  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -785,7 +785,7 @@ MonoBehaviour:
   _coordinates:
     height: 127.2
     latitude: 0
-    longitude: -180
+    longitude: 180
 --- !u!114 &1732086772 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8437317130164429899, guid: 6c4fde5ad35a96048850f8819f5b0717, type: 3}
@@ -812,7 +812,6 @@ GameObject:
   - component: {fileID: 2114856213}
   - component: {fileID: 2114856208}
   - component: {fileID: 2114856214}
-  - component: {fileID: 2114856215}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -891,7 +890,7 @@ MonoBehaviour:
   _coordinates:
     height: 110
     latitude: 0
-    longitude: 180
+    longitude: -180
 --- !u!4 &2114856212
 Transform:
   m_ObjectHideFlags: 0
@@ -900,7 +899,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2114856207}
   m_LocalRotation: {x: 0, y: 0, z: 0.7355061, w: 0.6775182}
-  m_LocalPosition: {x: -110, y: 0, z: 0.000009616506}
+  m_LocalPosition: {x: -110, y: 0, z: -0.000009616506}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1347979130}
@@ -932,27 +931,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d214efa58e72d554eb2f10c8ae6f5431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grabbableMask:
-    serializedVersion: 2
-    m_Bits: 2147483647
   _maxRaycastDistance: 10
   _maxInteractDistance: 5
   _maxInteractDistanceCamera: 5
   _carryHeight: 0
   _camera: {fileID: 1687258584}
   _player: {fileID: 2114856212}
---- !u!114 &2114856215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114856207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67ca7b3745a44d57a0a288323925c51b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2182511314168138884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -982,7 +966,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2182511314939340581, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000011120177
+      value: 0.000011120177
       objectReference: {fileID: 0}
     - target: {fileID: 2182511314939340581, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1087,7 +1071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7416953055716012904, guid: d28ebc3f5c669f142a8f6777bd912dc1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000009616506
+      value: 0.000009616506
       objectReference: {fileID: 0}
     - target: {fileID: 7416953055716012904, guid: d28ebc3f5c669f142a8f6777bd912dc1, type: 3}
       propertyPath: m_LocalRotation.w

@@ -12,6 +12,8 @@ namespace Biosearcher.Buildings
     [RequireComponent(typeof(Collider))]
     public abstract class Building : MonoBehaviour, IGrabbable
     {
+        private LayerMask _realMask;
+
         [SerializeField] protected LayerMask _groundMask;
         [SerializeField] protected float _minDistanceToGround;
         [SerializeField] protected BuildingsSettings _buildingsSettings;
@@ -37,20 +39,24 @@ namespace Biosearcher.Buildings
             _cyclesPerSecond = buildingsSettings.NetworkSettings.CyclesPerSecond;
         }
 
-        public void Drop()
+        public void HandleGrab()
         {
+            this.HandleGrabDefault(out _realMask);
+            
+            TryDisconnect();
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
+        }
+        public void HandleDrop()
+        {
+            this.HandleDropDefault(_realMask);
+
             if (Physics.OverlapSphere(transform.position, _minDistanceToGround, _groundMask).Length == 0)
             {
                 _rigidbody.isKinematic = false;
             }
             _collider.enabled = true;
             TryConnect();
-        }
-        public void Grab()
-        {
-            TryDisconnect();
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
         }
 
         protected abstract void TryConnect();

@@ -2,7 +2,7 @@
 {
     public interface IGrabbable
     {
-        void Grab();
-        void Drop();
+        void HandleGrab();
+        void HandleDrop();
     }
 }

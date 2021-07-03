@@ -529,7 +529,7 @@
             ]
         },
         {
-            "name": "Grabber",
+            "name": "Hand",
             "id": "6dcb8437-3419-4b91-a046-d7d90ff92c0f",
             "actions": [
                 {
@@ -544,6 +544,14 @@
                     "name": "Grab",
                     "type": "Button",
                     "id": "a11032e3-80f3-495f-99bf-1b683347cae5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Insert",
+                    "type": "Button",
+                    "id": "1219d5e5-798b-4f57-b8f5-060ef521ead7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -571,30 +579,14 @@
                     "action": "Drop",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "Inserter",
-            "id": "5686c3ff-3e1c-4525-aa1e-69c8d3d49b3b",
-            "actions": [
-                {
-                    "name": "Insert",
-                    "type": "Button",
-                    "id": "d8aa2818-e183-4024-80a4-ede9f31b8139",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
+                },
                 {
                     "name": "",
-                    "id": "98fcfa80-3dcc-46b2-9eb7-ff34f60091cc",
+                    "id": "f9d9a286-88dc-4c36-8676-0b3cc241b7ba",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard and Mouse",
                     "action": "Insert",
                     "isComposite": false,
                     "isPartOfComposite": false

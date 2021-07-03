@@ -47,7 +47,7 @@ namespace Biosearcher.Buildings.GreenHouses
             Transform parent = _capsules[capsuleNumber].transform;
             _capsules[capsuleNumber].Plant = seed.Plant(position, rotation, parent);
             RecalculateNeededResourcesForAllSlots();
-            Destroy(seed.gameObject);
+            // Destroy(seed.gameObject);
         }
         public void Plant(Seed seed, Capsule capsule)
         {
@@ -57,7 +57,7 @@ namespace Biosearcher.Buildings.GreenHouses
             Quaternion rotation = capsuleTransform.rotation;
             capsule.Plant = seed.Plant(position, rotation, capsuleTransform);
             RecalculateNeededResourcesForAllSlots();
-            Destroy(seed.gameObject);
+            // Destroy(seed.gameObject);
         }
         
         //todo: капсула должна ложиться в массив капсул
