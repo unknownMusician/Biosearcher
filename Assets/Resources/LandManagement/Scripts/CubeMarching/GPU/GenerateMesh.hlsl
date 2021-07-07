@@ -7,12 +7,12 @@
 [numthreads(7, 7, 7)]
 void GenerateMesh(uint3 threadId : SV_DispatchThreadID)
 {
-    if (threadId.x >= _CubesPerChunk || threadId.y >= _CubesPerChunk || threadId.z >= _CubesPerChunk)
+    if (threadId.x >= _CubesPerChunk1D || threadId.y >= _CubesPerChunk1D || threadId.z >= _CubesPerChunk1D)
     {
         return;
     }
     
-    uint cubeArrayId = MatrixId2ArrayId(threadId, _CubesPerChunk);
+    uint cubeArrayId = MatrixId2ArrayId(threadId, _CubesPerChunk1D);
     
     //float testValue = float(PointsHash2EdgesHashT[uint2(threadId.x + threadId.y * 6 + threadId.z * 6 * 6, 0)]);
     //float testValue = 56;

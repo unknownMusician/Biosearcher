@@ -34,7 +34,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
                 int localXIndex = ((1 - x) & z) | (x & (1 - z));
                 int localYIndex = y;
                 int localZIndex = 1 - z;
-                cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _constantBuffer.pointsPerChunk)];
+                cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _constantBuffer.pointsPerChunk1D)];
             }
 
             return new MarchCube { points = cubePoints };
@@ -65,7 +65,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
         internal void AddFace(Vector3[] face, int cubeArrayId, ref TempMeshBuffer tempBuffer)
         {
-            if (cubeArrayId >= _constantBuffer.cubesPerChunk * _constantBuffer.cubesPerChunk * _constantBuffer.cubesPerChunk)
+            if (cubeArrayId >= _constantBuffer.cubesPerChunk1D * _constantBuffer.cubesPerChunk1D * _constantBuffer.cubesPerChunk1D)
             {
                 return;
             }

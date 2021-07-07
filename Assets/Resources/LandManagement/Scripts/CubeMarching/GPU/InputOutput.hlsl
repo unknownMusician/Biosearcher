@@ -34,8 +34,8 @@ uniform float3 _ChunkPosition;
 uniform float _SurfaceValue;
 uniform int _CubeSize;
 
-uniform uint _PointsPerChunk;
-uniform uint _CubesPerChunk;
+uniform uint _PointsPerChunk1D;
+uniform uint _CubesPerChunk1D;
 
 uniform float _Seed;
 

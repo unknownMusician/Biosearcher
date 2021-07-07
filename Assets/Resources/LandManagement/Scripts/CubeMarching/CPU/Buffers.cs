@@ -45,8 +45,8 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
         internal int[,] pointsHash2EdgesIndexes;
 
         internal float surfaceValue;
-        internal int pointsPerChunk;
-        internal int cubesPerChunk;
+        internal int pointsPerChunk1D;
+        internal int cubesPerChunk1D;
         internal float seed;
 
     }

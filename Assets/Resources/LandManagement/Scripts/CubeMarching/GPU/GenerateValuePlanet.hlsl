@@ -1,7 +1,6 @@
 #ifndef BIOSEARCHER_GENERATE_VALUE_PLANET
 #define BIOSEARCHER_GENERATE_VALUE_PLANET
 
-#include "InputOutput.hlsl"
 #include "Noise.hlsl"
 
 // todo: not in sync with CPU (+~)
@@ -18,13 +17,13 @@ float GenerateValue(float3 position)
     
     // Mountains
     float preMountainNoise = 1;
-    preMountainNoise *= GradientNoise(normalizedPosition * (_CubesPerChunk * (1 << 2)));
-    preMountainNoise *= GradientNoise(normalizedPosition * (_CubesPerChunk * (1 << 3)));
-    float mountainMask = smoothstep(0.3, 0.1, GradientNoise(normalizedPosition * (_CubesPerChunk / uint(1 << 1))));
+    preMountainNoise *= GradientNoise(normalizedPosition * (1 << 2));
+    preMountainNoise *= GradientNoise(normalizedPosition * (1 << 3));
+    float mountainMask = smoothstep(0.3, 0.1, GradientNoise(normalizedPosition * (1 / (1u << 1))));
     planetRadius -= (Noise2Mountain(preMountainNoise) + 0.5) * mountainMask * 0.15;
     
     // Hills
-    planetRadius -= GradientNoise(normalizedPosition * (_CubesPerChunk * (1 << 0))) * (1 - mountainMask) * 0.02;
+    planetRadius -= GradientNoise(normalizedPosition * (1 << 0)) * (1 - mountainMask) * 0.02;
     // todo
     //result *= 1 - GradientNoise(position / (cubesPerChunk * (1 << 1))) / 16;
     //result *= 1 - GradientNoise(position / (cubesPerChunk * (1 << 2))) / 8;

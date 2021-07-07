@@ -14,8 +14,8 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             _constantBuffer = new ConstantBuffer
             {
                 surfaceValue = settings.SurfaceValue,
-                pointsPerChunk = settings.PointsPerChunk1D,
-                cubesPerChunk = settings.CubesPerChunk1D,
+                pointsPerChunk1D = settings.PointsPerChunk1D,
+                cubesPerChunk1D = settings.CubesPerChunk1D,
                 seed = settings.Seed,
                 edgeIndex2PointIndexes = new int[,] {
                 { 0, 1 },
@@ -324,7 +324,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             {
                 chunkPosition = chunkPosition,
                 cubeSize = cubeSize,
-                points = new MarchPoint[_constantBuffer.pointsPerChunk * _constantBuffer.pointsPerChunk * _constantBuffer.pointsPerChunk]
+                points = new MarchPoint[_constantBuffer.pointsPerChunk1D * _constantBuffer.pointsPerChunk1D * _constantBuffer.pointsPerChunk1D]
             };
             _generator.GeneratePoints(ref tempPointsBuffer);
 

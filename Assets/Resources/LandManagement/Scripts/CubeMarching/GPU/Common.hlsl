@@ -28,7 +28,7 @@ MarchCube GenerateCube(RWStructuredBuffer<MarchPoint> points, uint3 id)
         uint localXIndex = ((1 - x) & z) | (x & (1 - z));
         uint localYIndex = y;
         uint localZIndex = 1 - z;
-        cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk)];
+        cubePoints[i] = points[MatrixId2ArrayId(id.x + localXIndex, id.y + localYIndex, id.z + localZIndex, _PointsPerChunk1D)];
     }
     
     MarchCube marchCube;
@@ -61,7 +61,7 @@ float3 Interpolate(MarchPoint point1, MarchPoint point2, float surfaceValue)
 
 void AddFace(float3 face[3], uint faceId, uint cubeArrayId)
 {
-    if (cubeArrayId >= _CubesPerChunk * _CubesPerChunk * _CubesPerChunk)
+    if (cubeArrayId >= _CubesPerChunk1D * _CubesPerChunk1D * _CubesPerChunk1D)
     {
         return;
     }
@@ -118,7 +118,7 @@ void March(MarchCube cube, float surfaceValue, uint cubeArrayId)
 
 void PrepareBuffer(uint cubeIndex)
 {
-    if (cubeIndex >= _CubesPerChunk * _CubesPerChunk * _CubesPerChunk)
+    if (cubeIndex >= _CubesPerChunk1D * _CubesPerChunk1D * _CubesPerChunk1D)
     {
         return;
     }

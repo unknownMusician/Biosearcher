@@ -8,8 +8,8 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 {
     public class CubeMarcherGPU : CubeMarcher
     {
-        protected readonly int _pointsPerChunkId = Shader.PropertyToID("_PointsPerChunk");
-        protected readonly int _cubesPerChunkId = Shader.PropertyToID("_CubesPerChunk");
+        protected readonly int _pointsPerChunk1DId = Shader.PropertyToID("_PointsPerChunk1D");
+        protected readonly int _cubesPerChunk1DId = Shader.PropertyToID("_CubesPerChunk1D");
         protected readonly int _surfaceValueId = Shader.PropertyToID("_SurfaceValue");
         protected readonly int _seedId = Shader.PropertyToID("_Seed");
         protected readonly int _chunkPositionId = Shader.PropertyToID("_ChunkPosition");
@@ -29,8 +29,8 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 
         protected ComputeShader _shader;
         protected float _seed;
-        protected int _cubesPerChunk;
-        protected int _pointsPerChunk;
+        protected int _cubesPerChunk1D;
+        protected int _pointsPerChunk1D;
         protected float _surfaceValue;
         protected int _meshBufferSize;
         protected int _generateMeshKernel;
@@ -50,14 +50,14 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
 
         protected void InitializeMarcher(LandSettings settings)
         {
-            _cubesPerChunk = settings.CubesPerChunk1D;
-            _pointsPerChunk = settings.PointsPerChunk1D;
+            _cubesPerChunk1D = settings.CubesPerChunk1D;
+            _pointsPerChunk1D = settings.PointsPerChunk1D;
             _surfaceValue = settings.SurfaceValue;
             _seed = settings.Seed;
             _shader = settings.Shader;
-            _threadGroups = Mathf.CeilToInt(_cubesPerChunk / (float)CubeNumthreads);
-            _pointsBufferSize = (_cubesPerChunk + 1) * (_cubesPerChunk + 1) * (_cubesPerChunk + 1);
-            _meshBufferSize = 15 * _cubesPerChunk * _cubesPerChunk * _cubesPerChunk;
+            _threadGroups = Mathf.CeilToInt(_cubesPerChunk1D / (float)CubeNumthreads);
+            _pointsBufferSize = (_cubesPerChunk1D + 1) * (_cubesPerChunk1D + 1) * (_cubesPerChunk1D + 1);
+            _meshBufferSize = 15 * _cubesPerChunk1D * _cubesPerChunk1D * _cubesPerChunk1D;
 
             _generateMeshKernel = _shader.FindKernel("GenerateMesh");
             _generatePointsKernel = _shader.FindKernel("GeneratePoints");
@@ -376,8 +376,8 @@ namespace Biosearcher.LandManagement.CubeMarching.GPU
         }
         protected void InitializeShader()
         {
-            _shader.SetInt(_pointsPerChunkId, _pointsPerChunk);
-            _shader.SetInt(_cubesPerChunkId, _cubesPerChunk);
+            _shader.SetInt(_pointsPerChunk1DId, _pointsPerChunk1D);
+            _shader.SetInt(_cubesPerChunk1DId, _cubesPerChunk1D);
 
             _shader.SetFloat(_surfaceValueId, _surfaceValue);
             _shader.SetFloat(_seedId, _seed);
