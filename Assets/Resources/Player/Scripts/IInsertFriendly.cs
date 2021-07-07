@@ -9,5 +9,6 @@ namespace Biosearcher.Player
     {
         bool TryInsert(TInsertable insertable);
         bool TryAlign(TInsertable insertable);
+        void HandleInsertableGrabbed(TInsertable insertable);
     }
 }

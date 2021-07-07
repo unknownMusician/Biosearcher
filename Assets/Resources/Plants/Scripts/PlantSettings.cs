@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Biosearcher.Common;
+using Biosearcher.Planets;
+using UnityEngine;
 
 namespace Biosearcher.Plants
 {
@@ -11,8 +13,8 @@ namespace Biosearcher.Plants
         [SerializeField] public float timeToGrow;
         [SerializeField] public float timeToCorrupt;
         
-        [SerializeField] public Range humidityRange;
-        [SerializeField] public Range illuminationRange;
-        [SerializeField] public Range temperatureRange;
+        [SerializeField] public Range<Humidity> humidityRange;
+        [SerializeField] public Range<Illumination> illuminationRange;
+        [SerializeField] public Range<Temperature> temperatureRange;
     }
 }

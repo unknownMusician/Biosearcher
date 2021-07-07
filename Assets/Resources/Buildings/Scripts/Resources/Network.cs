@@ -43,8 +43,8 @@ namespace Biosearcher.Buildings.Resources
         }
         private void Tick()
         {
-            TResource availableResource = new TResource { Value = 0 };
-            TResource neededResource = new TResource { Value = 0 };
+            TResource availableResource = default;
+            TResource neededResource = default;
 
             foreach (var producer in _producers)
             {
@@ -59,8 +59,7 @@ namespace Biosearcher.Buildings.Resources
 
             foreach (var receiver in _receivers)
             {
-                var resourceWeCanGive = new TResource { Value = coefficient * receiver.CurrentPossibleReceived.Value };
-                receiver.Receive(resourceWeCanGive);
+                receiver.Receive(receiver.CurrentPossibleReceived.Multiply(coefficient));
             }
         }
 

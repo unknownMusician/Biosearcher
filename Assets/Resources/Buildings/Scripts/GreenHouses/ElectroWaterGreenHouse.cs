@@ -51,7 +51,7 @@ namespace Biosearcher.Buildings.GreenHouses
             _waterNetwork = new Network<Water>(this, _cyclesPerSecond);
         }
 
-        protected override void PreRecalculateNeededResources()
+        protected override void PreRecalculateNeededResourcesForAllCapsules()
         {
             _currentPossibleReceivedElectricity = default;
             _currentPossibleReceivedWater = default;
@@ -76,7 +76,7 @@ namespace Biosearcher.Buildings.GreenHouses
 
         public void Receive(Electricity resource)
         {
-            var efficiency = (resource / _currentPossibleReceivedElectricity);
+            var efficiency = resource / _currentPossibleReceivedElectricity;
             foreach (Capsule capsule in _capsules)
             {
                 if (capsule != null)
@@ -88,7 +88,7 @@ namespace Biosearcher.Buildings.GreenHouses
         }
         public void Receive(Water resource)
         {
-            var efficiency = (resource / _currentPossibleReceivedWater);
+            var efficiency = resource / _currentPossibleReceivedWater;
             foreach (Capsule capsule in _capsules)
             {
                 if (capsule != null)

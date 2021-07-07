@@ -2,16 +2,25 @@
 
 namespace Biosearcher.Weather
 {
-    public class WeatherRegulator
+    public class WeatherRegulator<TWeatherParameter> where TWeatherParameter : Planets.IWeatherParameter<TWeatherParameter>
     {
         #region Properties
 
-        private float _preparedness;
         private readonly float _percentagePerSecond;
         private readonly bool _control;
-        private float _currentValue;
+        private TWeatherParameter _goalParameter;
 
-        public float CurrentValue => _currentValue;
+        private float _localWeatherLerp;
+
+        public TWeatherParameter GetCurrentValue(Vector3 position)
+        {
+            if(!Planets.Weather.Current.TryGet(position, out TWeatherParameter outsideParameter))
+            {
+                throw new System.ArgumentException($"Parameter {outsideParameter.GetType().Name} is not supported by Weather.");
+            }
+
+            return outsideParameter.Lerp(_goalParameter, _localWeatherLerp);
+        }
 
         #endregion
 
@@ -19,17 +28,18 @@ namespace Biosearcher.Weather
         {
             _percentagePerSecond = percentagePerSecond;
             _control = control;
+            _localWeatherLerp = 0;
         }
 
         #region Methods
 
-        public void Reset(float outsideValue)
+        public void Reset(TWeatherParameter goalParameter)
         {
-            _preparedness = 0;
-            _currentValue = outsideValue;
+            _localWeatherLerp = 0;
+            _goalParameter = goalParameter;
         }
 
-        public void Regulate(float outsideValue, float goalValue, float efficiency)
+        public void Regulate(float efficiency)
         {
             if (!_control)
             {
@@ -38,15 +48,14 @@ namespace Biosearcher.Weather
 
             if (Mathf.Approximately(efficiency, 1))
             {
-                _preparedness += _percentagePerSecond;
+                _localWeatherLerp += _percentagePerSecond;
             }
             else
             {
-                _preparedness -= _percentagePerSecond * (1 - efficiency);
+                _localWeatherLerp -= _percentagePerSecond * (1 - efficiency);
             }
 
-            _preparedness = Mathf.Clamp01(_preparedness);
-            _currentValue = Mathf.Lerp(outsideValue, goalValue, _preparedness);
+            _localWeatherLerp = Mathf.Clamp01(_localWeatherLerp);
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using Biosearcher.InputHandling;
 using System.Collections;
-using Biosearcher.Planet.Orientation;
+using Biosearcher.Planets.Orientation;
 using Biosearcher.Refactoring;
 using UnityEngine;
 

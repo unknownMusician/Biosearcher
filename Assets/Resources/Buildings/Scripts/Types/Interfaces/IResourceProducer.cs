@@ -4,8 +4,8 @@ namespace Biosearcher.Buildings.Types.Interfaces
 {
     public interface IResourceProducer<TResource> : IResourceMover<TResource> where TResource : IResource<TResource>, new()
     {
-        public TResource MaxPossibleProduced { get; }
-        public TResource CurrentPossibleProduced { get; }
-        public TResource Produce();
+        TResource MaxPossibleProduced { get; }
+        TResource CurrentPossibleProduced { get; }
+        TResource Produce();
     }
 }

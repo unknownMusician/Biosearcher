@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Biosearcher.Common;
+using Biosearcher.Planets;
+using System.Collections;
 using UnityEngine;
 
 namespace Biosearcher.Plants
@@ -38,16 +40,15 @@ namespace Biosearcher.Plants
             _settings = plantSettings;
         }
 
-        private bool AreGrowthConditionsAcceptable(float humidity, float illumination, float temperature)
+        private bool AreGrowthConditionsAcceptable()
         {
-            var humidityCondition = _settings.humidityRange.Contains(humidity);
-            var illuminationCondition = _settings.illuminationRange.Contains(illumination);
-            var temperatureCondition = _settings.temperatureRange.Contains(temperature);
+            bool areAcceptable = true;
+
+            areAcceptable &= _settings.humidityRange.Contains(_capsule.CurrentHumidity);
+            areAcceptable &= _settings.illuminationRange.Contains(_capsule.CurrentIllumination);
+            areAcceptable &= _settings.temperatureRange.Contains(_capsule.CurrentTemperature);
             
-            // todo
-            // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
-            
-            return humidityCondition && illuminationCondition && temperatureCondition;
+            return areAcceptable;
         }
         
         private void Grow()
@@ -68,7 +69,7 @@ namespace Biosearcher.Plants
                 return;
             }
 
-            if (AreGrowthConditionsAcceptable(_capsule.CurrentHumidity, _capsule.CurrentIllumination, _capsule.CurrentTemperature))
+            if (AreGrowthConditionsAcceptable())
             {
                 Grow();
             }
@@ -81,6 +82,7 @@ namespace Biosearcher.Plants
         private IEnumerator GrowthCycle()
         {
             var waitForSeconds = new WaitForSeconds(1 / GrowthTicksPerSecond);
+
             while (_isGrowing)
             {
                 Tick();
