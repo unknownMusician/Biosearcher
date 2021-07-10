@@ -2,6 +2,9 @@
 
 ## 1. Обязательно нужно использовать префикс "\_" в названии `private` или `protected` переменных, а также использовать префикс "s_" в названии `private static` или `protected static` переменных.
 ```cs
+private static float s_variable;
+protected static float s_variable;
+
 [SerializeField] private float _variable;
 [SerializeField] protected float _variable;
 private float _variable;
