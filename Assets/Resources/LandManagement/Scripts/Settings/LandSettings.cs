@@ -8,6 +8,7 @@ namespace Biosearcher.LandManagement.Settings
     public sealed class LandSettings : ScriptableObject
     {
         #region Properties
+
         [Header("Chunk")]
         [NeedsRefactor(Needs.Rename)]
         [SerializeField] private int _minHierarchySize = 0;
