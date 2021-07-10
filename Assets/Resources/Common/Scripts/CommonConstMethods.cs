@@ -11,5 +11,10 @@ namespace Biosearcher.Common
         {
             // todo
         }
+        [NeedsRefactor(Needs.Remove)]
+        public static void OnDestroy(MonoBehaviour behaviour)
+        {
+            // todo
+        }
     }
 }

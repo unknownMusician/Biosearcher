@@ -1,10 +1,11 @@
 ﻿using Biosearcher.Common;
 using System;
+using UnityEngine.Scripting;
 
 namespace Biosearcher.Refactoring
 {
     [AttributeUsage(AttributeTargets.All, Inherited = false)]
-    public sealed class NeedsRefactorAttribute : Attribute
+    public sealed class NeedsRefactorAttribute : PreserveAttribute
     {
 #if UNITY_EDITOR
         internal string NeededAction { get; }

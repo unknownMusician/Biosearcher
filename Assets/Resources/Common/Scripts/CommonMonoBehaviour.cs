@@ -6,47 +6,32 @@ using UnityEngine.Events;
 namespace Biosearcher.Common
 {
     [NeedsRefactor]
-    public static class CommonMonoBehaviour
+    public sealed class CommonMonoBehaviour : MonoBehaviour
     {
-        private static CommonMonoBehaviourComponent instance;
-        public static CommonMonoBehaviourComponent Instance
-        {
-            [NeedsRefactor("if nobody calls Instance, Awake will not be called in the start")]
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new GameObject(nameof(CommonMonoBehaviour)).AddComponent<CommonMonoBehaviourComponent>();
+        private static CommonMonoBehaviour instance;
 
-                    CommonConstMethods.Awake(instance);
-                }
-                return instance;
-            }
+        public static event UnityAction DrawGizmos;
+        public static event UnityAction DrawGizmosSelected;
+
+        public static new Coroutine StartCoroutine(IEnumerator coroutine) => ((MonoBehaviour)instance).StartCoroutine(coroutine);
+
+        private void Awake()
+        {
+            instance = this;
+            CommonConstMethods.Awake(instance);
+        }
+        private void OnDestroy()
+        {
+            CommonConstMethods.OnDestroy(instance);
+            instance = null;
         }
 
-        public static event UnityAction OnDrawGizmos
-        {
-            add => Instance._onGizmos += value;
-            remove => Instance._onGizmos -= value;
-        }
-        public static event UnityAction OnDrawGizmosSelected
-        {
-            add => Instance._onGizmos += value;
-            remove => Instance._onGizmosSelected -= value;
-        }
+        private void OnDrawGizmos() => DrawGizmos?.Invoke();
+        private void OnDrawGizmosSelected() => DrawGizmosSelected?.Invoke();
+    }
 
-        public static Coroutine StartCoroutine(IEnumerator coroutine) => Instance.StartCoroutine(coroutine);
-        public static Coroutine StartCoroutine<T>(this T _, IEnumerator coroutine) => StartCoroutine(coroutine);
-
-        public sealed class CommonMonoBehaviourComponent : MonoBehaviour
-        {
-            public event UnityAction _onGizmos;
-            public event UnityAction _onGizmosSelected;
-
-            private void OnDrawGizmos() => _onGizmos?.Invoke();
-            private void OnDrawGizmosSelected() => _onGizmosSelected?.Invoke();
-
-            private void OnDestroy() => instance = null;
-        }
+    public static class CommonMonoBehaviourExtensions
+    {
+        public static Coroutine StartCoroutine<T>(this T _, IEnumerator coroutine) => CommonMonoBehaviour.StartCoroutine(coroutine);
     }
 }

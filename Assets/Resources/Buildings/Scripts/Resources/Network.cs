@@ -82,7 +82,7 @@ namespace Biosearcher.Buildings.Resources
                 _network = network;
                 TryAdd(resourceMover);
 
-                CommonMonoBehaviour.OnDrawGizmos += OnDrawGizmos;
+                CommonMonoBehaviour.DrawGizmos += OnDrawGizmos;
             }
 
             public void TryAdd(IResourceMover<TResource> resourceMover, IResourceMover<TResource> networkMember)
@@ -219,7 +219,7 @@ namespace Biosearcher.Buildings.Resources
                 }
             }
 
-            public void Dispose() => CommonMonoBehaviour.OnDrawGizmos -= OnDrawGizmos;
+            public void Dispose() => CommonMonoBehaviour.DrawGizmos -= OnDrawGizmos;
 
             [NeedsRefactor(Needs.Optimization)]
             private void OnDrawGizmos()
