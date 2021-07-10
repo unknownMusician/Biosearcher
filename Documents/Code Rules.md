@@ -125,16 +125,16 @@ public class Work
 }
 ```
 *Правильно:*
-```cs
+`cs 
 class Work
 {
-    private readonly float _amount;
+    private `**`readonly`**` float _amount;
     
     public Work(float amount) => _amount = amount
     
     public void ShowWork() => Debug.Log(_amount);
 }
-```
+`
 ## 10. В случае, когда класс/структура/интерфейс/поле/свойство/метод нуждается в дополнительной обработке, к нему следует приписать атрибут [NeedsRefactor] с соответствующими параметрами.
 *Неправильно:*
 ```cs
