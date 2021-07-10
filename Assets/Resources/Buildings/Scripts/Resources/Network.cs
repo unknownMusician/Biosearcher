@@ -28,6 +28,7 @@ namespace Biosearcher.Buildings.Resources
             Connection = new Connections(this, resourceMover);
             _cyclesPerSecond = cyclesPerSecond;
             this.StartCoroutine(NetworkCycle(_cyclesPerSecond));
+            CommonMonoBehaviour.Destroy += Dispose;
         }
 
         #region Methods
@@ -66,6 +67,7 @@ namespace Biosearcher.Buildings.Resources
 
         public void Dispose()
         {
+            CommonMonoBehaviour.Destroy -= Dispose;
             _isCycleActive = false;
             Connection.Dispose();
         }

@@ -13,7 +13,7 @@ namespace Biosearcher.Common
             }
             return collection;
         }
-        public static IEnumerable Foreach(this IEnumerable collection, System.Action<object> action)
+        public static IEnumerable ForeachNonGeneric(this IEnumerable collection, System.Action<object> action)
         {
             foreach (object element in collection)
             {

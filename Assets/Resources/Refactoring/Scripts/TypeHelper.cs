@@ -1,4 +1,5 @@
-﻿using Biosearcher.Refactoring.FileInput;
+﻿using Biosearcher.Common;
+using Biosearcher.Refactoring.FileInput;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,38 +10,15 @@ using UnityEngine.Profiling;
 
 namespace Biosearcher.Refactoring
 {
-    public static class ReflectionHelper
+    public static class TypeHelper
     {
-        private const BindingFlags MembersFlags =
-            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-
-        internal static bool TryGetCustomAttribute<TAttribute>(this MemberInfo element, out TAttribute attribute) where TAttribute : Attribute
-        {
-            attribute = element.GetCustomAttribute<TAttribute>();
-            return attribute != null;
-        }
-        private static IEnumerable<Type> GetAllTypes()
-        {
-#if BIOSEARCHER_PROFILING
-            Profiler.BeginSample(nameof(GetAllTypes));
-#endif
-
-            IEnumerable<Type> types = Assembly.GetExecutingAssembly().GetTypes()
-                .Where(t => t.Namespace != null && t.Namespace.Contains(nameof(Biosearcher)));
-
-#if BIOSEARCHER_PROFILING
-            Profiler.EndSample();
-#endif
-
-            return types;
-        }
         internal static IEnumerable<SearchedTypeInfo> GetSearchedTypeInfos()
         {
 #if BIOSEARCHER_PROFILING
             Profiler.BeginSample(nameof(GetSearchedTypeInfos));
 #endif
 
-            IEnumerable<SearchedTypeInfo> searchedTypeInfos = GetAllTypes()
+            IEnumerable<SearchedTypeInfo> searchedTypeInfos = ReflectionHelper.GetAllTypes()
                 .Select(GetSearchedTypeInfoOrNull)
                 .Where(info => info != null)
                 .Cast<SearchedTypeInfo>();
@@ -67,7 +45,7 @@ namespace Biosearcher.Refactoring
             }
 
             List<SearchedMemberInfo> searchedMemberInfos = new List<SearchedMemberInfo>(
-                type.GetMembers(MembersFlags)
+                type.GetMembers(ReflectionHelper.AllMembersFlags)
                 .Select(GetSearchedMemberInfoOrNull)
                 .Where(info => info != null)
                 .Cast<SearchedMemberInfo>());

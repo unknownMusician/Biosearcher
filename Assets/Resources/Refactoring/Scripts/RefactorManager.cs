@@ -12,7 +12,7 @@ namespace Biosearcher.Refactoring
     internal static class RefactorManager
     {
         private static Dictionary<string, FileInfo> fileInfos;
-        public static Log[] Logs { get; private set; } = new Log[0];
+        public static Log[] Logs { get; private set; } = Array.Empty<Log>();
 
         private static RefactorSettings RefactorSettings => Resources.Load<RefactorSettings>("Settings/Refactor Settings");
 
@@ -53,7 +53,7 @@ namespace Biosearcher.Refactoring
                 }
                 else
                 {
-                    Logs = new Log[0];
+                    Logs = Array.Empty<Log>();
                 }
             }
             catch (Exception ex)
@@ -74,7 +74,7 @@ namespace Biosearcher.Refactoring
 
             List<string> filePaths = DirectoryReader.GetFilePaths();
 
-            IEnumerable<SearchedTypeInfo> changedTypes = ReflectionHelper.GetSearchedTypeInfos();
+            IEnumerable<SearchedTypeInfo> changedTypes = TypeHelper.GetSearchedTypeInfos();
 
             fileInfos = GetChangedFileInfos(filePaths, changedTypes);
 
@@ -141,7 +141,7 @@ namespace Biosearcher.Refactoring
 
             return newFileInfos;
         }
-        
+
         private static List<SearchedTypeInfo> GetChangedTypes(IEnumerable<string> notChangedFilePaths)
         {
 #if BIOSEARCHER_PROFILING
@@ -150,7 +150,7 @@ namespace Biosearcher.Refactoring
 
             var types = new List<SearchedTypeInfo>();
             bool typeFound;
-            foreach (SearchedTypeInfo type in ReflectionHelper.GetSearchedTypeInfos())
+            foreach (SearchedTypeInfo type in TypeHelper.GetSearchedTypeInfos())
             {
                 typeFound = false;
                 foreach (string notChangedFilePath in notChangedFilePaths)
