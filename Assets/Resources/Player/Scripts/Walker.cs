@@ -95,7 +95,8 @@ namespace Biosearcher.Player
                 rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
                 _desiredRotation = _planetTransform.ToUniverse(rotation);
 
-                transform.rotation = (Quaternion)_desiredRotation;
+                //transform.rotation = (Quaternion)_desiredRotation;
+                transform.rotation = Quaternion.Slerp(transform.rotation, (Quaternion)_desiredRotation, 0.1f);
 
                 //Quaternion rotationRelativeToDesiredRotation = Quaternion.Inverse((Quaternion)desiredRotation) * transform.rotation;
                 //if (lastFrameRotationRelativeToDesiredRotation != null)
