@@ -5,6 +5,14 @@ namespace Biosearcher.Common
 {
     public static class CollectionsExtension
     {
+        public static IDictionary<K, V> Foreach<K, V>(this IDictionary<K, V> dictionary, System.Action<K, V> action)
+        {
+            foreach ((K key, V value) in dictionary)
+            {
+                action?.Invoke(key, value);
+            }
+            return dictionary;
+        }
         public static IEnumerable<T> Foreach<T>(this IEnumerable<T> collection, System.Action<T> action)
         {
             foreach (T element in collection)
@@ -13,7 +21,25 @@ namespace Biosearcher.Common
             }
             return collection;
         }
-        public static IEnumerable ForeachNonGeneric(this IEnumerable collection, System.Action<object> action)
+
+        public static T[] For<T>(this T[] array, System.Action<int> action)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                action?.Invoke(i);
+            }
+            return array;
+        }
+        public static T[] For<T>(this T[] array, System.Action<int, T> action)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                action?.Invoke(i, array[i]);
+            }
+            return array;
+        }
+
+        public static TEnumerable ForeachNonGeneric<TEnumerable>(this TEnumerable collection, System.Action<object> action) where TEnumerable : IEnumerable
         {
             foreach (object element in collection)
             {

@@ -58,7 +58,22 @@ namespace Biosearcher.Common
 
             return methods;
         }
+        
+        public static IEnumerable<(MethodInfo, Type)> GetAllMethodsWithTypes<TAttribute>(BindingFlags flags = AllMembersFlags) where TAttribute : Attribute
+        {
+#if BIOSEARCHER_PROFILING
+            Profiler.BeginSample(nameof(GetAllTypes));
+#endif
 
+            IEnumerable<(MethodInfo, Type)> methods = GetAllTypes()
+                .SelectMany(type => type.GetMethods(flags).Select(method => (method, type)))
+                .Where(input => input.method.TryGetCustomAttribute<TAttribute>(out _));
 
+#if BIOSEARCHER_PROFILING
+            Profiler.EndSample();
+#endif
+
+            return methods;
+        }
     }
 }

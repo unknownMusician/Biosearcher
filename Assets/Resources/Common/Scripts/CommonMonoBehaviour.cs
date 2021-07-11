@@ -14,24 +14,24 @@ namespace Biosearcher.Common
         private const BindingFlags MembersFlags =
             BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
-        private static CommonMonoBehaviour instance;
+        private static CommonMonoBehaviour s_instance;
 
         public static event UnityAction DrawGizmos;
         public static event UnityAction DrawGizmosSelected;
         public static new event UnityAction Destroy;
 
-        public static new Coroutine StartCoroutine(IEnumerator coroutine) => ((MonoBehaviour)instance).StartCoroutine(coroutine);
+        public static new Coroutine StartCoroutine(IEnumerator coroutine) => ((MonoBehaviour)s_instance).StartCoroutine(coroutine);
 
         private void Awake()
         {
-            instance = this;
+            s_instance = this;
             InvokeCommon<AwakeMethodAttribute>();
         }
         private void OnDestroy()
         {
             InvokeCommon<OnDestroyMethodAttribute>();
             Destroy?.Invoke();
-            instance = null;
+            s_instance = null;
         }
 
         private static void InvokeCommon<TAttribute>() where TAttribute : ExecutionOrderMethodAttribute
