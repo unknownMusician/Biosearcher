@@ -1,6 +1,14 @@
 # Чистый код 🥴:pinched_fingers:🤙🏿
 
-## 1. Обязательно нужно использовать префикс "\_" в названии `private` или `protected` переменных, а также использовать префикс "s_" в названии `private static` или `protected static` переменных.
+## 1. При написании `private` и `protected` полей используется *camelCase*, в противном случае используется *PascalCase*. При написании свойств всегда используется *PascalCase*
+```cs
+private float _variable;
+public readonly float Variable;
+
+public float Variable { get; set; }
+private float Variable { get; set; }
+```
+### 1.1. Обязательно нужно использовать префикс "\_" в названии `private` или `protected` полей, а также использовать префикс "s_" в названии `private static` или `protected static` полей.
 ```cs
 private static float s_variable;
 protected static float s_variable;
@@ -9,6 +17,17 @@ protected static float s_variable;
 [SerializeField] protected float _variable;
 private float _variable;
 protected float _variable;
+```
+### 1.2. Только `readonly` поля могут быть публичными.
+*Неправильно:*
+```cs
+public float Variable;
+```
+*Правильно:*
+```cs
+public readonly float Variable;
+// or
+public float Variable { get; set; }
 ```
 ## 2. Ключевое слово `var` необходимо использовать только в случае явного указания значения переменной или использования ключевого слова `new()`.
 ```cs
