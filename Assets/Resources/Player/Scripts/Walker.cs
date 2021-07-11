@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 namespace Biosearcher.Player
 {
+    [NeedsRefactor]
     public class Walker : MonoBehaviour
     {
         #region Properties

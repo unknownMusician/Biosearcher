@@ -25,7 +25,7 @@ namespace Biosearcher.Common
         public static Vector2 ProjectedXY(this Vector3 v) => new Vector2(v.x, v.y);
         public static Vector3 ReProjectedXY(this Vector2 v, float newZ = 0) => new Vector3(v.x, v.y, newZ);
 
-        public static Vector3 DroppedY(this Vector3 v) => new Vector3(v.x, 0, v.z);
+        public static Vector3 DroppedY(this Vector3 v, float newY = 0) => new Vector3(v.x, newY, v.z);
 
         public static Vector2 NormalizedDiamond(this Vector2 v) => v / (Mathf.Abs(v.x) + Mathf.Abs(v.y));
         public static Vector2 ClampedDiamond(this Vector2 v, float maxClamp)

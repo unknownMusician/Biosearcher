@@ -17,6 +17,9 @@ namespace Biosearcher.Planets.Orientation
         public Quaternion UniverseToPlanetRotation => Quaternion.FromToRotation(PositionRelativeToPlanet, planetRotationAxis);
         public Quaternion PlanetToUniverseRotation => Quaternion.FromToRotation(planetRotationAxis, PositionRelativeToPlanet);
 
+        public Vector3 Up => PositionRelativeToPlanet.normalized;
+        public Vector3 Down => -PositionRelativeToPlanet.normalized;
+
         public Coordinates Coordinates
         {
             get => new Coordinates(Height, Latitude, Longitude);
