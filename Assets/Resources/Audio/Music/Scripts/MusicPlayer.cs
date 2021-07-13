@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Biosearcher.Player
+namespace Biosearcher.Audio.Music
 {
     [RequireComponent(typeof(AudioSource))]
     public sealed class MusicPlayer : MonoBehaviour
     {
-        [SerializeField] private MusicSettings _musicSettings;
+        [SerializeField] private MusicSettings _settings;
         private AudioSource _audioSource;
         private AudioClip[] _shuffledTracks;
         private bool _isAlive = true;
@@ -15,24 +15,27 @@ namespace Biosearcher.Player
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
-            _audioSource.volume = _musicSettings.Volume;
-            _shuffledTracks = (AudioClip[])_musicSettings.Tracks.Clone();
-            
+            //_audioSource.volume = _settings.Volume;
+            _shuffledTracks = (AudioClip[])_settings.Tracks.Clone();
+
+            _settings.Validate += OnValidate;
             StartCoroutine(PlayMusic());
-        }
-        private void Update()
-        {
-            _audioSource.volume = _musicSettings.Volume;
         }
         private void OnDestroy()
         {
             _isAlive = false;
-            StopCoroutine(PlayMusic());
+            _settings.Validate -= OnValidate;
         }
-
+        private void OnValidate()
+        {
+            if (_settings != null)
+            {
+                GetComponent<AudioSource>().volume = _settings.Volume;
+            }
+        }
         private IEnumerator PlayMusic()
         {
-            yield return new WaitForSeconds(_musicSettings.Pause);
+            yield return new WaitForSeconds(_settings.Pause);
             while (_isAlive)
             {
                 Shuffle(_shuffledTracks);
@@ -40,9 +43,12 @@ namespace Biosearcher.Player
                 {
                     _audioSource.clip = track;
                     _audioSource.Play();
-                    yield return new WaitForSeconds(_audioSource.clip.length + _musicSettings.Pause);
+                    yield return new WaitForSeconds(_audioSource.clip.length + _settings.Pause);
+                    if (!_isAlive)
+                    {
+                        break;
+                    }
                 }
-                
             }
         }
 

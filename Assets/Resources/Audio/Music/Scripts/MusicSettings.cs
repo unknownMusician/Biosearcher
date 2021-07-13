@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-namespace Biosearcher.Player
+namespace Biosearcher.Audio.Music
 {
     [CreateAssetMenu(fileName = "Music Settings", menuName = "Music Settings", order = 53)]
     public sealed class MusicSettings : ScriptableObject
@@ -13,5 +14,10 @@ namespace Biosearcher.Player
         public AudioClip[] Tracks => _tracks;
         public float Volume => _volume;
         public int Pause => _pause;
+
+        public event Action Validate;
+
+        private void OnValidate() => Validate?.Invoke();
+
     }
 }

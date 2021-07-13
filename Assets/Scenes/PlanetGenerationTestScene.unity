@@ -1010,7 +1010,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 338b5d13a2589d544b02b68c95a8a63d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _musicSettings: {fileID: 11400000, guid: 5fb1e0e6231953346b7072bf066c8caa, type: 2}
+  _settings: {fileID: 11400000, guid: 5fb1e0e6231953346b7072bf066c8caa, type: 2}
 --- !u!82 &2114856217
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1023,7 +1023,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.546
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1168,7 +1168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2435475844816095532, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.55
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 2435475844816095532, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1180,7 +1180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3447425391693348844, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 79.05
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3447425391693348844, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1192,7 +1192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5197317207155239676, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 79.05
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5197317207155239676, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1204,7 +1204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5924867699386101352, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 78.55
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 5924867699386101352, guid: 822384aef79917c418b1416336d30364, type: 3}
       propertyPath: m_LocalPosition.y
