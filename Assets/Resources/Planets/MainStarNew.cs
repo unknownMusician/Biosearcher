@@ -41,7 +41,7 @@ namespace Biosearcher.Planets
         {
             _randomDeltaVector = GetRandomDeltaVector(_rotationAxis);
             RotationStartingVector = GetRotationStartingVector(_randomDeltaVector, _rotationAxis);
-            _rotationAngle.MakeCycleDegrees();
+            _rotationAngle.MakeCycleDegrees360();
             SetTransform();
         }
 
@@ -70,7 +70,7 @@ namespace Biosearcher.Planets
             while (_isAlive)
             {
                 _rotationAngle += _rotationAnglePerSecond * UnityEngine.Time.deltaTime;
-                _rotationAngle.MakeCycleDegrees();
+                _rotationAngle.MakeCycleDegrees360();
                 SetTransform();
 
                 yield return waitForFixedUpdate;

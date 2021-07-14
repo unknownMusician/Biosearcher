@@ -30,10 +30,16 @@ namespace Biosearcher.Planets.Orientation
         public float Latitude => ToLatitude(PositionRelativeToPlanet);
         public float Longitude => ToLongitude(PositionRelativeToPlanet);
 
-        public Quaternion planetRotation
+        public Quaternion PlanetRotation
         {
             get => ToPlanet(transform.rotation);
             set => transform.rotation = ToUniverse(value);
+        }
+
+        public Quaternion UniverseRotation
+        {
+            get => transform.rotation;
+            set => transform.rotation = value;
         }
 
         [NeedsRefactor(Needs.Implementation)]

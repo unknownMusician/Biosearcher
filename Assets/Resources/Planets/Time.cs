@@ -33,7 +33,7 @@ namespace Biosearcher.Planets
                 _planetRotationAxis);
 
             setterStarAngle += 180 + _mainStar.RotationAngle;
-            setterStarAngle.MakeCycleDegrees();
+            setterStarAngle.MakeCycleDegrees360();
 
             return Moment.Create(setterStarAngle / 360);
         }

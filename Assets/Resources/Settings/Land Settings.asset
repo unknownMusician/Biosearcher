@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Land Settings
   m_EditorClassIdentifier: 
   _minHierarchySize: 1
-  _maxHierarchySize: 5
+  _maxHierarchySize: 6
   _generatingFrequency: 16
   _cubesPerChunk1D: 16
   _surfaceValue: 0.76
