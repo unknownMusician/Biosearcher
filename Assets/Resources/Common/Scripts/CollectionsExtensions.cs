@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace Biosearcher.Common
 {
-    public static class CollectionsExtension
+    public static class CollectionsExtensions
     {
         public static IDictionary<K, V> Foreach<K, V>(this IDictionary<K, V> dictionary, System.Action<K, V> action)
         {
@@ -38,6 +40,15 @@ namespace Biosearcher.Common
             }
             return array;
         }
+
+        public static Vector3 GetAverage(this Vector3[] points)
+        {
+            Vector3 sum = Vector3.zero;
+            points.Foreach(point => sum += point);
+            return sum / points.Length;
+        }
+
+        public static Vector3 Average(params Vector3[] points) => GetAverage(points);
 
         public static TEnumerable ForeachNonGeneric<TEnumerable>(this TEnumerable collection, System.Action<object> action) where TEnumerable : IEnumerable
         {

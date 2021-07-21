@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Biosearcher.Common;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 #if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
@@ -61,12 +63,28 @@ namespace Biosearcher.LandManagement.CubeMarching
                 counter += 3;
             }
 
-            var meshData = new MeshData(newVertices.ToArray(), newTriangles.ToArray());
+            Vector3[] vertices = newVertices.ToArray();
+
+            var meshData = new MeshData(vertices, newTriangles.ToArray(), ToNormals(vertices));
 #if BIOSEARCHER_PROFILING
             Profiler.EndSample();
 #endif
             return meshData;
         }
+
+        protected Ray[] ToNormals(Vector3[] vertices)
+        {
+            Ray[] normals = new Ray[vertices.Length / 3];
+            for (int j, i = 0; i < normals.Length; i++)
+            {
+                j = i * 3;
+                Vector3 origin = CollectionsExtensions.Average(vertices[j + 0], vertices[j + 1], vertices[j + 2]);
+                Vector3 direction = Vector3.Cross(vertices[j + 1] - vertices[j + 0], vertices[j + 2] - vertices[j + 1]);
+                normals[i] = new Ray(origin, direction);
+            }
+            return normals;
+        }
+
         protected Mesh ToMesh(Vector3[] cleanVertices, int[] cleanTriangles)
         {
 #if BIOSEARCHER_PROFILING

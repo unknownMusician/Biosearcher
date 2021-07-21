@@ -27,7 +27,7 @@ namespace Biosearcher.Planets
         [NeedsRefactor(Needs.Check)]
         public float GetHumidity(Vector3 position)
         {
-            return _humidityRange.Lerp(LandManagement.CubeMarching.CPU.Noise.Gradient(position / 200));
+            return _humidityRange.Lerp(Noise.Gradient(position / 200));
         }
 
         [NeedsRefactor("Optimize raycast", Needs.Refactor)]

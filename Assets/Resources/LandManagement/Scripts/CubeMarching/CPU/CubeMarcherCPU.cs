@@ -337,7 +337,9 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             };
             _generator.GenerateMesh(ref tempMeshBuffer);
 
-            return new MeshData(tempMeshBuffer.vertices.ToArray(), tempMeshBuffer.triangles.ToArray());
+            Vector3[] vertices = tempMeshBuffer.vertices.ToArray();
+
+            return new MeshData(vertices, tempMeshBuffer.triangles.ToArray(), ToNormals(vertices));
         }
 
         public override MeshData GenerateMeshData(MarchPoint[] points)
@@ -352,7 +354,9 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
 
             _generator.GenerateMesh(ref tempBuffer);
 
-            return new MeshData(tempBuffer.vertices.ToArray(), tempBuffer.triangles.ToArray());
+            Vector3[] vertices = tempBuffer.vertices.ToArray();
+
+            return new MeshData(vertices, tempBuffer.triangles.ToArray(), ToNormals(vertices));
         }
 
         public override MarchPoint[] GeneratePoints(Vector3Int chunkPosition, int cubeSize)

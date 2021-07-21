@@ -15,7 +15,7 @@ namespace Biosearcher.LandManagement.Chunks
 
         protected internal override void Instantiate()
         {
-            _geometry = GeometryManager.InstantiateChunk(_geometry, this);
+            GeometryManager.InstantiateChunk(ref _geometry, this);
             Show();
         }
 

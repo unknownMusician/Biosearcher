@@ -1,13 +1,11 @@
-using Biosearcher.Refactoring;
 using UnityEngine;
 #if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;
 #endif
 
-namespace Biosearcher.LandManagement.CubeMarching.CPU
+namespace Biosearcher.Common
 {
-    [NeedsRefactor("Make less specific (there are uses from other namespaces)")]
-    internal static class Noise
+    public static class Noise
     {
         internal static float Get(Vector3 position)
         {

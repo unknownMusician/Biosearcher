@@ -4,13 +4,15 @@ namespace Biosearcher.LandManagement.CubeMarching
 {
     public sealed class MeshData
     {
-        public Vector3[] Vertices { get; private set; }
-        public int[] Triangles { get; private set; }
+        public Vector3[] Vertices { get; }
+        public int[] Triangles { get; }
+        public Ray[] Normals { get; }
 
-        public MeshData(Vector3[] vertices, int[] triangles)
+        public MeshData(Vector3[] vertices, int[] triangles, Ray[] normals)
         {
             Vertices = vertices;
             Triangles = triangles;
+            Normals = normals;
         }
     }
 }

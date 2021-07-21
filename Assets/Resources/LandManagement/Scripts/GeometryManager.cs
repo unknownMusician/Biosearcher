@@ -1,9 +1,13 @@
-﻿using Biosearcher.LandManagement.Chunks;
+﻿using Biosearcher.Common;
+using Biosearcher.LandManagement.Chunks;
 using Biosearcher.LandManagement.CubeMarching;
 using Biosearcher.LandManagement.CubeMarching.CPU;
 using Biosearcher.LandManagement.CubeMarching.GPU;
 using Biosearcher.LandManagement.QueueWorkers;
 using Biosearcher.LandManagement.Settings;
+using Biosearcher.Refactoring;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Biosearcher.LandManagement
@@ -59,6 +63,8 @@ namespace Biosearcher.LandManagement
         {
             Object.Destroy(geometry.chunkMesh);
             Object.Destroy(geometry.chunkObject);
+            PlantsSpawner.Dispose(geometry.plants);
+            geometry.normals = null;
         }
 
         protected MeshData GenerateChunkJob((Vector3Int chunkPosition, int hierarchySize) input)
@@ -66,20 +72,28 @@ namespace Biosearcher.LandManagement
             return _cubeMarcher.GenerateMeshData(input.chunkPosition, Chunk.HierarchySize2CubeSize(input.hierarchySize));
         }
 
-        protected internal Geometry InstantiateChunk(Geometry geometry, ChunkWithGeometry chunk)
+        [NeedsRefactor]
+        protected internal void InstantiateChunk(ref Geometry geometry, ChunkWithGeometry chunk)
         {
             GameObject generatedChunkObject = Object.Instantiate(_settings.ChunkPrefab, chunk.Position, Quaternion.identity, _land.transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = geometry.chunkMesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = geometry.chunkMesh;
-            return new Geometry() { chunkMesh = geometry.chunkMesh, chunkObject = generatedChunkObject };
+
+            // remove LINQ
+            IEnumerable<Ray> normals = geometry.normals.Select(normal => new Ray(normal.origin + chunk.Position, normal.direction));
+            //normals.Foreach(normal => Debug.DrawRay(normal.origin, normal.direction, Color.white, 20f));
+            IEnumerable<GameObject> plants = PlantsSpawner.Spawn(normals);
+
+            geometry = new Geometry() { chunkMesh = geometry.chunkMesh, chunkObject = generatedChunkObject, normals = geometry.normals, plants = plants };
         }
 
         protected void OnWorkerJobDone(MeshData output, ChunkWithGeometry chunk)
         {
             Mesh generatedMesh = _cubeMarcher.ToMesh(output);
             GameObject chunkPrefab = _settings.ChunkPrefab;
+            Ray[] normals = output.Normals;
 
-            var geometry = new Geometry() { chunkObject = chunkPrefab, chunkMesh = generatedMesh };
+            var geometry = new Geometry() { chunkObject = chunkPrefab, chunkMesh = generatedMesh, normals = normals };
             chunk.Initialize(geometry);
         }
 
