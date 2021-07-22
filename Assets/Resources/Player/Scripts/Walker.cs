@@ -34,8 +34,7 @@ namespace Biosearcher.Player
         private WheelAnimator _animator;
         private PlayerInput _input;
 
-        private enum States { OnGroundState, InAirState }
-        private StateManager<States> _state;
+        private ChangeableStateManager<WalkerStates> _state;
 
         private RaycastHit _hitInfo;
 
@@ -47,6 +46,8 @@ namespace Biosearcher.Player
         private float GroundDesiredHeight => _animator.Suspension.Max;
         private float GroundCheckHeight => GroundDesiredHeight * (4f / 3f);
         private LayerMask GroundMask => _animator.GroundMask;
+        public StateHook<WalkerStates> StateHook => _state.Hook;
+        public float MaxSpeed => _maxSpeed;
 
         private float TangentAcceleration { get; set; }
         private float NormalAcceleration { get; set; }
@@ -55,32 +56,19 @@ namespace Biosearcher.Player
 
         #region MonoBehaviour methods
 
-        private Walker()
-        {
-            _state = new StateManager<States>();
-
-            _state.Register(States.OnGroundState)
-                .Register(StabilizeTangent, StabilizeTangent)
-                .Register(StabilizeNormal, StabilizeNormal)
-                .Register(Move, Move)
-                .Register(DrawGizmos, DrawGizmos);
-
-            _state.Register(States.InAirState)
-                .Register(StabilizeTangent, () => _desiredPosition = null)
-                .Register(StabilizeNormal, null)
-                .Register(Move, null)
-                .Register(DrawGizmos, null);
-
-            _state.Change(States.InAirState);
-        }
-
         private void Awake()
         {
+            RegisterStates();
+
             this.GetComponents(out _planetTransform, out _rigidbody, out _animator);
 
             _input = new PlayerInput(new Presenter(this));
         }
-        private void OnDestroy() => _input.Dispose();
+        private void OnDestroy()
+        {
+            _input.Dispose();
+            _state.Dispose();
+        }
 
         private void OnEnable() => _input.OnEnable();
         private void OnDisable() => _input.OnDisable();
@@ -89,7 +77,7 @@ namespace Biosearcher.Player
         {
             _downDirection = -transform.up.normalized;
 
-            _state.Change(RaycastLocalDown() ? States.OnGroundState : States.InAirState);
+            _state.TryChange(RaycastLocalDown() ? WalkerStates.OnGroundState : WalkerStates.InAirState);
 
             _state.Active.Invoke(StabilizeTangent);
             _state.Active.Invoke(StabilizeNormal);
@@ -102,6 +90,25 @@ namespace Biosearcher.Player
 
         #region Methods
 
+        private void RegisterStates()
+        {
+            _state = new ChangeableStateManager<WalkerStates>();
+
+            _state.Register(WalkerStates.OnGroundState)
+                .Register(StabilizeTangent, StabilizeTangent)
+                .Register(StabilizeNormal, StabilizeNormal)
+                .Register(Move, Move)
+                .Register(DrawGizmos, DrawGizmos);
+
+            _state.Register(WalkerStates.InAirState)
+                .Register(StabilizeTangent, () => _desiredPosition = null)
+                .Register(StabilizeNormal, null)
+                .Register(Move, null)
+                .Register(DrawGizmos, null);
+
+            _state.TryChange(WalkerStates.InAirState);
+        }
+
         private bool RaycastLocalDown() => Physics.Raycast(transform.position, _downDirection, out _hitInfo, GroundCheckHeight, GroundMask);
 
         private void DrawGizmos()
@@ -110,6 +117,7 @@ namespace Biosearcher.Player
             Gizmos.DrawSphere(_desiredPosition.Value, 0.1f);
         }
 
+        [NeedsRefactor("Make Height check based on wheels, not on overall height")]
         private void StabilizeTangent()
         {
             _desiredPosition = _hitInfo.point - _downDirection * GroundDesiredHeight;
@@ -127,28 +135,13 @@ namespace Biosearcher.Player
             _lastFramePositionRelativeToDesiredPosition = positionRelativeToDesiredPosition;
 
             Vector3 tangentDistance = -_downDirection * GroundDesiredHeight - (transform.position - _hitInfo.point);
-            Vector3 tangentAcceleration = tangentDistance.normalized * _springTangentAcceleration * (tangentDistance.magnitude * tangentDistance.magnitude);
-            Vector3 tangentDamping = -_rigidbody.velocity.normalized * tangentVelocityRelativeToDesiredPosition.magnitude * _springTangentDamp;
+            Vector3 tangentAcceleration = (tangentDistance.magnitude * tangentDistance.magnitude) * _springTangentAcceleration * tangentDistance.normalized;
+            Vector3 tangentDamping = _springTangentDamp * tangentVelocityRelativeToDesiredPosition.magnitude * -_rigidbody.velocity.normalized;
             _rigidbody.velocity += (tangentAcceleration + tangentDamping) * Time.deltaTime;
         }
 
         private void StabilizeNormal()
         {
-            //Quaternion deltaRotation = transform.rotation.To(GetDesiredRotation(_hitInfo.normal));
-
-            //deltaRotation.ToAngleAxis(out float angle, out Vector3 axis);
-
-            //axis = float.IsInfinity(axis.x) ? Vector3.zero : axis.normalized;
-
-            //angle.MakeCycleDegrees180();
-
-            //Vector3 normalAcceleration = Mathf.Deg2Rad * angle * _springNormalAcceleration * axis;
-            //Vector3 normalDamping = -_rigidbody.angularVelocity * _springNormalDamp;
-
-            //_rigidbody.angularVelocity += (normalAcceleration + normalDamping) * Time.deltaTime;
-
-
-
             Transform[,] wheels = _animator.Wheels;
 
             Vector3 leftAverage = (wheels[0, 0].position + wheels[0, 1].position + wheels[0, 2].position) * (1f / 3f);
@@ -172,7 +165,6 @@ namespace Biosearcher.Player
             Vector3 normalDamping = -_rigidbody.angularVelocity * _springNormalDamp;
 
             _rigidbody.angularVelocity += (normalAcceleration + normalDamping) * Time.deltaTime;
-
         }
 
         private Quaternion GetDesiredRotation(Vector3 normal)

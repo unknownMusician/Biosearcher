@@ -39,10 +39,9 @@ namespace Biosearcher.Player
             Vector3 deltaPosition = transform.position - _lastPosition;
             float speed = (Quaternion.Inverse(transform.rotation) * deltaPosition).z;
             float angle = speed / _wheelRadius * Mathf.Rad2Deg;
-            WheelHeights = new float[2, 3];
             ForeachWheel((indices, position, wheel) =>
             {
-                wheel.localPosition = GetLocalPosition(position, out WheelHeights[indices.xi, indices.yi]);
+                wheel.localPosition = GetLocalPosition(position);
                 wheel.localRotation = Quaternion.Euler(angle, 0f, 0f) * wheel.localRotation;
             });
             _lastPosition = transform.position;
