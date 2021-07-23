@@ -59,6 +59,7 @@ namespace Biosearcher.LandManagement
         {
             Object.Destroy(geometry.chunkMesh);
             Object.Destroy(geometry.chunkObject);
+            Object.Destroy(geometry.grassObject);
         }
 
         protected MeshData GenerateChunkJob((Vector3Int chunkPosition, int hierarchySize) input)
@@ -66,20 +67,26 @@ namespace Biosearcher.LandManagement
             return _cubeMarcher.GenerateMeshData(input.chunkPosition, Chunk.HierarchySize2CubeSize(input.hierarchySize));
         }
 
-        protected internal Geometry InstantiateChunk(Geometry geometry, ChunkWithGeometry chunk)
+        private GameObject CreateChunkObject(GameObject prefab, ChunkWithGeometry chunk, Geometry geometry)
         {
-            GameObject generatedChunkObject = Object.Instantiate(_settings.ChunkPrefab, chunk.Position, Quaternion.identity, _land.transform);
+            GameObject generatedChunkObject = Object.Instantiate(prefab, chunk.Position, Quaternion.identity, _land.transform);
             generatedChunkObject.GetComponent<MeshFilter>().mesh = geometry.chunkMesh;
             generatedChunkObject.GetComponent<MeshCollider>().sharedMesh = geometry.chunkMesh;
-            return new Geometry() { chunkMesh = geometry.chunkMesh, chunkObject = generatedChunkObject };
+            return generatedChunkObject;
+        }
+
+        protected internal Geometry InstantiateChunk(Geometry geometry, ChunkWithGeometry chunk)
+        {
+            GameObject generatedChunkObject = CreateChunkObject(_settings.ChunkPrefab, chunk, geometry);
+            GameObject generatedChunkGrassObject = CreateChunkObject(_settings.ChunkGrassPrefab, chunk, geometry);
+            return new Geometry() { chunkMesh = geometry.chunkMesh, chunkObject = generatedChunkObject, grassObject = generatedChunkGrassObject };
         }
 
         protected void OnWorkerJobDone(MeshData output, ChunkWithGeometry chunk)
         {
             Mesh generatedMesh = _cubeMarcher.ToMesh(output);
-            GameObject chunkPrefab = _settings.ChunkPrefab;
 
-            var geometry = new Geometry() { chunkObject = chunkPrefab, chunkMesh = generatedMesh };
+            var geometry = new Geometry() { chunkMesh = generatedMesh };
             chunk.Initialize(geometry);
         }
 

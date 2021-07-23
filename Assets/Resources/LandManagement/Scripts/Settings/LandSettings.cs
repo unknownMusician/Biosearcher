@@ -28,6 +28,7 @@ namespace Biosearcher.LandManagement.Settings
         [SerializeField] private float _seed = 6;
         [SerializeField] private WorldType _worldType = WorldType.SingleChunk;
         [SerializeField] private GameObject _chunkPrefab;
+        [SerializeField] private GameObject _chunkGrassPrefab;
 
         public int MinHierarchySize => _minHierarchySize;
         public int MaxHierarchySize => _maxHierarchySize;
@@ -44,6 +45,7 @@ namespace Biosearcher.LandManagement.Settings
         public float Seed => _seed;
         public WorldType WorldType => _worldType;
         public GameObject ChunkPrefab => _chunkPrefab;
+        public GameObject ChunkGrassPrefab => _chunkGrassPrefab;
         public ComputeShader Shader
         {
             get
