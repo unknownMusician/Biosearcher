@@ -6,7 +6,17 @@ namespace Biosearcher.Common.States
     public abstract class StateManager<TEnum> : IDisposable where TEnum : Enum
     {
         protected Dictionary<TEnum, State> _states = new Dictionary<TEnum, State>();
-        internal Action<TEnum> _onStateChange;
+
+        public Action<TEnum> _onStateChange;
+        public event Action<TEnum> OnStateChange
+        {
+            add
+            {
+                _onStateChange += value;
+                value?.Invoke(ActiveName);
+            }
+            remove => _onStateChange -= value;
+        }
 
         public State Active => _states[ActiveName];
         protected internal TEnum ActiveName { get; protected set; }
@@ -14,7 +24,11 @@ namespace Biosearcher.Common.States
 
         public StateManager() => Hook = new StateHook<TEnum>(this);
 
-        public State Register(TEnum stateName) => _states[stateName] = new State();
+        public State Register(TEnum stateName)
+        {
+            _states.Remove(stateName);
+            return _states[stateName] = new State();
+        }
 
         protected void TryChange(TEnum stateName)
         {
@@ -31,6 +45,7 @@ namespace Biosearcher.Common.States
             {
                 state.Dispose();
             }
+            _onStateChange = null;
             _states.Clear();
         }
     }
@@ -42,19 +57,19 @@ namespace Biosearcher.Common.States
 
     public sealed class HookableStateManager<TEnum> : StateManager<TEnum> where TEnum : Enum
     {
-        private List<Action<TEnum>> _hookedActions = new List<Action<TEnum>>();
+        private readonly List<StateManager<TEnum>> _hookedManagers = new List<StateManager<TEnum>>();
 
         public void HookTo(StateHook<TEnum> hook) => HookTo(hook.StateManager);
         public void HookTo(StateManager<TEnum> originalStateManager)
         {
-            originalStateManager._onStateChange += TryChange;
-            TryChange(originalStateManager.ActiveName);
+            originalStateManager.OnStateChange += TryChange;
+            _hookedManagers.Add(originalStateManager);
         }
 
         public override void Dispose()
         {
-            _hookedActions.Foreach(action => action -= TryChange);
-            _hookedActions.Clear();
+            _hookedManagers.Foreach(manager => manager.OnStateChange -= TryChange);
+            _hookedManagers.Clear();
             base.Dispose();
         }
     }

@@ -19,7 +19,7 @@ namespace Biosearcher.Player
         private Walker _walker;
         private Rigidbody _rigidbody;
 
-        private HookableStateManager<WalkerStates> _state;
+        private HookableStateManager<WalkerState> _state;
 
         private float _pitchVelocity;
         private float _volumeVelocity;
@@ -49,12 +49,12 @@ namespace Biosearcher.Player
 
         private void RegisterStates()
         {
-            _state = new HookableStateManager<WalkerStates>();
+            _state = new HookableStateManager<WalkerState>();
 
-            _state.Register(WalkerStates.OnGroundState)
+            _state.Register(WalkerState.OnGroundState)
                 .Register(SetAudioPitch, SetAudioPitch);
 
-            _state.Register(WalkerStates.InAirState)
+            _state.Register(WalkerState.InAirState)
                 .Register(SetAudioPitch, SetAudioPitchInAir);
         }
         private void SetAudioPitch()
@@ -64,8 +64,8 @@ namespace Biosearcher.Player
         }
         private void SetAudioPitchInAir()
         {
-            PitchSmoothDamp(_walker.MaxSpeed);
-            _wheelsAudioSource.volume = 0;
+            PitchSmoothDamp(0f);
+            _wheelsAudioSource.volume = 0f;
         }
 
         private void PitchSmoothDamp(float targetVelocity)

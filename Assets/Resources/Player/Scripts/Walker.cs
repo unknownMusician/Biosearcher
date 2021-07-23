@@ -34,7 +34,7 @@ namespace Biosearcher.Player
         private WheelAnimator _animator;
         private PlayerInput _input;
 
-        private ChangeableStateManager<WalkerStates> _state;
+        private ChangeableStateManager<WalkerState> _state;
 
         private RaycastHit _hitInfo;
 
@@ -43,11 +43,10 @@ namespace Biosearcher.Player
         private Vector3? _desiredPosition;
         private Vector3 _downDirection;
 
-        private float GroundDesiredHeight => _animator.Suspension.Max;
-        private float GroundCheckHeight => GroundDesiredHeight * (4f / 3f);
+        private float GroundDesiredHeight => GroundCheckHeight * (3f / 4f);
+        private float GroundCheckHeight => _animator.Suspension.Max;
         private LayerMask GroundMask => _animator.GroundMask;
-        public StateHook<WalkerStates> StateHook => _state.Hook;
-        public float MaxSpeed => _maxSpeed;
+        public StateHook<WalkerState> StateHook => _state.Hook;
 
         private float TangentAcceleration { get; set; }
         private float NormalAcceleration { get; set; }
@@ -77,7 +76,7 @@ namespace Biosearcher.Player
         {
             _downDirection = -transform.up.normalized;
 
-            _state.TryChange(RaycastLocalDown() ? WalkerStates.OnGroundState : WalkerStates.InAirState);
+            _state.TryChange(_animator.AtLeastOneWeelTouchesGround ? WalkerState.OnGroundState : WalkerState.InAirState);
 
             _state.Active.Invoke(StabilizeTangent);
             _state.Active.Invoke(StabilizeNormal);
@@ -92,21 +91,21 @@ namespace Biosearcher.Player
 
         private void RegisterStates()
         {
-            _state = new ChangeableStateManager<WalkerStates>();
+            _state = new ChangeableStateManager<WalkerState>();
 
-            _state.Register(WalkerStates.OnGroundState)
+            _state.Register(WalkerState.OnGroundState)
                 .Register(StabilizeTangent, StabilizeTangent)
                 .Register(StabilizeNormal, StabilizeNormal)
                 .Register(Move, Move)
                 .Register(DrawGizmos, DrawGizmos);
 
-            _state.Register(WalkerStates.InAirState)
+            _state.Register(WalkerState.InAirState)
                 .Register(StabilizeTangent, () => _desiredPosition = null)
                 .Register(StabilizeNormal, null)
                 .Register(Move, null)
                 .Register(DrawGizmos, null);
 
-            _state.TryChange(WalkerStates.InAirState);
+            _state.TryChange(WalkerState.InAirState);
         }
 
         private bool RaycastLocalDown() => Physics.Raycast(transform.position, _downDirection, out _hitInfo, GroundCheckHeight, GroundMask);
@@ -120,7 +119,10 @@ namespace Biosearcher.Player
         [NeedsRefactor("Make Height check based on wheels, not on overall height")]
         private void StabilizeTangent()
         {
-            _desiredPosition = _hitInfo.point - _downDirection * GroundDesiredHeight;
+            Vector3 hitSum = Vector3.zero;
+            _animator.Wheels.For(wheel => hitSum += wheel.Transform.position);
+            Vector3 hitPoint = hitSum * (1f / 6f);
+            _desiredPosition = hitPoint - _downDirection * GroundDesiredHeight;
 
             Vector3 positionRelativeToDesiredPosition = transform.position - _desiredPosition.Value;
             Vector3 tangentVelocityRelativeToDesiredPosition;
@@ -134,21 +136,31 @@ namespace Biosearcher.Player
             }
             _lastFramePositionRelativeToDesiredPosition = positionRelativeToDesiredPosition;
 
-            Vector3 tangentDistance = -_downDirection * GroundDesiredHeight - (transform.position - _hitInfo.point);
+            Vector3 tangentDistance = -_downDirection * GroundDesiredHeight - (transform.position - hitPoint);
             Vector3 tangentAcceleration = (tangentDistance.magnitude * tangentDistance.magnitude) * _springTangentAcceleration * tangentDistance.normalized;
             Vector3 tangentDamping = _springTangentDamp * tangentVelocityRelativeToDesiredPosition.magnitude * -_rigidbody.velocity.normalized;
             _rigidbody.velocity += (tangentAcceleration + tangentDamping) * Time.deltaTime;
         }
 
+        [NeedsRefactor]
         private void StabilizeNormal()
         {
-            Transform[,] wheels = _animator.Wheels;
+            Vector3[,] wheelPositions = new Vector3[2, 3];
+            Wheel[,] wheels = _animator.Wheels;
 
-            Vector3 leftAverage = (wheels[0, 0].position + wheels[0, 1].position + wheels[0, 2].position) * (1f / 3f);
-            Vector3 rightAverage = (wheels[1, 0].position + wheels[1, 1].position + wheels[1, 2].position) * (1f / 3f);
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 3; y++)
+                {
+                    wheelPositions[x, y] = wheels[x, y].Transform.position;
+                }
+            }
 
-            Vector3 forwardAverage = (wheels[0, 2].position + wheels[1, 2].position) * 0.5f;
-            Vector3 backAverage = (wheels[0, 0].position + wheels[1, 0].position) * 0.5f;
+            Vector3 leftAverage = (wheelPositions[0, 0] + wheelPositions[0, 1] + wheelPositions[0, 2]) * (1f / 3f);
+            Vector3 rightAverage = (wheelPositions[1, 0] + wheelPositions[1, 1] + wheelPositions[1, 2]) * (1f / 3f);
+
+            Vector3 forwardAverage = (wheelPositions[0, 2] + wheelPositions[1, 2]) * 0.5f;
+            Vector3 backAverage = (wheelPositions[0, 0] + wheelPositions[1, 0]) * 0.5f;
 
             Vector3 normal = Vector3.Cross(((leftAverage + rightAverage) * 0.5f + forwardAverage) * 0.5f - (leftAverage + backAverage) * 0.5f,
                 (rightAverage + backAverage) * 0.5f - (leftAverage + backAverage) * 0.5f).normalized;
