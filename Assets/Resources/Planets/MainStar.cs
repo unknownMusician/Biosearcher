@@ -1,14 +1,14 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.Refactoring;
-using System.Collections;
 using UnityEngine;
 
 namespace Biosearcher.Planets
 {
+    [ExecuteAlways]
     [NeedsRefactor]
-    public sealed class MainStarNew : MonoBehaviour
+    public sealed class MainStar : MonoBehaviour
     {
-        public static MainStarNew Instance { get; private set; }
+        public static MainStar Instance { get; private set; }
 
         [NeedsRefactor]
         private static readonly Vector3 RotationCenter = Vector3.zero;
@@ -20,7 +20,8 @@ namespace Biosearcher.Planets
         [SerializeField] private float _rotationRadius = 300;
         [NeedsRefactor("Sync with Coordinates & Planet")]
         [SerializeField] private Vector3 _rotationAxis = DefaultRotationAxis;
-        private bool _isAlive = true;
+        [SerializeField] private Material _skyMaterial;
+        [SerializeField] private Material _atmosphereMaterial;
 
         private Vector3 _randomDeltaVector = DefaultRandomDeltaVector;
 
@@ -53,28 +54,30 @@ namespace Biosearcher.Planets
             }
             Instance = this;
         }
-        private void OnDestroy() => Instance = null;
+        private void OnDestroy()
+        {
+            Instance = null;
+            _skyMaterial.SetVector("MainStarDirection", Vector3.zero);
+            _atmosphereMaterial.SetVector("MainStarDirection", Vector3.zero);
+        }
 
-        private void Start() => StartCoroutine(Rotating());
+        private void Update()
+        {
+            transform.rotation = Quaternion.FromToRotation(Vector3.forward, -transform.position);
+            _skyMaterial.SetVector("MainStarDirection", transform.position.normalized);
+            _atmosphereMaterial.SetVector("MainStarDirection", transform.position.normalized);
+        }
+
+        private void FixedUpdate()
+        {
+            _rotationAngle += _rotationAnglePerSecond * UnityEngine.Time.deltaTime;
+            _rotationAngle.MakeCycleDegrees360();
+            SetTransform();
+        }
 
         private void SetTransform()
         {
             transform.position = Quaternion.AngleAxis(_rotationAngle, _rotationAxis) * RotationStartingVector * _rotationRadius;
-        }
-
-        private IEnumerator Rotating()
-        {
-            var waitForFixedUpdate = new WaitForFixedUpdate();
-
-            yield return waitForFixedUpdate;
-            while (_isAlive)
-            {
-                _rotationAngle += _rotationAnglePerSecond * UnityEngine.Time.deltaTime;
-                _rotationAngle.MakeCycleDegrees360();
-                SetTransform();
-
-                yield return waitForFixedUpdate;
-            }
         }
 
         private void OnDrawGizmosSelected()

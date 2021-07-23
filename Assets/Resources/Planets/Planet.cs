@@ -8,7 +8,7 @@ namespace Biosearcher.Planets
     {
         public static Planet Current { get; internal set; }
 
-        public MainStarNew Star => MainStarNew.Instance;
+        public MainStar Star => MainStar.Instance;
         [NeedsRefactor]
         public Vector3 Center => Vector3.zero;
         public Vector3 RotationAxis { get; }
