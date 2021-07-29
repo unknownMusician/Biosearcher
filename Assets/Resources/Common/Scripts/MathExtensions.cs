@@ -25,7 +25,7 @@ namespace Biosearcher.Common
         public static Vector2 ProjectedXY(this Vector3 v) => new Vector2(v.x, v.y);
         public static Vector3 ReProjectedXY(this Vector2 v, float newZ = 0) => new Vector3(v.x, v.y, newZ);
 
-        public static Vector3 DroppedY(this Vector3 v) => new Vector3(v.x, 0, v.z);
+        public static Vector3 DroppedY(this Vector3 v, float newY = 0) => new Vector3(v.x, newY, v.z);
 
         public static Vector2 NormalizedDiamond(this Vector2 v) => v / (Mathf.Abs(v.x) + Mathf.Abs(v.y));
         public static Vector2 ClampedDiamond(this Vector2 v, float maxClamp)
@@ -62,6 +62,8 @@ namespace Biosearcher.Common
             return new Quaternion(x, y, z, w);
         }
 
+        public static Quaternion To(this Quaternion origin, Quaternion destination) => destination * Quaternion.Inverse(origin);
+
         public static Vector3 DivideBy(this Vector3 v1, Vector3 v2)
         {
             return new Vector3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
@@ -73,20 +75,15 @@ namespace Biosearcher.Common
         public static int GetEven(this int n) => n & ~1;
         public static void MakeEven(this ref int n) => n &= ~1;
 
-        public static void MakeCycleDegrees(this ref float angle) => angle = GetCycleDegrees(angle);
-
-        [NeedsRefactor(Needs.Optimization)]
-        public static float GetCycleDegrees(this float angle)
+        public static void MakeCycleDegrees360(this ref float angle) => angle = GetCycleDegrees360(angle);
+        public static float GetCycleDegrees360(this float angle) => GetCycleDegrees(angle, 360f);
+        public static void MakeCycleDegrees180(this ref float angle) => angle = GetCycleDegrees180(angle);
+        public static float GetCycleDegrees180(this float angle) => GetCycleDegrees(angle, 180f);
+        public static void MakeCycleDegrees(this ref float angle, float cycleMaxAngle) => angle = GetCycleDegrees(angle, cycleMaxAngle);
+        public static float GetCycleDegrees(this float angle, float cycleMaxAngle)
         {
-            if (angle >= 360)
-            {
-                return angle - 360 * (Mathf.FloorToInt(angle) / 360);
-            }
-            else if (angle < 0)
-            {
-                return angle + 360 * (Mathf.FloorToInt(angle) / 360);
-            }
-            return angle;
+            float fullCyclesAngle = 360f * Mathf.Floor((angle + 360f - cycleMaxAngle) * (1f / 360f));
+            return angle - fullCyclesAngle;
         }
     }
 }

@@ -8,12 +8,12 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CustomSkyboxMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 3c3e5e91bea0016499534b00c6965f31, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: f16a5ae4d9ca04b4e96ad3c923501733, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2000
+  m_CustomRenderQueue: -1
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -38,6 +38,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - AtmosphereRadius: 200
+    - PlanetRadius: 150
     - Vector1_08c9c877cfcd49d58fab9a07fef1b3ab: 0.05
     - Vector1_1827cc94e8a8403f92a64412d2038b48: -0.16
     - Vector1_4b7296dedd5d4037a3c00de32d183d2e: 1.08
@@ -87,6 +89,9 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - DayColor: {r: 0.12609464, g: 0.749104, b: 0.8679245, a: 1}
+    - DayNightAngleSmoothDamp: {r: 0.33, g: 0.5, b: 0, a: 0}
+    - MainStarDirection: {r: -0.49335688, g: 0, b: -0.86982703, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

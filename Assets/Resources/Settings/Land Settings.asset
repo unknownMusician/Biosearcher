@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Land Settings
   m_EditorClassIdentifier: 
   _minHierarchySize: 1
-  _maxHierarchySize: 5
+  _maxHierarchySize: 6
   _generatingFrequency: 16
   _cubesPerChunk1D: 16
   _surfaceValue: 0.76
@@ -26,3 +26,4 @@ MonoBehaviour:
   _seed: 6
   _worldType: 0
   _chunkPrefab: {fileID: 4367298168131149415, guid: 7bc216e2126b7e6498dd261fd22064c0, type: 3}
+  _chunkGrassPrefab: {fileID: 4367298168131149415, guid: c5beaf1bf6f805b4c8ea142f4897c671, type: 3}

@@ -8,7 +8,7 @@ namespace Biosearcher.Planets
     {
         public static Time Current => Planet.Current.Time;
 
-        private readonly MainStarNew _mainStar;
+        private readonly MainStar _mainStar;
         private readonly Vector3 _planetCenter;
         private readonly Vector3 _planetRotationAxis;
         private readonly Planet _planet;
@@ -33,7 +33,7 @@ namespace Biosearcher.Planets
                 _planetRotationAxis);
 
             setterStarAngle += 180 + _mainStar.RotationAngle;
-            setterStarAngle.MakeCycleDegrees();
+            setterStarAngle.MakeCycleDegrees360();
 
             return Moment.Create(setterStarAngle / 360);
         }

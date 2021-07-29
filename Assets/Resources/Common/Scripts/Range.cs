@@ -35,6 +35,7 @@ namespace Biosearcher.Common
         public bool Contains(TRangeable value);
     }
 
+    [Obsolete]
     [NeedsRefactor("Custom Editor", Needs.Remove)]
     public struct FloatRange : IRange<float>
     {

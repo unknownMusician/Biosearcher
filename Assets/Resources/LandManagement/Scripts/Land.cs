@@ -30,7 +30,7 @@ namespace Biosearcher.LandManagement
 
         protected void Start() => InitializeChunksHolder(_landSettings.WorldType);
 
-        protected void OnDrawGizmos() => _chunksHolder?.DrawGizmos();
+        protected void OnDrawGizmosSelected() => _chunksHolder?.DrawGizmos();
 
         protected void InitializeChunksHolder(WorldType landType)
         {
