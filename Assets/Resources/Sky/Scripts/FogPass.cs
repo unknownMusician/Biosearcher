@@ -4,7 +4,7 @@ using UnityEngine.Rendering.Universal;
 
 namespace Biosearcher.Sky
 {
-    public class MyBlitRenderPass : ScriptableRenderPass
+    public class FogPass : ScriptableRenderPass
     {
         // used to label this pass in Unity's Frame Debug utility
         string profilerTag;
@@ -13,7 +13,7 @@ namespace Biosearcher.Sky
         RenderTargetIdentifier cameraColorTargetIdent;
         RenderTargetHandle tempTexture;
 
-        public MyBlitRenderPass(string profilerTag,
+        public FogPass(string profilerTag,
           RenderPassEvent renderPassEvent, Material materialToBlit)
         {
             this.profilerTag = profilerTag;

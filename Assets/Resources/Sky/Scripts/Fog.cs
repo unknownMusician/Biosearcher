@@ -3,14 +3,14 @@ using UnityEngine.Rendering.Universal;
 
 namespace Biosearcher.Sky
 {
-    public class MyBlitFeature : ScriptableRendererFeature
+    public class Fog : ScriptableRendererFeature
     {
         [System.Serializable]
         public class MyFeatureSettings
         {
             // we're free to put whatever we want here, public fields will be exposed in the inspector
             public bool IsEnabled = true;
-            public RenderPassEvent WhenToInsert = RenderPassEvent.AfterRendering;
+            public RenderPassEvent WhenToInsert = RenderPassEvent.BeforeRenderingPostProcessing;
             public Material MaterialToBlit;
         }
 
@@ -18,11 +18,11 @@ namespace Biosearcher.Sky
         public MyFeatureSettings settings = new MyFeatureSettings();
 
         RenderTargetHandle renderTextureHandle;
-        MyBlitRenderPass myRenderPass;
+        FogPass myRenderPass;
 
         public override void Create()
         {
-            myRenderPass = new MyBlitRenderPass(
+            myRenderPass = new FogPass(
               "My custom pass",
               settings.WhenToInsert,
               settings.MaterialToBlit
