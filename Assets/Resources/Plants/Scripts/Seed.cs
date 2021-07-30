@@ -33,8 +33,7 @@ namespace Biosearcher.Plants
 
         public Plant Plant(Vector3 position, Quaternion rotation, Transform parent) 
         {
-            var prefab = Resources.Load<GameObject>("Plants/Prefabs/Plant");
-            var plantObject = Instantiate(prefab, position, rotation, parent);
+            var plantObject = Instantiate(_plantSettings.PlantPrefab, position, rotation, parent);
             var plant = plantObject.GetComponent<Plant>();
             plant.Initialize(_plantSettings);
 

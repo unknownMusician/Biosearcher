@@ -8,7 +8,6 @@ using UnityEngine.Events;
 
 namespace Biosearcher.Common
 {
-    [NeedsRefactor("NeedsCustomEditor")]
     public sealed class CommonMonoBehaviour : MonoBehaviour
     {
         private const BindingFlags MembersFlags =

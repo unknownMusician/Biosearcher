@@ -1,10 +1,11 @@
 ﻿using System;
 using Biosearcher.Buildings.GreenHouses;
 using Biosearcher.Buildings.Resources.Structs;
+using Biosearcher.Common;
+using Biosearcher.Planets;
 using Biosearcher.Planets.Orientation;
 using Biosearcher.Player;
 using Biosearcher.Refactoring;
-using Biosearcher.Weather;
 using UnityEngine;
 
 namespace Biosearcher.Plants
@@ -129,9 +130,9 @@ namespace Biosearcher.Plants
         private void ResetWeatherParameters()
         {
             var position = transform.position;
-            _humidityRegulator.Reset(WeatherController.GetHumidity(position));
-            _illuminationRegulator.Reset(WeatherController.GetIllumination(position));
-            _temperatureRegulator.Reset(WeatherController.GetTemperature(position));
+            _humidityRegulator.Reset(Weather.Current.GetHumidity(position));
+            _illuminationRegulator.Reset(Weather.Current.GetIllumination(position));
+            _temperatureRegulator.Reset(Weather.Current.GetTemperature(position));
         }
 
         [NeedsRefactor(Needs.Remove)]
@@ -143,21 +144,21 @@ namespace Biosearcher.Plants
         {
             if (_plant != null)
             {
-                RegulateParameter(_humidityRegulator, WeatherController.GetHumidity(transform.position), _plant.Settings.humidityRange.Average, efficiency);
+                RegulateParameter(_humidityRegulator, Weather.Current.GetHumidity(transform.position), _plant.Settings.WeatherParameters.HumidityRange.Average(), efficiency);
             }
         }
         public void RegulateIllumination(float efficiency)
         {
             if (_plant != null)
             {
-                RegulateParameter(_illuminationRegulator, WeatherController.GetIllumination(transform.position), _plant.Settings.illuminationRange.Average, efficiency);
+                RegulateParameter(_illuminationRegulator, Weather.Current.GetIllumination(transform.position), _plant.Settings.WeatherParameters.IlluminationRange.Average(), efficiency);
             }
         }
         public void RegulateTemperature(float efficiency)
         {
             if (_plant != null)
             {
-                RegulateParameter(_temperatureRegulator, WeatherController.GetTemperature(transform.position), _plant.Settings.temperatureRange.Average, efficiency);
+                RegulateParameter(_temperatureRegulator, Weather.Current.GetTemperature(transform.position), _plant.Settings.WeatherParameters.TemperatureRange.Average(), efficiency);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Biosearcher.Planets;
+using System.Collections;
 using UnityEngine;
 
 namespace Biosearcher.Plants
@@ -40,9 +41,11 @@ namespace Biosearcher.Plants
 
         private bool AreGrowthConditionsAcceptable(float humidity, float illumination, float temperature)
         {
-            var humidityCondition = _settings.humidityRange.Contains(humidity);
-            var illuminationCondition = _settings.illuminationRange.Contains(illumination);
-            var temperatureCondition = _settings.temperatureRange.Contains(temperature);
+            WeatherRangeParameters parameters = _settings.WeatherParameters;
+
+            var humidityCondition = parameters.HumidityRange.Contains(humidity);
+            var illuminationCondition = parameters.IlluminationRange.Contains(illumination);
+            var temperatureCondition = parameters.TemperatureRange.Contains(temperature);
             
             // todo
             // Debug.Log($"h : {humidity} | i : {illumination} | t : {temperature}");
@@ -52,11 +55,11 @@ namespace Biosearcher.Plants
         
         private void Grow()
         {
-            _growthProgress += GrowthTicksPerSecond / _settings.timeToGrow;
+            _growthProgress += GrowthTicksPerSecond / _settings.TimeToGrow;
         }
         private void Corrupt()
         {
-            _corruptionProgress += GrowthTicksPerSecond / _settings.timeToCorrupt;
+            _corruptionProgress += GrowthTicksPerSecond / _settings.TimeToCorrupt;
         }
         
         private void Tick()

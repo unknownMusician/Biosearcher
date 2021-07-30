@@ -5,11 +5,11 @@ using UnityEngine;
 namespace Biosearcher.Common
 {
     [Serializable]
-    [NeedsRefactor("Custom Editor")]
-    public struct Range<TRangeable> : IRange<TRangeable> where TRangeable : IComparable<TRangeable>
+    public struct Range<TRangeable> where TRangeable : IComparable<TRangeable>
     {
         [SerializeField] private TRangeable _min;
         [SerializeField] private TRangeable _max;
+        [SerializeField] private bool _isBounded;
 
         public TRangeable Min => _min;
         public TRangeable Max => _max;
@@ -18,46 +18,24 @@ namespace Biosearcher.Common
         {
             _min = min;
             _max = max;
+            _isBounded = true;
         }
 
         public bool Contains(TRangeable value)
         {
-            return _min.CompareTo(value) <= 0 && value.CompareTo(_max) <= 0;
+            return !_isBounded || (_min.CompareTo(value) <= 0 && value.CompareTo(_max) <= 0);
         }
-    }
 
-    [NeedsRefactor(Needs.Remove)]
-    public interface IRange<TRangeable> where TRangeable : IComparable<TRangeable>
-    {
-        public TRangeable Min { get; }
-        public TRangeable Max { get; }
-
-        public bool Contains(TRangeable value);
-    }
-
-    [Obsolete]
-    [NeedsRefactor("Custom Editor", Needs.Remove)]
-    public struct FloatRange : IRange<float>
-    {
-        [SerializeField] private float _min;
-        [SerializeField] private float _max;
-
-        public float Min => _min;
-        public float Max => _max;
-
-        public FloatRange(float min, float max)
+        public static implicit operator Range<TRangeable>((TRangeable min, TRangeable max) tuple)
         {
-            _min = min;
-            _max = max;
+            return new Range<TRangeable>(tuple.min, tuple.max);
         }
 
-        public bool Contains(float value)
+        public void Deconstruct(out TRangeable min, out TRangeable max)
         {
-            return _min.CompareTo(value) <= 0 && value.CompareTo(_max) <= 0;
+            min = _min;
+            max = _max;
         }
-
-        public static explicit operator FloatRange(Range<float> range) => new FloatRange(range.Min, range.Max);
-        public static explicit operator Range<float>(FloatRange range) => new Range<float>(range.Min, range.Max);
     }
 
     [NeedsRefactor(Needs.Remove)]

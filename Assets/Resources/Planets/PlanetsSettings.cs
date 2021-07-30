@@ -1,5 +1,4 @@
-﻿using Biosearcher.Common;
-using Biosearcher.Refactoring;
+﻿using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Planets
@@ -24,11 +23,13 @@ namespace Biosearcher.Planets
     public class PlanetSettings
     {
         [NeedsRefactor("Sync with Coordinates")]
-        public Vector3 rotationAxis = Vector3.up;
+        [SerializeField] private Vector3 _rotationAxis = Vector3.up;
         [NeedsRefactor]
-        public bool isCurrent = true;
-        public Range<float> temperatureRange = new Range<float>(-40, 40);
-        public Range<float> illuminationRange = new Range<float>(0.01f, 100_000);
-        public Range<float> humidityRange = new Range<float>(0, 100);
+        [SerializeField] private bool _isCurrent = true;
+        [SerializeField] private WeatherRangeParameters _weatherParameters = new WeatherRangeParameters((0, 100), (0.01f, 100_000), (-40, 40));
+
+        public Vector3 RotationAxis => _rotationAxis;
+        public bool IsCurrent => _isCurrent;
+        public WeatherRangeParameters WeatherParameters => _weatherParameters;
     }
 }

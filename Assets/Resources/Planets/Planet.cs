@@ -1,5 +1,4 @@
-﻿using Biosearcher.Common;
-using Biosearcher.Refactoring;
+﻿using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Planets
@@ -28,13 +27,13 @@ namespace Biosearcher.Planets
         }
 
         internal static Planet Create(PlanetSettings settings)
-            => Create(settings.rotationAxis, settings.isCurrent, settings.temperatureRange, settings.illuminationRange, settings.humidityRange);
-        internal static Planet Create(Vector3 rotationAxis, bool setAsCurrent, Range<float> temperatureRange, Range<float> illuminationRange, Range<float> humidityRange)
+            => Create(settings.RotationAxis, settings.IsCurrent, settings.WeatherParameters);
+        internal static Planet Create(Vector3 rotationAxis, bool setAsCurrent, WeatherRangeParameters weatherParameters)
         {
             var planet = new Planet(rotationAxis);
 
             var time = new Time(planet);
-            var weather = new Weather(planet, temperatureRange, illuminationRange, humidityRange);
+            var weather = new Weather(planet, weatherParameters);
 
             planet.Initialize(time, weather);
 

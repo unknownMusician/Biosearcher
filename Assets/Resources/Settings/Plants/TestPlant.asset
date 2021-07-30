@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a3f3c67d3e746d9b2ab770fdf00ff26, type: 3}
   m_Name: TestPlant
   m_EditorClassIdentifier: 
-  id: 0
-  name: test
-  timeToGrow: 30
-  timeToCorrupt: 30
-  humidityRange:
-    leftBorder: 20
-    rightBorder: 30
-  illuminationRange:
-    leftBorder: 20
-    rightBorder: 30
-  temperatureRange:
-    leftBorder: 20
-    rightBorder: 30
+  _plantName: 
+  _plantPrefab: {fileID: 0}
+  _seedPrefab: {fileID: 0}
+  _timeToGrow: 30
+  _timeToCorrupt: 30
+  _weatherParameters:
+    _humidityRange:
+      _min: 0
+      _max: 0
+      _isLax: 0
+    _illuminationRange:
+      _min: 0
+      _max: 0
+      _isLax: 0
+    _temperatureRange:
+      _min: 0
+      _max: 0
+      _isLax: 0
