@@ -542,7 +542,7 @@ public class @Controls : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Grabber"",
+            ""name"": ""Hand"",
             ""id"": ""6dcb8437-3419-4b91-a046-d7d90ff92c0f"",
             ""actions"": [
                 {
@@ -557,6 +557,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""name"": ""Grab"",
                     ""type"": ""Button"",
                     ""id"": ""a11032e3-80f3-495f-99bf-1b683347cae5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Insert"",
+                    ""type"": ""Button"",
+                    ""id"": ""1219d5e5-798b-4f57-b8f5-060ef521ead7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -584,30 +592,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""Drop"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                }
-            ]
-        },
-        {
-            ""name"": ""Inserter"",
-            ""id"": ""5686c3ff-3e1c-4525-aa1e-69c8d3d49b3b"",
-            ""actions"": [
-                {
-                    ""name"": ""Insert"",
-                    ""type"": ""Button"",
-                    ""id"": ""d8aa2818-e183-4024-80a4-ede9f31b8139"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                }
-            ],
-            ""bindings"": [
+                },
                 {
                     ""name"": """",
-                    ""id"": ""98fcfa80-3dcc-46b2-9eb7-ff34f60091cc"",
+                    ""id"": ""f9d9a286-88dc-4c36-8676-0b3cc241b7ba"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Keyboard and Mouse"",
                     ""action"": ""Insert"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -663,13 +655,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Terraformer_AddStop = m_Terraformer.FindAction("AddStop", throwIfNotFound: true);
         m_Terraformer_RemoveStart = m_Terraformer.FindAction("RemoveStart", throwIfNotFound: true);
         m_Terraformer_RemoveStop = m_Terraformer.FindAction("RemoveStop", throwIfNotFound: true);
-        // Grabber
-        m_Grabber = asset.FindActionMap("Grabber", throwIfNotFound: true);
-        m_Grabber_Drop = m_Grabber.FindAction("Drop", throwIfNotFound: true);
-        m_Grabber_Grab = m_Grabber.FindAction("Grab", throwIfNotFound: true);
-        // Inserter
-        m_Inserter = asset.FindActionMap("Inserter", throwIfNotFound: true);
-        m_Inserter_Insert = m_Inserter.FindAction("Insert", throwIfNotFound: true);
+        // Hand
+        m_Hand = asset.FindActionMap("Hand", throwIfNotFound: true);
+        m_Hand_Drop = m_Hand.FindAction("Drop", throwIfNotFound: true);
+        m_Hand_Grab = m_Hand.FindAction("Grab", throwIfNotFound: true);
+        m_Hand_Insert = m_Hand.FindAction("Insert", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -887,34 +877,39 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public TerraformerActions @Terraformer => new TerraformerActions(this);
 
-    // Grabber
-    private readonly InputActionMap m_Grabber;
-    private IGrabberActions m_GrabberActionsCallbackInterface;
-    private readonly InputAction m_Grabber_Drop;
-    private readonly InputAction m_Grabber_Grab;
-    public struct GrabberActions
+    // Hand
+    private readonly InputActionMap m_Hand;
+    private IHandActions m_HandActionsCallbackInterface;
+    private readonly InputAction m_Hand_Drop;
+    private readonly InputAction m_Hand_Grab;
+    private readonly InputAction m_Hand_Insert;
+    public struct HandActions
     {
         private @Controls m_Wrapper;
-        public GrabberActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Drop => m_Wrapper.m_Grabber_Drop;
-        public InputAction @Grab => m_Wrapper.m_Grabber_Grab;
-        public InputActionMap Get() { return m_Wrapper.m_Grabber; }
+        public HandActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Drop => m_Wrapper.m_Hand_Drop;
+        public InputAction @Grab => m_Wrapper.m_Hand_Grab;
+        public InputAction @Insert => m_Wrapper.m_Hand_Insert;
+        public InputActionMap Get() { return m_Wrapper.m_Hand; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GrabberActions set) { return set.Get(); }
-        public void SetCallbacks(IGrabberActions instance)
+        public static implicit operator InputActionMap(HandActions set) { return set.Get(); }
+        public void SetCallbacks(IHandActions instance)
         {
-            if (m_Wrapper.m_GrabberActionsCallbackInterface != null)
+            if (m_Wrapper.m_HandActionsCallbackInterface != null)
             {
-                @Drop.started -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
-                @Drop.performed -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
-                @Drop.canceled -= m_Wrapper.m_GrabberActionsCallbackInterface.OnDrop;
-                @Grab.started -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
-                @Grab.performed -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
-                @Grab.canceled -= m_Wrapper.m_GrabberActionsCallbackInterface.OnGrab;
+                @Drop.started -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
+                @Drop.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
+                @Drop.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
+                @Grab.started -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
+                @Grab.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
+                @Grab.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
+                @Insert.started -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
+                @Insert.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
+                @Insert.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
             }
-            m_Wrapper.m_GrabberActionsCallbackInterface = instance;
+            m_Wrapper.m_HandActionsCallbackInterface = instance;
             if (instance != null)
             {
                 @Drop.started += instance.OnDrop;
@@ -923,43 +918,13 @@ public class @Controls : IInputActionCollection, IDisposable
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
-            }
-        }
-    }
-    public GrabberActions @Grabber => new GrabberActions(this);
-
-    // Inserter
-    private readonly InputActionMap m_Inserter;
-    private IInserterActions m_InserterActionsCallbackInterface;
-    private readonly InputAction m_Inserter_Insert;
-    public struct InserterActions
-    {
-        private @Controls m_Wrapper;
-        public InserterActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Insert => m_Wrapper.m_Inserter_Insert;
-        public InputActionMap Get() { return m_Wrapper.m_Inserter; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(InserterActions set) { return set.Get(); }
-        public void SetCallbacks(IInserterActions instance)
-        {
-            if (m_Wrapper.m_InserterActionsCallbackInterface != null)
-            {
-                @Insert.started -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
-                @Insert.performed -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
-                @Insert.canceled -= m_Wrapper.m_InserterActionsCallbackInterface.OnInsert;
-            }
-            m_Wrapper.m_InserterActionsCallbackInterface = instance;
-            if (instance != null)
-            {
                 @Insert.started += instance.OnInsert;
                 @Insert.performed += instance.OnInsert;
                 @Insert.canceled += instance.OnInsert;
             }
         }
     }
-    public InserterActions @Inserter => new InserterActions(this);
+    public HandActions @Hand => new HandActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -999,13 +964,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnRemoveStart(InputAction.CallbackContext context);
         void OnRemoveStop(InputAction.CallbackContext context);
     }
-    public interface IGrabberActions
+    public interface IHandActions
     {
         void OnDrop(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
-    }
-    public interface IInserterActions
-    {
         void OnInsert(InputAction.CallbackContext context);
     }
 }

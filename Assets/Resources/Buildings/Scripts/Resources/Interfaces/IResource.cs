@@ -1,10 +1,11 @@
-﻿namespace Biosearcher.Buildings.Resources.Interfaces
+﻿using Biosearcher.Buildings.Resources.Structs;
+using Biosearcher.Common.Interfaces;
+
+namespace Biosearcher.Buildings.Resources.Interfaces
 {
     public interface IResource<T> : System.IComparable<T>,
         IAddable<T>, ISubtractable<T>,
-        IMultipliable<T>, IDividable<T>
-        where T : new()
-    {
-        float Value { get; set; }
-    }
+        IDivisibleBySelf<T>, IDivisibleByFloat<T>,
+        IMultipliable<float, T>, IAverageable<T>
+    { }
 }

@@ -1,11 +1,12 @@
-﻿using Biosearcher.Refactoring;
+﻿using Biosearcher.Common.Interfaces;
+using Biosearcher.Refactoring;
 using System;
 using UnityEngine;
 
 namespace Biosearcher.Common
 {
     [Serializable]
-    public struct Range<TRangeable> where TRangeable : IComparable<TRangeable>
+    public struct Range<TRangeable>
     {
         [SerializeField] private TRangeable _min;
         [SerializeField] private TRangeable _max;
@@ -13,6 +14,7 @@ namespace Biosearcher.Common
 
         public TRangeable Min => _min;
         public TRangeable Max => _max;
+        public bool IsBounded => _isBounded;
 
         public Range(TRangeable min, TRangeable max)
         {
@@ -21,15 +23,11 @@ namespace Biosearcher.Common
             _isBounded = true;
         }
 
-        public bool Contains(TRangeable value)
-        {
-            return !_isBounded || (_min.CompareTo(value) <= 0 && value.CompareTo(_max) <= 0);
-        }
-
         public static implicit operator Range<TRangeable>((TRangeable min, TRangeable max) tuple)
         {
             return new Range<TRangeable>(tuple.min, tuple.max);
         }
+    
 
         public void Deconstruct(out TRangeable min, out TRangeable max)
         {
@@ -38,17 +36,36 @@ namespace Biosearcher.Common
         }
     }
 
-    [NeedsRefactor(Needs.Remove)]
+    [NeedsRefactor(Needs.MakeOwnFile)]
     public static class RangeExtensions
     {
-        public static float Average(this Range<float> range)
+        public static bool Contains<TComparable>(this Range<TComparable> range, TComparable value)
+            where TComparable : IComparable<TComparable>
         {
-            return (range.Min + range.Max) / 2;
+            return range.Min.CompareTo(value) <= 0 && value.CompareTo(range.Max) <= 0;
         }
 
-        public static float Lerp(this Range<float> range, float t)
+        public static TLerpable Lerp<TLerpable>(this Range<TLerpable> range, float t)
+            where TLerpable : ILerpable<TLerpable>
         {
-            return Mathf.Lerp(range.Min, range.Max, t);
+            return range.Min.Lerp(range.Max, t);
         }
+
+        public static TAverageable Average<TAverageable>(this Range<TAverageable> range)
+            where TAverageable : IAverageable<TAverageable>
+        {
+            return range.Min.Average(range.Max);
+        }
+
+
+        public static float Average(this Range<float> range) => range.Min.Average(range.Max);
+        public static float Lerp(this Range<float> range, float t) => Mathf.Lerp(range.Min, range.Max, t);
+        public static Color Lerp(this Range<Color> range, float t) => Color.Lerp(range.Min, range.Max, t);
+        public static Vector2 Lerp(this Range<Vector2> range, float t) => Vector2.Lerp(range.Min, range.Max, t);
+        public static Vector3 Lerp(this Range<Vector3> range, float t) => Vector3.Lerp(range.Min, range.Max, t);
+        public static Vector3 Slerp(this Range<Vector3> range, float t) => Vector3.Slerp(range.Min, range.Max, t);
+        public static Vector4 Lerp(this Range<Vector4> range, float t) => Vector4.Lerp(range.Min, range.Max, t);
+        public static Quaternion Lerp(this Range<Quaternion> range, float t) => Quaternion.Lerp(range.Min, range.Max, t);
+        public static Quaternion Slerp(this Range<Quaternion> range, float t) => Quaternion.Slerp(range.Min, range.Max, t);
     }
 }

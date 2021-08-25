@@ -12,13 +12,15 @@ namespace Biosearcher.Plants
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(Collider))]
-    public sealed class Capsule : MonoBehaviour, IInsertFriendly, IInsertable
+    public sealed class Capsule : MonoBehaviour, IInsertFriendly<Seed>, IInsertable
     {
         #region Properties
 
-        private static readonly Electricity ElectricityToControlIllumination = new Electricity { energy = 1 };
-        private static readonly Electricity ElectricityToControlTemperature = new Electricity { energy = 1 };
-        private static readonly Water WaterToControlHumidity = new Water { volume = 1 };
+        private LayerMask _realMask;
+
+        [NeedsRefactor] private static readonly Electricity ElectricityToControlIllumination = new Electricity(1);
+        [NeedsRefactor] private static readonly Electricity ElectricityToControlTemperature = new Electricity(1);
+        [NeedsRefactor] private static readonly Water WaterToControlHumidity = new Water(1);
 
         private const float HumidityPercentagePerSecond = 0.1f;
         private const float IlluminationPercentagePerSecond = 0.1f;
@@ -31,14 +33,13 @@ namespace Biosearcher.Plants
         [SerializeField] private bool _controlIllumination;
         [SerializeField] private bool _controlTemperature;
 
-        private WeatherRegulator _humidityRegulator;
-        private WeatherRegulator _illuminationRegulator;
-        private WeatherRegulator _temperatureRegulator;
+        private WeatherRegulator<Humidity> _humidityRegulator;
+        private WeatherRegulator<Illumination> _illuminationRegulator;
+        private WeatherRegulator<Temperature> _temperatureRegulator;
 
         private Plant _plant;
         private Collider _collider;
         private Rigidbody _rigidbody;
-        private GreenHouse _greenHouse;
         private PlanetTransform _planetTransform;
 
 
@@ -94,15 +95,11 @@ namespace Biosearcher.Plants
                 _plant.Capsule = this;
             }
         }
-        public GreenHouse GreenHouse
-        {
-            get => _greenHouse;
-            set => _greenHouse = value;
-        }
-        
-        public float CurrentHumidity => _humidityRegulator.CurrentValue;
-        public float CurrentIllumination => _illuminationRegulator.CurrentValue;
-        public float CurrentTemperature => _temperatureRegulator.CurrentValue;
+        public GreenHouse GreenHouse { get; set; }
+
+        public Humidity CurrentHumidity => _humidityRegulator.GetCurrentValue(transform.position);
+        public Illumination CurrentIllumination => _illuminationRegulator.GetCurrentValue(transform.position);
+        public Temperature CurrentTemperature => _temperatureRegulator.GetCurrentValue(transform.position);
 
         #endregion
 
@@ -110,9 +107,9 @@ namespace Biosearcher.Plants
 
         private void Awake()
         {
-            _humidityRegulator = new WeatherRegulator(HumidityPercentagePerSecond, _controlHumidity);
-            _illuminationRegulator = new WeatherRegulator(IlluminationPercentagePerSecond, _controlIllumination);
-            _temperatureRegulator = new WeatherRegulator(TemperaturePercentagePerSecond, _controlTemperature);
+            _humidityRegulator = new WeatherRegulator<Humidity>(HumidityPercentagePerSecond, _controlHumidity);
+            _illuminationRegulator = new WeatherRegulator<Illumination>(IlluminationPercentagePerSecond, _controlIllumination);
+            _temperatureRegulator = new WeatherRegulator<Temperature>(TemperaturePercentagePerSecond, _controlTemperature);
 
             _collider = GetComponent<Collider>();
             _rigidbody = GetComponent<Rigidbody>();
@@ -129,66 +126,67 @@ namespace Biosearcher.Plants
 
         private void ResetWeatherParameters()
         {
-            var position = transform.position;
-            _humidityRegulator.Reset(Weather.Current.GetHumidity(position));
-            _illuminationRegulator.Reset(Weather.Current.GetIllumination(position));
-            _temperatureRegulator.Reset(Weather.Current.GetTemperature(position));
+            _humidityRegulator.Reset(_plant.Settings.humidityRange.Average());
+            _illuminationRegulator.Reset(_plant.Settings.illuminationRange.Average());
+            _temperatureRegulator.Reset(_plant.Settings.temperatureRange.Average());
         }
 
         [NeedsRefactor(Needs.Remove)]
-        private void RegulateParameter(WeatherRegulator regulator, float outsideValue, float goalValue, float efficiency)
-        {
-            regulator.Regulate(outsideValue, goalValue, efficiency);
-        }
-        public void RegulateHumidity(float efficiency)
+        private void RegulateParameterIfPlantIsNotNull<TWeatherParameter>(WeatherRegulator<TWeatherParameter> regulator, float efficiency)
+            where TWeatherParameter : IWeatherParameter<TWeatherParameter>
         {
             if (_plant != null)
             {
-                RegulateParameter(_humidityRegulator, Weather.Current.GetHumidity(transform.position), _plant.Settings.WeatherParameters.HumidityRange.Average(), efficiency);
+                regulator.Regulate(efficiency);
             }
         }
-        public void RegulateIllumination(float efficiency)
+        public void RegulateHumidity(float efficiency) => RegulateParameterIfPlantIsNotNull(_humidityRegulator, efficiency);
+        public void RegulateIllumination(float efficiency) => RegulateParameterIfPlantIsNotNull(_illuminationRegulator, efficiency);
+        public void RegulateTemperature(float efficiency) => RegulateParameterIfPlantIsNotNull(_temperatureRegulator, efficiency);
+
+        public bool TryInsert(Seed insertable)
         {
-            if (_plant != null)
-            {
-                RegulateParameter(_illuminationRegulator, Weather.Current.GetIllumination(transform.position), _plant.Settings.WeatherParameters.IlluminationRange.Average(), efficiency);
-            }
+            var capsuleTransform = transform;
+
+            Vector3 position = capsuleTransform.position;
+            Quaternion rotation = capsuleTransform.rotation;
+            Plant = insertable.Plant(position, rotation, capsuleTransform);
+            GreenHouse.PlantChanged();
+
+            return true;
         }
-        public void RegulateTemperature(float efficiency)
+        public bool TryAlign(Seed insertable)
         {
-            if (_plant != null)
-            {
-                RegulateParameter(_temperatureRegulator, Weather.Current.GetTemperature(transform.position), _plant.Settings.WeatherParameters.TemperatureRange.Average(), efficiency);
-            }
+            insertable.transform.position = transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
+            return true;
         }
 
-        #endregion
+        public void HandleInsertableGrabbed(Seed insertable) { }
 
-        public Type[] GetInsertableType()
+        public void HandleGrab()
         {
-            return new Type[] {typeof(Seed)};
+            this.HandleGrabDefault(out _realMask);
+
+            _rigidbody.isKinematic = true;
+            _collider.enabled = false;
         }
-        public Vector3 GetAlignmentPosition()
+        public void HandleDrop()
         {
-            return transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
-        }
-        public void Insert(IInsertable insertable)
-        {
-            _greenHouse.Plant((Seed) insertable, this);
-        }
-        
-        public void Drop()
-        {
+            this.HandleDropDefault(_realMask);
+
             if (Physics.OverlapSphere(transform.position, _minDistanceToGround, _groundMask).Length == 0)
             {
                 _rigidbody.isKinematic = false;
             }
             _collider.enabled = true;
         }
-        public void Grab()
+        public void HandleInsert()
         {
-            _rigidbody.isKinematic = true;
-            _collider.enabled = false;
+            this.HandleInsertDefault(_realMask);
         }
+        public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
+        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
+
+        #endregion
     }
 }

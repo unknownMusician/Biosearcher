@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Biosearcher.Planets
 {
-    [NeedsRefactor(Needs.Check, Needs.RemoveTodo)]
+    [NeedsRefactor("Dynamic to Static (Need planet to have certain radius)")]
     public sealed class Weather
     {
         public static Weather Current => Planet.Current.Weather;
@@ -27,62 +27,42 @@ namespace Biosearcher.Planets
             return new WeatherParameters(GetHumidity(position), GetIllumination(position), GetTemperature(position));
         }
 
-        [NeedsRefactor(Needs.Check, Needs.Refactor)]
+        [NeedsRefactor(Needs.Check)]
         public float GetHumidity(Vector3 position)
         {
-            float height = 1.0f - Mathf.Clamp01(PlanetTransform.ToHeight(position) / (_planet.Radius * 1.2f));
-            float latitude = PlanetTransform.ToLatitude(position) / 90.0f;
-            float noise = Noise.Gradient(position / 200.0f);
-
-            float lerp = MathExtensions.Average(height, latitude, noise);
-
-            return _weatherParameters.HumidityRange.Lerp(lerp);
+            return _weatherParameters.HumidityRange.Lerp(LandManagement.CubeMarching.CPU.Noise.Gradient(position / 200));
         }
 
         [NeedsRefactor("Optimize raycast", Needs.Refactor)]
         public float GetIllumination(Vector3 position, float objectRadius = 3)
         {
-            float height = Mathf.Clamp01(PlanetTransform.ToHeight(position) / (_planet.Radius * 1.2f));
-            float latitude = 1.0f - PlanetTransform.ToLatitude(position) / 90.0f;
+            Vector3 localPosition = position - _planetCenter;
+            Vector3 positionWithOffset = position + localPosition.normalized * objectRadius;
 
-            float lerp = MathExtensions.Average(height, latitude);
+            float maxIlluminationDistance = 10;
 
-            return _weatherParameters.IlluminationRange.Lerp(lerp * lerp);
+            float timelessIlluminationLerp;
+            if (Physics.Raycast(positionWithOffset, localPosition, out RaycastHit hit))
+            {
+                timelessIlluminationLerp = Mathf.Clamp01(Vector3.Distance(position, hit.point) / maxIlluminationDistance);
+            }
+            else
+            {
+                timelessIlluminationLerp = 1;
+            }
+            float timeLerp = GetTimeLerp(position);
 
-            //Vector3 localPosition = position - _planetCenter;
-            //Vector3 positionWithOffset = position + localPosition.normalized * objectRadius;
-
-            //float maxIlluminationDistance = 10;
-
-            //float timelessIlluminationLerp;
-            //if (Physics.Raycast(positionWithOffset, localPosition, out RaycastHit hit))
-            //{
-            //    timelessIlluminationLerp = Mathf.Clamp01(Vector3.Distance(position, hit.point) / maxIlluminationDistance);
-            //}
-            //else
-            //{
-            //    timelessIlluminationLerp = 1;
-            //}
-            //float timeLerp = GetTimeLerp(position);
-
-            //return _weatherParameters.IlluminationRange.Lerp(timelessIlluminationLerp * timeLerp);
+            return _weatherParameters.IlluminationRange.Lerp(timelessIlluminationLerp * timeLerp);
         }
 
         [NeedsRefactor("Add Noise", Needs.Refactor)]
         public float GetTemperature(Vector3 position)
         {
-            float height = 1.0f - Mathf.Clamp01(Mathf.Abs(PlanetTransform.ToHeight(position) / (_planet.Radius) - 1.0f));
-            float latitude = 1.0f - PlanetTransform.ToLatitude(position) / 90.0f;
-
-            float lerp = MathExtensions.Average(height, latitude);
-
-            return _weatherParameters.TemperatureRange.Lerp(lerp * lerp);
-
-            //float positionLerp = 1 - Mathf.Abs(PlanetTransform.ToLatitude(position - _planetCenter)) / 90;
-            //float timeLerp = GetTimeLerp(position);
-            //const float positionSignificance = 0.8f;
-            //const float timeSignificance = 1 - positionSignificance;
-            //return _weatherParameters.TemperatureRange.Lerp(positionLerp * positionSignificance + timeLerp * timeSignificance);
+            float positionLerp = 1 - Mathf.Abs(PlanetTransform.ToLatitude(position - _planetCenter)) / 90;
+            float timeLerp = GetTimeLerp(position);
+            const float positionSignificance = 0.8f;
+            const float timeSignificance = 1 - positionSignificance;
+            return _weatherParameters.TemperatureRange.Lerp(positionLerp * positionSignificance + timeLerp * timeSignificance);
         }
 
         private float GetTimeLerp(Vector3 position)
@@ -264,7 +244,6 @@ namespace Biosearcher.Planets
     //    }
     //}
 
-    [NeedsRefactor]
     public static class MathB
     {
         public static TComparable Max<TComparable>(TComparable l, TComparable r) where TComparable : System.IComparable<TComparable>

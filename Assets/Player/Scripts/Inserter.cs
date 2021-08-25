@@ -9,9 +9,9 @@ namespace Biosearcher.Player
 
         //todo: delete grabber from here
         protected Grabber _grabber;
-        
+
         protected InserterInput _input;
-    
+
         protected IInsertable _insertable;
         protected IInsertFriendly _insertFriendly;
 
@@ -25,7 +25,7 @@ namespace Biosearcher.Player
             get => _insertFriendly;
             set => _insertFriendly = value;
         }
-    
+
         #endregion
 
         #region MonoBehaviour methods
@@ -51,9 +51,9 @@ namespace Biosearcher.Player
         }
         public void TryInsert()
         {
-            if (_insertable != null && _insertFriendly!= null)
+            if (_insertable != null && _insertFriendly != null)
             {
-                _insertFriendly.Insert(_insertable); 
+                _insertFriendly.Insert(_insertable);
                 _insertable.Drop();
             }
         }

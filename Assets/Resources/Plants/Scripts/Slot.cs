@@ -6,19 +6,14 @@ using UnityEngine;
 
 namespace Biosearcher.Plants
 {
-    public class Slot : MonoBehaviour, IInsertFriendly
+    [RequireComponent(typeof(PlanetTransform))]
+    public class Slot : MonoBehaviour, IInsertFriendly<Capsule>
     {
         private GreenHouse _greenHouse;
         private PlanetTransform _planetTransform;
 
         private Capsule _capsule;
-        
-        public Capsule Capsule
-        {
-            get => _capsule;
-            set => _capsule = value;
-        }
-        
+
         private void Awake()
         {
             _greenHouse = GetComponentInParent<GreenHouse>();
@@ -30,20 +25,27 @@ namespace Biosearcher.Plants
             }
         }
 
-        public Type[] GetInsertableType()
+        public bool TryInsert(Capsule insertable)
         {
-            return new Type[] {typeof(Capsule)};
+            if (_capsule == null)
+            {
+                insertable.transform.SetParent(transform);
+                _greenHouse.HandleCapsuleInsert(insertable);
+                return true;
+            }
+            return false;
         }
 
-        public Vector3 GetAlignmentPosition()
+        public bool TryAlign(Capsule insertable)
         {
-            return transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
+            insertable.transform.position = transform.position + _planetTransform.ToUniverse(0.5f * Vector3.up);
+            return true;
         }
 
-        public void Insert(IInsertable insertable)
+        public void HandleInsertableGrabbed(Capsule insertable)
         {
-            Debug.Log("Inserted!");
-            _greenHouse.ChangeCapsule((Capsule) insertable, this);
+            _greenHouse.HandleCapsuleGrabbed(insertable);
+            insertable.transform.SetParent(null);
         }
     }
 }

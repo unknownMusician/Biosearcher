@@ -29,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042053128047726321}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.3, z: -0.25000775}
+  m_LocalPosition: {x: -0.25000003, y: 0.5, z: -0.25000003}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_Children: []
   m_Father: {fileID: 2182511314939340581}
@@ -48,9 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 126.9506
-    latitude: 0.13539715
-    longitude: -179.88718
+    height: 0.61237246
+    latitude: 54.735607
+    longitude: -135
 --- !u!33 &1490377182509228554
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -155,7 +155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519923378212413083}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.3, z: 0.24999774}
+  m_LocalPosition: {x: 0.25000003, y: 0.5, z: 0.25000003}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_Children: []
   m_Father: {fileID: 2182511314939340581}
@@ -174,9 +174,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 127.45059
-    latitude: 0.13486598
-    longitude: 179.8876
+    height: 0.61237246
+    latitude: 54.735607
+    longitude: 45
 --- !u!33 &606932142068684186
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -283,7 +283,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2182511314939340573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -127.2, y: 0, z: 0.000011120177}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5197317207155239676}
@@ -306,9 +306,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 127.2
+    height: 0
     latitude: 0
-    longitude: -180
+    longitude: 0
 --- !u!114 &2182511314939340571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -422,7 +422,6 @@ MonoBehaviour:
   - {fileID: 2669890489026391332}
   - {fileID: 4102652971872584096}
   - {fileID: 7940410841062008056}
-  _capsules: []
 --- !u!1 &6903855970952598615
 GameObject:
   m_ObjectHideFlags: 0
@@ -452,7 +451,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6903855970952598615}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 0.3, z: 0.2499855}
+  m_LocalPosition: {x: 0.25000003, y: 0.5, z: -0.25000003}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_Children: []
   m_Father: {fileID: 2182511314939340581}
@@ -471,9 +470,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 126.9506
-    latitude: 0.13539715
-    longitude: 179.88718
+    height: 0.61237246
+    latitude: 54.735607
+    longitude: -45
 --- !u!33 &906509357516893012
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -578,7 +577,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7617844473598084095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 0.3, z: -0.25001997}
+  m_LocalPosition: {x: -0.25000003, y: 0.5, z: 0.25000003}
   m_LocalScale: {x: 0.25, y: 0.5, z: 0.25}
   m_Children: []
   m_Father: {fileID: 2182511314939340581}
@@ -597,9 +596,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _coordinates:
-    height: 127.45059
-    latitude: 0.13486598
-    longitude: -179.8876
+    height: 0.61237246
+    latitude: 54.735607
+    longitude: 135
 --- !u!33 &1121794989507859950
 MeshFilter:
   m_ObjectHideFlags: 0

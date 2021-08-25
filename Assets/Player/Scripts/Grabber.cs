@@ -23,9 +23,9 @@ namespace Biosearcher.Player
 
         protected PlanetTransform _planetTransform;
         protected Inserter _inserter;
-        
+
         protected GrabberInput _input;
-        
+
         protected IGrabbable _grabbed;
 
         #endregion
@@ -36,7 +36,7 @@ namespace Biosearcher.Player
         {
             _planetTransform = GetComponent<PlanetTransform>();
             _inserter = GetComponent<Inserter>();
-            
+
             _input = new GrabberInput(new Presenter(this));
         }
         protected void OnDestroy() => _input.Dispose();
@@ -76,7 +76,7 @@ namespace Biosearcher.Player
                 {
                     continue;
                 }
-                            
+
                 _inserter.SetInsertStuff(insertable, insertFriendly);
                 carryPosition = insertFriendly.GetAlignmentPosition();
 
@@ -109,9 +109,9 @@ namespace Biosearcher.Player
             {
                 Ray checkRay = _camera.ScreenPointToRay(_input.MousePosition);
 
-                MonoBehaviour grabbedMonoBehaviour = (MonoBehaviour) _grabbed;
+                MonoBehaviour grabbedMonoBehaviour = (MonoBehaviour)_grabbed;
                 Vector3 carryPosition = default;
-                if (TryGetClosestHit(checkRay, out RaycastHit hit, ((MonoBehaviour) _grabbed).gameObject))
+                if (TryGetClosestHit(checkRay, out RaycastHit hit, ((MonoBehaviour)_grabbed).gameObject))
                 {
                     if (grabbedMonoBehaviour.TryGetComponent(out IInsertable insertable) &&
                         hit.collider.TryGetComponent(out IInsertFriendly insertFriendly))
@@ -129,7 +129,8 @@ namespace Biosearcher.Player
                 }
 
                 grabbedMonoBehaviour.transform.position = carryPosition;
-                grabbedMonoBehaviour.transform.rotation = _planetTransform.ToUniverse(Quaternion.Euler(Vector3.up));;
+                grabbedMonoBehaviour.transform.rotation = _planetTransform.ToUniverse(Quaternion.Euler(Vector3.up));
+                ;
 
                 yield return waitForFixedUpdate;
             }
@@ -147,7 +148,7 @@ namespace Biosearcher.Player
                 hit = default;
                 return false;
             }
-            
+
             hit = hits.OrderBy(hit => Vector3.SqrMagnitude(hit.point - _camera.transform.position)).First();
             return true;
         }

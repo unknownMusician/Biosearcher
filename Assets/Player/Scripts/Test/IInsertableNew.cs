@@ -1,4 +1,4 @@
-﻿using Biosearcher.Planets.Orientation;
+/*using Biosearcher.Planet.Orientation;
 using Biosearcher.Refactoring;
 using System.Collections;
 using System.Linq;
@@ -12,6 +12,17 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
         void HandleDrop();
     }
 
+    public interface IInsertableNew : IGrabbableNew
+    {
+        void HandleInsert();
+
+        //bool IsCompatible(IInsertFriendly insertFriendly);
+
+        bool TryInsertIn(IInsertFriendlyNew insertFriendly);
+        bool TryAlignWith(IInsertFriendlyNew insertFriendly);
+    }
+
+    
     public static class GrabbableExtensionNew
     {
         [NeedsRefactor]
@@ -36,28 +47,14 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
             grabbable.gameObject.layer = realMask;
         }
     }
-
-    public static class InsertableExtensionNew
+    
+    public static class InsertableExtensionsNewss
     {
-        public static void HandleInsertDefault<TInsertable>(this TInsertable insertable, LayerMask realMask)
+        public static void HandleInsertDefault<TInsertable>(this TInsertable insertable, LayerMask realMask) 
             where TInsertable : MonoBehaviour, IInsertableNew
         {
             insertable.HandleDropDefault(realMask);
         }
-    }
-
-    public interface IInsertableNew : IGrabbableNew
-    {
-        void HandleInsert();
-
-        //bool IsCompatible(IInsertFriendly insertFriendly);
-
-        bool TryInsertIn(IInsertFriendlyNew insertFriendly);
-        bool TryAlignWith(IInsertFriendlyNew insertFriendly);
-    }
-
-    public static class InsertableExtensionsNew
-    {
         /// <summary>
         /// Use IsCompatible() instead unless you are trying to call this from IsCompatible()
         /// </summary>
@@ -224,12 +221,7 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
             return false;
         }
     }
-
-
-
-
-
-
+    
     [RequireComponent(typeof(PlanetTransform))]
     public sealed class HandNew : MonoBehaviour
     {
@@ -245,7 +237,7 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
         [SerializeField] private Transform _player;
 
         private PlanetTransform _planetTransform;
-        private InputHandling.GrabberInput _input;
+        private InputHandling.HandInput _input;
 
         private CarryInfo _carryInfo;
 
@@ -260,7 +252,7 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
             _planetTransform = GetComponent<PlanetTransform>();
 
             // todo
-            _input = new InputHandling.GrabberInput(new Biosearcher.Player.Grabber.Presenter(new Biosearcher.Player.Grabber()));
+            _input = new InputHandling.HandInput(new Biosearcher.Player.Grabber.Presenter(new Biosearcher.Player.Grabber()));
         }
         //protected void OnDestroy() => _input.Dispose();
 
@@ -401,4 +393,4 @@ namespace Biosearcher.Assets.Resources.Player.Scripts.Test
 
         #endregion
     }
-}
+}*/
