@@ -4,9 +4,8 @@ using UnityEngine;
 using UnityEngine.Profiling;
 #endif
 
-namespace Biosearcher.LandManagement.CubeMarching.CPU
+namespace Biosearcher.Common
 {
-    [NeedsRefactor("Make less specific (there are uses from other namespaces)")]
     internal static class Noise
     {
         internal static float Get(Vector3 position)
@@ -26,7 +25,7 @@ namespace Biosearcher.LandManagement.CubeMarching.CPU
             return x * x * x * (x * (x * 6 - 15) + 10);
         }
 
-        internal static Vector3 Smooth(Vector3 v)
+        private static Vector3 Smooth(Vector3 v)
         {
             return new Vector3(Smooth(v.x), Smooth(v.y), Smooth(v.z));
         }

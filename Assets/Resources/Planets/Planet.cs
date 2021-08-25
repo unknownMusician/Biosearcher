@@ -11,13 +11,15 @@ namespace Biosearcher.Planets
         [NeedsRefactor]
         public Vector3 Center => Vector3.zero;
         public Vector3 RotationAxis { get; }
+        public float Radius { get; }
 
         public Time Time { get; private set; }
         public Weather Weather { get; private set; }
 
-        private Planet(Vector3 rotationAxis)
+        private Planet(Vector3 rotationAxis, float radius)
         {
             RotationAxis = rotationAxis;
+            Radius = radius;
         }
 
         private void Initialize(Time time, Weather weather)
@@ -27,10 +29,10 @@ namespace Biosearcher.Planets
         }
 
         internal static Planet Create(PlanetSettings settings)
-            => Create(settings.RotationAxis, settings.IsCurrent, settings.WeatherParameters);
-        internal static Planet Create(Vector3 rotationAxis, bool setAsCurrent, WeatherRangeParameters weatherParameters)
+            => Create(settings.RotationAxis, settings.IsCurrent, settings.WeatherParameters, settings.Radius);
+        internal static Planet Create(Vector3 rotationAxis, bool setAsCurrent, WeatherRangeParameters weatherParameters, float radius)
         {
-            var planet = new Planet(rotationAxis);
+            var planet = new Planet(rotationAxis, radius);
 
             var time = new Time(planet);
             var weather = new Weather(planet, weatherParameters);

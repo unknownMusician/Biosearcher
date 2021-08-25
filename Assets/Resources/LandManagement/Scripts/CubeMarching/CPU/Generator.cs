@@ -1,4 +1,5 @@
-﻿using Biosearcher.Refactoring;
+﻿using Biosearcher.Common;
+using Biosearcher.Refactoring;
 using UnityEngine;
 #if BIOSEARCHER_PROFILING
 using UnityEngine.Profiling;

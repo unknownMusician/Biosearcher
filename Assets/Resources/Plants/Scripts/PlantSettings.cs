@@ -14,6 +14,7 @@ namespace Biosearcher.Plants
         [SerializeField] private float _timeToCorrupt;
 
         [SerializeField] private WeatherRangeParameters _weatherParameters;
+        [SerializeField] [Range(0.0f, 1.0f)] private float _probability;
 
         public string PlantName => _plantName;
         public GameObject PlantPrefab => _plantPrefab;
@@ -23,5 +24,6 @@ namespace Biosearcher.Plants
         public float TimeToCorrupt => _timeToCorrupt;
 
         public WeatherRangeParameters WeatherParameters => _weatherParameters;
+        public float Probability => _probability;
     }
 }

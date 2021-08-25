@@ -85,5 +85,16 @@ namespace Biosearcher.Common
             float fullCyclesAngle = 360f * Mathf.Floor((angle + 360f - cycleMaxAngle) * (1f / 360f));
             return angle - fullCyclesAngle;
         }
+
+        public static float Average(params float[] nums)
+        {
+            float sum = 0;
+            nums.Foreach(num => sum += num);
+            sum /= nums.Length;
+            return sum;
+        }
+
+        public static bool EvaluateProbability(float randomValue, float probability) => randomValue < probability;
+        public static bool EvaluateProbability(float probability) => EvaluateProbability(Random.value, probability);
     }
 }

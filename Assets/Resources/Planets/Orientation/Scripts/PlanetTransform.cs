@@ -50,8 +50,7 @@ namespace Biosearcher.Planets.Orientation
 
         public static float ToHeight(Vector3 positionRelativeToPlanet)
         {
-            Vector3 p = positionRelativeToPlanet;
-            return Mathf.Sqrt(p.x * p.x + p.z * p.z + p.y * p.y);
+            return positionRelativeToPlanet.magnitude;
         }
         public static float ToLatitude(Vector3 positionRelativeToPlanet)
         {
@@ -59,13 +58,11 @@ namespace Biosearcher.Planets.Orientation
             {
                 return 0;
             }
-            Vector3 p = positionRelativeToPlanet;
-            return Mathf.Asin(p.y / Mathf.Sqrt(p.x * p.x + p.y * p.y + p.z * p.z)) * Mathf.Rad2Deg;
+            return Mathf.Asin(positionRelativeToPlanet.y / positionRelativeToPlanet.magnitude) * Mathf.Rad2Deg;
         }
         public static float ToLongitude(Vector3 positionRelativeToPlanet)
         {
-            Vector3 p = positionRelativeToPlanet;
-            return Mathf.Atan2(p.z, p.x) * Mathf.Rad2Deg;
+            return Mathf.Atan2(positionRelativeToPlanet.z, positionRelativeToPlanet.x) * Mathf.Rad2Deg;
         }
 
         public static Coordinates ToCoordinates(Vector3 positionRelativeToPlanet)

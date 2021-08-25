@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minHierarchySize: 1
   _maxHierarchySize: 6
-  _generatingFrequency: 16
+  _generatingFrequency: 4
   _cubesPerChunk1D: 16
   _surfaceValue: 0.76
   _geometryType: 1

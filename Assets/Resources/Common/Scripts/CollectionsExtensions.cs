@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Biosearcher.Common
 {
-    public static class CollectionsExtension
+    public static class CollectionsExtensions
     {
         public static IDictionary<K, V> Foreach<K, V>(this IDictionary<K, V> dictionary, System.Action<K, V> action)
         {

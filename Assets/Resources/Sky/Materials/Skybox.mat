@@ -91,7 +91,7 @@ Material:
     m_Colors:
     - DayColor: {r: 0.12609464, g: 0.749104, b: 0.8679245, a: 1}
     - DayNightAngleSmoothDamp: {r: 0.33, g: 0.5, b: 0, a: 0}
-    - MainStarDirection: {r: -0.49335688, g: 0, b: -0.86982703, a: 0}
+    - MainStarDirection: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

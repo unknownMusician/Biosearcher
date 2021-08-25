@@ -42,6 +42,6 @@ Material:
     m_Colors:
     - Base_Color: {r: 0.052545372, g: 0.34776872, b: 0.38679248, a: 1}
     - Fresnel_Smoothstep: {r: 0.9, g: 0, b: 0, a: 0}
-    - MainStarDirection: {r: -0.49335688, g: 0, b: -0.86982703, a: 0}
+    - MainStarDirection: {r: 0, g: 0, b: 0, a: 0}
     - StarPositionAlphaSmoothstep: {r: 0.17, g: 0.37, b: 0, a: 0}
   m_BuildTextureStacks: []
