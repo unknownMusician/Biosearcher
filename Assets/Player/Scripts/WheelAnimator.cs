@@ -1,13 +1,11 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.Common.States;
-using Biosearcher.Planets.Orientation;
 using Biosearcher.Refactoring;
 using System;
 using UnityEngine;
 
 namespace Biosearcher.Player
 {
-    [RequireComponent(typeof(PlanetTransform))]
     [NeedsRefactor]
     public sealed class WheelAnimator : MonoBehaviour
     {

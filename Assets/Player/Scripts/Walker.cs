@@ -1,12 +1,12 @@
 using Biosearcher.Common;
 using Biosearcher.Common.States;
 using Biosearcher.InputHandling;
-using Biosearcher.Planets.Orientation;
 using Biosearcher.Refactoring;
 using UnityEngine;
 
 namespace Biosearcher.Player
 {
+    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(WheelAnimator))]
     [NeedsRefactor]
     public sealed class Walker : MonoBehaviour
@@ -18,18 +18,15 @@ namespace Biosearcher.Player
         [SerializeField] private float _maxSpeed = 20;
         [SerializeField] private float _tangentDamp = 10;
         [Header("Moving - Normal")]
-        [SerializeField] private float _normalAcceleration = 20;
-        [SerializeField] private float _maxRotationSpeed = 10;
+        [SerializeField] private float _normalAcceleration = 40;
+        [SerializeField] private float _maxRotationSpeed = 20;
         [SerializeField] private float _normalDamp = 10;
         [Header("Stabilizer")]
         [SerializeField] private float _springTangentAcceleration = 1000;
         [SerializeField] private float _springTangentDamp = 10;
         [SerializeField] private float _springNormalAcceleration = 200;
         [SerializeField] private float _springNormalDamp = 10;
-        [Header("Other")]
-        [SerializeField] private PlayerCamera _camera;
 
-        private PlanetTransform _planetTransform;
         private Rigidbody _rigidbody;
         private WheelAnimator _animator;
         private PlayerInput _input;
@@ -53,13 +50,13 @@ namespace Biosearcher.Player
 
         #endregion
 
+        private Walker() => RegisterStates();
+
         #region MonoBehaviour methods
 
         private void Awake()
         {
-            RegisterStates();
-
-            this.GetComponents(out _planetTransform, out _rigidbody, out _animator);
+            this.GetComponents(out _rigidbody, out _animator);
 
             _input = new PlayerInput(new Presenter(this));
         }
@@ -108,6 +105,7 @@ namespace Biosearcher.Player
             _state.TryChange(WalkerState.InAirState);
         }
 
+        [NeedsRefactor(Needs.Remove)]
         private bool RaycastLocalDown() => Physics.Raycast(transform.position, _downDirection, out _hitInfo, GroundCheckHeight, GroundMask);
 
         private void DrawGizmos()
@@ -181,14 +179,16 @@ namespace Biosearcher.Player
 
         private Quaternion GetDesiredRotation(Vector3 normal)
         {
-            Quaternion rotation = _planetTransform.PlanetRotation;
+            //Quaternion rotation = _planetTransform.PlanetRotation;
 
-            Vector3 hitNormalLocalPositionRotated = Quaternion.Euler(0f, -rotation.eulerAngles.y, 0f) * _planetTransform.ToPlanet(normal);
-            Vector3 hitNormalRotationAngles = Quaternion.FromToRotation(Vector3.up, hitNormalLocalPositionRotated).eulerAngles;
+            //Vector3 hitNormalLocalPositionRotated = Quaternion.Euler(0f, -rotation.eulerAngles.y, 0f) * _planetTransform.ToPlanet(normal);
+            //Vector3 hitNormalRotationAngles = Quaternion.FromToRotation(Vector3.up, hitNormalLocalPositionRotated).eulerAngles;
 
-            rotation = Quaternion.Euler(hitNormalRotationAngles.x, rotation.eulerAngles.y, hitNormalRotationAngles.z);
+            //rotation = Quaternion.Euler(hitNormalRotationAngles.x, rotation.eulerAngles.y, hitNormalRotationAngles.z);
 
-            return _planetTransform.ToUniverse(rotation);
+            //return _planetTransform.ToUniverse(rotation);
+
+            return Quaternion.FromToRotation(transform.up, normal) * transform.rotation;
         }
 
         private void Move()
@@ -207,7 +207,7 @@ namespace Biosearcher.Player
 
             if (playerRigidbody.angularVelocity.magnitude < _maxRotationSpeed)
             {
-                Vector3 acceleration = _planetTransform.ToUniverse(NormalAcceleration * _normalAcceleration * Vector3.up);
+                Vector3 acceleration = NormalAcceleration * _normalAcceleration * transform.up;
                 playerRigidbody.angularVelocity += acceleration * deltaTime;
             }
 
