@@ -8,8 +8,5 @@ namespace Biosearcher.Player.Interactions
     {
         bool TryInsert(TInsertable insertable);
         bool TryAlign(TInsertable insertable);
-
-        [NeedsRefactor(Needs.Remove)]
-        void HandleInsertableGrabbed(TInsertable insertable);
     }
 }

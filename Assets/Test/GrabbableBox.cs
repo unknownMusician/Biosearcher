@@ -1,5 +1,6 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.Player.Interactions;
+using System;
 using UnityEngine;
 
 namespace Biosearcher.Test
@@ -7,26 +8,30 @@ namespace Biosearcher.Test
     [RequireComponent(typeof(Rigidbody))]
     public class GrabbableBox : MonoBehaviour, IGrabbable
     {
-        private Rigidbody _rigidbody;
+        protected Rigidbody _rigidbody;
+        protected Collider _collider;
 
         LayerMask IGrabbable.DefaultLayer { get; set; }
+        Action IGrabbable.OnGrab { get; set; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             this.InitializeDefaultLayer();
-            this.SetComponents(out _rigidbody);
+            this.SetComponents(out _rigidbody, out _collider);
         }
 
-        public void HandleGrab()
+        public virtual void HandleGrab()
         {
             this.HandleGrabDefault();
             _rigidbody.isKinematic = true;
+            _collider.enabled = false;
         }
 
         public void HandleDrop()
         {
             this.HandleDropDefault();
             _rigidbody.isKinematic = false;
+            _collider.enabled = true;
         }
     }
 }

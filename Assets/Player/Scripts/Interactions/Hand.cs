@@ -49,9 +49,9 @@ namespace Biosearcher.Player.Interactions.Hand
         internal void TryInsert()
         {
             InsertableInfo insertInfo = _carryInfo.InsertInfo;
-            if (insertInfo != null)
+            if (insertInfo != null && insertInfo.Insertable.TryInsertIn(insertInfo.InsertFriendly))
             {
-                insertInfo.Insertable.TryInsertIn(insertInfo.InsertFriendly);
+                _carryInfo = null;
             }
         }
 
