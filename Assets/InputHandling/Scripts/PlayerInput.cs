@@ -1,25 +1,28 @@
-using Biosearcher.Player;
+using Biosearcher.Common;
+using Biosearcher.InputHandling;
 using Biosearcher.Refactoring;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Biosearcher.InputHandling
+namespace Biosearcher.Player.Movement
 {
-    public class PlayerInput : System.IDisposable
+    [RequireComponent(typeof(Walker))]
+    public sealed class PlayerInput : MonoBehaviour
     {
-        protected Walker.Presenter _playerPresenter;
+        private Walker _walker;
 
-        public PlayerInput(Walker.Presenter playerPresenter)
+        private void Awake()
         {
-            _playerPresenter = playerPresenter;
+            this.SetComponents(out _walker);
+
             SetInput(CustomInput.controls);
         }
-        public void Dispose() => UnsetInput(CustomInput.controls);
+        private void OnDestroy() => UnsetInput(CustomInput.controls);
 
-        public void OnEnable() => CustomInput.controls.Player.Enable();
-        public void OnDisable() => CustomInput.controls.Player.Disable();
+        private void OnEnable() => CustomInput.controls.Player.Enable();
+        private void OnDisable() => CustomInput.controls.Player.Disable();
 
-        protected void SetInput(Controls controls)
+        private void SetInput(Controls controls)
         {
             controls.Player.TangentAccelerationStart.performed += HandleTangentAccelerationStart;
             controls.Player.TangentAccelerationStop.performed += HandleTangentAccelerationStop;
@@ -27,7 +30,7 @@ namespace Biosearcher.InputHandling
             controls.Player.NormalAccelerationStart.performed += HandleNormalAccelerationStart;
             controls.Player.NormalAccelerationStop.performed += HandleNormalAccelerationStop;
         }
-        protected void UnsetInput(Controls controls)
+        private void UnsetInput(Controls controls)
         {
             controls.Player.TangentAccelerationStart.performed -= HandleTangentAccelerationStart;
             controls.Player.TangentAccelerationStop.performed -= HandleTangentAccelerationStop;
@@ -37,25 +40,25 @@ namespace Biosearcher.InputHandling
         }
 
         [NeedsRefactor("small gamepad trigger press would not matter")]
-        protected void HandleTangentAccelerationStart(InputAction.CallbackContext ctx)
+        private void HandleTangentAccelerationStart(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>());
+            _walker.TangentAcceleration = Mathf.Sign(ctx.ReadValue<float>());
         }
 
-        protected void HandleTangentAccelerationStop(InputAction.CallbackContext ctx)
+        private void HandleTangentAccelerationStop(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.TangentAcceleration = 0;
+            _walker.TangentAcceleration = 0;
         }
 
         [NeedsRefactor("small gamepad trigger press would not matter")]
-        protected void HandleNormalAccelerationStart(InputAction.CallbackContext ctx)
+        private void HandleNormalAccelerationStart(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>());
+            _walker.NormalAcceleration = Mathf.Sign(ctx.ReadValue<float>());
         }
 
-        protected void HandleNormalAccelerationStop(InputAction.CallbackContext ctx)
+        private void HandleNormalAccelerationStop(InputAction.CallbackContext ctx)
         {
-            _playerPresenter.NormalAcceleration = 0;
+            _walker.NormalAcceleration = 0;
         }
     }
 }

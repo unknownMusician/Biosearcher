@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 
-namespace Biosearcher.Player
+namespace Biosearcher.Player.Interactions
 {
     public static class InsertableExtensions
     {
-        public static void HandleInsertDefault<TInsertable>(this TInsertable insertable, LayerMask realMask) 
-            where TInsertable : MonoBehaviour, IInsertable
+        public static void HandleInsertDefault<TInsertableBehaviour>(this TInsertableBehaviour insertableBehaviour)
+            where TInsertableBehaviour : MonoBehaviour, IInsertable
         {
-            insertable.HandleDropDefault(realMask);
+            insertableBehaviour.HandleDropDefault();
         }
+
         /// <summary>
         /// Use IsCompatible() instead unless you are trying to call this from IsCompatible()
         /// </summary>
@@ -24,11 +25,7 @@ namespace Biosearcher.Player
         public static bool TryInsertInGeneric<TInsertable>(this TInsertable insertable, IInsertFriendly insertFriendly)
             where TInsertable : IInsertable
         {
-            if (insertable.IsCompatibleGeneric(insertFriendly))
-            {
-                return (insertFriendly as IInsertFriendly<TInsertable>).TryInsert(insertable);
-            }
-            return false;
+            return insertable.IsCompatibleGeneric(insertFriendly) && (insertFriendly as IInsertFriendly<TInsertable>).TryInsert(insertable);
         }
 
         /// <summary>
@@ -37,11 +34,7 @@ namespace Biosearcher.Player
         public static bool TryAlignWithGeneric<TInsertable>(this TInsertable insertable, IInsertFriendly insertFriendly)
             where TInsertable : IInsertable
         {
-            if (insertable.IsCompatibleGeneric(insertFriendly))
-            {
-                return (insertFriendly as IInsertFriendly<TInsertable>).TryAlign(insertable);
-            }
-            return false;
+            return insertable.IsCompatibleGeneric(insertFriendly) && (insertFriendly as IInsertFriendly<TInsertable>).TryAlign(insertable);
         }
     }
 }

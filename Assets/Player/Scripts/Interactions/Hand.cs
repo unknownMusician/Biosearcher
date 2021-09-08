@@ -1,12 +1,10 @@
 ﻿using Biosearcher.InputHandling;
 using System.Collections;
-using Biosearcher.Planets.Orientation;
 using Biosearcher.Refactoring;
 using UnityEngine;
 
-namespace Biosearcher.Player
+namespace Biosearcher.Player.Interactions.Hand
 {
-    [RequireComponent(typeof(PlanetTransform))]
     public sealed class Hand : MonoBehaviour
     {
         #region Properties
@@ -17,37 +15,21 @@ namespace Biosearcher.Player
         [NeedsRefactor]
         [SerializeField] private float _carryHeight;
         [Space]
-        [SerializeField] private Camera _camera;
         [SerializeField] private Transform _player;
-
-        private PlanetTransform _planetTransform;
-        private HandInput _input;
 
         private CarryInfo _carryInfo;
 
-        private Quaternion GrabbedDefaultRotation => _planetTransform.ToUniverse(Quaternion.Euler(Vector3.up));
+        internal Ray _lookRay;
 
-        #endregion
-
-        #region MonoBehaviour methods
-
-        private void Awake()
-        {
-            _planetTransform = GetComponent<PlanetTransform>();
-
-            _input = new HandInput(new Presenter(this));
-        }
-        private void OnDestroy() => _input.Dispose();
-        private void OnEnable() => _input.OnEnable();
-        private void OnDisable() => _input.OnDisable();
+        private Quaternion GrabbedDefaultRotation => transform.rotation;
 
         #endregion
 
         #region Methods
 
-        private void TryGrab()
+        internal void TryGrab()
         {
-            if (TryGetClosestHit(_camera.ScreenPointToRay(_input.MousePosition), out RaycastHit hit) &&
+            if (TryGetClosestHit(_lookRay, out RaycastHit hit) &&
                 Vector3.Distance(hit.point, _player.position) < _maxInteractDistance &&
                 hit.collider.TryGetComponent(out IGrabbable grabbed))
             {
@@ -56,7 +38,7 @@ namespace Biosearcher.Player
                 StartCoroutine(Carrying());
             }
         }
-        private void TryDrop()
+        internal void TryDrop()
         {
             if (_carryInfo != default)
             {
@@ -64,7 +46,7 @@ namespace Biosearcher.Player
                 _carryInfo = default;
             }
         }
-        private void TryInsert()
+        internal void TryInsert()
         {
             InsertableInfo insertInfo = _carryInfo.InsertInfo;
             if (insertInfo != null)
@@ -90,7 +72,7 @@ namespace Biosearcher.Player
         }
         private void CarryOnMaxDistance(Ray checkRay)
         {
-            Vector3 prefferedPosition = checkRay.direction * _maxInteractDistanceCamera + _camera.transform.position;
+            Vector3 prefferedPosition = checkRay.direction * _maxInteractDistanceCamera + _lookRay.origin/*_camera.transform.position*/;
 
             _carryInfo.Transform.SetPositionAndRotation(prefferedPosition, GrabbedDefaultRotation);
         }
@@ -101,7 +83,7 @@ namespace Biosearcher.Player
 
             while (_carryInfo != default)
             {
-                Carry(_camera.ScreenPointToRay(_input.MousePosition));
+                Carry(_lookRay);
 
                 yield return waitForFixedUpdate;
             }
@@ -129,23 +111,12 @@ namespace Biosearcher.Player
 
         private bool TryGetClosestHit(Ray checkRay, out RaycastHit hit)
         {
-            return Physics.Raycast(checkRay, out hit, _maxRaycastDistance, ~GrabbableExtensions.GrabbableMask);
+            return Physics.Raycast(checkRay, out hit, _maxRaycastDistance, ~(1 << GrabbableExtensions.GrabbedLayerIndex));
         }
 
         #endregion
 
         #region Classes
-
-        public sealed class Presenter
-        {
-            private readonly Hand _hand;
-
-            public Presenter(Hand hand) => _hand = hand;
-
-            public void Grab() => _hand.TryGrab();
-            public void Drop() => _hand.TryDrop();
-            public void Insert() => _hand.TryInsert();
-        }
 
         private sealed class CarryInfo
         {

@@ -149,7 +149,7 @@ namespace Biosearcher.Player
 
     public sealed class Wheel : IDisposable
     {
-        private ChangeableStateManager<WalkerState> _state;
+        private ChangeableStateManager<WalkerState, ActionName> _state;
 
         public Transform Transform { get; }
         public ParticleSystem Particles { get; }
@@ -192,15 +192,15 @@ namespace Biosearcher.Player
 
         private void RegisterStates()
         {
-            _state = new ChangeableStateManager<WalkerState>();
+            _state = new ChangeableStateManager<WalkerState, ActionName>();
 
             _state.Register(WalkerState.OnGroundState)
-                .Register<float>(RotateWheel, RotateWheel)
-                .Register<Vector3, Vector3, float>(CalculateLocalHeight, CalculateLocalHeight);
+                .Register<Action<float>>(ActionName.RotateWheel, RotateWheel)
+                .Register<Func<Vector3, Vector3, float>>(ActionName.CalculateLocalHeight, CalculateLocalHeight);
 
             _state.Register(WalkerState.InAirState)
-                .Register<float>(RotateWheel, null)
-                .Register<Vector3, Vector3, float>(CalculateLocalHeight, CalculateLocalHeightInAir);
+                .Register<Action<float>>(ActionName.RotateWheel, null)
+                .Register<Func<Vector3, Vector3, float>>(ActionName.CalculateLocalHeight, CalculateLocalHeightInAir);
 
             _state.OnStateChange += HandleStateChange;
         }
@@ -213,7 +213,7 @@ namespace Biosearcher.Player
         internal void Move(Vector2 localPositionXZ, float angle)
         {
             Transform.localPosition = GetLocalPosition(localPositionXZ, out float _);
-            _state.Active.Invoke(RotateWheel, angle);
+            _state.Active.Get<Action<float>>(ActionName.RotateWheel)?.Invoke(angle);
         }
         private Vector3 GetLocalPosition(Vector2 localPositionXZ, out float localHeight)
         {
@@ -228,7 +228,7 @@ namespace Biosearcher.Player
             IsOnGround = Physics.Raycast(raycastSource, down, out RaycastHit hit, Suspension.Max - Suspension.Min + WheelRadius, GroundMask);
 
             _state.TryChange(IsOnGround ? WalkerState.OnGroundState : WalkerState.InAirState);
-            return _state.Active.Invoke(CalculateLocalHeight, raycastSource, hit.point);
+            return _state.Active.Get<Func<Vector3, Vector3, float>>(ActionName.CalculateLocalHeight).Invoke(raycastSource, hit.point);
         }
         private float CalculateLocalHeight(Vector3 raycastSource, Vector3 hitPoint)
         {
@@ -240,5 +240,11 @@ namespace Biosearcher.Player
         }
 
         public void Dispose() => _state.Dispose();
+
+        private enum ActionName
+        {
+            RotateWheel,
+            CalculateLocalHeight
+        }
     }
 }

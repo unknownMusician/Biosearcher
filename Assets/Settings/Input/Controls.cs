@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Resources/Settings/Input/Controls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Settings/Input/Controls.inputactions'
 
 using System;
 using System.Collections;
@@ -546,9 +546,17 @@ public class @Controls : IInputActionCollection, IDisposable
             ""id"": ""6dcb8437-3419-4b91-a046-d7d90ff92c0f"",
             ""actions"": [
                 {
+                    ""name"": ""Insert"",
+                    ""type"": ""Button"",
+                    ""id"": ""1219d5e5-798b-4f57-b8f5-060ef521ead7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Drop"",
                     ""type"": ""Button"",
-                    ""id"": ""e52e1742-99e5-411d-98ba-78f4b440f8cd"",
+                    ""id"": ""f8dbc253-6a8d-49d1-bdcc-ddb382f4c2d2"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -556,15 +564,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""Grab"",
                     ""type"": ""Button"",
-                    ""id"": ""a11032e3-80f3-495f-99bf-1b683347cae5"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""Insert"",
-                    ""type"": ""Button"",
-                    ""id"": ""1219d5e5-798b-4f57-b8f5-060ef521ead7"",
+                    ""id"": ""0ed6eb94-307f-4267-8f83-0b0ab2699ed5"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -573,7 +573,18 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""8acc2125-d32f-4064-b105-8d95409fcc05"",
+                    ""id"": ""f9d9a286-88dc-4c36-8676-0b3cc241b7ba"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""Insert"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53427e3d-8ab3-4f32-8685-e0bef3ca733c"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
@@ -584,23 +595,12 @@ public class @Controls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""d8eb4733-e82d-4864-9e13-9b5604db94bd"",
+                    ""id"": ""67191329-d35e-4bea-a68d-b916b1c0c6a5"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Drop"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""f9d9a286-88dc-4c36-8676-0b3cc241b7ba"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard and Mouse"",
-                    ""action"": ""Insert"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -657,9 +657,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Terraformer_RemoveStop = m_Terraformer.FindAction("RemoveStop", throwIfNotFound: true);
         // Hand
         m_Hand = asset.FindActionMap("Hand", throwIfNotFound: true);
+        m_Hand_Insert = m_Hand.FindAction("Insert", throwIfNotFound: true);
         m_Hand_Drop = m_Hand.FindAction("Drop", throwIfNotFound: true);
         m_Hand_Grab = m_Hand.FindAction("Grab", throwIfNotFound: true);
-        m_Hand_Insert = m_Hand.FindAction("Insert", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -880,16 +880,16 @@ public class @Controls : IInputActionCollection, IDisposable
     // Hand
     private readonly InputActionMap m_Hand;
     private IHandActions m_HandActionsCallbackInterface;
+    private readonly InputAction m_Hand_Insert;
     private readonly InputAction m_Hand_Drop;
     private readonly InputAction m_Hand_Grab;
-    private readonly InputAction m_Hand_Insert;
     public struct HandActions
     {
         private @Controls m_Wrapper;
         public HandActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Insert => m_Wrapper.m_Hand_Insert;
         public InputAction @Drop => m_Wrapper.m_Hand_Drop;
         public InputAction @Grab => m_Wrapper.m_Hand_Grab;
-        public InputAction @Insert => m_Wrapper.m_Hand_Insert;
         public InputActionMap Get() { return m_Wrapper.m_Hand; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -899,28 +899,28 @@ public class @Controls : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_HandActionsCallbackInterface != null)
             {
+                @Insert.started -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
+                @Insert.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
+                @Insert.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
                 @Drop.started -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
                 @Drop.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
                 @Drop.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnDrop;
                 @Grab.started -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
                 @Grab.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
                 @Grab.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnGrab;
-                @Insert.started -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
-                @Insert.performed -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
-                @Insert.canceled -= m_Wrapper.m_HandActionsCallbackInterface.OnInsert;
             }
             m_Wrapper.m_HandActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Insert.started += instance.OnInsert;
+                @Insert.performed += instance.OnInsert;
+                @Insert.canceled += instance.OnInsert;
                 @Drop.started += instance.OnDrop;
                 @Drop.performed += instance.OnDrop;
                 @Drop.canceled += instance.OnDrop;
                 @Grab.started += instance.OnGrab;
                 @Grab.performed += instance.OnGrab;
                 @Grab.canceled += instance.OnGrab;
-                @Insert.started += instance.OnInsert;
-                @Insert.performed += instance.OnInsert;
-                @Insert.canceled += instance.OnInsert;
             }
         }
     }
@@ -966,8 +966,8 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public interface IHandActions
     {
+        void OnInsert(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnGrab(InputAction.CallbackContext context);
-        void OnInsert(InputAction.CallbackContext context);
     }
 }

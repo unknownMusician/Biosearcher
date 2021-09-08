@@ -3,12 +3,10 @@ using System.Collections.Generic;
 
 namespace Biosearcher.Common.States
 {
-    public abstract class StateManager<TEnum> : IDisposable where TEnum : Enum
+    public abstract class StateManager<TStateName> where TStateName : Enum
     {
-        protected Dictionary<TEnum, State> _states = new Dictionary<TEnum, State>();
-
-        public Action<TEnum> _onStateChange;
-        public event Action<TEnum> OnStateChange
+        internal Action<TStateName> _onStateChange;
+        public event Action<TStateName> OnStateChange
         {
             add
             {
@@ -18,19 +16,26 @@ namespace Biosearcher.Common.States
             remove => _onStateChange -= value;
         }
 
-        public State Active => _states[ActiveName];
-        protected internal TEnum ActiveName { get; protected set; }
-        public readonly StateHook<TEnum> Hook;
+        protected internal TStateName ActiveName { get; protected set; }
+    }
 
-        public StateManager() => Hook = new StateHook<TEnum>(this);
+    public abstract class StateManager<TStateName, TActionsName> : StateManager<TStateName>, IDisposable where TStateName : Enum where TActionsName : Enum
+    {
+        protected Dictionary<TStateName, State<TActionsName>> _states = new Dictionary<TStateName, State<TActionsName>>();
 
-        public State Register(TEnum stateName)
+
+        public State<TActionsName> Active => _states[ActiveName];
+        public readonly StateHook<TStateName> Hook;
+
+        public StateManager() => Hook = new StateHook<TStateName>(this);
+
+        public State<TActionsName> Register(TStateName stateName)
         {
             _states.Remove(stateName);
-            return _states[stateName] = new State();
+            return _states[stateName] = new State<TActionsName>();
         }
 
-        protected void TryChange(TEnum stateName)
+        protected void TryChange(TStateName stateName)
         {
             if (!ActiveName.Equals(stateName))
             {
@@ -41,7 +46,7 @@ namespace Biosearcher.Common.States
 
         public virtual void Dispose()
         {
-            foreach ((_, State state) in _states)
+            foreach ((_, State<TActionsName> state) in _states)
             {
                 state.Dispose();
             }
@@ -50,17 +55,17 @@ namespace Biosearcher.Common.States
         }
     }
 
-    public sealed class ChangeableStateManager<TEnum> : StateManager<TEnum> where TEnum : Enum
+    public sealed class ChangeableStateManager<TStateName, TActionsName> : StateManager<TStateName, TActionsName> where TStateName : Enum where TActionsName : Enum
     {
-        public new void TryChange(TEnum stateName) => base.TryChange(stateName);
+        public new void TryChange(TStateName stateName) => base.TryChange(stateName);
     }
 
-    public sealed class HookableStateManager<TEnum> : StateManager<TEnum> where TEnum : Enum
+    public sealed class HookableStateManager<TStateName, TActionsName> : StateManager<TStateName, TActionsName> where TStateName : Enum where TActionsName : Enum
     {
-        private readonly List<StateManager<TEnum>> _hookedManagers = new List<StateManager<TEnum>>();
+        private readonly List<StateManager<TStateName>> _hookedManagers = new List<StateManager<TStateName>>();
 
-        public void HookTo(StateHook<TEnum> hook) => HookTo(hook.StateManager);
-        public void HookTo(StateManager<TEnum> originalStateManager)
+        public void HookTo(StateHook<TStateName> hook) => HookTo(hook.StateManager);
+        public void HookTo(StateManager<TStateName> originalStateManager)
         {
             originalStateManager.OnStateChange += TryChange;
             _hookedManagers.Add(originalStateManager);
@@ -74,10 +79,10 @@ namespace Biosearcher.Common.States
         }
     }
 
-    public class StateHook<TEnum> where TEnum : Enum
+    public class StateHook<TStateName> where TStateName : Enum
     {
-        internal StateManager<TEnum> StateManager;
+        internal StateManager<TStateName> StateManager;
 
-        internal StateHook(StateManager<TEnum> stateManager) => StateManager = stateManager;
+        internal StateHook(StateManager<TStateName> stateManager) => StateManager = stateManager;
     }
 }

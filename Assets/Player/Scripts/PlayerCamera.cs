@@ -26,15 +26,6 @@ namespace Biosearcher.Player
 
         #region MonoBehaviour methods
 
-        protected void Awake()
-        {
-            _input = new PlayerCameraInput(new Presenter(this));
-        }
-        protected void OnDestroy() => _input.Dispose();
-
-        protected void OnEnable() => _input.OnEnable();
-        protected void OnDisable() => _input.OnDisable();
-
         protected void Update()
         {
             _lastPlayerForward = Vector3.SmoothDamp(_lastPlayerForward, _player.forward, ref _lastPlayerPositionVelocity, _playerRotationSmoothTime);
@@ -55,7 +46,7 @@ namespace Biosearcher.Player
         {
             transform.position = _player.position + transform.rotation * _relativePosition;
         }
-        protected void Rotate(Vector2 direction)
+        internal void Rotate(Vector2 direction)
         {
             if (Mathf.Abs(_rotation.x + direction.y) <= 60)
             {

@@ -533,9 +533,17 @@
             "id": "6dcb8437-3419-4b91-a046-d7d90ff92c0f",
             "actions": [
                 {
+                    "name": "Insert",
+                    "type": "Button",
+                    "id": "1219d5e5-798b-4f57-b8f5-060ef521ead7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Drop",
                     "type": "Button",
-                    "id": "e52e1742-99e5-411d-98ba-78f4b440f8cd",
+                    "id": "f8dbc253-6a8d-49d1-bdcc-ddb382f4c2d2",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -543,15 +551,7 @@
                 {
                     "name": "Grab",
                     "type": "Button",
-                    "id": "a11032e3-80f3-495f-99bf-1b683347cae5",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Insert",
-                    "type": "Button",
-                    "id": "1219d5e5-798b-4f57-b8f5-060ef521ead7",
+                    "id": "0ed6eb94-307f-4267-8f83-0b0ab2699ed5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -560,7 +560,18 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "8acc2125-d32f-4064-b105-8d95409fcc05",
+                    "id": "f9d9a286-88dc-4c36-8676-0b3cc241b7ba",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Insert",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "53427e3d-8ab3-4f32-8685-e0bef3ca733c",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
                     "processors": "",
@@ -571,23 +582,12 @@
                 },
                 {
                     "name": "",
-                    "id": "d8eb4733-e82d-4864-9e13-9b5604db94bd",
+                    "id": "67191329-d35e-4bea-a68d-b916b1c0c6a5",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Drop",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f9d9a286-88dc-4c36-8676-0b3cc241b7ba",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Insert",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

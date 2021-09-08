@@ -1,4 +1,4 @@
-﻿namespace Biosearcher.Player
+﻿namespace Biosearcher.Player.Interactions
 {
     public interface IInsertable : IGrabbable
     {

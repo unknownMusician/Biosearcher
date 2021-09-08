@@ -2,9 +2,10 @@ using Biosearcher.Common;
 using Biosearcher.Common.States;
 using Biosearcher.InputHandling;
 using Biosearcher.Refactoring;
+using System;
 using UnityEngine;
 
-namespace Biosearcher.Player
+namespace Biosearcher.Player.Movement
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(WheelAnimator))]
@@ -31,7 +32,7 @@ namespace Biosearcher.Player
         private WheelAnimator _animator;
         private PlayerInput _input;
 
-        private ChangeableStateManager<WalkerState> _state;
+        private ChangeableStateManager<WalkerState, ActionName> _states;
 
         private RaycastHit _hitInfo;
 
@@ -43,10 +44,10 @@ namespace Biosearcher.Player
         private float GroundDesiredHeight => GroundCheckHeight * (3f / 4f);
         private float GroundCheckHeight => _animator.Suspension.Max;
         private LayerMask GroundMask => _animator.GroundMask;
-        public StateHook<WalkerState> StateHook => _state.Hook;
+        public StateHook<WalkerState> StateHook => _states.Hook;
 
-        private float TangentAcceleration { get; set; }
-        private float NormalAcceleration { get; set; }
+        internal float TangentAcceleration { get; set; }
+        internal float NormalAcceleration { get; set; }
 
         #endregion
 
@@ -54,33 +55,21 @@ namespace Biosearcher.Player
 
         #region MonoBehaviour methods
 
-        private void Awake()
-        {
-            this.GetComponents(out _rigidbody, out _animator);
-
-            _input = new PlayerInput(new Presenter(this));
-        }
-        private void OnDestroy()
-        {
-            _input.Dispose();
-            _state.Dispose();
-        }
-
-        private void OnEnable() => _input.OnEnable();
-        private void OnDisable() => _input.OnDisable();
+        private void Awake() => this.SetComponents(out _rigidbody, out _animator);
+        private void OnDestroy() => _states.Dispose();
 
         private void FixedUpdate()
         {
             _downDirection = -transform.up.normalized;
 
-            _state.TryChange(_animator.AtLeastOneWeelTouchesGround ? WalkerState.OnGroundState : WalkerState.InAirState);
+            _states.TryChange(_animator.AtLeastOneWeelTouchesGround ? WalkerState.OnGroundState : WalkerState.InAirState);
 
-            _state.Active.Invoke(StabilizeTangent);
-            _state.Active.Invoke(StabilizeNormal);
-            _state.Active.Invoke(Move);
+            _states.Active.Get<Action>(ActionName.StabilizeTangent)?.Invoke();
+            _states.Active.Get<Action>(ActionName.StabilizeNormal)?.Invoke();
+            _states.Active.Get<Action>(ActionName.Move)?.Invoke();
         }
 
-        private void OnDrawGizmos() => _state.Active.Invoke(DrawGizmos);
+        private void OnDrawGizmos() => _states.Active.Get<Action>(ActionName.DrawGizmos)?.Invoke();
 
         #endregion
 
@@ -88,21 +77,23 @@ namespace Biosearcher.Player
 
         private void RegisterStates()
         {
-            _state = new ChangeableStateManager<WalkerState>();
+            _states = new ChangeableStateManager<WalkerState, ActionName>();
 
-            _state.Register(WalkerState.OnGroundState)
-                .Register(StabilizeTangent, StabilizeTangent)
-                .Register(StabilizeNormal, StabilizeNormal)
-                .Register(Move, Move)
-                .Register(DrawGizmos, DrawGizmos);
+            _states.Register(WalkerState.OnGroundState)
+                .Register<Action>(
+                    (ActionName.StabilizeTangent, StabilizeTangent),
+                    (ActionName.StabilizeNormal, StabilizeNormal),
+                    (ActionName.Move, Move),
+                    (ActionName.DrawGizmos, DrawGizmos));
 
-            _state.Register(WalkerState.InAirState)
-                .Register(StabilizeTangent, () => _desiredPosition = null)
-                .Register(StabilizeNormal, null)
-                .Register(Move, null)
-                .Register(DrawGizmos, null);
+            _states.Register(WalkerState.InAirState)
+                .Register<Action>(
+                    (ActionName.StabilizeTangent, () => _desiredPosition = null),
+                    (ActionName.StabilizeNormal, null),
+                    (ActionName.Move, null),
+                    (ActionName.DrawGizmos, null));
 
-            _state.TryChange(WalkerState.InAirState);
+            _states.TryChange(WalkerState.InAirState);
         }
 
         [NeedsRefactor(Needs.Remove)]
@@ -219,19 +210,12 @@ namespace Biosearcher.Player
 
         #region Classes
 
-        public class Presenter
+        private enum ActionName
         {
-            public Walker Player { get; }
-
-            public Presenter(Walker player) => Player = player;
-            public float TangentAcceleration
-            {
-                set => Player.TangentAcceleration = value;
-            }
-            public float NormalAcceleration
-            {
-                set => Player.NormalAcceleration = value;
-            }
+            StabilizeTangent,
+            StabilizeNormal,
+            Move,
+            DrawGizmos
         }
 
         #endregion

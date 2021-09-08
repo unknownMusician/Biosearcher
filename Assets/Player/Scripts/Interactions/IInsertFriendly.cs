@@ -1,4 +1,6 @@
-﻿namespace Biosearcher.Player
+﻿using Biosearcher.Refactoring;
+
+namespace Biosearcher.Player.Interactions
 {
     public interface IInsertFriendly { }
 
@@ -6,6 +8,8 @@
     {
         bool TryInsert(TInsertable insertable);
         bool TryAlign(TInsertable insertable);
+
+        [NeedsRefactor(Needs.Remove)]
         void HandleInsertableGrabbed(TInsertable insertable);
     }
 }
