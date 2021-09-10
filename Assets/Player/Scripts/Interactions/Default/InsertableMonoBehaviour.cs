@@ -1,10 +1,8 @@
-﻿using Biosearcher.Player.Interactions;
-
-namespace Biosearcher.Test
+﻿namespace Biosearcher.Player.Interactions.Default
 {
-    public sealed class InsertableBox : GrabbableBox, IInsertable
+    public class InsertableMonoBehaviour : GrabbableMonoBehaviour, IInsertable
     {
-        public void HandleInsert() => this.HandleInsertDefault();
+        public virtual void HandleInsert() => this.HandleInsertDefault();
 
         public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
         public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
