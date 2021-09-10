@@ -2,7 +2,7 @@
 
 namespace Biosearcher.Test
 {
-    public sealed class InsertableBox : GrabbableBox, IInsertable
+    public class InsertableBox : GrabbableBox, IInsertable
     {
         public void HandleInsert() => this.HandleInsertDefault();
 
