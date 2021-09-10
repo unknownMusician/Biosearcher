@@ -1,5 +1,6 @@
 using Biosearcher.Common;
 using Biosearcher.InputHandling;
+using Biosearcher.Level;
 using Biosearcher.Refactoring;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,18 +10,29 @@ namespace Biosearcher.Player.Movement
     [RequireComponent(typeof(Walker))]
     public sealed class PlayerInput : MonoBehaviour
     {
+        [SerializeField] private Day _day;
+
         private Walker _walker;
 
         private void Awake()
         {
             this.SetComponents(out _walker);
-
             SetInput(CustomInput.controls);
+
+            _day.OnEnd += OnDisable;
         }
-        private void OnDestroy() => UnsetInput(CustomInput.controls);
+        private void OnDestroy()
+        {
+            UnsetInput(CustomInput.controls);
+            _day.OnEnd -= OnDisable;
+        }
 
         private void OnEnable() => CustomInput.controls.Player.Enable();
-        private void OnDisable() => CustomInput.controls.Player.Disable();
+        private void OnDisable()
+        {
+            CustomInput.controls.Player.Disable();
+            ResetState();
+        }
 
         private void SetInput(Controls controls)
         {
@@ -37,6 +49,11 @@ namespace Biosearcher.Player.Movement
 
             controls.Player.NormalAccelerationStart.performed -= HandleNormalAccelerationStart;
             controls.Player.NormalAccelerationStop.performed -= HandleNormalAccelerationStop;
+        }
+        private void ResetState()
+        {
+            _walker.TangentAcceleration = 0;
+            _walker.NormalAcceleration = 0;
         }
 
         [NeedsRefactor("small gamepad trigger press would not matter")]

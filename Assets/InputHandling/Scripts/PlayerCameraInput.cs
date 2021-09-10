@@ -1,5 +1,6 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.InputHandling;
+using Biosearcher.Level;
 using Biosearcher.Player;
 using System.Collections;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace Biosearcher.Player
     {
         [SerializeField] private float _mouseSpeed = 0.1f;
         [SerializeField] private float _gamepadSpeed = 1.5f;
+        [SerializeField] private Day _day;
 
         private PlayerCamera _camera;
         private bool _isMoving;
@@ -21,10 +23,15 @@ namespace Biosearcher.Player
         private void Awake()
         {
             this.SetComponents(out _camera);
-
             SetInput(CustomInput.controls);
+
+            _day.OnEnd += OnDisable;
         }
-        private void OnDestroy() => UnsetInput(CustomInput.controls);
+        private void OnDestroy()
+        {
+            UnsetInput(CustomInput.controls);
+            _day.OnEnd -= OnDisable;
+        }
 
         private void OnEnable() => CustomInput.controls.Camera.Enable();
         private void OnDisable() => CustomInput.controls.Camera.Disable();

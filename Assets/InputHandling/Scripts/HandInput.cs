@@ -1,5 +1,6 @@
 ﻿using Biosearcher.Common;
 using Biosearcher.InputHandling;
+using Biosearcher.Level;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,7 @@ namespace Biosearcher.Player.Interactions.Hand
     public sealed class HandInput : MonoBehaviour
     {
         [SerializeField] private Camera _camera;
+        [SerializeField] private Day _day;
 
         private Hand _hand;
 
@@ -17,16 +19,25 @@ namespace Biosearcher.Player.Interactions.Hand
         private void Awake()
         {
             this.SetComponents(out _hand);
-
             SetInput(CustomInput.controls);
+
+            _day.OnEnd += OnDisable;
+        }
+
+        private void OnDestroy()
+        {
+            UnsetInput(CustomInput.controls);
+            _day.OnEnd -= OnDisable;
+        }
+
+        private void OnEnable() => CustomInput.controls.Hand.Enable();
+        private void OnDisable()
+        {
+            CustomInput.controls.Hand.Disable();
+            ResetState();
         }
 
         private void Update() => _hand._lookRay = _camera.ScreenPointToRay(MousePosition);
-
-        private void OnDestroy() => UnsetInput(CustomInput.controls);
-
-        private void OnEnable() => CustomInput.controls.Hand.Enable();
-        private void OnDisable() => CustomInput.controls.Hand.Disable();
 
         private void SetInput(Controls controls)
         {
@@ -40,6 +51,7 @@ namespace Biosearcher.Player.Interactions.Hand
             controls.Hand.Drop.performed -= HandleDrop;
             controls.Hand.Insert.performed -= HandleInsert;
         }
+        private void ResetState() => _hand.TryDrop();
 
         private void HandleGrab(InputAction.CallbackContext ctx) => _hand.TryGrab();
         private void HandleDrop(InputAction.CallbackContext ctx) => _hand.TryDrop();
