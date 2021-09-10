@@ -97,11 +97,11 @@ namespace Biosearcher.Player.Interactions.Hand
             {
                 CarryOnMaxDistance(castRay);
             }
-            else if ((_carryInfo.Grabbable is IInsertable insertable) && hit.collider.TryGetComponent(out IInsertFriendly insertFriendly))
+            else if ((_carryInfo.Grabbable is IInsertable insertable) 
+                && hit.collider.TryGetComponent(out IInsertFriendly insertFriendly)
+                && insertable.TryAlignWith(insertFriendly))
             {
                 _carryInfo.InsertInfo = new InsertableInfo(insertable, insertFriendly);
-
-                insertable.TryAlignWith(insertFriendly);
             }
             else
             {

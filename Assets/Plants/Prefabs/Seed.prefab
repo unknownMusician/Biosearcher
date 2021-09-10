@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2219361522514011894}
   - component: {fileID: 8399566780757203994}
   - component: {fileID: 2239903541395807428}
+  - component: {fileID: 3676624283168571283}
   m_Layer: 0
   m_Name: Seed
   m_TagString: Untagged
@@ -113,3 +114,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6670564047659770637}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3676624283168571283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6670564047659770637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 504816f4e765da841a54eadf122a5b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
