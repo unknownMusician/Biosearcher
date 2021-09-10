@@ -1,20 +1,19 @@
-﻿using Biosearcher.Player.Interactions;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Biosearcher.Test
+namespace Biosearcher.Player.Interactions.Default
 {
-    public sealed class BoxConsumer : MonoBehaviour, IInsertFriendly<InsertableBox>
+    public sealed class InsertableMonoBehaviourConsumer : MonoBehaviour, IInsertFriendly<InsertableMonoBehaviour>
     {
         [SerializeField] private Vector3 _alignLocalPosition;
         [SerializeField] private Quaternion _alignRotation;
 
-        public bool TryAlign(InsertableBox insertable)
+        public bool TryAlign(InsertableMonoBehaviour insertable)
         {
             insertable.transform.SetPositionAndRotation(transform.position + _alignLocalPosition, _alignRotation);
             return true;
         }
 
-        public bool TryInsert(InsertableBox insertable)
+        public bool TryInsert(InsertableMonoBehaviour insertable)
         {
             insertable.transform.SetPositionAndRotation(transform.position + _alignLocalPosition, _alignRotation);
             insertable.transform.SetParent(transform);

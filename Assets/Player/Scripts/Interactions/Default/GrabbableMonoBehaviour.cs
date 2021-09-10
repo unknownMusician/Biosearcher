@@ -1,12 +1,11 @@
 ﻿using Biosearcher.Common;
-using Biosearcher.Player.Interactions;
 using System;
 using UnityEngine;
 
-namespace Biosearcher.Test
+namespace Biosearcher.Player.Interactions.Default
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class GrabbableBox : MonoBehaviour, IGrabbable
+    public class GrabbableMonoBehaviour : MonoBehaviour, IGrabbable
     {
         protected Rigidbody _rigidbody;
         protected Collider _collider;
@@ -27,7 +26,7 @@ namespace Biosearcher.Test
             _collider.enabled = false;
         }
 
-        public void HandleDrop()
+        public virtual void HandleDrop()
         {
             this.HandleDropDefault();
             _rigidbody.isKinematic = false;
