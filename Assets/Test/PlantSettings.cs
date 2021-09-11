@@ -6,7 +6,6 @@ namespace Biosearcher.Test
     public class PlantSettings : ScriptableObject
     {
         [SerializeField] private string _name;
-        //[SerializeField] private GameObject _seedPrefab;
         [SerializeField] private GameObject _plantPrefab;
         [SerializeField] private float _growthTime;          // in seconds
 

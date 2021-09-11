@@ -3,6 +3,7 @@ using Biosearcher.Common;
 using System;
 using System.Collections;
 using UnityEngine;
+using Biosearcher.Refactoring;
 
 namespace Biosearcher.Test
 {
@@ -17,7 +18,8 @@ namespace Biosearcher.Test
 
         LayerMask IGrabbable.DefaultLayer { get; set; }
         Action IGrabbable.OnGrab { get; set; }
-        Action OnGrowStart { get; set; }
+        public event Action OnGrowStart;
+        public event Action OnGrowEnd;
 
 
         private void Awake()
@@ -41,37 +43,33 @@ namespace Biosearcher.Test
         public void HandleInsert()
         {
             this.HandleInsertDefault();
-
             StartCoroutine(GrowthProcess());
         }
-        
-        public bool TryInsertIn(IInsertFriendly insertFriendly)
-        {
-            return this.TryInsertInGeneric(insertFriendly);
-        }
-        public bool TryAlignWith(IInsertFriendly insertFriendly)
-        {
-            return this.TryAlignWithGeneric(insertFriendly);
-        }
 
+        public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
+        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
+
+        [NeedsRefactor("need to add seed handling by plant or garden bed on start of growth")]
         private void StartGrow()
         {
             print("seed has planted");
             OnGrowStart?.Invoke();
         }
+        [NeedsRefactor("need to add seed handling by plant or garden bed on end of growth"), ]
         private void EndGrow()
         {
+            OnGrowEnd?.Invoke();
             print("Growth finished");
         }
 
         private IEnumerator GrowthProcess()
         {
             StartGrow();
-            float time = 0;
-            while (_meshRenderer.material.color != Color.red)
+            float time = 0f;
+            while (time != 1f)
             {
-                _meshRenderer.material.color = Color.Lerp(Color.green, Color.red, time / _plantSettings.GrowthTime);
-                time += Time.deltaTime;
+                _meshRenderer.material.color = Color.Lerp(Color.green, Color.red, time);
+                time += Time.deltaTime / _plantSettings.GrowthTime;
                 yield return null;
             }
             EndGrow();
