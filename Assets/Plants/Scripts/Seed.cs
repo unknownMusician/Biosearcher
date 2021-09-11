@@ -50,17 +50,10 @@ namespace Biosearcher.Test
         public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
 
         [NeedsRefactor("need to add seed handling by plant or garden bed on start of growth")]
-        private void StartGrow()
-        {
-            print("seed has planted");
-            OnGrowStart?.Invoke();
-        }
-        [NeedsRefactor("need to add seed handling by plant or garden bed on end of growth"), ]
-        private void EndGrow()
-        {
-            OnGrowEnd?.Invoke();
-            print("Growth finished");
-        }
+        private void StartGrow() => OnGrowStart?.Invoke();
+        
+        [NeedsRefactor("need to add seed handling by plant or garden bed on end of growth"),]
+        private void EndGrow() => OnGrowEnd?.Invoke();
 
         private IEnumerator GrowthProcess()
         {
