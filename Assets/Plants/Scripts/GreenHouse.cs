@@ -1,4 +1,5 @@
-﻿using Biosearcher.Player.Interactions;
+﻿using Biosearcher.Level;
+using Biosearcher.Player.Interactions;
 using Biosearcher.Refactoring;
 using System;
 using System.Collections;
@@ -9,16 +10,20 @@ namespace Biosearcher.Plants
     public class GreenHouse : MonoBehaviour, IInsertFriendly<ISeed>
     {
         [SerializeField] private Vector3 _alignLocalPosition;
+        [SerializeField] private Score _score;
 
         private Plant _plant;
 
         public bool TryAlign(ISeed seed)
         {
-            seed.transform.SetPositionAndRotation(transform.position + _alignLocalPosition, transform.rotation);
-            return true;
+            if (_plant == null)
+            {
+                Align(seed.transform);
+                return true;
+            }
+            return false;
         }
 
-        [NeedsRefactor("Get Plant GameObject from seed")]
         public bool TryInsert(ISeed seed)
         {
             if (_plant != null)
@@ -26,32 +31,52 @@ namespace Biosearcher.Plants
                 return false;
             }
 
-            // todo
-            GameObject plantPrefab = seed.PlantSettings.PlantPrefab;
-            GameObject plantObject =Instantiate(plantPrefab);
+            GameObject plantObject = Instantiate(seed.PlantSettings.PlantPrefab);
 
-            plantObject.transform.SetPositionAndRotation(transform.position + _alignLocalPosition, transform.rotation);
-            plantObject.transform.SetParent(transform);
-
-            _plant = plantObject.GetComponent<Plant>();
-            _plant.TryStartGrow(seed.PlantSettings);
+            HandleInsertTransform(plantObject);
+            HandleInsertPlant(plantObject, seed.PlantSettings);
 
             return true;
+        }
+
+        private void Align(Transform insertable)
+        {
+            insertable.transform.SetPositionAndRotation(transform.position + _alignLocalPosition, transform.rotation);
+        }
+
+        private void HandleInsertTransform(GameObject plantObject)
+        {
+            Align(plantObject.transform);
+            plantObject.transform.SetParent(transform);
+        }
+
+        private void HandleInsertPlant(GameObject plantObject, IPlantSettings plantSettings)
+        {
+            _plant = plantObject.GetComponent<Plant>();
+            _plant.OnGrowEnd += HandlePlantGrowed;
+            _plant.TryStartGrow(plantSettings);
+        }
+
+        private void HandlePlantGrowed()
+        {
+            _score.AddScore(_plant.PlantSettings.Score);
+
+            Destroy(_plant.gameObject);
         }
     }
 
     public sealed class Plant : MonoBehaviour
     {
-        private bool _isGrowing = false;
-        private IPlantSettings _plantSettings;
-
         public event Action OnGrowEnd;
+
+        private bool _isGrowing = false;
+        public IPlantSettings PlantSettings { get; private set; }
 
         public void TryStartGrow(IPlantSettings plantSettings)
         {
             if (!_isGrowing)
             {
-                _plantSettings = plantSettings;
+                PlantSettings = plantSettings;
                 StartCoroutine(Growing());
             }
         }
@@ -60,7 +85,7 @@ namespace Biosearcher.Plants
         private IEnumerator Growing()
         {
             _isGrowing = true;
-            float oneOverGrowTime = 1.0f / _plantSettings.GrowTime;
+            float oneOverGrowTime = 1.0f / PlantSettings.GrowTime;
             float lerp = 0.0f;
 
             while (lerp < 1.0f)
@@ -85,6 +110,7 @@ namespace Biosearcher.Plants
     {
         float GrowTime { get; }
         GameObject PlantPrefab { get; }
+        int Score { get; }
     }
 
     public interface ISeed : IInsertable
