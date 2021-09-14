@@ -9,6 +9,7 @@ namespace Biosearcher.Plants
 
         public bool TryInsert(Seed insertableSeed)
         {
+            insertableSeed.transform.SetPositionAndRotation(_seedSlot.transform.position, _seedSlot.transform.rotation);
             insertableSeed.transform.SetParent(_seedSlot.transform);
             return true;
         }
