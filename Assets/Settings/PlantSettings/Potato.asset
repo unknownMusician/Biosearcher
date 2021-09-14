@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Potato
   m_EditorClassIdentifier: 
   _name: Potato
-  _plantPrefab: {fileID: 0}
-  _growthTime: 10
+  _plantPrefab: {fileID: 3937379991547073921, guid: e23a68f11dad34e42b430c2cab80439a, type: 3}
+  _growthTime: 3
+  _score: 15
