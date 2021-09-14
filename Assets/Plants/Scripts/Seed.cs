@@ -1,6 +1,5 @@
+﻿using Biosearcher.Player.Interactions;
 using Biosearcher.Common;
-using Biosearcher.Player.Interactions;
-using Biosearcher.Player.Interactions.Default;
 using System;
 using UnityEngine;
 
@@ -8,11 +7,15 @@ namespace Biosearcher.Plants
 {
     public sealed class Seed : MonoBehaviour, IInsertable
     {
+        [SerializeField] private PlantSettings _plantSettings;
+
         private Rigidbody _rigidbody;
         private Collider _collider;
 
         LayerMask IGrabbable.DefaultLayer { get; set; }
         Action IGrabbable.OnGrab { get; set; }
+
+        public PlantSettings PlantSettings => _plantSettings;
 
         private void Awake()
         {
@@ -35,7 +38,7 @@ namespace Biosearcher.Plants
         }
         public void HandleInsert() => this.HandleInsertDefault();
 
-        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
         public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
+        public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);
     }
 }
