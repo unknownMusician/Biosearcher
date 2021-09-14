@@ -34,10 +34,8 @@ namespace Biosearcher.Plants
             _rigidbody.isKinematic = false;
             _collider.enabled = true;
         }
-        public void HandleInsert()
-        {
-            this.HandleInsertDefault();
-        }
+
+        public void HandleInsert() => this.HandleInsertDefault();
 
         public bool TryInsertIn(IInsertFriendly insertFriendly) => this.TryInsertInGeneric(insertFriendly);
         public bool TryAlignWith(IInsertFriendly insertFriendly) => this.TryAlignWithGeneric(insertFriendly);

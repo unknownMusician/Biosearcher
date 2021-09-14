@@ -7,15 +7,20 @@ namespace Biosearcher.Plants
     {
         [SerializeField] private GameObject _seedSlot;
 
-        public bool TryInsert(Seed insertableSeed)
+        private void Align(Seed insertableSeed)
         {
             insertableSeed.transform.SetPositionAndRotation(_seedSlot.transform.position, _seedSlot.transform.rotation);
+        }
+
+        public bool TryInsert(Seed insertableSeed)
+        {
+            Align(insertableSeed);
             insertableSeed.transform.SetParent(_seedSlot.transform);
             return true;
         }
         public bool TryAlign(Seed insertableSeed)
         {
-            insertableSeed.transform.SetPositionAndRotation(_seedSlot.transform.position, _seedSlot.transform.rotation);
+            Align(insertableSeed);
             return true;
         }
     }
