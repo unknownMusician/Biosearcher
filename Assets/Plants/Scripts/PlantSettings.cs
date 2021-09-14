@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Biosearcher.Test
+namespace Biosearcher.Plants
 {
     [CreateAssetMenu(fileName = "Default Plant", menuName = "Plant Settings")]
     public class PlantSettings : ScriptableObject
