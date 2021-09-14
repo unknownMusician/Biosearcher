@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cacc407a482e0a4c9845ce5391b5be9, type: 3}
+  m_Script: {fileID: 11500000, guid: eaa744afffc29ea4ea9e27c85fdf67ff, type: 3}
   m_Name: Potato
   m_EditorClassIdentifier: 
-  _name: Delicious potato
-  _plantPrefab: {fileID: 1453579790639807203, guid: f130887be12beff48b31695d93306755, type: 3}
-  _growthTime: 5
+  _name: Potato
+  _plantPrefab: {fileID: 0}
+  _growthTime: 10
