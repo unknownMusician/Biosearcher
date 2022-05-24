@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa744afffc29ea4ea9e27c85fdf67ff, type: 3}
   m_Name: Plant
   m_EditorClassIdentifier: 
-  _name: Potato
-  _plantPrefab: {fileID: 3937379991547073921, guid: e23a68f11dad34e42b430c2cab80439a, type: 3}
-  _growthTime: 20
-  _score: 15
+  Info:
+    Name: Bush
+    PlantPrefab: {fileID: 3937379991547073921, guid: e23a68f11dad34e42b430c2cab80439a, type: 3}
+    GrowthTime: 100
+    Score: 10

@@ -2,50 +2,255 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="834304b2-68b3-4141-962c-e760f8d46c9e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/HandInput.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/GrabbableExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/GrabbableExtensions.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Hand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/InsertFriendlyExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/InsertFriendlyExtensions.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/InsertableExtensions.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/InsertableExtensions.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Common" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Biosearcher/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Buildings/Prefabs/GreenHouse.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Buildings/Prefabs/GreenHouse.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Buildings/Scripts/Building.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Buildings/Scripts/Building.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Buildings/Scripts/GreenHouses/GreenHouse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Buildings/Scripts/GreenHouses/GreenHouse.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/CustomInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/CustomInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/CustomInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/CustomInput.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/GrabberInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/GrabberInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/HandInput.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/InserterInput.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/InserterInput.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/PlayerCameraInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/PlayerCameraInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/PlayerCameraInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/PlayerCameraInput.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/PlayerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/PlayerInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/PlayerInput.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/TerraformerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/TerraformerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Planet/Orientation/Scripts/InputHandling/Scripts/TerraformerInput.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/InputHandling/Scripts/TerraformerInput.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Capsule.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Capsule.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Seed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Seed.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Slot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Plants/Scripts/Slot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Grabber.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Grabber.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Hand.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IGrabbable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IGrabbable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IInsertFriendly.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IInsertFriendly.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IInsertable.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/IInsertable.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Inserter.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Inserter.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Test/IInsertableNew.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Player/Scripts/Test/IInsertableNew.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Settings/Input/Controls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Settings/Input/Controls.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Resources/Settings/Input/Controls.inputactions" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Resources/Settings/Input/Controls.inputactions" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/PlanetGenerationTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/PlanetGenerationTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe1.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe3.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Audio.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Audio/RIP EARS ORGASM.ogg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Audio/RIP EARS ORGASM.ogg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Scripts/CameraSound.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Scripts/CameraSound.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Scripts/ColliderSound.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AudioHandling/Scripts/ColliderSound.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Attributes.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Attributes/AttributesExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Attributes/AttributesExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Attributes/ReflectionHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Attributes/ReflectionHelper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/CollectionsExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/CollectionsExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/FunctionsExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/FunctionsExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IAddable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IAddable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IAverageable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IAverageable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IDivisible.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IDivisible.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/ILerpable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/ILerpable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IMultipliable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/IMultipliable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/ISubtractable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Interfaces/ISubtractable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/MathExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/MathExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/MonoBehaviourExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/MonoBehaviourExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Range.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/Range.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/States.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/States/State.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/States/State.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/States/StateManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Common/Scripts/States/StateManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/CustomInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/CustomInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/HandInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/HandInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/PlayerCameraInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/PlayerCameraInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/PlayerInput.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/InputHandling/Scripts/PlayerInput.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Materials/Floor.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Materials/Floor.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Materials/Wall.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Materials/Wall.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/Day.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/Day.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/FinalScreenUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/FinalScreenUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/Score.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/Score.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/ScoreUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/ScoreUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/TimerUI.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/TimerUI.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/WallMaterialTracker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Scripts/WallMaterialTracker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Shaders.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Shaders/Floor.shadergraph" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Shaders/Floor.shadergraph.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Shaders/Wall.shadergraph" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Shaders/Wall.shadergraph.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Textures/Floor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Textures/Floor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Textures/WallSign.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level/Textures/WallSign.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Base.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Base.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Glass.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Glass.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Ground.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenGouse/Ground.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenHouse.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/GreenHouse.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/Seed.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Materials/Seed.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Models/GreenHouse.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Models/GreenHouse.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Models/Plant.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Models/Plant.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Prefabs/GreenHouse.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Prefabs/GreenHouse.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Prefabs/Plant.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Prefabs/Plant.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/GreenHouse.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/GreenHouse.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/Plant.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/Plant.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/PlantSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/PlantSettings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/Seed.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/Seed.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/SeedConsumer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Scripts/SeedConsumer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Materials/Seed.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Materials/Seed.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Models/Seed.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Models/Seed.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Prefabs/Seed.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Prefabs/Seed.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Textures/SeedBase.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Seeds/Textures/SeedBase.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/GlassNormal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/GlassNormal.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/GroundNormal.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/GroundNormal.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/MetalNormal.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plants/Textures/GreenHouse/MetalNormal.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Corners.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Corners.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Eyes.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Eyes.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Inner.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Inner.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Skin.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Body/Skin.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Center.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Center.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Ring.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Ring.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/RingLines.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/RingLines.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Tire1.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Tire1.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Tire2.mat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Materials/Wheel/Tire2.mat.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Models.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Models/body.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Models/body.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Models/wheel.fbx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Models/wheel.fbx.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Prefabs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Prefabs/Wheel.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Prefabs/Wheel.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/GrabbableMonoBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/GrabbableMonoBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/InsertableMonoBehaviour.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/InsertableMonoBehaviour.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/InsertableMonoBehaviourConsumer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Default/InsertableMonoBehaviourConsumer.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/GrabbableExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/GrabbableExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Hand.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/Hand.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IGrabbable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IGrabbable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IInsertFriendly.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IInsertFriendly.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IInsertable.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/IInsertable.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/InsertableExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Interactions/InsertableExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/PlayerCamera.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/PlayerCamera.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Walker.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/Walker.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/WalkerState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/WalkerState.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/WheelAnimator.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Player/Scripts/WheelAnimator.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/DirectoryReader.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/DirectoryReader.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/FileInfos.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/FileInfos.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/FileTypeSearcher.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/FileInput/FileTypeSearcher.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Log.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Log.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Logger.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Logger.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Needs.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Needs.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/NeedsRefactorAttribute.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/NeedsRefactorAttribute.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/RefactorManager.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/RefactorManager.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/TypeHelper.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/TypeHelper.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/EditorCommon.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/EditorCommon.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/RefactorSettings.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/RefactorSettings.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/SettingsEditor.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/SettingsEditor.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/SettingsExtensions.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/SettingsExtensions.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/Window.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Refactoring/Scripts/Unity/Window.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Prototype.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Prototype.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/AbstractComponent.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/AbstractComponent.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/AbstractComponentExtensions.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/AbstractComponentExtensions.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/SerializedInterface.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/SerializedInterface.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Common/Tasks.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Common/Tasks.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/Input/Controls.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/Input/Controls.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/PlantSettings/Plant.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PlantSettings/Plant.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP/UniversalRenderPipelineAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP/UniversalRenderPipelineAsset.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Settings/URP/UniversalRenderPipelineAsset_Renderer.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/URP/UniversalRenderPipelineAsset_Renderer.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Logs/Packages-Update.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/Packages-Update.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,10 +277,55 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CF2386DF-9990-4F30-A4C5-E83B165F15D0/51/dc8b929e/YieldInstruction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CF2386DF-9990-4F30-A4C5-E83B165F15D0/4c/f16290c3/WaitForFixedUpdate.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5406A456-CF73-4443-B3D0-2A7D123287F1/72/10f3b1cb/String.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.inputsystem@1.0.2/InputSystem/Utilities/DelegateHelpers.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2fcda70363c749f387c650f79a21ad5d498200/dc/dd281054/ClientConfig.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/e749addbc2164fa58381bb665457218b77600/30/1d08cff3/InspectorElement.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/31c0f51ac5a24a22ba784db24f4ba02346a800/ef/42370008/String.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.0/Tests/Runtime/Shared/050-TestStructs.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/Common.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/07/71f84419/IDisposable.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/API/D3D11.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.mathematics@1.2.5/Unity.Mathematics/Noise/noise3D.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0cde216a590a4d6fbc3d7db7ac203c5d809c00/7b/f07a3115/EditorCompilationInterface.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/31c0f51ac5a24a22ba784db24f4ba02346a800/9c/2a57845a/Array.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InterceptedEventsPreview.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.vscode@1.2.4/Editor/ProjectGeneration/ProjectGeneration.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/EventSystem/InterceptedEventsPreviewTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.0/Runtime/BurstString.Float.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.0/Runtime/BurstCompileAttribute.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/Lighting.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.2/Editor/Data/Util/SerializationHelper.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/SurfaceData.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/ScrollBar/ScrollBarTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/Input.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/b8d272a8be0e439da4052df4419466c7283e00/80/41914227/Socket.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.0/Runtime/Editor/BurstReflection.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/31c0f51ac5a24a22ba784db24f4ba02346a800/c1/59782892/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/31c0f51ac5a24a22ba784db24f4ba02346a800/26/ff431fed/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.shadergraph@12.1.2/Tests/Editor/UnitTests/PropertyChunkTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5a41d6b7189842eca409fd0b1c3e3dcf17bf78/a0/498e460f/IEnumerator`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.burst@1.6.0/Tests/Runtime/Shared/055-TestStackalloc.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/TextEditor/TextEditorTests.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad50157ee00e45cdb3c8bd67012f8804157200/5d/03efd9a6/Mesh.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/MetaPass.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/Version.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Common/ComponentGeneration/HasComponentAttribute.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/MetaInput.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/Macros.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/GlobalIllumination.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/CanvasUpdateRegistry.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad50157ee00e45cdb3c8bd67012f8804157200/2b/3fbe047e/UnsafeUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/31c0f51ac5a24a22ba784db24f4ba02346a800/95/6778ac46/Span`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0cde216a590a4d6fbc3d7db7ac203c5d809c00/11/2e434476/PropertyHandler.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/SurfaceInput.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/ShaderLibrary/Core.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Components/AudioHandling/ColliderSound.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.2/Shaders/ShadowCasterPass.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad50157ee00e45cdb3c8bd67012f8804157200/ca/4ac67c26/ColorUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0cde216a590a4d6fbc3d7db7ac203c5d809c00/ae/391d6e5e/SerializedProperty.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.core@12.1.2/ShaderLibrary/Packing.hlsl" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/0cde216a590a4d6fbc3d7db7ac203c5d809c00/94/bfaeed29/EditorGUILayout.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ad50157ee00e45cdb3c8bd67012f8804157200/7d/15bdaec2/Profiler.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -132,7 +382,13 @@
       <option value="$PROJECT_DIR$/Assets/Resources/Buildings/Scripts/GreenHouses/GreenHouse.cs" />
     </changedPaths>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="1tDfD2JfFtzBTNxkOiYoVy0be5o" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -145,7 +401,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.C#" />
+    <property name="XThreadsFramesViewSplitterKey" value="0.45884147" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="rider.run.widget.enabled.cache" value="false" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
@@ -159,10 +418,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="4544">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="4544" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -201,12 +460,37 @@
       <workItem from="1624464228661" duration="5923000" />
       <workItem from="1624801916328" duration="12268000" />
       <workItem from="1624895778636" duration="633000" />
+      <workItem from="1648559473542" duration="4983000" />
+      <workItem from="1648571547508" duration="949000" />
+      <workItem from="1648631941509" duration="8454000" />
+      <workItem from="1648808603262" duration="8758000" />
+      <workItem from="1648839080675" duration="1531000" />
+      <workItem from="1649002840927" duration="1892000" />
+      <workItem from="1649444128246" duration="1674000" />
+      <workItem from="1649604878861" duration="9976000" />
+      <workItem from="1649672985492" duration="16727000" />
+      <workItem from="1649857317752" duration="20469000" />
+      <workItem from="1649921966292" duration="25238000" />
+      <workItem from="1650053722226" duration="2021000" />
+      <workItem from="1650878081915" duration="9190000" />
+      <workItem from="1650914053158" duration="28795000" />
+      <workItem from="1651132606594" duration="869000" />
+      <workItem from="1651244236145" duration="17667000" />
+      <workItem from="1651607034289" duration="2524000" />
+      <workItem from="1651776559266" duration="9130000" />
+      <workItem from="1651872463366" duration="10797000" />
+      <workItem from="1651943091056" duration="20000" />
+      <workItem from="1651951907941" duration="2242000" />
+      <workItem from="1652013088702" duration="830000" />
+      <workItem from="1652091053789" duration="1402000" />
+      <workItem from="1652126846345" duration="2138000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,10 +503,80 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Logic/WorldGeneration/StoneSpawner.cs</url>
+          <line>28</line>
+          <properties documentPath="D:\Projects\Unity projects\Biosearcher\Assets\Scripts\Logic\WorldGeneration\StoneSpawner.cs" initialLine="28" containingFunctionPresentation="method 'Spawn'">
+            <startOffsets>
+              <option value="962" />
+            </startOffsets>
+            <endOffsets>
+              <option value="963" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Logic/WorldGeneration/ChunkGenerator.cs</url>
+          <line>50</line>
+          <properties documentPath="D:\Projects\Unity projects\Biosearcher\Assets\Scripts\Logic\WorldGeneration\ChunkGenerator.cs" initialLine="50" containingFunctionPresentation="method 'GenerateChunk'">
+            <startOffsets>
+              <option value="1649" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1703" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Player/Interactions/Hand.cs</url>
+          <line>135</line>
+          <properties documentPath="D:\Projects\Unity projects\Biosearcher\Assets\Scripts\Player\Interactions\Hand.cs" initialLine="135" containingFunctionPresentation="method 'Carry'">
+            <startOffsets>
+              <option value="4049" />
+            </startOffsets>
+            <endOffsets>
+              <option value="4050" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Logic/Plants/GreenHouse.cs</url>
+          <line>66</line>
+          <properties documentPath="D:\Projects\Unity projects\Biosearcher\Assets\Scripts\Logic\Plants\GreenHouse.cs" initialLine="66" containingFunctionPresentation="method 'CanInsert'">
+            <startOffsets>
+              <option value="2128" />
+            </startOffsets>
+            <endOffsets>
+              <option value="2168" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Player/Interactions/Default/InsertableMonoBehaviour.cs</url>
+          <line>14</line>
+          <properties documentPath="D:\Projects\Unity projects\Biosearcher\Assets\Scripts\Player\Interactions\Default\InsertableMonoBehaviour.cs" initialLine="14" containingFunctionPresentation="method 'CanBeInserted'">
+            <startOffsets>
+              <option value="533" />
+            </startOffsets>
+            <endOffsets>
+              <option value="537" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
